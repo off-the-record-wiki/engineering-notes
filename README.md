@@ -23,6 +23,7 @@ Detailed study notes live in the [Wiki](https://github.com/thought-corner/study/
 | [Architecture & Design](https://github.com/thought-corner/study/wiki/Tech-Architecture-Design) | MSA, Design Pattern, Clean Spring |
 | [Testing](https://github.com/thought-corner/study/wiki/Tech-Testing) | Java Test, Load Testing, TDD |
 | [Distributed Search and Analytics Engine](https://github.com/thought-corner/study/wiki/Tech-Distributed-Search-Analytics-Engine) | OpenSearch |
+| [AI Engineering](https://github.com/thought-corner/study/wiki/Tech-AI-Engineering) | Harness Engineering |
 
 ## Priority
 
