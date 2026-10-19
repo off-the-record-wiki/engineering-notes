@@ -1,6 +1,6 @@
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
-  title: Backend Roadmap
+  title: Study
   structure:
     - type: space
       key: backend-roadmap
