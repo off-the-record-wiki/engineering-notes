@@ -1,4 +1,4 @@
-# Backend Roadmap
+# Study
 
 A repository of notes on the technologies I have studied and the books I have read as a backend developer.
 

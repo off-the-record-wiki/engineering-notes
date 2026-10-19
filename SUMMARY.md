@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Backend Roadmap](README.md)
+* [Study](README.md)
 * [Tech Stack](tech-stack/README.md)
 
 ## Language
