@@ -19,7 +19,7 @@ public class Child extends Parent {
 }
 ```
 
-![스크린샷 2025-01-09 오후 8 31 17](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e16af0be-1864-4560-b8a0-0ca3c9466a2e.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e16af0be-1864-4560-b8a0-0ca3c9466a2e.png)
 
 * 자바에서 모든 객체의 최종 부모는 Object이다.
 * 공통 기능 제공
@@ -57,7 +57,7 @@ public class ObjectMain {
 * Object 타입에는 `sound()` 메서드가 존재하지 않는다.
 * 따라서 아래로 내려가야하는데 이 과정을 다운 캐스팅이라고 한다.
 
-![스크린샷 2025-01-09 오후 8 42 45](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/71662bbc-011f-442f-bc3f-91cfe788f72c.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/71662bbc-011f-442f-bc3f-91cfe788f72c.png)
 
 * Object를 활용한 다형성의 한계
   * Object는 모든 객체를 대상으로 다형적 참조를 할 수 있다.

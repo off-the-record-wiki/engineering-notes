@@ -103,9 +103,9 @@ public class BankAccountMain {
 
 #### 그림 설명
 
-![스크린샷 2025-01-09 오전 1 29 16](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/661e8b61-fce4-41fd-9154-5c0cc217115b.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/661e8b61-fce4-41fd-9154-5c0cc217115b.png)
 
-![스크린샷 2025-01-09 오전 1 29 31](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a97fb55c-9294-4d4a-b6a8-a5c368eaac8d.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a97fb55c-9294-4d4a-b6a8-a5c368eaac8d.png)
 
 ```
 - 2개의 요청 쓰레드가 생성되고 출금 요청을 처리하게 된다. 이 때, `BankAccount` 타입의 인스턴스가 공유가 된다.
@@ -125,7 +125,7 @@ public class BankAccountMain {
 
 #### 1. t1 쓰레드가 t2 쓰레드보다 아주 약간 빠르게 실행된 경우
 
-![스크린샷 2025-01-09 오전 1 45 21](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aae81c2e-6bff-45b1-b16a-b4c6dd9c9172.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aae81c2e-6bff-45b1-b16a-b4c6dd9c9172.png)
 
 ```
 - t1 쓰레드가 아주 근소한 차이로 먼저 코드 블럭에 진입해 분기문 측에서 검증 로직을 체크하고 있고 이후 t2 쓰레드가 코드 블럭에 진입한 상태이다.
@@ -137,7 +137,7 @@ public class BankAccountMain {
 
 #### 2. t1 쓰레드와 t2 쓰레드가 동시에 실행된 경우
 
-![스크린샷 2025-01-09 오전 1 51 52](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e24ac51f-2b55-4b09-bf65-f01acf60a293.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e24ac51f-2b55-4b09-bf65-f01acf60a293.png)
 
 ```
 - t1, t2 쓰레드가 출금 검증 로직을 거치게 된다. 이 때, `BankAccount` 인스턴스가 공유가 된다.
@@ -200,27 +200,27 @@ public synchronized boolean withdraw(int amount) {
 
 * 자바의 synchronized 키워드가 어떻게 작동하는지는 아래와 같다.
 
-![스크린샷 2025-01-09 오후 2 15 10](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91f4e27b-f51d-4ef7-b28c-6be62a48a4e0.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91f4e27b-f51d-4ef7-b28c-6be62a48a4e0.png)
 
 ```
 - 모든 객체(인스턴스)는 자신만의 락(Lock)을 가지고 있다.
 - 쓰레드가 synchronized 키워드가 있는 메서드에 진입하려면 반드시 해당 인스턴스의 락이 있어야 한다.
 ```
 
-![스크린샷 2025-01-09 오후 2 18 20](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fc20d54e-0089-4c87-b7ec-e7207224ffeb.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fc20d54e-0089-4c87-b7ec-e7207224ffeb.png)
 
 ```
 - 쓰레드 t1이 먼저 실행되고 BankAccount 인스턴스의 락을 확보하면서 메서드가 실행되고 검증 로직을 수행하게 된다.
 - 이 때, 쓰레드 t2는 락을 획득하지 못했기 때문에 대기 상태에 진입하게 된다.
 ```
 
-![스크린샷 2025-01-09 오후 2 21 02](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/66811a20-478b-4fef-b100-3c37b79f48f1.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/66811a20-478b-4fef-b100-3c37b79f48f1.png)
 
 ```
 - 쓰레드 t1이 메서드 수행을 끝나고 BankAccount 인스턴스에 락을 반납한다.
 ```
 
-![스크린샷 2025-01-09 오후 2 23 37](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4f80af94-930a-466d-89a3-a72a4ee3783a.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4f80af94-930a-466d-89a3-a72a4ee3783a.png)
 
 ```
 - 쓰레드 t2가 BankAccount 인스턴스의 락을 획득하면서 synchronized 키워드가 붙은 메서드에 진입한다.

@@ -34,7 +34,7 @@ $ sudo systemctl start nginx
 
 > [Nginx 공식문서](https://nginx.org/en/linux_packages.html#Ubuntu)
 
-![스크린샷 2025-01-26 오후 11 29 07](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e5939cd1-22ca-4812-931f-86ca2f681fd8.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e5939cd1-22ca-4812-931f-86ca2f681fd8.png)
 
 #### Nginx 로그 확인하는 방법
 

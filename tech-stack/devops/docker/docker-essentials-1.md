@@ -62,11 +62,11 @@ Server: Docker Desktop 4.42.0 (195023)
   * 격리된 시스템 자원 및 네트워크를 사용할 수 있는 독립적인 실행 단위
   * 읽기 전용 상태인 이미지에 변경된 사항을 저장할 수 있는 컨테이너 계층에 저장
 
-![스크린샷 2025-06-23 오후 11 53 35](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/964f4856-8b48-4902-805b-b22b8e67cfdd.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/964f4856-8b48-4902-805b-b22b8e67cfdd.png)
 
 ### [ Docker Container LifeCycle ] : Docker Container 실행과 중지에 따른 상태 변화
 
-![스크린샷 2025-06-23 오후 11 57 23](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/35146e49-00a3-419d-ab16-4fea42ee7f9a.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/35146e49-00a3-419d-ab16-4fea42ee7f9a.png)
 
 > [참고 - Docker Hub](https://hub.docker.com/)
 

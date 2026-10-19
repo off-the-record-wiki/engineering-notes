@@ -2,7 +2,7 @@
 
 ## 📚 URI(Uniform Resource Identifier)
 
-![스크린샷 2025-01-06 오후 1 52 27](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70136170-0517-4934-8d93-c3baf7c06b44.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70136170-0517-4934-8d93-c3baf7c06b44.png)
 
 * Uniform : 리소스를 식별하는 통일된 방식
 * Resource : 자원, URI로 식별할 수 있는 모든 것

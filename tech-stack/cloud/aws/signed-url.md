@@ -36,4 +36,4 @@ https://example.cloudfront.net/exmaple.jpg?Policy=eyJTdGF0ZW1lbnQiOiBbeyJSZXNvdX
 
 ### Signed URL 아키텍처
 
-![스크린샷 2025-07-25 09 27 17](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f20e847-a12f-4f0e-9fd1-d135dfe78df5.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f20e847-a12f-4f0e-9fd1-d135dfe78df5.png)

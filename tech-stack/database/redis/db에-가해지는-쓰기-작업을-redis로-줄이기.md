@@ -25,7 +25,7 @@ $ LPOP my_list # 1
 $ LPOP my_list # 2
 ```
 
-![스크린샷 2026-02-07 22 56 10](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ab88928-fc37-4b7a-bca3-f4cc6a101f76.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ab88928-fc37-4b7a-bca3-f4cc6a101f76.png)
 
 * **Write Back** 전략을 활용하면 된다. 
 * **Write Back** 전략이란 클라이언트의 요청이 들어오면 먼저 Redis에 데이터를 쌓아두고 클라이언트에게 먼저 응답을 반환하고나서 Redis에 쌓인 데이터를 스케줄러가 주기적으로 DB에 한꺼번에 저장하는 방식을 뜻한다. 

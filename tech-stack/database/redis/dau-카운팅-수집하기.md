@@ -2,7 +2,7 @@
 
 ## 📚 Redis - DAU 카운팅 수집하기
 
-![스크린샷 2026-02-08 22 05 19](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91f6def0-e5fe-48f2-81bb-87fa771acf24.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91f6def0-e5fe-48f2-81bb-87fa771acf24.png)
 
 * Sorted Set은 score(점수)를 기준으로 자동 정렬되는 중복없는 자료 구조다. 
 * Set은 정렬되지 않는 중복 없는 자료구조를 뜻한다. 이런 특성 때문에 Set은 순서는 중요하지 않지만 중복되면 안 되는 데이터를 다룰 때 적합하다.
@@ -34,7 +34,7 @@ $ SCARD member
   * 대규모 이벤트에서 사용자별 참여 여부 (참석 : true / 불참 : false)
   * 하루 동안 서비스에 방문한 사용자 수인 DAU 구하기 (방문 : true / 방문 X : false)
 
-![스크린샷 2026-02-08 22 08 20](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/36b67512-adc6-4b17-b345-9b2f8a5549c4.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/36b67512-adc6-4b17-b345-9b2f8a5549c4.png)
 
 * `key`, `offset`, `value`의 구성 요소를 가지고 있다.
 * `offset`에는 0 이상의 정수만 넣을 수 있다. 인덱스(index)라고 생각하면 편하다.

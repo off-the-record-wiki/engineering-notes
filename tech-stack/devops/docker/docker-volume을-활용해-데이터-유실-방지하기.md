@@ -53,7 +53,7 @@ $ docker run -e MYSQL_ROOT_PASSWORD=password123 -p 3306:3306 -v /Users/jwj/Deskt
 * MySQL Container에 테스트용 testdb를 만든다.
 * 그러고 나서 컨테이너를 삭제한 후 다시 위와 같은 명령어를 그대로 입력해서 컨테이너를 생성한다.
 
-![스크린샷 2025-01-07 오후 11 55 53](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1d7ac08f-1f19-4a06-a99c-63853ec06987.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1d7ac08f-1f19-4a06-a99c-63853ec06987.png)
 
 * 데이터베이스가 그대로 살아있음을 확인할 수 있다.
 

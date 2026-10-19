@@ -2,7 +2,7 @@
 
 ## 📚 표현
 
-![스크린샷 2025-01-06 오후 7 16 21](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4d44e233-136b-4bf7-91e9-ccea6ae33754.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4d44e233-136b-4bf7-91e9-ccea6ae33754.png)
 
 * 표현 헤더는 전송, 응답 둘 다 사용한다.
 * Content-Type : 표현 데이터의 형식
@@ -18,14 +18,14 @@
 * Accept-Encoding : 클라이언트가 선호하는 압축 인코딩
 * Accept-Language : 클라이언트가 선호하는 자연 언어
 
-![스크린샷 2025-01-06 오후 9 14 25](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec169aa4-851c-499d-a150-dbab2f401c31.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec169aa4-851c-499d-a150-dbab2f401c31.png)
 
 * 협상과 우선순위1(Quality Values(q))
   * Quality Values(q) 값 사용
   * 0 ~ 1, 클수록 높은 우선순위라는 의미
   * 생략하면 기본적으로 1
 
-![스크린샷 2025-01-06 오후 9 20 52](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/77beda07-2e67-4655-b98f-d170d5f33be3.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/77beda07-2e67-4655-b98f-d170d5f33be3.png)
 
 * 협상과 우선순위2(Quality Values(q))
   * 구체적인 것이 우선한다.
@@ -34,19 +34,19 @@
 
 * 단순 전송
 
-![스크린샷 2025-01-06 오후 9 24 49](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a0dc4c9d-916f-45b9-9ed9-2ef1851b330c.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a0dc4c9d-916f-45b9-9ed9-2ef1851b330c.png)
 
 * 압축 전송
 
-![스크린샷 2025-01-06 오후 9 26 45](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b0200b2a-3e45-4ea5-9704-2ff7915e5712.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b0200b2a-3e45-4ea5-9704-2ff7915e5712.png)
 
 * 분할 전송
 
-![스크린샷 2025-01-06 오후 9 27 32](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/966c82b6-7f55-432f-bf57-06fb3840e3b2.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/966c82b6-7f55-432f-bf57-06fb3840e3b2.png)
 
 * 범위 전송
 
-![스크린샷 2025-01-06 오후 9 27 57](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/192d9a63-8b17-4aaa-8703-cede466a537a.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/192d9a63-8b17-4aaa-8703-cede466a537a.png)
 
 ## 📚 일반 정보
 
@@ -78,11 +78,11 @@
 * 로그인에 성공한 후 서버에서 쿠키를 만들어 응답으로 보낸다.
 * 웹 브라우저가 쿠키 저장소에 해당 쿠키를 저장한다.
 
-![스크린샷 2025-01-06 오후 9 42 04](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/45c3aa7d-d319-47fd-a9ba-6951f11099e0.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/45c3aa7d-d319-47fd-a9ba-6951f11099e0.png)
 
 * 로그인 이후 인증을 필요로 하는 페이지에 접근할 때 쿠키를 포함해서 요청을 보낸다.
 
-![스크린샷 2025-01-06 오후 9 43 49](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/551a1282-037e-42cb-a071-469e522b58a3.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/551a1282-037e-42cb-a071-469e522b58a3.png)
 
 > ❗ 모든 요청에 사용자 정보를 포함해서 전송하는 방식의 문제점
 

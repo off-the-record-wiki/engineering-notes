@@ -191,7 +191,7 @@ SHOW WARNINGS;
 * `rows` : 조사할 추정 행 수. `rows`는 옵티마이저가 쿼리를 실행하기 위해 조사해야 한다고 추정하는 행 수이다.
 * `filtered` : 테이블 조건에 의해 필터링되어 남는 행의 추정 비율(%)이다.
 
-![스크린샷 2026-08-03 22 07 38](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c623a19c-0b5d-4ce3-b8f7-31a926104fcf.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c623a19c-0b5d-4ce3-b8f7-31a926104fcf.png)
 
 #### Extra 컬럼 해석
 

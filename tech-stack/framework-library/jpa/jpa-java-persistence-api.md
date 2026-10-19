@@ -26,11 +26,11 @@
 * 이 1차 캐시의 `@Id` 값은 DB의 PK로 매핑한 값이 들어가고 Entity에는 객체가 들어간다.
 * 조회 작업을 할 때, 아래와 같이 1차 캐시를 조회한다. 조회하는 값 기준은 `@Id`가 된다.
 
-![스크린샷 2025-01-02 오후 11 04 56](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/30a4eb0b-0b5e-4300-991c-38720339af55.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/30a4eb0b-0b5e-4300-991c-38720339af55.png)
 
 * 만약 1차 캐시에 원하는 값이 없다면 DB로부터 조회하여 영속성 컨텍스트에 올린다.
 
-![스크린샷 2025-01-02 오후 11 08 53](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3c88b93d-7c67-47a8-a5c9-b6d27dd481de.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3c88b93d-7c67-47a8-a5c9-b6d27dd481de.png)
 
 ## 📚 변경 감지(Dirty Checking)
 

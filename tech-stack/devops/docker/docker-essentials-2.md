@@ -5,7 +5,7 @@
 * 컨테이너를 만드는 데 필요한 읽기 전용 템플릿
 * 컨테이너 실행에 필요한 파일과 설정 값 등을 포함한다.
 
-![스크린샷 2025-06-27 오전 12 04 36](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6be458a4-ffa4-4862-bf40-9944589ba7a2.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6be458a4-ffa4-4862-bf40-9944589ba7a2.png)
 
 ## 📚 Dockerfile
 

@@ -11,7 +11,7 @@
 * 빅오(Big O) 표기법은 알고리즘 성능을 분석할 때 사용하는 수학적 표현 방식이다. 특히 알고리즘이 처리해야 할 데이터의 양이 증가할 때, 그 알고리즘이 얼마나 빠르게 실행되는지를 나타낸다.
 * 여기서 중요한 것은 알고리즘의 정확한 실행 시간을 계산하는 것이 아니라, 데이터 양의 증가에 따른 성능 변화 추세를 이해하는 것이다.
 
-![스크린샷 2025-01-15 오후 3 43 04](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70d7f94c-4470-4401-aa11-c675afecda51.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70d7f94c-4470-4401-aa11-c675afecda51.png)
 
 * `O(1)` - 상수 시간, 입력 데이터 크기에 관계없이 알고리즘 실행 시간이 일정하다.
 * `O(N)` - 선형 시간, 알고리즘 실행 시간이 입력 데이터 크기에 비례하여 증가한다.

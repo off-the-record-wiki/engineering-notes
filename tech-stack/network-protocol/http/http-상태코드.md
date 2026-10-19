@@ -21,11 +21,11 @@
 * 원래의 URL을 사용X, 검색 엔진 등에서도 변경 인지
 * 301 Moved Permanently : 리다이렉트시 요청 메서드가 GET으로 변하고 본문이 제거될 수 있다.
 
-![스크린샷 2025-01-06 오후 6 42 50](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4ce8c5b7-bff3-46ed-a868-eb7abd5e3b78.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4ce8c5b7-bff3-46ed-a868-eb7abd5e3b78.png)
 
 * 308 Permanent Redirect : 301과 동일한 기능, 다만 리다이렉트 요청 메서드와 본문이 유지된다.
 
-![스크린샷 2025-01-06 오후 6 43 36](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3ea91655-aaa3-4d07-8c69-e0468d3f7079.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3ea91655-aaa3-4d07-8c69-e0468d3f7079.png)
 
 > 일시 리다이렉션 - 302, 303, 307
 
@@ -71,6 +71,6 @@
 
 #### 외부 서비스와의 연동 과정에서 발생하는 오류에 대한 상태 코드
 
-![스크린샷 2025-09-25 10 10 15](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70db4fae-b4fa-4ada-82ef-4d9e00a2b2f0.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70db4fae-b4fa-4ada-82ef-4d9e00a2b2f0.png)
 
 * 503 Service Unavailable는 일시적으로 서버가 요청을 처리할 수 없는 상황을 가정한 상태이다.
