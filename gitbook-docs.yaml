@@ -4,7 +4,7 @@ site:
   structure:
     - type: space
       key: backend-roadmap
-      title: Backend Roadmap
+      title: Study
       path: backend-roadmap
       default: true
       content:
