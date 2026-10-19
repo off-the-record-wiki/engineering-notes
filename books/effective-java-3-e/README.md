@@ -71,7 +71,7 @@
 * [(Effective Java Item 67) Java ‐ 최적화는 신중히 하라](최적화는-신중히-하라-effective-java-item-67.md)
 * [(Effective Java Item 68) Java ‐ 일반적으로 통용되는 명명 규칙을 따르라](일반적으로-통용되는-명명-규칙을-따르라-effective-java-item-68.md)
 * [(Effective Java Item 69) Java ‐ 예외는 진짜 예외 상황에만 사용하라](예외는-진짜-예외-상황에만-사용하라-effective-java-item-69.md)
-* [(Effective Java Item 70) Java ‐ 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라](복구할-수-있는-상황에는-검사-예외를-프로그래밍-오류에는-런타임-예외를-사ᄋ.md)
+* [(Effective Java Item 70) Java ‐ 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라](복구할-수-있는-상황에는-검사-예외를-프로그래밍-오류에는-런타임-예외를-사용하라-effecti-7923d6.md)
 * [(Effective Java Item 71) Java ‐ 필요 없는 검사 예외 사용은 피하라](필요-없는-검사-예외-사용은-피하라-effective-java-item-71.md)
 * [(Effective Java Item 72) Java ‐ 표준 예외를 사용하라](표준-예외를-사용하라-effective-java-item-72.md)
 * [(Effective Java Item 73) Java ‐ 추상화 수준에 맞는 예외를 던지라](추상화-수준에-맞는-예외를-던지라-effective-java-item-73.md)
