@@ -1,0 +1,20 @@
+# Design Pattern📎
+
+🔗 [Reference](https://refactoring.guru/design-patterns)
+
+* [Design Pattern - Strategy](https://github.com/thought-corner/design-pattern/tree/main/src/strategy)
+* [Design Pattern - Factory Method](https://github.com/thought-corner/design-pattern/tree/main/src/factory_method)
+* [Design Pattern - Abstract Factory](https://github.com/thought-corner/design-pattern/tree/main/src/abstract_factory)
+* [Design Pattern - Singleton](https://github.com/thought-corner/design-pattern/tree/main/src/singleton)
+* [Design Pattern - Observer](https://github.com/thought-corner/design-pattern/tree/main/src/observer)
+* [Design Pattern - Publisher - Subscriber](https://github.com/thought-corner/design-pattern/tree/main/src/pub_sub)
+* [Design Pattern - Decorator](https://github.com/thought-corner/design-pattern/tree/main/src/decorator)
+* [Design Pattern - Adapter](https://github.com/thought-corner/design-pattern/tree/main/src/adapter)
+* [Design Pattern - Builder](https://github.com/thought-corner/design-pattern/tree/main/src/builder)
+* [Design Pattern - Template Method](https://github.com/thought-corner/design-pattern/tree/main/src/template_method)
+* [Design Pattern - Facade](https://github.com/thought-corner/design-pattern/tree/main/src/facade)
+* [Design Pattern - Proxy](https://github.com/thought-corner/design-pattern/tree/main/src/proxy)
+* [Design Pattern - Command](https://github.com/thought-corner/design-pattern/tree/main/src/command)
+* [Design Pattern - Chain of Responsibility](https://github.com/thought-corner/design-pattern/tree/main/src/chain_of_responsibility)
+* [Design Pattern - State](https://github.com/thought-corner/design-pattern/tree/main/src/state)
+* [Design Pattern - Composite](https://github.com/thought-corner/design-pattern/tree/main/src/composite)
