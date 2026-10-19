@@ -53,11 +53,7 @@ def nfc(s):
     return unicodedata.normalize('NFC', s)
 
 
-def nfd(s):
-    return unicodedata.normalize('NFD', s)
-
-
-def slugify(text, max_bytes=120):
+def slugify(text, max_bytes=200):  # 파일명 한도 255바이트 안에서 해시와 .md가 붙을 자리를 남긴다
     s = re.sub(r'[\W_]+', '-', unicodedata.normalize('NFKC', text).lower()).strip('-') or 'page'
     if len(s.encode()) > max_bytes:
         head = s.encode()[:max_bytes].decode('utf-8', 'ignore').rstrip('-')
@@ -113,13 +109,7 @@ class Builder:
         name = nfc(name)
         if name in self.pages:
             return name
-        if name.casefold() in self.by_key:
-            return self.by_key[name.casefold()]
-        # wiki는 긴 제목의 파일명을 잘라서 저장한다(한글은 자모 단위로 잘리기도 한다).
-        # 링크는 전체 제목을 쓰므로 NFD 기준 접두어로 찾는다.
-        target = nfd(name)
-        found = [p for p in self.pages if len(p) >= 40 and target.startswith(nfd(p))]
-        return max(found, key=len) if found else None
+        return self.by_key.get(name.casefold())
 
     def link(self, dest, cur):
         m = WIKI_LINK.match(dest)
