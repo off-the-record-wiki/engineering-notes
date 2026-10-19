@@ -2,9 +2,9 @@
 
 🔗 [Reference](https://dev.mysql.com/doc/)
 
-* [MySQL ‐ Solving Concurrency Problems using Database-Level Locking](동시성-이슈를-데이터베이스로-해결하기.md)
+* [MySQL ‐ Solving Concurrency Problems using Database-Level Locking](solving-concurrency-problems-using-database-level-locking.md)
 * [MySQL - Multi Column Index](multi-column-index.md)
-* [MySQL - Covering Index & RDB vs ElasticSearch Diff](covering-index-rdb-vs-elasticsearch-index-diff.md)
+* [MySQL - Covering Index & RDB vs ElasticSearch Diff](covering-index-rdb-vs-elasticsearch-diff.md)
 * [MySQL - ORDER BY](order-by.md)
 * [MySQL - INSERT](insert.md)
 * [MySQL - AUTO_INCREMENT_LOCK](auto-increment-lock.md)

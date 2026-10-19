@@ -18,7 +18,7 @@
 
 ## 📚 메서드 이름으로 @NamedQuery 호출 가능
 
-* [NamedQuery란?](객체지향-쿼리-언어.md#-named-%EC%BF%BC%EB%A6%AC)
+* [NamedQuery란?](introduction-to-object-oriented-query-languages-in-jpa.md#-named-%EC%BF%BC%EB%A6%AC)
 * 애플리케이션 로딩 시점에 오류를 잡아 준다.
 
 ## 📚 @Query, 리포지토리 메서드에 쿼리 정의하기
@@ -45,13 +45,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 ## 📚 파라미터 바인딩 - 이름 기반, 위치 기반
 
-* [파라미터 바인딩이란?](객체지향-쿼리-언어.md#-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9---%EC%9D%B4%EB%A6%84-%EA%B8%B0%EC%A4%80-%EC%9C%84%EC%B9%98-%EA%B8%B0%EC%A4%80%EA%B0%80%EA%B8%89%EC%A0%81%EC%9D%B4%EB%A9%B4-%EC%9D%B4%EB%A6%84-%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EA%B2%83)
+* [파라미터 바인딩이란?](introduction-to-object-oriented-query-languages-in-jpa.md#-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9---%EC%9D%B4%EB%A6%84-%EA%B8%B0%EC%A4%80-%EC%9C%84%EC%B9%98-%EA%B8%B0%EC%A4%80%EA%B0%80%EA%B8%89%EC%A0%81%EC%9D%B4%EB%A9%B4-%EC%9D%B4%EB%A6%84-%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EA%B2%83)
 * 결론적으로 위치 기반은 데이터 순서가 바뀌면 큰 문제가 발생하므로 이름 기반을 사용하도록 한다.
 
 ## 📚 유연한 반환 타입
 
-* [TypedQuery, Query](객체지향-쿼리-언어.md#-typedquery-query)
-* [getResultList, getSingleResult](객체지향-쿼리-언어.md#-%EA%B2%B0%EA%B3%BC-%EC%A1%B0%ED%9A%8C---getresultlist-getsingleresult)
+* [TypedQuery, Query](introduction-to-object-oriented-query-languages-in-jpa.md#-typedquery-query)
+* [getResultList, getSingleResult](introduction-to-object-oriented-query-languages-in-jpa.md#-%EA%B2%B0%EA%B3%BC-%EC%A1%B0%ED%9A%8C---getresultlist-getsingleresult)
 
 ## 📚 순수 JPA 페이징과 정렬
 
@@ -103,7 +103,7 @@ Page<Member> findByAge(int age, Pageable pageable);
 
 * 벌크성 수정, 삭제 쿼리는 `@Modifying` 어노테이션을 사용한다.
 * 변경 감지를 통해 여러 데이터를 하나하나 바꾼다면 많은 SQL문이 발생하기에 다량의 데이터에 대한 적용을 위해서라면 이와 같은 벌크성 수정 쿼리가 효율적이다.
-* [벌크 연산 주의사항 - 영속성 컨텍스트와 DB의 데이터 정합성 문제](객체지향-쿼리-언어.md#-%EB%B2%8C%ED%81%AC-%EC%97%B0%EC%82%B0bulk)
+* [벌크 연산 주의사항 - 영속성 컨텍스트와 DB의 데이터 정합성 문제](introduction-to-object-oriented-query-languages-in-jpa.md#-%EB%B2%8C%ED%81%AC-%EC%97%B0%EC%82%B0bulk)
 
 ```java
 @Modifying(clearAutomatically = true)	// 영속성 컨텍스트 초기화 자동 설정
@@ -382,5 +382,5 @@ public String findMember2(@PathVariable(name = "id") Member member) {
 ## 📚 save() 메서드 동작 이해
 
 * `save()`메서드를 사용할 경우 새로운 엔티티라면 저장을, 새로운 엔티티가 아니라면 병합을 한다.
-* [기본 키 생성 전략 정리](엔티티-매핑-및-기본키-생성-전략-정리.md)
+* [기본 키 생성 전략 정리](entity-mapping-pk-strategy.md)
 * JPA 생성 전략을 @Id 직접 할당 방식이라면 `save()` 호출 시점에 이미 식별자 값이 있는 상태로 `save()` 메서드를 호출해 `merge`가 동작하게 된다. `merge`는 DB를 호출해서 값을 확인하고 DB에 값이 없으면 새로운 엔티티로 인지하므로 매우 비효율적이다. 이와 같은 경우 `Persistable`를 사용해서 새로운 엔티티 확인 여부를 직접 구현하는 것이 효율적이다.

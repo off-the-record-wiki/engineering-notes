@@ -57,4 +57,4 @@ class StockServiceTest {
 }
 ```
 
-* [Java - synchronized 키워드 설명](동기화-synchronized.md) 
+* [Java - synchronized 키워드 설명](synchronized.md) 

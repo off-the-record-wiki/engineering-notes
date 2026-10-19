@@ -1,6 +1,6 @@
 # MSA⭐
 
-* [MicroService Architecture - Service Communications Patterns(RESTful API)](service-communications-patterns.md)
+* [MicroService Architecture - Service Communications Patterns(RESTful API)](service-communications-patterns-restful-api.md)
 * [MicroService Architecture - Service Communications Patterns(GraphQL)](service-communications-patterns-graphql.md)
 * [MicroService Architecture - Service Communications Patterns(gRPC)](service-communications-patterns-grpc.md)
 * [MicroService Architecture - API Gateway Patterns](api-gateway-patterns.md)

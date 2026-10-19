@@ -152,7 +152,7 @@ public final class DefaultSecurityFilterChain implements SecurityFilterChain, Be
 * 서블릿 필터는 클라이언트 요청이 서블릿에 도달하기 전이나 서블릿이 응답을 클라이언트에게 보내기 전에 특정 작업을 수행할 수 있다.
 * 서블릿 필터는 Tomcat(WAS)에서 생성되고 실행되며 종료된다.
 
-> [Spring - Filter와 Interceptor](../spring/필터와-인터셉터.md)
+> [Spring - Filter와 Interceptor](../spring/filter-interceptor.md)
 
 #### DelegatingFilterProxy
 

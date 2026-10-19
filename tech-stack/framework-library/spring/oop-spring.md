@@ -23,4 +23,4 @@
 * **DIP(Dependency Inversion Principle) : 의존관계 역전의 원칙**
   * 구현체 클래스에 의존하기보다는 추상 인터페이스에 의존하라는 뜻이다.
 
-> * [Java - 자바 특징과 객체 지향 원칙](../../language/java/자바-특징과-객체-지향-원칙.md)
+> * [Java - 자바 특징과 객체 지향 원칙](../../language/java/jvm-gc-solid.md)

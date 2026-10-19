@@ -35,7 +35,7 @@ private void dynamicCall(Method method, Object target) throws Exception {
 
 * 리플렉션을 사용하면 클래스와 메서드 메타 정보를 사용해서 애플리케이션을 동적으로 유연하게 만들 수 있다.
 * 하지만 리플렉션 기술은 런타임에 동작하기 때문에 컴파일 시점에 오류를 잡을 수 없다.
-* [Java Reflection 정리](../../language/java/리플렉션.md)
+* [Java Reflection 정리](../../language/java/reflection.md)
 
 ```java
 Method methodCallB = classHello.getMethod("callBBBB");  // 컴파일 시점에 오류를 잡을 수 없다.
@@ -289,4 +289,4 @@ public interface InvocationHandler {
 * CGLIB(Code Generator Library)
   * CGLIB는 바이트코드를 조작해서 동적으로 클래스를 생성하는 기술을 제공하는 라이브러리이다.
   * CGLIB를 사용하면 인터페이스가 없어도 구체 클래스만 가지고 동적 프록시를 만들 수 있다.
-* [Spring - Singleton Container](싱글톤-컨테이너.md)
+* [Spring - Singleton Container](singleton-container.md)
