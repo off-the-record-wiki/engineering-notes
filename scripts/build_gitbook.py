@@ -31,7 +31,7 @@ WIKI_LINK = re.compile(
 IMG_TAG = re.compile(r'<img\b[^>]*>', re.I)
 IMG_OPEN = re.compile(r'<img\b[^>]*$', re.I)
 IMG_ATTR = re.compile(r'\b(src|alt)\s*=\s*"([^"]*)"|\b(src|alt)\s*=\s*\'([^\']*)\'', re.I)
-# GitHub에 붙여넣은 이미지에 자동으로 붙는 alt는 버린다.
+# GitHub에 붙여넣은 이미지에 자동으로 붙는 alt는 버린다. macOS 스크린샷 이름은 NFD라서 NFC로 맞춰 비교한다.
 AUTO_ALT = re.compile(r'^(image|스크린샷.*|screenshot.*|img)$', re.I)
 FENCE_OPEN = re.compile(r'^[\s>]*(`{3,}|~{3,})')
 FENCE_CLOSE = re.compile(r'^[\s>]*(`{3,}|~{3,})\s*$')
@@ -194,13 +194,13 @@ class Builder:
         if 'src' not in attrs:
             return tag
         alt = attrs.get('alt', '').strip()
-        return f'![{"" if AUTO_ALT.match(alt) else alt}]({attrs["src"]})'
+        return f'![{"" if AUTO_ALT.match(nfc(alt)) else alt}]({attrs["src"]})'
 
     def convert_text(self, s, cur, source):
         s = IMG_TAG.sub(lambda m: self.img_to_markdown(m[0]), s)
         # GitBook은 이미지 alt를 캡션으로 보여 주므로 자동으로 붙은 alt는 지운다.
         s = MD_LINK.sub(lambda m: '{}[{}]({}{})'.format(
-            m['bang'], '' if m['bang'] and AUTO_ALT.match(m['text'].strip()) else m['text'],
+            m['bang'], '' if m['bang'] and AUTO_ALT.match(nfc(m['text'].strip())) else m['text'],
             self.asset(m['dest'], cur, source) if m['bang'] else self.link(m['dest'], cur),
             m['title'] or ''), s)
         return TAG.sub(lambda m: '<' if m[1].lower() in HTML_TAGS else r'\<', s)
