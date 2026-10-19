@@ -1,0 +1,11 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: Backend Roadmap
+  structure:
+    - type: space
+      key: backend-roadmap
+      title: Backend Roadmap
+      path: backend-roadmap
+      default: true
+      content:
+        directory: ./
