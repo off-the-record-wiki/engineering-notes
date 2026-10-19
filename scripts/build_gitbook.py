@@ -53,7 +53,8 @@ def nfc(s):
 
 
 def slugify(text, max_bytes=200):  # 파일명 한도 255바이트 안에서 해시와 .md가 붙을 자리를 남긴다
-    s = re.sub(r'[\W_]+', '-', unicodedata.normalize('NFKC', text).lower()).strip('-') or 'page'
+    # GitBook은 파일명에서 ASCII가 아닌 글자를 지우고 URL을 만든다(한글만 있으면 `undefined`). 그래서 ASCII만 남긴다.
+    s = re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFKC', text).lower()).strip('-')
     if len(s.encode()) > max_bytes:
         head = s.encode()[:max_bytes].decode('utf-8', 'ignore').rstrip('-')
         s = f'{head}-{hashlib.sha1(text.encode()).hexdigest()[:6]}'
@@ -225,7 +226,7 @@ class Builder:
         for line in self.pages[name].split('\n'):
             if m := SECTION.match(line):
                 title, ref = heading_title(m[1])
-                path = f'{base}/{self.unique(base, slugify(title))}/README.md'
+                path = f'{base}/{self.unique(base, slugify(title) or "section")}/README.md'
                 current = {'title': title, 'ref': ref, 'path': path, 'items': []}
                 sections.append(current)
                 self.anchor_paths[(name, github_anchor(title))] = path
@@ -246,8 +247,11 @@ class Builder:
                     continue
                 if page in self.paths:
                     continue  # 여러 섹션에 걸린 페이지는 처음 나온 곳에만 둔다
-                stem = re.sub(r'^[^‐]{1,40}?-‐[\x00-\x1f]*-', '', page)
-                self.paths[page] = f'{directory}/{self.unique(directory, slugify(stem))}.md'
+                # GitBook은 파일명의 ASCII 부분으로 URL을 만들기 때문에, 영어로 적힌 링크 텍스트에서
+                # "Java - " 같은 접두어를 떼고 파일명을 만든다.
+                title = re.sub(r'^[^-‐]{1,30}?\s*[-‐]\s+', '', text)
+                slug = slugify(title) or slugify(page) or 'page'
+                self.paths[page] = f'{directory}/{self.unique(directory, slug)}.md'
                 owned.append((text, page))
             sec['owned'] = owned
 
