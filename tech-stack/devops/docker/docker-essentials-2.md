@@ -28,4 +28,4 @@
 * Docker를 통해 생성하는 Image들을 저장해주는 저장소
 * Docker Image들의 위치 제어 및 CI/CD를 위한 자동화 Pipeline 구축 가능
 
-![image](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/feb96bdd-7862-4b0b-a4e2-75afb3dbc325.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/feb96bdd-7862-4b0b-a4e2-75afb3dbc325.png)

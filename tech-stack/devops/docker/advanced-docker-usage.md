@@ -4,9 +4,9 @@
 
 ## 📚 Docker & Microservice Architecture
 
-![image](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/96f6483b-1a22-4b68-820b-c20aee60c076.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/96f6483b-1a22-4b68-820b-c20aee60c076.png)
 
-![image](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f8d8119-bc22-4e76-83ea-ec36ca77cc15.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f8d8119-bc22-4e76-83ea-ec36ca77cc15.png)
 
 ## 📚 멀티 플랫폼 이미지를 위한 Docker Buildx⚠️
 

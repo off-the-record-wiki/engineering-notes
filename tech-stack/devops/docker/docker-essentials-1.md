@@ -79,5 +79,5 @@ Server: Docker Desktop 4.42.0 (195023)
 $ docker run -p host_port:container_port <IMAGE_NAME>
 ```
 
-![image](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/328fe2f4-e5b4-4c02-bc81-d4eb8f8e3ea0.png)
+![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/328fe2f4-e5b4-4c02-bc81-d4eb8f8e3ea0.png)
 > [참고](https://linuxhandbook.com/docker-port-mapping/)
