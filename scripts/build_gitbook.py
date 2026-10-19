@@ -295,10 +295,11 @@ class Builder:
         self.files['SUMMARY.md'] = '\n'.join(summary) + '\n'
         self.files['.gitbook.yaml'] = 'root: ./\n\nstructure:\n  readme: README.md\n  summary: SUMMARY.md\n'
         # 사이트 단위 Git Sync가 읽는 설정. key는 GitBook이 space를 식별하는 값이라 연결 후에는 바꾸지 않는다.
+        # gitbook 브랜치에 이미 있으면 워크플로가 그 파일을 유지하므로, 이 값은 브랜치를 새로 만들 때만 쓰인다.
         self.files['gitbook-docs.yaml'] = (
             '$schema: https://api.gitbook.com/gitbook-docs.yaml\n'
             'site:\n'
-            '  title: Backend Roadmap\n'
+            '  title: Study\n'
             '  structure:\n'
             '    - type: space\n'
             '      key: backend-roadmap\n'

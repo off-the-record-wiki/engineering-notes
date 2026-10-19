@@ -49,6 +49,10 @@ jobs:
           git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git fetch -q --depth 1 origin gitbook; then
             git reset -q --soft FETCH_HEAD
+            # GitBook에서 사이트 설정을 바꾸면 gitbook-docs.yaml에 커밋하므로, 이미 있으면 그대로 둔다
+            if git cat-file -e FETCH_HEAD:gitbook-docs.yaml 2>/dev/null; then
+              git checkout -q FETCH_HEAD -- gitbook-docs.yaml
+            fi
           fi
           git add -A
           if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then
