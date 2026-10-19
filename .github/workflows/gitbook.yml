@@ -6,8 +6,6 @@ on:
     branches: [main]
     paths:
       - README.md
-      - claude/**
-      - docs/**
       - scripts/build_gitbook.py
       - .github/workflows/gitbook.yml
   schedule:
