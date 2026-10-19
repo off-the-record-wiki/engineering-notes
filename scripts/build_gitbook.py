@@ -198,8 +198,9 @@ class Builder:
 
     def convert_text(self, s, cur, source):
         s = IMG_TAG.sub(lambda m: self.img_to_markdown(m[0]), s)
+        # GitBook은 이미지 alt를 캡션으로 보여 주므로 자동으로 붙은 alt는 지운다.
         s = MD_LINK.sub(lambda m: '{}[{}]({}{})'.format(
-            m['bang'], m['text'],
+            m['bang'], '' if m['bang'] and AUTO_ALT.match(m['text'].strip()) else m['text'],
             self.asset(m['dest'], cur, source) if m['bang'] else self.link(m['dest'], cur),
             m['title'] or ''), s)
         return TAG.sub(lambda m: '<' if m[1].lower() in HTML_TAGS else r'\<', s)
