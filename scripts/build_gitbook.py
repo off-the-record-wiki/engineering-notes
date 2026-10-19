@@ -314,6 +314,20 @@ class Builder:
 
         self.files['SUMMARY.md'] = '\n'.join(summary) + '\n'
         self.files['.gitbook.yaml'] = 'root: ./\n\nstructure:\n  readme: README.md\n  summary: SUMMARY.md\n'
+        # 사이트 단위 Git Sync가 읽는 설정. key는 GitBook이 space를 식별하는 값이라 연결 후에는 바꾸지 않는다.
+        self.files['gitbook-docs.yaml'] = (
+            '$schema: https://api.gitbook.com/gitbook-docs.yaml\n'
+            'site:\n'
+            '  title: Backend Roadmap\n'
+            '  structure:\n'
+            '    - type: space\n'
+            '      key: backend-roadmap\n'
+            '      title: Backend Roadmap\n'
+            '      path: backend-roadmap\n'
+            '      default: true\n'
+            '      content:\n'
+            '        directory: ./\n'
+        )
 
     def write(self):
         if self.out.exists():
