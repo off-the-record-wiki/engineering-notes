@@ -1,0 +1,63 @@
+name: GitBook
+
+on:
+  gollum:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+      - claude/**
+      - docs/**
+      - scripts/build_gitbook.py
+      - .github/workflows/gitbook.yml
+  schedule:
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gitbook
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone wiki
+        run: |
+          git clone -q --filter=blob:none --no-checkout --depth 1 \
+            "https://github.com/${GITHUB_REPOSITORY}.wiki.git" "$RUNNER_TEMP/wiki"
+          git -C "$RUNNER_TEMP/wiki" sparse-checkout set --no-cone '/*.md'
+          git -C "$RUNNER_TEMP/wiki" checkout -q
+
+      - name: Build
+        run: >
+          python3 scripts/build_gitbook.py
+          --wiki "$RUNNER_TEMP/wiki"
+          --out "$RUNNER_TEMP/book"
+          --wiki-url "https://github.com/${GITHUB_REPOSITORY}/wiki"
+
+      - name: Publish to gitbook branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          wiki_sha=$(git -C "$RUNNER_TEMP/wiki" rev-parse --short HEAD)
+          cd "$RUNNER_TEMP/book"
+          git init -q -b gitbook
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q --depth 1 origin gitbook; then
+            git reset -q --soft FETCH_HEAD
+          fi
+          git add -A
+          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -q -m "docs(gitbook): sync wiki ${wiki_sha}, main ${GITHUB_SHA::7}"
+          git push -q origin HEAD:gitbook
