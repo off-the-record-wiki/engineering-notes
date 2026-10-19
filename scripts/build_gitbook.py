@@ -20,6 +20,7 @@ import urllib.parse
 from pathlib import Path
 
 DEFAULT_WIKI_URL = 'https://github.com/off-the-record-wiki/study/wiki'
+SITE_TITLE = 'Study'
 
 TEXT = r'(?:[^\[\]\n]|\[[^\[\]\n]*\])*'
 DEST = r'(?:[^()\s]|\([^()\s]*\))+'
@@ -278,11 +279,13 @@ class Builder:
             self.paths[c] = 'tech-stack/README.md'
 
         readme = self.repo / 'README.md'
-        self.page('README.md', 'Backend Roadmap', readme.read_text(encoding='utf-8'), readme)
+        # 첫 페이지 제목은 레포 README의 제목 대신 사이트 이름을 쓴다
+        text = re.sub(r'\A\s*# [^\n]*\n', '', readme.read_text(encoding='utf-8'))
+        self.page('README.md', SITE_TITLE, text, readme)
         text = '\n'.join(l for l in self.pages['Tech-Stack'].split('\n') if not NAV_LINE.match(l))
         self.page(self.paths['Tech-Stack'], 'Tech Stack', text)
 
-        summary = ['# Table of contents', '', '* [Backend Roadmap](README.md)', '* [Tech Stack](tech-stack/README.md)']
+        summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)', '* [Tech Stack](tech-stack/README.md)']
         for label, sections in groups:
             summary += ['', f'## {label}', '']
             for sec in sections:
@@ -299,11 +302,11 @@ class Builder:
         self.files['gitbook-docs.yaml'] = (
             '$schema: https://api.gitbook.com/gitbook-docs.yaml\n'
             'site:\n'
-            '  title: Study\n'
+            f'  title: {SITE_TITLE}\n'
             '  structure:\n'
             '    - type: space\n'
             '      key: backend-roadmap\n'
-            '      title: Backend Roadmap\n'
+            f'      title: {SITE_TITLE}\n'
             '      path: backend-roadmap\n'
             '      default: true\n'
             '      content:\n'
