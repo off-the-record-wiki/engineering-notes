@@ -1,11 +1,11 @@
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
-  title: Study
+  title: engineering-notes
   structure:
     - type: space
       key: backend-roadmap
-      title: Study
-      path: backend-roadmap
+      title: engineering-notes
+      path: engineering-notes
       default: true
       content:
         directory: ./
