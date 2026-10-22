@@ -91,3 +91,4 @@
 * [(Effective Java Item 87) Java - 커스텀 직렬화 형태를 고려해보라](keoseuteom-jikryeolhwa-hyeongtaereul-goryeohaebora.md)
 * [(Effective Java Item 88) Java - readObject 메서드는 방어적으로 작성하라](readobject-meseodeuneun-bangeojeokeuro-jakseonghara.md)
 * [(Effective Java Item 89) Java - 인스턴스 수를 통제해야 한다면 readResolve보다는 열거 타입을 사용하라](inseuteonseu-sureul-tongjehaeya-handamyeon-readresolvebodaneun-yeolgeo-taipeul-sayonghara.md)
+* (Effective Java Item 90) Java - 직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하라

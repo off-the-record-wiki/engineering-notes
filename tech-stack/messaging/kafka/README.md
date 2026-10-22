@@ -21,5 +21,14 @@
 * [Apache Kafka - Group by & Mview](group-by-mview.md)
 * [Apache Kafka - Join](join.md)
 * [Apache Kafka - Time & Windows](time-windows.md)
+* Apache Kafka - Connecting KSQLDB to Kafka Connect
+* Apache Kafka - Kafka Connect
+* Apache Kafka - JDBC Source Connector
+* Apache Kafka - JDBC Sink Connector
+* Apache Kafka - Debezium MySQL CDC Source Connector
+* Apache Kafka - Schema Registry
 * [Apache Kafka - Differences Between RocksDB and In-Memory KeyValueStore in GlobalKTable](differences-between-rocksdb-and-in-memory-keyvaluestore-in-globalktable.md)
 * [Apache Kafka - Kafka Streams](kafka-streams.md)
+* Apache Kafka - Kafka Connect
+* Apache Kafka - Idempotent Producers and Transactional Producers & Consumers
+* Apache Kafka - CDC(Change Data Capture)

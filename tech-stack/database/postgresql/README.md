@@ -8,3 +8,5 @@
 * [PostgreSQL - Advanced SQL Query Patterns](advanced-sql-query-patterns.md)
 * [PostgreSQL - PostgreSQL-Specific Features, Indexing & Performance Optimization](postgresql-specific-features-indexing-performance-optimization.md)
 * [PostgreSQL - Transactions, Concurrency & Why PostgreSQL in the AI Era](transactions-concurrency-why-postgresql-in-the-ai-era.md)
+* PostgreSQL - PostgreSQL Extensions: Modular Features Beyond Core
+* PostgreSQL - Extensions for Distributed Systems & Scheduling

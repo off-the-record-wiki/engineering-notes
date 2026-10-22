@@ -12,6 +12,7 @@
 * [Spring Security - OAuth 2.0 Resource Server](oauth-2-0-resource-server.md)
 * [Spring Security - OAuth 2.0 Resource Server API](oauth-2-0-resource-server-api.md)
 * [Spring Security - OAuth 2.0 Verification](oauth-2-0-verification.md)
+* Spring Security - OAuth 2.0 MAC & RSA Token Verification
 * [Spring Security - OAuth 2.0 Resource Server Permission Implementation](oauth-2-0-resource-server-permission-implementation.md)
 * [Spring Security - OAuth 2.0 opaque()](oauth-2-0-opaque.md)
 * [Spring Security - Integrating OAuth 2.0 Client and Resource Server](https://github.com/thought-corner/spring-security-oauth2-client-resource-server)
