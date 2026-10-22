@@ -2,25 +2,25 @@
 
 #### 단일 쓰레드 애플리케이션 한계와 멀티 프로그래밍
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ea7a522a-1228-4780-b835-70c2158d1212.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ea7a522a-1228-4780-b835-70c2158d1212.png)
 
 * 쓰레드는 한 번에 하나의 작업밖에 수행하지 못한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b3754188-c1c9-4393-a1db-89ad7f840877.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b3754188-c1c9-4393-a1db-89ad7f840877.png)
 
 * 만약 다음과 같이 메인 쓰레드가 오래 걸리는 작업에 의해 점유된다면 앱이 버벅이고 ANR이 발생하게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1ce3ff97-0890-4d4a-91ce-fa55507e89f3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1ce3ff97-0890-4d4a-91ce-fa55507e89f3.png)
 
 * 서버에서 사용자의 요청을 단일 쓰레드만을 사용해 처리하면 요청 처리에 오랜 시간이 걸린다.
 * 그래서 등장하게 된 개념이 바로 멀티 쓰레드 프로그래밍이다. 멀티 쓰레드 프로그래밍이란, 여러 개의 쓰레드를 사용해 작업을 처리하는 프로그래밍 기법을 말한다.
 * 다른 쓰레드를 추가로 사용해 오래 걸리는 작업을 처리하면 문제를 해결할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/06002138-376b-4086-a73d-3cee835583fc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/06002138-376b-4086-a73d-3cee835583fc.png)
 
 * 다음과 깉이 여러 개의 쓰레드를 사용해 병렬 처리하면 해결이 가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ea659042-e60a-4ccd-8a4d-5caac5413653.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ea659042-e60a-4ccd-8a4d-5caac5413653.png)
 
 #### 쓰레드를 사용한 멀티 쓰레드 프로그래밍
 
@@ -45,7 +45,7 @@ fun main() {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc7a96d9-ac5f-4dc7-a4e8-6b95acf51d2f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc7a96d9-ac5f-4dc7-a4e8-6b95acf51d2f.png)
 
 * 위와 같이 `Thread`를 사용하면 간단하게 병렬 처리가 가능하다.
 * 그러나 `Thread`를 사용한 멀티 쓰레드 프로그래밍은 다음과 같은 한계를 지니고 있다.
@@ -60,7 +60,7 @@ fun main() {
 
 #### 쓰레드 풀을 사용한 멀티 쓰레드 프로그래밍
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/78eb12c6-6bfb-4e37-bfc7-38ee63a694a4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/78eb12c6-6bfb-4e37-bfc7-38ee63a694a4.png)
 
 * 쓰레드는 비싼 자원이고 재사용도 어렵다.
 * 위와 같은 단점들을 해결하기 위해 `Executor` 프레임워크가 등장했다.
@@ -70,29 +70,29 @@ fun main() {
 * 그러나 모든 기술엔 장점만 있는 것이 아니다. `Executor` 프레임워크는 쓰레드 블로킹 문제가 발생할 수 있다.
 * 쓰레드 블로킹 문제란, 쓰레드가 사용될 수 없는 상태에 있는 것을 말한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5afaf2da-7bc8-4420-9eb4-1c79b1a51372.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5afaf2da-7bc8-4420-9eb4-1c79b1a51372.png)
 
 #### 쓰레드 기반 작업을 사용하는 방식의 한계와 코루틴의 등장
 
 * 쓰레드 기반 작업들은 작업 전환이 어렵고 전환 간에 드는 비용이 비싸다.
 * 간단한 작업이라면 앞서 본 콜백 방식을 사용하거나 체이닝 함수를 사용하는 방식으로 쓰레드 블로킹 문제를 해결할 수 있지만, 실제 애플리케이션은 작업 간 종속성이 복잡해 쓰레드 블로킹이 발생하는 것은 필연적이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/093d11b1-f7b3-4f28-a136-05e820eac303.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/093d11b1-f7b3-4f28-a136-05e820eac303.png)
 
 * 코루틴에서는 '코루틴'이라고 불리는 작업 단위를 사용한다.
 * 코루틴은 쓰레드의 사용 권한을 양보할 수 있다. 즉, 쓰레드에 붙었다 떼었다 할 수 있는 작업 단위가 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5fda113e-ecb2-4123-be95-9ca426f2f9e0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5fda113e-ecb2-4123-be95-9ca426f2f9e0.png)
 
 #### 코루틴을 언제 사용하면 좋은지?
 
 * 코루틴은 I/O 작업(네트워크, DB 입출력)과 같은 곳에서 사용하면 좋은 성능을 기대할 수 있지만 CPU Bound 작업(이미지/동영상의 인코딩 혹은 디코딩, 대용량 데이터 변환)에서는 코루틴을 사용해도 성능이 비슷하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/83333b56-dc05-4ccd-84d9-3455da901127.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/83333b56-dc05-4ccd-84d9-3455da901127.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8385fe92-6b38-4d55-8a8c-be3d88d2c94d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8385fe92-6b38-4d55-8a8c-be3d88d2c94d.png)
 
 <br>
 

@@ -2,7 +2,7 @@
 
 #### 스프링 예외 추상화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/42e41c61-3f99-49d8-95c2-80684c6108ba.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/42e41c61-3f99-49d8-95c2-80684c6108ba.png)
 
 * 예외의 최고 상위는 `DataAccessException`이다.
 * `RuntimeException`을 상속받기 때문에 데이터 접근 계층의 예외는 모두 런타임 예외이다.

@@ -6,11 +6,11 @@
 * scope 지정 시 `openid`를 포함하면 OpenID Connect 사용이 가능하며 인증에 대한 정보는 ID 토큰(ID Token)이라고 하는 JWT로 반환된다. 
 * OpenID Connect는 클라이언트가 사용자 ID를 확인할 수 있게 하는 보안 토큰인 ID Token을 제공한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1d682e93-1e10-41ca-805f-2b4f4ce2191f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1d682e93-1e10-41ca-805f-2b4f4ce2191f.png)
 
 #### ID Token과 scope
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3027d921-be12-4b10-a706-84a0f8ab36f1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3027d921-be12-4b10-a706-84a0f8ab36f1.png)
 
 * ID Token은 사용자가 인증되었음을 증명하는 결과물로서 OIDC 요청 시 Access Token과 함께 클라이언트에게 전달되는 토큰이다.
 * ID Token은 JWT으로 표현되며 헤더, 페이로드 및 서명으로 구성된다.
@@ -28,7 +28,7 @@
 
 #### OIDC 로그인 요청 흐름 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/26348806-9d79-49a8-8fc5-89a97037b6bd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/26348806-9d79-49a8-8fc5-89a97037b6bd.png)
 
 * 매개변수 요청 및 응답
   * 요청시 `openid` 범위를 scope 매개변수에 포함해야 한다.

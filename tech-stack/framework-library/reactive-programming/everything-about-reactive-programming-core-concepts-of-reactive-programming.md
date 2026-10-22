@@ -43,7 +43,7 @@
 * `onErrorResume()` — 개별 원소 복구
 * `onErrorContinue()` — Reactive Streams 계약을 깨는 특수 연산자라 지양. 원소별 복구는 flatMap 안에서 onErrorResume으로 처리하는 게 정석이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/38d80276-d4d8-4846-a7fd-aa8b9190f884.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/38d80276-d4d8-4846-a7fd-aa8b9190f884.png)
 
 | 구분      | `List<User>`              | `Flux<User>`               |
 | --------- | ------------------------- | -------------------------- |
@@ -76,7 +76,7 @@ Mono.fromCallable(() -> blockingCall());  // ✅ lazy (그래서 defer/fromCalla
 * 오버플로우 전략 : `onBackpressureBuffer()` / `onBackpressureDrop()` / `onBackpressureLatest()`
 * BaseSubscriber로 `request(n)`을 직접 제어할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d9f97804-1c4d-474d-8b20-312c7322a17e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d9f97804-1c4d-474d-8b20-312c7322a17e.png)
 
 #### Disposable & 리소스 관리
 
@@ -86,7 +86,7 @@ Mono.fromCallable(() -> blockingCall());  // ✅ lazy (그래서 defer/fromCalla
 * 무한 스트림(SSE, Kafka 리스너)에서 특히 중요
 * 취소 신호가 상위 생산자까지 전파되어 즉시 리소스 정리를 유발한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2c9b4c30-8fd9-4ba5-96ac-1cbcd518f82e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2c9b4c30-8fd9-4ba5-96ac-1cbcd518f82e.png)
 
 * `subscribe()`를 하는 순간, 각 단계가 서로를 참조하는 연결 사슬이 만들어진다.
 * 여기서 `cancel()`을 호출하게 되면 상위 `Subscription`을 들고 있으므로 연쇄적으로 취소가 된다.
@@ -107,14 +107,14 @@ Mono.fromCallable(() -> jdbcUserRepository.findById(id))
 ```
 > 블로킹 대상: JDBC, RestTemplate, `Thread.sleep()`, 동기 파일 IO 등.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc4b2dc1-010d-4293-872c-c5c85ef2d666.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc4b2dc1-010d-4293-872c-c5c85ef2d666.png)
 
 * Netty 하나 안에 스레드(이벤트 루프)가 여러 개가 있는 구조이며, 하나의 이벤트 루프(스레드)가 수천 개의 커넥션을 번갈아가며 처리한다.
 * 스레드가 각 커넥션마다 대기(블로킹)하지 않고, 현재 처리할 데이터가 준비된 커넥션만 골라서 빠르게 돌아가며 처리하기 때문에 가능하다.
 
 #### Reactive Streams 신호 흐름
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/df8ae54a-241f-4564-8fc5-940c29b73d50.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/df8ae54a-241f-4564-8fc5-940c29b73d50.png)
 
 #### 언제 WebFlux를 쓰는가(트레이드오프)
 

@@ -22,7 +22,7 @@
 
 #### 부하 테스트를 위한 인프라 아키텍처 구성하기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0a3693d3-5f91-4317-959d-e1f2ca91da76.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0a3693d3-5f91-4317-959d-e1f2ca91da76.png)
 
 #### 부하 테스트 시 주의점
 
@@ -32,4 +32,4 @@
 
 #### 부하 테스트 인프라 구성
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/787178de-0088-419e-a01a-e11a8484df5a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/787178de-0088-419e-a01a-e11a8484df5a.png)

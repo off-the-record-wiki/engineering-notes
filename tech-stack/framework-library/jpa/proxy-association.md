@@ -7,7 +7,7 @@
 
 ## 📚 프록시 객체의 초기화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/23253929-ddeb-4101-87da-8bc3587c3792.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/23253929-ddeb-4101-87da-8bc3587c3792.png)
 
 * 초기화 요청(해당 엔티티의 메서드를 호출)을 하면 영속성 컨텍스트를 통해 DB 조회가 이루어지면서 초기화가 이루어진다.
 * 프록시 객체는 처음 사용할 때 한 번만 초기화가 된다.

@@ -19,7 +19,7 @@
 
 #### 실제 변환 과정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/58e8d747-81a2-4ce7-9e0c-21c841a6b5f8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/58e8d747-81a2-4ce7-9e0c-21c841a6b5f8.png)
 
 * **Character Filter** 단계에서 `<p>` 태그가 제거된다. 아직 하나의 문자열이다.
 * **Tokenizer** 단계에서 공백 기준으로 잘려 **배열**이 된다.
@@ -44,7 +44,7 @@
 
 #### 역색인 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b2b61fd9-bef2-49c1-a70f-c51a5237c044.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b2b61fd9-bef2-49c1-a70f-c51a5237c044.png)
 
 **원본 문서**
 
@@ -338,7 +338,7 @@ log-2026-08-03  ─┘   (settings + mappings + aliases)
 
 #### Dynamic Mapping이란
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7a0c9c1d-4756-4f21-800c-30dbcf07a363.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7a0c9c1d-4756-4f21-800c-30dbcf07a363.png)
 
 * Elasticsearch의 dynamic mapping은 **새 문서가 색인될 때 인덱스의 필드 매핑을 자동으로 만들고 갱신**해 주는 기능이다.
 * 덕분에 **매핑을 미리 명시하지 않아도 새 필드를 즉석에서 처리**할 수 있다. **들어올 데이터의 구조를 미리 알 수 없는 상황**에서 특히 유용하다.
@@ -360,7 +360,7 @@ log-2026-08-03  ─┘   (settings + mappings + aliases)
 
 #### 세 가지 값
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/25b58415-e3ea-482c-832f-1a881ccb3065.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/25b58415-e3ea-482c-832f-1a881ccb3065.png)
 
 * **`true`** — (기본값) 새 필드를 만나면 **자동으로 매핑에 추가**한다.
 * **`false`** — 매핑에 명시되지 않은 새 필드를 **무시**한다. 이 필드들은 **색인되지도, 저장되지도 않는다.**

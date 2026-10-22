@@ -30,7 +30,7 @@
   * 하드웨어에도 최대 용량 제한이 있다.
   * 수백만 개의 요청 처리 ⭢ 수평적 확장 또는 더 많은 컴퓨팅 확장이 필요하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6c39e468-3e5c-45d1-a763-3a06746d04dc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6c39e468-3e5c-45d1-a763-3a06746d04dc.png)
 
 #### Horizontal Scaling – Scale out
 
@@ -44,7 +44,7 @@
   * 상태가 있는지 여부
   * 데이터베이스 서버 ⭢ CAP 정리 및 관리 필요
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d48ba12f-654d-4fdf-978e-ee08fd2f11a1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d48ba12f-654d-4fdf-978e-ee08fd2f11a1.png)
 
 #### Load Balancer
 
@@ -69,7 +69,7 @@
   * Disk Cache : HDD나 SDD에 데이터 저장. 디스크 캐시는 메모리 내 캐시보다 느리지만 데이터 유지 가능
   * 분산 캐시 : 여러 컴퓨터에 분산. MSA와 같은 분산 시스템에서 사용. 데이터를 여러 위치에서 저장하고 액세스. 시스템의 성능과 확장성 개선 가능
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/24bf2755-8844-4466-a915-85629e0fa564.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/24bf2755-8844-4466-a915-85629e0fa564.png)
 
 #### Distributed Caching – Hit and Miss
 
@@ -92,4 +92,4 @@
 * 데이터베이스 샤딩과 캐싱 : 데이터를 여러 DB 노드에 분산 저장(수평적 확장성). 샤드 키에 따라 데이터 분할. 샤드 키와 캐시 키 정렬, 효율적인 캐시 무효화
 * Polyglot Persistence 환경에서의 Caching 방법
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cdcf91fb-416d-4ae1-a15f-55250555d5c1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cdcf91fb-416d-4ae1-a15f-55250555d5c1.png)

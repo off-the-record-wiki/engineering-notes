@@ -6,11 +6,11 @@
 * 즉, 사용자가 속한 사이트의 보호된 자원에 대해 애플리케이션의 접근을 허용하도록 승인하는 것을 의미한다.
 * Delegated Authorization Framework : 애플리케이션이 사용자의 데이터에 접근하도록 권한을 부여한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/43d4d534-6699-4d69-9be5-ee376b896420.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/43d4d534-6699-4d69-9be5-ee376b896420.png)
 
 #### OAuth 2.0 Roles
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f8cdbf88-b99e-4731-b512-bc0577e30b67.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f8cdbf88-b99e-4731-b512-bc0577e30b67.png)
 
 **1. Resource Owner(자원 소유자)** 
 * 보호된 자원에 대한 접근 권한을 부여할 수 있는 주체를 말한다. 사용자로서 계정의 일부에 대한 접근 권한을 부여하는 사람이다.
@@ -30,7 +30,7 @@
 
 #### OAuth 2.0 Client Types
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d21cf08b-1a08-43ce-b669-32d6a75e1c93.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d21cf08b-1a08-43ce-b669-32d6a75e1c93.png)
 
 **1. 개요**
 * [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749)
@@ -51,9 +51,9 @@
 
 #### OAuth 2.0 Token Types
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d470c529-d3c3-4af6-8aef-4d5e2b4253a0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d470c529-d3c3-4af6-8aef-4d5e2b4253a0.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f959fe1d-87f4-4eeb-9a05-e89a07f72455.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f959fe1d-87f4-4eeb-9a05-e89a07f72455.png)
 
 **1. Access Token**
 * 클라이언트에서 사용자의 보호된 리소스에 접근하기 위해 사용하는 일종의 자격 증명으로서 역할을 하며 리소스 소유자가 클라이언트에게 부여한 권한 부여의 표현이다.
@@ -73,7 +73,7 @@
 
 #### 식별자 타입(Identifier Type)과 자체 포함 타입(Self-contained Type)의 차이점 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8e2c4393-e58a-4ab0-8137-f3c7ff7ded18.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8e2c4393-e58a-4ab0-8137-f3c7ff7ded18.png)
 
 * 식별자 타입
   * 인가서버는 데이터 저장소에 토큰의 내용을 저장하고 이 토큰에 대한 고유 식별자만 클라이언트에 다시 발행한다. 

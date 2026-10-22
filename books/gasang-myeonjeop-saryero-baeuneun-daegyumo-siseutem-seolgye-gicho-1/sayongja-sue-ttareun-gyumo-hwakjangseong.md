@@ -2,7 +2,7 @@
 
 #### 데이터베이스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/badca0b7-266a-4bb5-8e6d-a91e0b5b8b52.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/badca0b7-266a-4bb5-8e6d-a91e0b5b8b52.png)
 
 * 사용자가 늘어나면 서버 하나로는 충분하지 않아서 여러 서버를 두게 된다.
 * 하나는 웹/모바일 트래픽 처리 서버(웹 계층)와 데이터베이스 서버(데이터 계층)를 분리하면 그 각각을 독립적으로 확장해 나갈 수 있게 된다.
@@ -49,7 +49,7 @@
 
 #### 로드밸런서(Load Balancer)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9b63e5bf-852c-4e3e-a29e-56fe2ec2f93f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9b63e5bf-852c-4e3e-a29e-56fe2ec2f93f.png)
 
 * 로드밸런서는 여러 대의 웹 서버 앞에 서서, 들어오는 요청을 서버들에게 골고루 나눠 주는 장치이다.
 * 이 때 로드밸런서가 요청을 나눠 줄 대상 서버들의 묶음을 부하 분산 집합(Load Balancing Set)이라고 한다.
@@ -60,7 +60,7 @@
 
 #### 데이터베이스 다중화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/11d7dd75-cc88-448c-810c-507d363cb364.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/11d7dd75-cc88-448c-810c-507d363cb364.png)
 
 * 데이터베이스 다중화는 DB 서버를 여러 대 두고 역할을 나누는 방식이다. 보통 주(Master) - 부(Slave) 관계로 구성한다.
   * 주 DB : 쓰기 연산만 담당. 데이터를 바꾸는 INSERT, UPDATE, DELETE 같은 명령은 반드시 주 DB로만 보낸다.
@@ -76,7 +76,7 @@
 
 #### 최종 설계안
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a9a05731-e6d9-4273-b636-17ea36cd5f86.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a9a05731-e6d9-4273-b636-17ea36cd5f86.png)
 
 1. 사용자는 DNS로부터 로드밸런서의 공개 IP 주소를 받는다.
 2. 사용자는 해당 IP 주소를 사용해 로드밸런서에 접속한다.
@@ -144,7 +144,7 @@
 
 #### 컨텐츠 전송 네트워크(CDN)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec50de7b-d7b5-4321-ac5f-2bf32f2626b2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ec50de7b-d7b5-4321-ac5f-2bf32f2626b2.png)
 
 * CDN(Content Delivery Network)은 정적 콘텐츠를 빠르게 전달하기 위해 전 세계 여러 지역에 분산 배치된 서버 네트워크이다.
 * 이미지, 비디오, CSS, JavaScript 파일처럼 누가 요청해도 내용이 같은 파일을 캐시해둔다.
@@ -183,7 +183,7 @@
 
 > **상태 정보 의존적 아키텍처**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b15a4448-f5e2-4e1b-b7ed-cf6f842f154b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b15a4448-f5e2-4e1b-b7ed-cf6f842f154b.png)
 
 * 사용자 A의 요청이 서버 2로 전송되면 세션 정보가 없어 인증이 실패하게 된다.
 * 로드밸런서에서 동일한 클라이언트가 항상 같은 서버로 전송되게끔 고정 세션 기능을 제공하지만, 이는 로드 밸런서에 부담을 준다.
@@ -191,17 +191,17 @@
 
 > **무상태 아키텍처**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5ece1755-5382-41ed-8da0-6586194e3c6e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5ece1755-5382-41ed-8da0-6586194e3c6e.png)
 
 * 상태 정보를 웹 계층에서 분리하면, 어떤 서버든 상태정보를 DB에서 가져와 인증을 처리하면 된다.
 
 > **무상태 아키텍처를 적용하여 수평적 확장이 가능해진 설계**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/614e2b22-1eff-43e5-8a19-69d52ab189bd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/614e2b22-1eff-43e5-8a19-69d52ab189bd.png)
 
 #### 메시지 큐(Message Queue)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/97860829-5679-46a1-8dab-57e66e6d5c9f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/97860829-5679-46a1-8dab-57e66e6d5c9f.png)
 
 * 메시지 큐는 서비스끼리 비동기로 통신할 수 있게 해 주는 컴포넌트이다. 보내는 쪽이 메시지를 큐에 넣어 두면, 받는 쪽이 준비됐을 때 꺼내 처리한다. 그 사이 큐는 메시지를 잠시 쌓아 두는 버퍼 역할을 한다.
 * 생산자(Producer) / 발행자(Publisher) : 메시지를 만들어 큐에 발행하는 서비스
@@ -216,7 +216,7 @@
 
 #### 로그, 메트릭, 자동화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f532760e-05a4-4e49-80d3-9b208c044755.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f532760e-05a4-4e49-80d3-9b208c044755.png)
 
 * 로그 : 에러 로그를 모니터링하면 시스템에서 어떤 오류가 언제, 어디서 났는지 빠르게 찾아낼 수 있다.
 * 메트릭 : 메트릭은 시스템과 사업 상태를 숫자로 측정한 값이다. 
@@ -224,7 +224,7 @@
 
 #### 데이터베이스 규모 확장
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe7bdcae-219d-4793-8a63-4901728768a5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe7bdcae-219d-4793-8a63-4901728768a5.png)
 
 * 샤딩은 DB 서버를 샤드(Shard)라는 작은 단위로 분할하는 것이다. 모든 샤드는 같은 스키마를 쓰지만, 샤드에 보관되는 데이터 사이에는 중복이 없다.
 

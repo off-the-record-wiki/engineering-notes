@@ -7,7 +7,7 @@
 * 이전 프로젝트의 경우 Redis를 단일 노드로 구성했었다. 이렇게 되면 Redis에 장애가 발생할 경우 Redis의 특성상(인메모리 DB) 데이터가 소실될 수 있다.
 * 그래서 이런 문제를 해결하고자 Master - Slave 구조로 Redis를 운영하고자 한다. Master 노드에 장애가 발생할 경우 복제 노드인 Slave 노드를 통해 데이터를 읽을 수 있게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/63aa540d-f0f4-40f9-9023-51c775b2a720.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/63aa540d-f0f4-40f9-9023-51c775b2a720.png)
 
 * 위와 같이 구성을 하게 되면 Master Node는 쓰기 모드만 가능하고 Master Node의 값을 Slave Node 측에도 저장한다. 반면 Slave Node는 읽기 모드만 가능해지면서 서버 측으로 요청이 들어오게 되면 Master Node를 대신해서 읽기 작업을 수행하게 된다.
 * Redis Master - Slave 구성을 위해 루트 프로젝트에 redis.conf를 작성한다.
@@ -103,11 +103,11 @@ $ docker compose up -d --build
 
 * 백그라운드에서 실행하도록 위와 같은 명령어를 입력해주고 Docker Desktop을 통해 결과를 조회하면 아래와 같이 컨테이너들이 잘 뜨게 되는 것을 볼 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3b681779-7222-4926-96c7-5d8746ba7336.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3b681779-7222-4926-96c7-5d8746ba7336.png)
 
 * Redis Commander를 들어가보면 다음과 같이 Redis 구성 현황을 알 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0c7d7e2b-c649-4965-83bf-6ec274f66e63.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0c7d7e2b-c649-4965-83bf-6ec274f66e63.png)
 
 * 시스템적인 설계는 위와 같고 이제 자바 코드로 Redis 관련 설정을 작성해주면 된다.
 

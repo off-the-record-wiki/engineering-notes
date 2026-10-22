@@ -4,7 +4,7 @@
 
 * 자바 메모리 구조(JVM, Java Virtual Machine)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d8d5ce93-f4da-4388-bfcc-3e0f00c8df18.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d8d5ce93-f4da-4388-bfcc-3e0f00c8df18.png)
 
 * 메서드 영역 : 클래스 정보, static 변수, 런타임 상수 풀 정보를 저장
 * 스택 영역 : 쓰레드 별로 생성되는 개별 요청 저장(지역 변수, 메서드 호출 내역 등)
@@ -29,7 +29,7 @@ public class CustomThread extends Thread{
 customThread.start();
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6d631c7c-8abc-4608-8d10-92e013449cfb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6d631c7c-8abc-4608-8d10-92e013449cfb.png)
 
 * 새로운 쓰레드가 만들어지면서 개별 스택 영역이 생성되고 메서드를 실행했더니 스택 영역에 메서드 호출 내역 등이 저장되는 것을 볼 수 있다.
 * 쓰레드 간 실행 순서는 보장하지 않는다. → 쓰레드는 동시에 실행되기 때문에 쓰레드 간 실행 순서는 얼마든지 달라질 수 있다.

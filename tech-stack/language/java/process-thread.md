@@ -5,11 +5,11 @@
 * 멀티 태스킹(Multi Tasking)
   * 하나의 컴퓨터 시스템이 동시에 여러 작업을 수행하는 능력을 멀티 태스킹이라고 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/31e55b84-5903-42c0-ac97-ff2e58ab86e7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/31e55b84-5903-42c0-ac97-ff2e58ab86e7.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/20997c61-d23e-4cf2-ac0b-3bff62ecfa98.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/20997c61-d23e-4cf2-ac0b-3bff62ecfa98.png)
 
 * 프로그램 A의 코드 1을 수행하고 바로 이어 프로그램 B의 코드 1을 수행한다.
 * 찰나의 시간에 바로바로 작업을 이어 받아 마치 동시에 실행되는 것처럼 보이는 이 기법을 시분할(Time Sharing) 기법이라고 한다.
@@ -23,7 +23,7 @@
 * 멀티 프로세싱(Multi Processing)
   * 둘 이상의 코어를 사용하여 여러 작업을 동시에 처리하는 기법을 말한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f011a9ae-8bcf-4101-b06c-8672bd34bfff.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f011a9ae-8bcf-4101-b06c-8672bd34bfff.png)
 
 #### 프로세스와 쓰레드
 
@@ -38,7 +38,7 @@
   * 힙 : 동적으로 할당되는 메모리 영역
   * 스택 : 지역 변수, 메서드 호출 내역 등이 저장되는 부분
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b0feb69e-1e83-45e8-8d3c-e995fc84c899.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b0feb69e-1e83-45e8-8d3c-e995fc84c899.png)
 
 * 프로세스는 하나 이상의 쓰레드를 반드시 포함한다.
 * 쓰레드는 프로세스 내에서 실행되는 작업의 단위이다. 한 프로세스 내에는 여러 쓰레드가 존재할 수 있으며, 이들은 프로세스가 제공하는 동일한 메모리 공간을 공유한다.

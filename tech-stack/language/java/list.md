@@ -15,11 +15,11 @@
 * 컴파일 타임 : 코드 컴파일 시점
 * 런타임 : 프로그램 실행 시점
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/485fc15d-0fb0-425b-b7ee-f6aaeb127487.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/485fc15d-0fb0-425b-b7ee-f6aaeb127487.png)
 
 * 컴파일 타임 의존관계는 자바 컴파일러가 보는 의존관계이다. 클래스에 모든 의존관계가 다 나타난다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1a490caf-1a33-46c3-b612-ea44088f1998.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1a490caf-1a33-46c3-b612-ea44088f1998.png)
 
 * 런타임 의존관계는 실제 프로그램이 작동할 때 보이는 의존관계이다. 주로 생성된 인스턴스와 그것을 참조하는 의존관계이다.
 * 런타임 의존관계는 프로그램이 실행될 때 계속 변할 수 있다.
@@ -35,7 +35,7 @@
 * List 자료구조 : 순서가 있고 중복을 허용하는 자료 구조를 말한다.
 * 자바의 컬렉션 프레임워크가 제공하는 대표적인 자료 구조로 아래와 같은 구조를 가진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e6510f7a-4307-491f-b56b-d8b405d2e288.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e6510f7a-4307-491f-b56b-d8b405d2e288.png)
 
 * 자바 ArrayList
   * 배열을 사용해서 데이터를 관리한다.

@@ -38,7 +38,7 @@ public class ThreadInfoMain {
 
 #### 쓰레드 생명 주기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6a245ecb-bdd3-40da-99f5-e9f6cac59976.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6a245ecb-bdd3-40da-99f5-e9f6cac59976.png)
 
 * 쓰레드의 상태
   * NEW(새로운 상태) : 쓰레드가 생성은 되었으나 아직 실행되지 않은 상태

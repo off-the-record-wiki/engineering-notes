@@ -2,7 +2,7 @@
 
 ## 📚 IP(인터넷 프로토콜, Internet Protocol)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b8c6f2b7-42cb-4b95-abe7-36b8c65ab27a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b8c6f2b7-42cb-4b95-abe7-36b8c65ab27a.png)
 
 * 지정한 IP 주소로 데이터를 전달한다.
 * 이 때, 패킷 단위로 데이터를 전달한다.
@@ -20,7 +20,7 @@
 
 > ❓ TCP/IP 4계층과 OSI 7계층(출처 : [Inpa Dev](https://inpa.tistory.com/entry/WEB-%F0%9F%8C%90-TCP-IP-%EC%A0%95%EB%A6%AC-%F0%9F%91%AB%F0%9F%8F%BD-TCP-IP-4%EA%B3%84%EC%B8%B5))
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7b94ebea-fda9-4d36-8b88-0b13fd0859e3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7b94ebea-fda9-4d36-8b88-0b13fd0859e3.png)
 
 ```
 ▣ TCP/IP 4계층
@@ -48,7 +48,7 @@
 
 * TCP는 신뢰성을 확보할 때, 3-way handshake라는 작업을 거치게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c7cce7f7-b38b-4fd8-8a27-65e5c2ae41e2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c7cce7f7-b38b-4fd8-8a27-65e5c2ae41e2.png)
 
 ①. SYN 단계 : 클라이언트가 서버에 초기 네트워크 연결을 위해 ISN(Initial Sequence Numbers)을 보낸다.<br>
 ②. SYN + ACK 단계 : 서버가 클라이언트의 ISN을 수신하고 서버의 ISN을 보낸다.(이 때, 서버 측에서 보내는 ISN은 클라이언트 측에서 보내는 ISN + 1을 보낸다.)<br>
@@ -68,4 +68,4 @@
 
 * 도메인 명을 IP주소로 변환한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6662b8c2-3987-4e24-a28b-efc196432d02.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6662b8c2-3987-4e24-a28b-efc196432d02.png)

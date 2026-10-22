@@ -167,7 +167,7 @@ limit 10;
 * 조회 트래픽 비중이 높은 서비스의 경우 주 DB - 복제 DB 구조를 사용해 처리량을 효과적으로 늘릴 수 있다.
 * 서버는 데이터 변경 쿼리는 주 DB를 통해, 조회 쿼리는 복제 DB를 통해 실행한다. 조회 기능에 대한 트래픽이 증가하면 복제 DB를 추가해 조회 처리량을 확장할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe04cb67-1d71-447b-8fb8-2832be32a373.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe04cb67-1d71-447b-8fb8-2832be32a373.png)
 
 #### 별도 캐시 서버 구성하기
 

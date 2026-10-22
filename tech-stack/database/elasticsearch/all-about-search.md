@@ -244,7 +244,7 @@ GET /my_index/_search
 
 #### 동작 방식
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/38c2f845-c323-44ae-82dc-1668e1e4ac79.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/38c2f845-c323-44ae-82dc-1668e1e4ac79.png)
 
 * **Text Analysis** — 토큰화, 소문자 변환, stemming, stop word 제거
 * **Inverted Index** — 빠른 검색을 위해 term을 저장한다
@@ -372,7 +372,7 @@ GET /products/_search
 
 #### 동작 방식
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8ffe25f8-5959-45ae-92ff-560923f619c9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8ffe25f8-5959-45ae-92ff-560923f619c9.png)
 
 * **Best Score Wins** — `dis_max`는 **하위 질의 중 가장 높은 점수를 골라** 그 문서의 연관도 점수로 삼는다. 이렇게 하면 **문서가 여러 필드나 조건에 걸릴 때 점수가 부풀려지는 것을 막는다.**
 * **Tie Breaking** — 선택 파라미터인 **`tie_breaker`** 로 **최고점이 아닌 하위 질의들의 점수 일부를 더할 수 있다.** 여러 필드·조건에 걸린 문서를 **약간 밀어 올리되, 여전히 최고 매치를 우선**하게 한다.

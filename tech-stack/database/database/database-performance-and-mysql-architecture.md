@@ -2,7 +2,7 @@
 
 #### MySQL 서버 5계층 아키텍처
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aa2889c2-27ec-428a-a603-b6c2b61939b1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aa2889c2-27ec-428a-a603-b6c2b61939b1.png)
 
 | 계층 | 역할 |
 |:---:|:---:|
@@ -84,7 +84,7 @@
   * 디스크 구조
 * 모든 데이터를 메모리에 올리면 빠르겠지만, 메모리는 비싸고 용량이 제한적이다. 그래서 InnoDB는 자주 사용하는 데이터를 메모리에 캐싱하고, 전체 데이터를 디스크에 안전하게 보관한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/22c403ed-7dcb-4df2-9ee6-caf7193c32ce.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/22c403ed-7dcb-4df2-9ee6-caf7193c32ce.png)
 
 #### 메모리 영역 : 버퍼 풀(Buffer Pool)
 
@@ -98,7 +98,7 @@
 3. 해당 데이터가 버퍼 풀에 없으면 디스크에서 읽어와서 버퍼 풀에 올린 다음에 읽는다.
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2c6ef2dd-dcf7-48fc-9306-89915a38ad98.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2c6ef2dd-dcf7-48fc-9306-89915a38ad98.png)
 
 * 버퍼 풀의 히트율이 높을수록 디스크 I/O가 줄어들고 성능이 좋아진다. 데이터베이스 전용 서버의 경우 물리 메모리의 최대 80%까지 버퍼 풀로 할당하는 것을 권장한다.
 
@@ -119,7 +119,7 @@
 
 * InnoDB의 데이터 저장은 페이지 ⭢ 익스텐트 ⭢ 세그먼트 ⭢ 테이블스페이스 순서의 계층 구조를 가진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/474902ec-e79d-4cc8-8bd3-0de273a8fd5b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/474902ec-e79d-4cc8-8bd3-0de273a8fd5b.png)
 
 #### 페이지 - 모든 I/O의 최소 단위
 
@@ -146,7 +146,7 @@
 
 * 인덱스 하나당 2개의 세그먼트가 할당된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/434fbf2e-7bac-4c4d-8afd-fd866d315407.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/434fbf2e-7bac-4c4d-8afd-fd866d315407.png)
 
 * 비리프노드 세그먼트 : B+Tree의 내부 노드(검색 경로)를 저장한다.
 * 리프노드 세그먼트 : 실제 데이터(또는 데이터를 가리키는 포인터)를 저장한다.

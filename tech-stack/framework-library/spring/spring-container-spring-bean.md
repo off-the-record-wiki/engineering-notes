@@ -27,7 +27,7 @@
 * 스프링 컨테이너를 구성 후 구성 정보 `AppConfiguration`클래스를 구성 정보로 지정한다.
 * 스프링 컨테이너는 설정 정보(Ex. AppConfiguration Class)를 참고해서 의존관계를 주입한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ece1465c-6ef6-44c4-881e-961085ba5e76.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ece1465c-6ef6-44c4-881e-961085ba5e76.png)
 
 ```java
 ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class)
@@ -60,15 +60,15 @@ public class AppConfiguration {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1858d81d-ecb0-4bb6-b4c8-26619e9efa80.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1858d81d-ecb0-4bb6-b4c8-26619e9efa80.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0eaa9b6e-64bd-4b7b-825b-e4f1e8a145b9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0eaa9b6e-64bd-4b7b-825b-e4f1e8a145b9.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bd4dd540-d0d7-400f-a2ee-64a65c0cfbfe.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bd4dd540-d0d7-400f-a2ee-64a65c0cfbfe.png)
 
 #### 컨테이너에 등록된 모든 빈 조회
 
@@ -489,13 +489,13 @@ public class ApplicationContextExtendTest {
 
 #### BeanFactory와 ApplicationContext
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8ea54d85-4fb7-4fd9-b998-01d6c52fdcd4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8ea54d85-4fb7-4fd9-b998-01d6c52fdcd4.png)
 
 * `BeanFactory` : 스프링 컨테이너의 최상위 인터페이스로 스프링 빈을 관리하고 조회하는 역할을 담당한다.
 * `ApplicationContext` : `BeanFactory` 기능을 모두 상속받아서 제공하며, `BeanFactory` 기능뿐만 아니라 수많은 부가 기능을 `ApplicationContext`에서 제공한다.
 
 #### 스프링 빈 설정 메타 정보 - BeanDefinition
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/79ea7715-e63e-4ee4-abe8-71b989288883.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/79ea7715-e63e-4ee4-abe8-71b989288883.png)
 
 * 스프링 컨테이너 자체는 `BeanDefinition`만 알고 있어도 다양한 형식의 설정 정보를 지원한다.

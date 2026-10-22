@@ -2,7 +2,7 @@
 
 #### KSQLDB에서 Time 역할과 Rowtime
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/54cdeb18-049e-41ae-8552-107ed46911ce.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/54cdeb18-049e-41ae-8552-107ed46911ce.png)
 
 * ROWTIME = 카프카 레코드의 타임스탬프. ksqlDB 모든 행에 자동으로 붙는 시스템 컬럼. 값 컬럼이 아니라 메타데이터이다.
 * 모든 시간 연산의 기준은 ROWTIME : 윈도우·WITHIN·조인 판정이 전부 이 값으로 이뤄진다. 서버 시계가 아니다.
@@ -19,7 +19,7 @@
 
 #### Event time, Ingestion time, Processing time
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/88e6e70f-f71e-49da-b775-f26bd62649dd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/88e6e70f-f71e-49da-b775-f26bd62649dd.png)
 
 * Event Time : 사건이 실제로 발생한 시각. 프로듀서가 찍고 레코드에 박혀 있어 재처리해도 같다.
 * Ingestion Time : 브로커가 토픽에 기록한 시각. 발생이 아니라 도착 시점이다.
@@ -27,7 +27,7 @@
 
 #### log.message.timestamp.type 설정값에 따른 Rowtime
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ca8b557-c090-443f-be0d-5ebfc8ceee28.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9ca8b557-c090-443f-be0d-5ebfc8ceee28.png)
 
 * Producer는 자동으로 메시지의 생성 시점을 Timestamp 값으로 메시지에 추가하여 전송한다.
 * Kafka Broker는 Producer로부터 전송된 메시지의 Timestamp 값을 Topic 저장 시 그대로 사용하거나 Broker가 Topic에 메시지를 저장한 시각을 기록할 수도 있다.
@@ -60,12 +60,12 @@ CREATE STREAM device_status_stream (
 * Window절을 사용할 경우 자동으로 WINDOWSTART, WINDOWEND 컬럼이 할당되어 Group by 레벨로 사용될 수 있다.
 * Window도 Kafka 메시지와 마찬가지로 시간상으로 한 방향으로 이동할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/deed603a-e0e5-474a-9901-f065ecca5d35.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/deed603a-e0e5-474a-9901-f065ecca5d35.png)
 
 * Window절은 Stream/Table의 Rowtime을 기반으로 한다.
 * Rowtime은 기본적으로 UTC 시간이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a72fbbae-2c68-4a09-9afd-9f05e8f631e4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a72fbbae-2c68-4a09-9afd-9f05e8f631e4.png)
 
 * `Tumbling` : Window가 겹치지 않는다. 하나의 레코드는 단 하나의 Window에 소속된다.
 * `Hopping` : Window가 서로 겹칠 수 있다. 하나의 레코드는 여러 개의 Window에 소속될 수 있다.
@@ -73,7 +73,7 @@ CREATE STREAM device_status_stream (
 
 #### Tumbling Window
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9886aab8-d15d-4103-8bdd-ed4c592c2244.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9886aab8-d15d-4103-8bdd-ed4c592c2244.png)
 
 * 고정 크기로 시간을 잘라, 겹치지도 비지도 않게 나누는 윈도우. 한 이벤트는 정확히 하나의 윈도우에만 속한다.
 
@@ -87,7 +87,7 @@ EMIT CHANGES;
 
 #### Hopping Window
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8463fbad-a12f-4637-a664-35e25349c8c1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8463fbad-a12f-4637-a664-35e25349c8c1.png)
 
 * 고정 크기 윈도우를 일정 간격으로 밀면서 만드는 윈도우. 크기보다 간격이 작으면 윈도우끼리 겹치고, 한 이벤트가 여러 윈도우에 속한다.
 
@@ -101,7 +101,7 @@ EMIT CHANGES;
 
 #### Session Window
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/177166cb-5fbd-44e6-9c44-feee0ef9d5a7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/177166cb-5fbd-44e6-9c44-feee0ef9d5a7.png)
 
 * 경계를 시각이 아니라 데이터가 정하는 윈도우. 이벤트가 계속 들어오면 세션이 계속 늘어나고, inactivity gap보다 긴 공백이 생기면 거기서 끊긴다.
 
@@ -129,7 +129,7 @@ EMIT CHANGES;
 * Stream과 Stream은 Window 조인만 가능하며 `WITHIN`절을 사용하여 Window 조인을 수행한다.
 * Stream과 Stream 조인은 대부분 조인 Key 값으로 M:M이 발생하기 쉽다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f93df96c-13fd-443c-a530-d3d678ca77c9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f93df96c-13fd-443c-a530-d3d678ca77c9.png)
 
 #### 조인 Mview의 Rowtime
 

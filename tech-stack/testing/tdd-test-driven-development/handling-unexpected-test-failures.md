@@ -2,7 +2,7 @@
 
 #### 내부 설계에 의존하는 테스트
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0cf81275-d690-48ec-a18c-200b39f8463c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0cf81275-d690-48ec-a18c-200b39f8463c.png)
 
 * 기본값은 동작(입출력) 테스트. 내부 의존은 예외다.
 * 예외가 정당한 유일한 조건
@@ -33,4 +33,4 @@
 * 테스트 실행 범위가 넓으면 많은 것을 확인할 수 있고 더 큰 안정감을 얻을 수 있지만 긴 시간이 소요된다.
 * 테스트 실행 범위가 좁으면 빠르게 진행할 수 있지만 안정감은 줄어든다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/36601ab3-25e9-4662-b41d-d60e3b29f43b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/36601ab3-25e9-4662-b41d-d60e3b29f43b.png)

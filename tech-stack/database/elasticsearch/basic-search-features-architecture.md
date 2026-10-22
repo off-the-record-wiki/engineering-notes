@@ -37,7 +37,7 @@ POST /products/_doc
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8ba53168-58ec-40f3-9087-17305dd741f4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8ba53168-58ec-40f3-9087-17305dd741f4.png)
 
 * **캐릭터 필터** : 문자열을 토큰으로 자르기 전에 문자열을 다듬는 역할을 수행한다.(0개 이상)
 * **토크나이저** : 문자열을 토큰으로 자르는 역할을 수행한다.(**정확히 1개, 필수**)
@@ -138,7 +138,7 @@ PUT /products_custom
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e8d46baf-1d63-4746-8bab-8ad408919e26.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e8d46baf-1d63-4746-8bab-8ad408919e26.png)
 
 * **주의** : `analysis` 설정은 인덱스 생성 시점에만 지정할 수 있다. 이미 존재하는 인덱스에 `PUT`을 다시 보내면 `resource_already_exists_exception`이 발생한다.
 * 기존 인덱스의 애널라이저를 바꾸려면 인덱스를 닫고(`_close`) 설정을 변경하거나, 새 인덱스를 만들어 `_reindex` 해야 한다.

@@ -22,7 +22,7 @@
 
 #### Executor 프레임워크
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5f471f20-86e1-4ec3-8c55-03e5d3f24bf0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5f471f20-86e1-4ec3-8c55-03e5d3f24bf0.png)
 
 * ThreadPoolExecutor(ExecutorService)는 크게 2가지 구성요소로 이루어져 있다.
   * 쓰레드 풀 : 쓰레드를 관리한다.
@@ -130,37 +130,37 @@ public interface Future<V> {
 
 #### Executor 쓰레드 풀 관리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/33ac8dfe-05c3-42a4-a3da-fe5ce4e86d93.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/33ac8dfe-05c3-42a4-a3da-fe5ce4e86d93.png)
 
 * `task1` 작업을 요청한다.
 * `Executor`는 쓰레드 풀에 쓰레드가 core 사이즈만큼 있는지 확인한다.
   * 만약 core 사이즈만큼 없으면 쓰레드를 하나 생성한다.
   * 작업을 처리하기 위해 쓰레드를 하나 생성했기 때문에 작업을 큐에 넣을 필요없이 해당 쓰레드가 바로 작업을 처리할 수 있게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a539ceba-3456-4c1f-90c9-4f94262b52bf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a539ceba-3456-4c1f-90c9-4f94262b52bf.png)
 
 * 새로 만들어진 쓰레드가 `task1`을 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d3edf390-123e-4c72-bd9e-e6e74f60fa93.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d3edf390-123e-4c72-bd9e-e6e74f60fa93.png)
 
 * `task2`를 요청한다.
 * `Executor`는 쓰레드 풀에 쓰레드가 core 사이즈만큼 있는지 확인한다.
 * 아직 core 사이즈만큼 쓰레드가 안 찼기에 쓰레드를 하나 생성한다.
 * 새로 만들어진 쓰레드가 `task2`를 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6cf3873e-aa51-4da1-ac2b-a058a04304ed.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6cf3873e-aa51-4da1-ac2b-a058a04304ed.png)
 
 * `task3`를 요청한다.
 * `Executor`는 쓰레드 풀에 core 사이즈만큼 있는지 확인한다.
 * 이미 core 사이즈(=2)만큼 쓰레드가 만들어져 있기 때문에 쓰레드 풀에 사용할 수 있는 쓰레드가 없으므로 이 경우에는 큐에 작업을 보관한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7252817e-df21-45c2-8228-c9e279f4c757.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7252817e-df21-45c2-8228-c9e279f4c757.png)
 
 * `task4`를 요청한다.
 * `Executor`는 쓰레드 풀에 core 사이즈만큼 있는지 확인한다.
 * 이미 core 사이즈(=2)만큼 쓰레드가 만들어져 있기 때문에 쓰레드 풀에 사용할 수 있는 쓰레드가 없으므로 이 경우에는 큐에 작업을 보관한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bf9504c5-40e4-49c3-86b8-4316288d2425.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bf9504c5-40e4-49c3-86b8-4316288d2425.png)
 
 * `task5`를 요청한다.
 * `Executor`는 쓰레드 풀에 core 사이즈만큼 있는지 확인한다.
@@ -168,24 +168,24 @@ public interface Future<V> {
 * 큐가 가득차면 긴급 상황이 된다. 대기하는 작업이 꽉 찰 정도로 요청이 많다는 의미이기 때문이다.
 * 이 경우에 해당되면 `Executor`는 쓰레드 풀의 max 사이즈까지 초과 쓰레드를 만들어서 작업을 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc835891-c128-4453-9df1-f4d45f6ef4ee.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc835891-c128-4453-9df1-f4d45f6ef4ee.png)
 
 * `task6`를 요청한다.
 * 큐도 가득 찼다.
 * 초과 쓰레드를 만들어서 작업을 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/66939007-81f1-4e2e-858b-2b3395e41d14.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/66939007-81f1-4e2e-858b-2b3395e41d14.png)
 
 * `task7`를 요청한다.
 * 큐도 가득 찼다.
 * 쓰레드 풀 max 사이즈도 다 찼다.
 * 이 경우 큐에 넣을 수도 없고 작업을 수행할 쓰레드도 만들 수 없다. 따라서 작업을 거절하게 되면서 `RejectedExecutionException`이 발생한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/857e83b1-2eba-4c82-a3b1-69a26dba1a2a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/857e83b1-2eba-4c82-a3b1-69a26dba1a2a.png)
 
 * 모든 작업이 완료된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eed40b5d-b47b-4579-a3c8-e880437aeba7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eed40b5d-b47b-4579-a3c8-e880437aeba7.png)
 
 * 초과 쓰레드들은 지정된 시간까지 작업을 하지 않고 대기하면 제거된다. 긴급한 경우에만 투입되는 것으로 이해할 수 있다.
 * 참고로 초과 스레드가 작업을 처리할 때 마다 시간은 계속 초기화 된다. 작업 요청이 계속 들어온다면 긴급한 상황이 끝난 것이 아니다. 따라서 긴급한 상황이 끝날 때 까지는 초과 스레드를 살려두는 것이 많은 스레드를 사용해서 작업을 더 빨리 처리할 수 있다. 

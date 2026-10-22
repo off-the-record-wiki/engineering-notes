@@ -2,7 +2,7 @@
 
 #### Request/Response Communication
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/560ab93f-0897-4f9d-822e-6b5cffc29c45.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/560ab93f-0897-4f9d-822e-6b5cffc29c45.png)
 
 * **장점**
   * 단순함 · 낮은 진입장벽 : 별도 인프라 필요 X

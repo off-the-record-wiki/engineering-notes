@@ -24,7 +24,7 @@
   * 복잡한 도메인에는 하위 도메인이 포함
   * 일부 하위 도메인은 공통 규칙과 책임을 위해 서로 결합하고 그룹화 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2cc2a28f-b27f-4ac0-81ea-e7c7ee77f5fd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2cc2a28f-b27f-4ac0-81ea-e7c7ee77f5fd.png)
 
 #### SAGA Pattern
 
@@ -40,17 +40,17 @@
 * 장점 : 분산화, 유연성. 단일 장애 지점을 피할 수 있다. 간단한 워크플로우 구성. 트랜잭션이 많지 않은 간단한 경우에 적합하다.
 * 단점 : 복잡성 증가. 순환 이벤트 소비 위험 존재. 분산 시스템의 특정 요구사항과 제약 조건이 다르기에 일부 시스템에서는 적합하지 않다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ed747124-a749-481d-873b-2e28b0011281.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ed747124-a749-481d-873b-2e28b0011281.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/33ef098f-efa2-4954-8c67-f143c1ef9cdc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/33ef098f-efa2-4954-8c67-f143c1ef9cdc.png)
 
 #### Orchestration-based Saga
 * 장점 : 트랜잭션을 위한 명확하고 중앙 집중화된 제어/관리 제공. 시스템의 이해, 디버깅, 트랜잭션 추가 및 수정 용이. 많은 단계가 포함된 워크플로우에 적합하다.
 * 단점 : 단일 장애 지점 발생 가능. 오케스트레이션 다운 시 전체 다운. 모든 트랜잭션이 오케스트레이션을 거치기 때문에 시스템에 부하가 많이 걸릴 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/59ff289b-48a2-4888-bbd8-0a1f305b4ae9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/59ff289b-48a2-4888-bbd8-0a1f305b4ae9.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e8a2add-0435-4249-9ce4-abf0826450e8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e8a2add-0435-4249-9ce4-abf0826450e8.png)
 
 #### Compensating Transaction Pattern
 
@@ -60,7 +60,7 @@
 * 최종적으로 일관된 작업이며 실패할 수 있다. 시스템은 실패 지점에서 보상 트랜잭션을 재개하고 계속할 수 있어야 한다.
 * 보상 트랜잭션의 단계 : 모두 `Idempotent` 명령으로 정의한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/83604d9d-8ccd-4281-b3f5-45e2481964ae.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/83604d9d-8ccd-4281-b3f5-45e2481964ae.png)
 
 #### Dual Write Problem
 
@@ -69,7 +69,7 @@
   * Order 서비스가 Event Bus에 주문 생성 이벤트를 발행한다.
 * DB와 메시지 브로커는 다른 시스템이기에 둘을 원자적으로 커밋할 수 없다. 어느 한쪽만 성공하는 순간이 반드시 존재한다.
  
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4403fe9e-9322-4ee4-8cf3-9737adc6dcc5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4403fe9e-9322-4ee4-8cf3-9737adc6dcc5.png)
 
 |순서|실패 지점|결과|
 |:---:|:---:|:---:| 
@@ -89,7 +89,7 @@
 * 메시지를 트리거한 트랜잭션이 실패하더라도 마이크로서비스에서 다른 마이크로서비스로 메시지가 안정적으로 전달 가능하다.
 * 아웃박스 테이블에서 레코드를 수신하고 폴링하는 마이크로서비스가 필요하다. 폴링하는 동안 시간/리소스 낭비 ⭢ 성능 저하로 이어진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7d3dc24c-e6a0-41c8-9251-fd2857d425a6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7d3dc24c-e6a0-41c8-9251-fd2857d425a6.png)
 
 |컬럼|용도|
 |:---:|:---:|
@@ -124,6 +124,6 @@ kafkaTemplate.send(event);     // ② 이벤트 발행
 * 순서 : 같은 테이블 · 같은 파티션 키 안에서는 커밋 순서가 유지된다. 파티션이 갈리면 순서 보장이 없다.
 * 지연 : 보통 수십 ms ~ 초 단위. 실시간이지만 동기는 아니다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6d6b7b0d-ef94-4fe2-b43e-60de885994dc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6d6b7b0d-ef94-4fe2-b43e-60de885994dc.png)
 
 * **"이벤트를 발행하지 말고, DB에 적어라. 발행은 로그를 읽는 CDC가 한다." — 이중 쓰기 문제를 로컬 트랜잭션 하나로 해결하는 것이 outbox + log-based CDC의 전부다.**

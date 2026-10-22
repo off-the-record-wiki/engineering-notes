@@ -6,9 +6,9 @@
 * 이벤트를 수신하려면 `ApplicationEventPublisher`를 사용하거나 시큐리티에서 제공하는 `AuthenticationEventPublihser`를 사용해서 발행해야 한다.
 * `AuthenticationEventPublisher`의 구현체로 `DefaultAuthenticationEventPublisher`가 제공된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/932324c8-2f50-44f4-bebb-d3ef4f900e82.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/932324c8-2f50-44f4-bebb-d3ef4f900e82.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/39e4a7a5-93a7-45a3-8ecb-71e53cbfe586.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/39e4a7a5-93a7-45a3-8ecb-71e53cbfe586.png)
 
 ### 인증 이벤트 - AuthenticationEventPublisher 활용
 
@@ -20,6 +20,6 @@
 * 이벤트를 수신하려면 `ApplicationEventPublisher`를 사용하거나 시큐리티에서 제공하는 `AuthorizationEventPublisher`를 사용한다.
 * `AuthorizationEventPublisher`의 구현체로 `SpringAuthorizationEventPublisher`가 제공된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/50e3667b-ff98-473e-918f-d9eb1317f166.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/50e3667b-ff98-473e-918f-d9eb1317f166.png)
 
 * 위와 같이 인가 이벤트를 발행하기 위해서는 `SpringAuthorizationEventPublisher`를 빈으로 등록해야 한다.

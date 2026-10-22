@@ -2,7 +2,7 @@
 
 #### Pipelining - 일반 실행과 파이프라이닝
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d6b9737b-fc57-4aec-b553-1d2c3a25fb27.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d6b9737b-fc57-4aec-b553-1d2c3a25fb27.png)
 
 **1. 일반 실행(Request-Response)**
 
@@ -20,7 +20,7 @@
 
 #### Pipelining - 3단계 동작 흐름
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/453f4e54-b302-4054-99d0-eb267b6fe1a9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/453f4e54-b302-4054-99d0-eb267b6fe1a9.png)
 
 **1. 전송 단계 : 일단 한 번에 다 보낸다**
 
@@ -53,7 +53,7 @@ List<Object> results = redisTemplate.executePipelined((RedisCallback<Object>) co
 
 #### Lua Script - 파이프라이닝을 넘어서
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2475bec4-1645-4d39-bf55-ae37c9ad8283.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2475bec4-1645-4d39-bf55-ae37c9ad8283.png)
 
 **1. 원자적 실행 : 트랜잭션 그 이상의 보장**
 
@@ -73,7 +73,7 @@ List<Object> results = redisTemplate.executePipelined((RedisCallback<Object>) co
 
 #### Lua Script - EVAL 실행 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a9cec8a7-9553-4faa-b4c3-1f77307f7b17.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a9cec8a7-9553-4faa-b4c3-1f77307f7b17.png)
 
 **1. EVAL 명령과 스크립트 전송**
 
@@ -111,7 +111,7 @@ EVAL "return redis.call('GET', KEYS[1])" 1 mykey
 
 #### Lua Script - SCRIPT LOAD와 EVALSHA
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b9162d0f-a2bd-4784-bb84-45f7bc5b970b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b9162d0f-a2bd-4784-bb84-45f7bc5b970b.png)
 
 **스크립트 등록(Registration)**
 
@@ -146,7 +146,7 @@ Long result = redisTemplate.execute(script, List.of("stock:100"));
 
 #### Redis 성능 최적화 원칙
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2f37cae9-18ee-4677-8e31-ee605205eb12.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2f37cae9-18ee-4677-8e31-ee605205eb12.png)
 
 **1. 명령 최소화(Minimize Commands)**
 
@@ -171,7 +171,7 @@ Long result = redisTemplate.execute(script, List.of("stock:100"));
 
 #### 세 가지 방식 비교 - 언제 무엇을 쓰는가
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b5a1305a-8b37-4964-8ce6-98403bce6fa7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b5a1305a-8b37-4964-8ce6-98403bce6fa7.png)
 
 |구분|Pipelining|MULTI / EXEC|Lua Script|
 |:---|:---|:---|:---|

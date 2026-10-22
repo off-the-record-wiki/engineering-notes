@@ -2,7 +2,7 @@
 
 #### WAL(Write-Ahead Logging, 선행 기록 로그)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d9be4da2-76e7-4895-9ad5-441a3761af75.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d9be4da2-76e7-4895-9ad5-441a3761af75.png)
 
 * 데이터 파일을 고치기 전에 그 변경 내용을 로그에 먼저 기록하고, 이 로그를 디스크에 확실히 써야만 커밋을 완료로 인정하는 방식.
 * 데이터 페이지가 디스크에 쓰이기 전에 그 페이지의 변경 기록이 반드시 먼저 디스크의 WAL에 쓰여 있어야 한다.
@@ -11,35 +11,35 @@
 
 #### 이상 현상 - Dirty Read
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/77c7c62d-8083-45ec-bd7c-5e0e613ed73e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/77c7c62d-8083-45ec-bd7c-5e0e613ed73e.png)
 
 * 다른 트랜잭션이 아직 커밋하지 않은 값을 읽는 현상. 그 트랜잭션이 롤백하면 존재한 적 없는 값을 근거로 삼은 것이다.
 * PostgreSQL에서는 Read Uncommitted를 지정해도 Read Committed로 동작하므로 어떤 격리 수준에서도 Dirty Read가 발생하지 않는다.
 
 #### 이상 현상 - Non-Repeatable Read
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3b8b714f-e010-4181-a0df-3f3e52062a04.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3b8b714f-e010-4181-a0df-3f3e52062a04.png)
 
 * 한 트랜잭션 안에서 같은 행을 2번 읽었는데 값이 다른 현상. 그 사이에 다른 트랜잭션이 그 행을 고치고 커밋했기 때문이다.
 * PostgreSQL의 기본 격리 수준인 Read Committed는 쿼리마다 새 스냅샷을 찍기 때문에 이 현상이 발생하며, Repeatable Read부터는 트랜잭션 동안 같은 스냅샷을 유지해 발생하지 않는다.
 
 #### 이상 현상 - Phantom Read
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/714075f2-a34e-4a30-bf63-2c1a8baa8c64.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/714075f2-a34e-4a30-bf63-2c1a8baa8c64.png)
 
 * 한 트랜잭션 안에서 같은 조건으로 2번 조회했는데 행 수가 다른 현상. 기존 행이 바뀐 것이 아니라 조건에 맞는 새로운 행이 생겼기 때문이다.
 * SQL 표준은 Serializable에서만 이 현상을 막도록 정하지만, PostgreSQL은 스냅샷 방식 덕분에 Repeatable Read에서부터 발생하지 않는다.
 
 #### 격리 수준 - Read Committed(PostgreSQL 기준 기본)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/49ec9fad-9846-42ec-93bf-f2d3a8d61aeb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/49ec9fad-9846-42ec-93bf-f2d3a8d61aeb.png)
 
 * Read Committed는 쿼리를 실행할 때마다 스냅샷을 새로 찍는다. 그래서 각 쿼리는 그 쿼리가 시작되기 직전까지 커밋된 데이터만 본다.
 * 동시 UPDATE : 두 트랜잭션이 같은 행을 UPDATE하면 나중에 온 쪽이 먼저 잠근 쪽이 끝날 때까지 기다린다. 그 뒤 최신 값을 기준으로 조건과 계산을 다시 적용한다. 그래서 `balance = balance - 100`처럼 SQL 식 안에서 계산하면 안전하다.
 
 #### 격리 수준 - Repeatable Read
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/016e1c3b-be8b-472b-985a-f8b550d423d2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/016e1c3b-be8b-472b-985a-f8b550d423d2.png)
 
 * Repeatable Read는 트랜잭션 첫 쿼리에서 스냅샷을 한 번 찍고 트랜잭션이 끝날 때까지 그 스냅샷을 그대로 쓴다.
 * 트랜잭션 A에서 스냅샷을 찍은 이후 만약 트랜잭션 B에서 고치고 커밋한 행을 수정하면 PostgreSQL은 `could not serialize access due to concurrent update(40001)`이 발생한다.
@@ -47,14 +47,14 @@
 
 #### 격리 수준 - Serializable
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/df470d52-b3bf-48b7-befa-90f7df6ac588.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/df470d52-b3bf-48b7-befa-90f7df6ac588.png)
 
 * 동시에 실행된 트랜잭션들의 결과가 어떤 순서로 하나씩 실행한 결과와 같을 때만 커밋을 허용하는 실행 방식은 느슨한데 결과에 대해서는 엄격한 방식이다.
 * 충돌이 생기면 기다리는 대신 `could not serialize access(40001)` 오류가 발생하므로, 애플리케이션이 트랜잭션을 처음부터 다시 실행하는 재시도 로직을 반드시 갖춰야 한다.
 
 #### Database Lock 교착상태와 읽기/쓰기 성능을 보장하는 MVCC 모델
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e3fc3e52-0a1c-49ef-9d31-6571147cc1de.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e3fc3e52-0a1c-49ef-9d31-6571147cc1de.png)
 
 ```
 A: 계좌 1 잠금 → 계좌 2 요청 (B가 쥐고 있어 대기)
@@ -65,7 +65,7 @@ B: 계좌 2 잠금 → 계좌 1 요청 (A가 쥐고 있어 대기)
 * PostgreSQL의 처리 : 잠금을 `deadlock_timeout(기본 1초)` 이상 기다리면 순환이 있는지 검사한다. 순환을 찾으면 한쪽 트랜잭션을 `deadlock detected(40P01)`로 롤백한다.
 * 항상 같은 순서로 잠근다. 혹은 트랜잭션을 짧게 유지해 잠금을 오래 쥐지 않도록 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c50f1bb4-dd8d-491f-9659-c79053aafdb9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c50f1bb4-dd8d-491f-9659-c79053aafdb9.png)
 
 * UPDATE는 행을 덮어쓰지 않고 새로운 버전을 만든다. 기존 T1 버전은 그대로 두고 T2 버전을 새로 만든다.
 * 읽기는 잠금 없이 자기 스냅샷에 맞는 버전을 고른다. 누군가 그 행을 고치더라도 기다리지 않고 T1 버전을 읽는다.

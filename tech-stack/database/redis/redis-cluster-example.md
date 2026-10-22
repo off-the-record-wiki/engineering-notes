@@ -88,4 +88,4 @@ services:
       - slave-node-3
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/22050ab3-46ab-4375-a681-db9b66b02a3a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/22050ab3-46ab-4375-a681-db9b66b02a3a.png)

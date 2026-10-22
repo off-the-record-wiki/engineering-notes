@@ -47,7 +47,7 @@ s3.equals(s4) -> true
 
 > ❓문자열 풀(String Pool)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f5461674-e6ed-4dab-9ae8-402f5341e590.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f5461674-e6ed-4dab-9ae8-402f5341e590.png)
 
 > * 풀(Pool)은 자원이 모여있는 곳을 말한다.<br>
 > * 프로그래밍에서 풀(Pool)은 공용 자원을 모아둔 곳을 말한다. 여러 곳에서 함께 사용할 수 있는 객체를 필요할 때마다 생성하고, 제거하는 것은 비효율적이다.<br>

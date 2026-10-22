@@ -2,7 +2,7 @@
 
 #### Replication & Distribution
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aa902f4a-3232-428c-ad4c-47524a5eadc0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aa902f4a-3232-428c-ad4c-47524a5eadc0.png)
 
 * 쓰기 경로 : Client → Master DB → Binary Log → (I/O Thread) → Relay Log → (SQL Thread) → Replica DB 
 * 읽기 경로 : Client → Replica DB

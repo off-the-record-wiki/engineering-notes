@@ -13,7 +13,7 @@
 
 #### gRPC 장/단점
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bbdcbcdb-5ad3-4b96-a242-e30b6882dc4c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bbdcbcdb-5ad3-4b96-a242-e30b6882dc4c.png)
 
 * 장점
   * 고성능 통신이 가능하다.

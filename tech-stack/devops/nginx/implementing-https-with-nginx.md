@@ -28,11 +28,11 @@ $ sudo certbot --nginx -d <도메인 주소>
 
 * 무료 도메인을 EC2 IP와 연결한 후 HTTPS 인증서를 발급받으면 아래와 같이 정상적으로 발급이 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/642319a0-e531-473d-ba57-617aa8c12f4d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/642319a0-e531-473d-ba57-617aa8c12f4d.png)
 
 * `https://` 프로토콜로 입력하니 아래와 같은 결과가 떴다. 앞서 배웠던 Nginx 로그 분석을 통해 알아보았더니 아래와 같았다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cbf140f5-c486-403e-bd3c-2895abc08352.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cbf140f5-c486-403e-bd3c-2895abc08352.png)
 
 ```shell
 $ ubuntu@ip-172-31-40-249:/var/log/nginx$ tail -f access.log

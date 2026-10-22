@@ -2,7 +2,7 @@
 
 #### 클린 아키텍처란?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9c985272-4ae6-4fdf-bbb4-d842b7047063.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9c985272-4ae6-4fdf-bbb4-d842b7047063.png)
 
 * 각각의 동심원은 소프트웨어에서 서로 다른 영역을 표현한다.
 * 보통 안으로 들어갈수록 고수준의 소프트웨어가 된다. 바깥쪽 원은 메커니즘이고 안쪽 원은 정책이다.

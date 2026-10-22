@@ -2,7 +2,7 @@
 
 #### 메시지 로그 세그먼트의 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/be72cb14-1392-4d58-b4ac-383ee503d7e9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/be72cb14-1392-4d58-b4ac-383ee503d7e9.png)
 
 * 카프카의 로그 메시지는 실제로 Segment로 저장된다.
 * 파티션은 단순히 파일 디렉터리로만 되어 있고, 해당 파티션 디렉터리에 메시지 저장 Segment를 File로 가지고 있다.
@@ -60,13 +60,13 @@
 
 #### Log Compaction
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fd99fcdc-6ce5-414a-acc3-37424aa0005e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fd99fcdc-6ce5-414a-acc3-37424aa0005e.png)
 
 * `log.cleanup.policy=compact`로 설정 시 Segment의 Key 값에 따라 가장 최신의 메시지로만 compact하게 Segment를 재구성한다.
 * Key 값이 null인 메시지에는 적용할 수 없다.
 * 백그라운드 쓰레드 방식으로 별도의 I/O 작업을 수행하므로 추가적인 I/O 부하가 소모된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/41d6f97f-2473-488c-a1ca-518b63808ab5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/41d6f97f-2473-488c-a1ca-518b63808ab5.png)
 
 * `Active Segment`는 Compact 대상에서 제외된다.
 * Compaction은 파티션 레벨에서 수행 결정이 되며, 개별 세그먼트들을 새로운 세그먼트들로 재생성한다.

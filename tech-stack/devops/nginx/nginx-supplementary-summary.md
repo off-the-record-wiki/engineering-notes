@@ -4,7 +4,7 @@
 
 * 웹 서버(Web Server)란, 정적 컨텐츠(HTML, CSS, JS, 이미지)를 제공해주는 컴퓨터를 말한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e0a8da09-6f8d-481c-9238-9b85e77bf39c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e0a8da09-6f8d-481c-9238-9b85e77bf39c.png)
 
 #### Nginx 기본 문법
 

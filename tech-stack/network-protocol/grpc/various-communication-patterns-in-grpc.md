@@ -2,7 +2,7 @@
 
 #### Unary RPC의 기본 통신 특징
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/498c4890-05c5-467f-b169-9c6d79f2f772.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/498c4890-05c5-467f-b169-9c6d79f2f772.png)
 
 * 1:1 통신 : 요청 메시지 하나와 응답 메시지 하나로 구성된다.
 * 동기·비동기 지원 : 응답을 기다리는 동기 방식과 다른 작업을 수행하다 응답을 처리하는 비동기 방식 모두 가능하다.
@@ -15,7 +15,7 @@
 
 > **일반적인 요청–응답 흐름은 REST와 유사하지만, Unary RPC는 리소스가 아닌 원격 메서드 호출을 중심으로 설계된다.**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d98ce46b-13c2-4ecc-b9db-c9a72838285e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d98ce46b-13c2-4ecc-b9db-c9a72838285e.png)
 
 * Unary RPC 통신에서 요청마다 새로운 네트워크 연결을 생성하지 않고, 기존에 수립된 Channel과 HTTP/2 연결을 재사용해 연결 설정 비용을 최소화한다.
 * 또한 Keep-Alive와 재연결 정책을 통해 유휴 연결의 유효성을 확인하고 일시적인 네트워크 장애에 대응한다.
@@ -28,7 +28,7 @@
 * Keep-Alive 주기를 지나치게 짧게 설정하면 불필요한 네트워크 트래픽과 서버 부하가 발생할 수 있으니 idle timeout 정책을 고려해 설정해야 한다.
 * 연결 장애가 발생하면 Channel은 일시적 장애 상태인 `TRANSIENT_FAILURE`로 전환될 수 있다. 이후 클라이언트는 지수 백오프를 적용해 재연결을 시도한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/027f8fc2-c387-4a2f-9a4a-7f8e0a32ea3b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/027f8fc2-c387-4a2f-9a4a-7f8e0a32ea3b.png)
 
 * gRPC 배치 처리는 여러 개의 작업을 하나의 요청 메시지로 묶어 한 번의 Unary RPC로 전송하는 애플리케이션 수준의 최적화 방식이다.
 * gRPC가 개별 호출을 자동으로 배치하는 것은 아니며, 요청 수집기와 배치용 Protobuf 메시지 및 RPC 메서드를 별도로 설계해야한다.
@@ -68,13 +68,13 @@ message UserResult {
 
 #### 실시간 통신에 필수로 사용되는 Streaming RPC 통신
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/399e3177-198f-49f3-b4a8-d5d95a6e81a7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/399e3177-198f-49f3-b4a8-d5d95a6e81a7.png)
 
 * 백프레셔는 수신 측의 처리 상태에 맞춰 송신 속도를 제어해 메시지 누적과 메모리 고갈을 방지한다.
 * 클라이언트·서버에 용량이 제한된 큐와 동시성 상한을 적용하고, 스트림 준비 상태 및 HTTP/2 흐름 제어에 따라 전송을 중단하거나 재개한다.
 * 버퍼 포화 정책과 deadline·취소·자원 해제를 명확히 정의하며, 재시도에 대비해 메시지 ID와 멱등성을 보장한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/98b2d763-064a-4952-9f88-62aaa1c2c275.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/98b2d763-064a-4952-9f88-62aaa1c2c275.png)
 
 * 초기 동기화: 클라이언트는 현재 상태의 Snapshot과 Version을 받아 로컬 상태를 초기화한다.
 * 실시간 반영: 해당 Version 이후의 이벤트를 gRPC 스트림으로 구독하고 순서대로 적용하며, 마지막 처리 Version을 Checkpoint로 저장한다.
@@ -83,14 +83,14 @@ message UserResult {
 
 #### Bidirectional Streaming RPC 주의사항 및 동시성
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fb7b41a0-236f-4c63-98c4-1ef30ba7752b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fb7b41a0-236f-4c63-98c4-1ef30ba7752b.png)
 
 * Full-Duplex 통신은 하나의 gRPC 양방향 스트림에서 요청 송신과 응답 수신을 동시에 수행하는 방식이다.
 * 송신과 수신을 별도의 스레드 또는 실행기로 분리해, 한쪽 작업이 지연되더라도 반대 방향의 처리를 차단하지 않도록 한다.
 * 각 방향에 독립적인 제한 버퍼와 백프레셔를 적용하고, 스트림 쓰기는 순서를 보장하도록 직렬화한다.
 * 완료·오류·취소 발생 시 양쪽 작업을 조정하고 스레드, 큐, 스트림 자원을 안전하게 해제한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c423042a-422a-4985-8fc5-961e42497409.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c423042a-422a-4985-8fc5-961e42497409.png)
 
 * 동시 처리량은 Permit과 제한된 Worker Pool로 통제하고, 작업이 끝나면 Permit을 반환한다.
 * 처리 상한에 도달하면 제한 큐에서 대기시키며, 큐까지 포화되면 `RESOURCE_EXHAUSTED`로 빠르게 실패시킨다.

@@ -2,7 +2,7 @@
 
 #### Labels
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/af5ce604-1674-4fc3-837d-cc20da3f0c84.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/af5ce604-1674-4fc3-837d-cc20da3f0c84.png)
 
 * Kubernetes Label은 Pod, Service, Deployment 등의 오브젝트를 식별하고 분류하는 키-값 형태의 메타데이터이다.
 * Service와 Deployment는 Selector를 사용하여 특정 Label을 가진 Pod를 선택하고 연결하거나 관리한다.
@@ -19,7 +19,7 @@
 
 #### Selector
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c817f65a-2373-4b76-9984-07b8c81f8aec.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c817f65a-2373-4b76-9984-07b8c81f8aec.png)
 
 * Selector는 Kubernetes에서 Label 조건을 이용해 특정 오브젝트를 선택하는 기능이다.
 * Service는 Selector와 일치하는 Pod로 트래픽을 전달하고, Deployment는 Selector와 일치하는 Pod를 관리한다.

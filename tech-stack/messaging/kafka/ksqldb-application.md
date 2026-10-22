@@ -46,7 +46,7 @@
 
 #### Kafka의 Default Timezone
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/65409d1f-3247-4d01-b209-e0b3ac94433d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/65409d1f-3247-4d01-b209-e0b3ac94433d.png)
 
 * Kafka Producer가 전송하는 메시지는 Header에 메시지 전송 시각을 UTC 시각으로 가지고 있다.
 * 전송된 메시지는 Kafka Broker의 `log.message.timestamp.type`의 설정값에 따라 Producer 전송 시각을 저장할 수도, Broker에서 Topic에 기록한 시간을 저장할 수도 있다.

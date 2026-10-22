@@ -79,12 +79,12 @@ public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult bindi
 > * Session Clustering : 서버 간 세션 데이터를 실시간 복제
 > * External Session Store : Redis나 DB같은 별도 저장소에 세션을 저장해 모든 서버가 공유
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aeb974ae-b091-410b-a6a4-e02309ef4726.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aeb974ae-b091-410b-a6a4-e02309ef4726.png)
 
 * 세션ID를 응답 쿠키로 만들어 반환하면 클라이언트 측 쿠키 저장소에서 이를 보관한다.
 * 서버 측에서는 만든 세션ID에 대한 것을 세션 저장소에 저장한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/faab6405-eb1e-4ac7-a1a3-ebe481d089a0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/faab6405-eb1e-4ac7-a1a3-ebe481d089a0.png)
 
 * 클라이언트 측의 쿠키 저장소에서 보관하는 쿠키를 서버 측 요청을 보낼 때 함께 포함해서 보내게 된다.
 * 그렇게 되면 서버 측에서 해당 쿠키 정보를 열람해 세션 ID를 서버 측 세션 저장소와 비교해 조회한다.

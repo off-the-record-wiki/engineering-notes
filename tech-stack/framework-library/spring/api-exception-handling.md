@@ -16,7 +16,7 @@
 
 #### ExceptionResolver
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/95af57e4-e7ba-4f65-8901-fc58f64ffaef.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/95af57e4-e7ba-4f65-8901-fc58f64ffaef.png)
 
 * 스프링에서 제공하는 ExceptionResolver는 다음과 같다.
   * `ExceptionHandlerExceptionResolver`

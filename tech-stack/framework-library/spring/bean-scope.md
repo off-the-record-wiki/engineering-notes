@@ -41,7 +41,7 @@
 > * 공유 인스턴스 : 해당 빈을 요청할 때마다 컨테이너는 항상 동일한 객체를 반환한다.
 > * 캐싱 메커니즘 : 컨테이너는 싱글톤 빈을 생성한 후 내부 캐시에 보관하며, 이후의 모든 요청은 이 캐시된 객체를 참조한다.
 >
-> ![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dd6c38d5-8830-44a6-ac1e-0950af9a3737.png)
+> ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dd6c38d5-8830-44a6-ac1e-0950af9a3737.png)
 > 
 > **2. 주요 특징 및 설정**
 > * 기본값(Default) : 스프링에서 스코프를 별도로 지정하지 않으면 모두 싱글톤으로 동작한다.
@@ -54,12 +54,12 @@
 
 #### 싱글톤 스코프 vs 프로토타입 스코프
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dfb52813-e7e6-44a4-938b-a375312ad2b7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dfb52813-e7e6-44a4-938b-a375312ad2b7.png)
 
 * 스프링 컨테이너는 기본적으로 싱글톤 스코프가 적용된다.
 * 여러 클라이언트 요청이 와도 같은 객체 인스턴스가 반환된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7c81d5d1-310e-4e93-8bea-d01902457104.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7c81d5d1-310e-4e93-8bea-d01902457104.png)
 
 * 여러 클라이언트 요청이 오면 프로토타입 빈이 생성되고 의존관계 주입 후 반환하는데 이 때, 의존관계 주입시까지만 스프링 컨테이너에서 관리된다.
 * 반환한 후에는 스프링 컨테이너에서 이 프로토타입 빈을 관리하지 않는다.

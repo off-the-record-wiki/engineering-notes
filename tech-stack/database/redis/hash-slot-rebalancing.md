@@ -2,7 +2,7 @@
 
 #### Hash Slot - 키가 슬롯에 매핑되는 과정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bd0fcb13-1467-4640-bc6a-128b932abd05.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bd0fcb13-1467-4640-bc6a-128b932abd05.png)
 
 **1. 키 입력**
 
@@ -42,7 +42,7 @@
 
 #### Hash Slot - 해시 태그로 슬롯 맞추기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bb56649a-b9ab-4703-a5c9-6b6514098d52.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bb56649a-b9ab-4703-a5c9-6b6514098d52.png)
 
 * 슬롯이 다르면 여러 키를 한 명령으로 다룰 수 없다. `MSET`, `SINTER`, `MULTI`, Lua 스크립트 모두 **모든 키가 같은 슬롯**에 있어야 한다.
 * 다른 슬롯의 키를 함께 다루려 하면 `CROSSSLOT` 에러가 발생한다.
@@ -62,7 +62,7 @@ CLUSTER KEYSLOT user:{100}:profile   # 슬롯 번호 확인
 
 #### Sharding - MOVED 리다이렉션
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a3174ae1-3320-4516-823a-f7119395b45a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a3174ae1-3320-4516-823a-f7119395b45a.png)
 
 **1. 클라이언트의 요청**
 
@@ -94,7 +94,7 @@ CLUSTER KEYSLOT user:{100}:profile   # 슬롯 번호 확인
 
 #### Cluster Rebalancing - 노드 추가와 제거
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4f375441-83d9-4dbb-b4bb-df77f15bb1e3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4f375441-83d9-4dbb-b4bb-df77f15bb1e3.png)
 
 **1. 노드 추가 및 제거(Scale Out / In)**
 
@@ -140,7 +140,7 @@ redis-cli --cluster del-node 127.0.0.1:7000 <node-id>
 
 **4. 리밸런싱(Rebalancing)**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6dfd4816-2feb-41fe-8900-fc1e702b4011.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6dfd4816-2feb-41fe-8900-fc1e702b4011.png)
 
 * 특정 노드에 데이터나 부하가 쏠렸을 때, 균형을 맞추는 과정이다.
   * 불균형 감지 : 노드당 슬롯 분포를 분석

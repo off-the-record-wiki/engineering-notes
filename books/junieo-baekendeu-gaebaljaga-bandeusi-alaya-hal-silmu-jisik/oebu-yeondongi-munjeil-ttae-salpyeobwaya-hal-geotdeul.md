@@ -24,7 +24,7 @@
 
 #### 2가지 타임아웃 - 연결 타임아웃, 읽기 타임아웃
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9395c547-e888-47d0-a103-7345fc2012fe.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9395c547-e888-47d0-a103-7345fc2012fe.png)
 
 * 첫 번째 단계는 네트워크 연결 시도 단계이다.
 * 실제 네트워크 전송 속도는 네트워크 상황이나 연결할 서버 상태에 따라 연결에 오랜 시간이 걸릴 수 있다.
@@ -40,7 +40,7 @@
 * 네트워크 통신 과정에서 간헐적으로 연결에 실패하거나 일시적으로 응답이 느려지는 경우가 있다.
 * 이럴 때는 재시도를 통해 연동 실패를 성공으로 바꿀 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e1535d3c-88d9-4ff9-a86f-d32a340f54dc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e1535d3c-88d9-4ff9-a86f-d32a340f54dc.png)
 
 #### 1. 재시도를 해도 되는 조건 - 단순 조회 기능
 
@@ -83,7 +83,7 @@
 * 연동 서비스가 장애 상황일 때는 연동 대신 바로 에러를 응답하고 정상화되었을 때 연동을 재개하면 연동 서비스의 장애가 주는 영향을 줄일 수 있다.
 * 서킷 브레이커가 동작하는 방식이 바로 이와 같다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1a37554c-9c70-4e11-a801-e927c711aa33.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1a37554c-9c70-4e11-a801-e927c711aa33.png)
 
 1. 서킷 브레이커는 닫힘 상태로 시작한다.
 2. 닫힘 상태일 때는 모든 요청을 연동 서비스에 전달한다.
@@ -91,7 +91,7 @@
 4. 실패 건수가 임계치를 넘어섰다면 서킷 브레이커는 열림 상태가 된다.
 5. 보통 임계치는 다음 조건 중 하나를 사용한다.(시간 기준 오류 발생 비율/개수 기준 오류 발생 비율)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/530eee29-c991-49ed-9600-c3228994e0e2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/530eee29-c991-49ed-9600-c3228994e0e2.png)
 
 1. 평소(닫힘 / Closed) : 모든 요청이 정상적으로 대상 시스템(예 : 외부 API)으로 나간다. 성공하든 실패하든 계속 닫힘 상태를 유지한다.
 2. 장애 감지 : 대상 시스템에 문제가 생겨 실패가 쌓인다. 실패가 정해둔 임계치(예 : 10번 중 5번 실패)를 넘으면 열림 상태로 전환한다.
@@ -171,7 +171,7 @@
 
 > **[HTTP 커넥션 관리](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Connection_management_in_HTTP_1.x)**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0821b70d-0c26-4a22-8220-abd2a8c540b8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0821b70d-0c26-4a22-8220-abd2a8c540b8.png)
 
 > * Short-lived(단기 연결) : 요청을 하나 할 때마다 연결을 새로 맺고 응답 받고, 바로 끊는다. 즉, 요청 3개라면 연결을 3번 맺고 끊는다.
 > * Persistent(연결 유지) : 처음 한 번만 연결을 맺어두고 그 하나의 연결로 요청을 주고 받는다. 매번 연결을 다시 맺는 비용(=TCP 핸드셰이크)을 아낀다.

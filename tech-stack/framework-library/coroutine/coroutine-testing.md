@@ -179,7 +179,7 @@ public sealed interface TestScope : CoroutineScope {
 * `runTest()` 함수는 테스트 전체를 감싸는 방식으로 자주 사용된다.
 * `runTest()` 함수는 `runTest()` 함수로 생성된 코루틴의 시간만 흐르게 만든다. `runTest()` 함수를 호출해 생성된 `TestScope`을 사용해 새로운 코루틴이 실행된다면 이 코루틴은 자동으로 시간이 흐르지 않게 된다. 이런 경우 `advanceUntilIdle()` 함수를 명시적으로 호출해줘야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/64d1d1b1-c478-4563-925b-62d8871a8fe1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/64d1d1b1-c478-4563-925b-62d8871a8fe1.png)
 
 ```kotlin
 @OptIn(ExperimentalCoroutinesApi::class)

@@ -2,7 +2,7 @@
 
 #### JWT API
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/785e4685-111c-4e2a-bb73-cb56d011aecb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/785e4685-111c-4e2a-bb73-cb56d011aecb.png)
 
 ```yml
 spring:
@@ -23,11 +23,11 @@ spring:
   * 리소스 서버는 인가서버의 `jwk-set-uri` 엔드포인트로 유효한 공개키를 질의하기 위한 검증 전략을 설정한다.
   * `issuer-uri`에 대한 각 JWT 클레임을 검증할 전략을 설정한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d1e259ad-bc42-47d6-8dbd-21629d058d9a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d1e259ad-bc42-47d6-8dbd-21629d058d9a.png)
 
 #### JwtDecoder 세부 흐름
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8b336413-4416-4716-b11b-fda7030011ef.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8b336413-4416-4716-b11b-fda7030011ef.png)
 
 * `JwtDecoder`는 문자열로 된 JWT(Json Web Token)를 컴팩트 클레임 표현 형식에서 Jwt 인스턴스로 디코딩하는 역할을 한다.
 * `JwtDecoder` 는 JWT 가 JSON 웹 서명(JWS) 구조로 생성된 경우 JWS 서명에 대한 검증의 책임이 있다.
@@ -39,7 +39,7 @@ spring:
 * `JwkSetUriJwtDecoderBuilder$SpringJWKSource` : `JwkSetUriJwtDecoderBuilder` 내부에서 실제로 JWK Set을 가져오고 캐싱하는 JWKSource 구현체다.
 * `RestTemplateWithNimbusDefaultTimeouts` : 조회에 쓰이는 기본 `RestTemplate`으로, 인가서버 지연이 리소스 서버 전체로 번지지 않도록 연결·읽기 타임아웃을 각각 500ms로 못 박아둔다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/64dba558-fee7-47ca-89cf-e659e6b9b1e7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/64dba558-fee7-47ca-89cf-e659e6b9b1e7.png)
 
 #### JwtDecoder 생성
 

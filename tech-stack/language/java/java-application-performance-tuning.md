@@ -6,11 +6,11 @@
 
 (1). Intellij MarketPlace에서 VisualVM Install
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70364f8a-4a52-48f0-951c-2f88b3f179e5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/70364f8a-4a52-48f0-951c-2f88b3f179e5.png)
 
 (2). 플러그인 설치 후 JDK Path와 VisualVM을 설치한 디렉토리로 간 후 visualvm 프로그램 경로 입력
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/741d86e4-ac55-4f75-a266-b4c86bd38b58.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/741d86e4-ac55-4f75-a266-b4c86bd38b58.png)
 
 * **Indicator 1. Memory(메모리)**
   * Heap Memory Usage 

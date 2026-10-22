@@ -8,13 +8,13 @@
   * Statement : SQL 내용
   * ResultSet : SQL 요청에 대한 응답
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/15d92f53-d631-46b0-aaf3-62ea03cc3c34.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/15d92f53-d631-46b0-aaf3-62ea03cc3c34.png)
 
 * 각 DB마다 다르기에 DB 엔진을 바꿀 때마다 코드를 바꿔야한다는 문제가 발생한다.
 
 #### 커넥션 풀 - 커넥션 풀을 사용하지 않은 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c5c127c3-617f-4d1b-9837-2ffd7f9a5805.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c5c127c3-617f-4d1b-9837-2ffd7f9a5805.png)
 
 * 애플리케이션 로직은 DB 드라이버를 통해 커넥션을 조회한다.
 * DB 드라이버는 DB와 TCP/IP 커넥션을 연결한다.
@@ -25,16 +25,16 @@
 
 #### 커넥션 풀 - 커넥션 풀을 사용하는 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4ab8c49e-a8a3-47e7-baa3-92f8458eb7cc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4ab8c49e-a8a3-47e7-baa3-92f8458eb7cc.png)
 
 * 애플리케이션을 시작하는 시점에 커넥션 풀은 필요한 만큼 미리 커넥션을 확보해서 커넥션 풀에 보관한다.
 * 커넥션 풀에 보관된 커넥션은 이미 DB와 TCP/IP로 커넥션이 연결된 상태이기 때문에 언제든지 즉시 SQL을 DB에 전달할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c4f3a9df-38ec-428c-a909-483a41ff9652.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c4f3a9df-38ec-428c-a909-483a41ff9652.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/71063bfa-c72b-46f1-92c5-c3d61f0636e9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/71063bfa-c72b-46f1-92c5-c3d61f0636e9.png)
 
 * 애플리케이션 로직에서는 DB 드라이버를 통한 커넥션 확보를 하지 않아도 커넥션 풀에 이미 생성된 커넥션을 그대로 가져다 쓰기만 하면 된다.
 * 커넥션을 사용하고 나면 종료하는 것이 아니라 다음에 다시 사용할 수 있도록 해당 커넥션을 그대로 커넥션 풀에 반환한다. 이 때, 커넥션을 종료하는 것이 아니라 커넥션이 살아있는 상태로 커넥션 풀에 반환해야 한다는 것이다.
@@ -60,7 +60,7 @@
 
 #### DataSource
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6f78ea26-1c6a-4530-ac5f-d304d548a046.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6f78ea26-1c6a-4530-ac5f-d304d548a046.png)
 
 * DataSource는 커넥션을 획득하는 방법을 추상화한 인터페이스이다.
 * 인터페이스 핵심 기능은 커넥션 조회이다.

@@ -16,27 +16,27 @@
 
 #### 0. 큐 상황
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/108f0175-96ae-41da-ba75-58b3d0a0f134.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/108f0175-96ae-41da-ba75-58b3d0a0f134.png)
 
 #### 1. 생산자 쓰레드 실행 시작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/64f8cf07-597d-4c20-8942-b0a29dadbecd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/64f8cf07-597d-4c20-8942-b0a29dadbecd.png)
 
 * p1 쓰레드가 락을 획득하고 임계영역으로 들어가 큐에 데이터를 적재한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/442fe697-de66-4d5c-a6cd-392291c704ef.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/442fe697-de66-4d5c-a6cd-392291c704ef.png)
 
 * p1 쓰레드가 작업을 완료한 후 락을 반납하고 종료된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2215a2b4-ddc1-4a5e-879e-cb18e0ccfb29.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2215a2b4-ddc1-4a5e-879e-cb18e0ccfb29.png)
 
 * p2 쓰레드가 락을 획득하고 임계영역으로 들어가 큐에 데이터를 적재한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eaa3f82e-ad4e-4871-bf3e-24f6b811fa9a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eaa3f82e-ad4e-4871-bf3e-24f6b811fa9a.png)
 
 * p2 쓰레드가 작업을 완료한 후 락을 반납하고 종료된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/31075c52-07bd-4843-b318-e00ad9b52623.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/31075c52-07bd-4843-b318-e00ad9b52623.png)
 
 * p3 쓰레드가 임계영역으로 들어가기 위해 락을 획득한다.
 * 큐에 데이터를 적재하려고 하나 이미 큐에 데이터가 다 찼다.
@@ -47,65 +47,65 @@
 
 #### 2. 소비자 쓰레드 실행 시작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8cac4812-ecce-41e5-8f72-46c84e9f1b7c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8cac4812-ecce-41e5-8f72-46c84e9f1b7c.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/99de66b4-f06b-4f5d-a025-7f4a468efa6d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/99de66b4-f06b-4f5d-a025-7f4a468efa6d.png)
 
 * c1 쓰레드가 락을 보유하려고 하지만 현재 락이 없기 때문에 무한 대기 문제가 발생한다.
 * p3 쓰레드가 큐에 공간이 남아있는지를 계속 확인하는 과정에서 락을 계속 점유하기 때문에 c 쓰레드들이 무한 대기하는 것이다.
 
 #### wait, notify(생산자 우선)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c655feac-108f-4862-882d-23ade766970a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c655feac-108f-4862-882d-23ade766970a.png)
 
 * 쓰레드 대기 집합(wait set)
   * `synchronized` 임계 영역 안에서 `Object.wait()`를 호출하면 쓰레드는 대기 상태로 들어간다. 이렇게 대기 상태에 들어간 쓰레드를 관리하는 것을 대기 집합(wait set)이라고 한다. 참고로 모든 객체는 각자의 대기 집합을 가지고 있다.
   * 여기서는 `BoundedQueue` 인스턴스의 락을 사용한 것으로 이해할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fb57d289-1f68-44e7-bd1a-e93970ee817b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fb57d289-1f68-44e7-bd1a-e93970ee817b.png)
 
 * 큐에 빈 공간이 남아있기 때문에 p1, p2는 문제가 없겠지만 p3 작업 시점에서는 문제가 발생한다.
 * 큐가 가득 찼기 때문에 `wait()`를 호출한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/483b9ceb-bc58-4c59-8c10-972a88197776.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/483b9ceb-bc58-4c59-8c10-972a88197776.png)
 
 * p3에서 `wait()`를 호출하면 락을 반납하고 해당 쓰레드의 상태는 `RUNNABLE` -> `WAITING` 상태로 변경된다.
 * 이렇게 상태가 변경된 쓰레드가 쓰레드 대기 집합에서 관리된다.
 * 쓰레드 대기 집합에서 관리되는 쓰레드는 이후에 다른 쓰레드가 `notify()`를 호출해 쓰레드 대기 집합에 신호를 주면 깨어날 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c0be92b8-66c5-45c6-8958-a8319f037dbb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c0be92b8-66c5-45c6-8958-a8319f037dbb.png)
 
 * 소비자 쓰레드가 데이터를 획득했기 때문에 큐에 데이터를 보관할 자리가 생기게 되고 소비자 쓰레드가 `notify()`를 호출해서 쓰레드 대기 집합에 이 사실을 공지한다.
 * `notify()`를 받으면 대기 집합에 있는 쓰레드 중 하나가 기상하는데 이 때, 깨어난다고 바로 작동하지 않는다. 깨어난 쓰레드가 여전히 임계 영역 안에 존재하지만 이 때, 소비자 쓰레드가 락을 점유하고 사용 중이기 때문에 락을 획득하기 위해서 `WAITING` -> `BLOCKED` 상태로 전환된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d6840714-688e-4ec3-b1a3-f305447d13fd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d6840714-688e-4ec3-b1a3-f305447d13fd.png)
 
 * c1이 데이터 소비를 완료하고 락을 반납하고 임계 영역을 빠져나가게 되고 그 다음으로 생산자 쓰레드 p3가 락을 획득해 이후 코드를 실행한다. 큐에 빈 공간이 없어 `notify()`를 호출하게 되는데 허나 쓰레드 대기 집합에는 아무도 없기 때문에 아무런 일이 일어나지 않는다.
 
 #### wait, notify(소비자 우선)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5a52154a-c14c-4cac-812d-e3b95214251c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5a52154a-c14c-4cac-812d-e3b95214251c.png)
 
 * c1 소비자 쓰레드가 락을 획득하고 큐에서 데이터를 소비하려 하지만 큐에 데이터가 없는 상태이다.
 * 이런 상태가 되면 c1 쓰레드는 쓰레드 대기 집합으로 이동해 관리된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3ae35cf6-0447-4654-bbfa-6ed1852a0171.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3ae35cf6-0447-4654-bbfa-6ed1852a0171.png)
 
 * 이런 수순으로 나머지 c2, c3 소비자 쓰레드 역시 쓰레드 대기 집합으로 이동해 관리가 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f9f0b42f-eb23-4399-9b9f-0d2500e24b62.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f9f0b42f-eb23-4399-9b9f-0d2500e24b62.png)
 
 * 그 다음으로 p1 생산자 쓰레드가 락을 획득해 작업을 시작하게 된다.
 * 큐에 데이터가 있기 때문에 소비자를 깨울 수 있게 되고 `notify()`를 통해 쓰레드 대기 집합에 이 사실을 알린다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d0dcd49b-828e-4caa-8702-e50789cc6431.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d0dcd49b-828e-4caa-8702-e50789cc6431.png)
 
 * `notify()`를 인지한 쓰레드 대기 집합은 쓰레드 중 하나를 깨우는데 이 때, 어떤 쓰레드가 깨워질지는 예측할 수 없다.
 * 허나 지금 p1 생산자 쓰레드가 락을 점유 후 사용을 하고 있기 때문에 먼저 나가게 된 c1 소비자 쓰레드는 `WAITING` -> `BLOCKED` 상태로 전환된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/22dcbe80-a797-4ac7-9038-41cdebb640e9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/22dcbe80-a797-4ac7-9038-41cdebb640e9.png)
 
 * p1 생산자 쓰레드가 락을 반납하면 `BLOCKED` 상태의 c1 소비자 쓰레드가 락을 획득하고 큐의 데이터를 소비한다.
 * 그러나 큐의 데이터가 없기 때문에 c1 소비자 쓰레드가 작업을 처리하고 `notify()` 신호를 쓰레드 대기 집합에 보낸다고 하더라도 처리를 할 수 없게 되기 때문에 위와 같은 수순의 과정이 반복이 된다.
@@ -125,16 +125,16 @@
 
 #### 생산자 소비자 대기 공간 분리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ebaddba2-307e-47e1-9d62-3d7efbc1fd0b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ebaddba2-307e-47e1-9d62-3d7efbc1fd0b.png)
 
 * `consumerCond` : 소비자를 위한 쓰레드 대기 공간
 * `producerCond` : 생산자를 위한 쓰레드 대기 공간
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f0ce119b-268f-45aa-847d-5b4a18521f69.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f0ce119b-268f-45aa-847d-5b4a18521f69.png)
 
 * p0 쓰레드는 ReentrantLock의 락을 획득하고 큐에 데이터를 보관한 다음 소비자 쓰레드 대기 공간에 `signal()`을 보내 알려준다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/29074d64-e04a-4422-99fd-90488dd70964.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/29074d64-e04a-4422-99fd-90488dd70964.png)
 
 * 소비자 쓰레드 중 임의의 쓰레드 하나가 깨어난다.
 * 아직 p0 쓰레드가 락을 획득하고 있으므로 락을 반납하면 소비자 쓰레드가 락을 획득해서 큐의 데이터를 소비하게 된다.
@@ -158,7 +158,7 @@
 * 쓰레드가 `notify()`를 호출하면 쓰레드 대기 집합에 있는 쓰레드 중 하나가 쓰레드 대기 집합을 빠져나오고 모니터 락 획득을 시도한다.
 * 모니터 락을 획득했다면 임계 영역을 수행한다. 만약 모니터 락을 획득하지 못하면 락 대기 집합에 들어가서 `BLOCKED` 상태로 기다린다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2a030938-ad02-44b7-91ba-fda051739142.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2a030938-ad02-44b7-91ba-fda051739142.png)
 
 * `ReentrantLock` 락 획득 대기
   * `ReentrantLock` 대기 큐에서 관리
@@ -391,4 +391,4 @@ public interface BlockingQueue<E> extends Queue<E> {
 3. 대기한다.
 4. 특정 시간만큼만 대기한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d5a42f75-c065-40d9-b030-65559aa7959f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d5a42f75-c065-40d9-b030-65559aa7959f.png)

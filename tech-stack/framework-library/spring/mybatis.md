@@ -107,7 +107,7 @@ public interface ItemMapper {
 * 이 때, `<if>`가 하나라도 성공하면 처음 나타나는 `and`를 WHERE절로 변환한다.
 * XML에서 비교하는 조건을 써야하는 경우 TAG를 사용할 수 없다. 다른 해결 방안으로는 XML에서 지원하는 CDATA 구문 문법을 사용하면 되는데, 특수문자와 CDATA 각각 상황에 따른 장단점이 있기에 원하는 방법을 그때그때 선택하면 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c46c4510-6f80-4772-977c-68c07b4e0966.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c46c4510-6f80-4772-977c-68c07b4e0966.png)
 
 1. 애플리케이션 로딩 시점에 MyBatis 스프링 연동 모듈은 `@Mapper` 어노테이션이 붙은 인터페이스를 조사한다.
 2. 해당 인터페이스가 발견되면 동적 프록시 기술을 사용해서 매퍼의 인터페이스의 구현체를 만든다.

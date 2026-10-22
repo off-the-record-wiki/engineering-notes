@@ -111,27 +111,27 @@ CREATE TABLE orders (
   * 건당 부모 행 조회(인덱스 탐색) 비용이 INSERT마다 추가된다.
   * 부모 행을 갱신하는 쿼리(댓글 수 카운터 증가, 게시글 수정 등)는 X-Lock이 필요하므로, 인기 게시글 하나에 동시 댓글 + 게시글 갱신이 섞이면 S-Lock ↔ X-Lock 경합과 데드락 위험이 실측으로 드러나게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1922e6a3-eae7-4755-8e10-c3ed56b10d16.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1922e6a3-eae7-4755-8e10-c3ed56b10d16.png)
 
 > **2. 수평 확장(샤딩)·파티셔닝과의 충돌**
 
 * 샤드가 분리되는 순간 DB 수준의 외래키는 물리적으로 불가능하다. 대형 서비스가 외래키를 제거하는 가장 흔한 이유이다.
 * 같은 DB 안에서도 **MySQL의 파티션 테이블은 외래키를 지원하지 않는다.** 파티셔닝된 테이블은 FK를 가질 수도, 다른 테이블로부터 참조될 수도 없다. 대용량 테이블을 파티셔닝하는 시점에 FK를 포기해야 하는 경우가 생긴다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aeaf195d-ec78-44df-b3e1-59e7c10c4687.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aeaf195d-ec78-44df-b3e1-59e7c10c4687.png)
 
 > **3. 이벤트 소싱 / MSA 아키텍처**
 
 * 마이크로서비스 환경에서는 `posts`와 `comments`가 아예 다른 서비스, 다른 DB에 존재한다. 이 경우 참조 무결성은 DB가 아닌 이벤트와 애플리케이션 로직이 담당한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/52e16586-61c1-4898-abed-3088a082ca56.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/52e16586-61c1-4898-abed-3088a082ca56.png)
 
 > **4. 배치/마이그레이션 작업**
 
 * 대량 데이터를 INSERT할 때 외래키 체크는 건당 조회를 유발하므로, 마이그레이션에서는 일시적으로 비활성화하는 것이 일반적이다.
 * 주의 : `FOREIGN_KEY_CHECKS`를 다시 1로 켜도 **비활성화 동안 들어온 데이터를 소급 검증하지 않는다.** 이 사이에 위반 데이터가 들어왔다면 고아 데이터가 조용히 남는다. 또한 세션 변수이므로 다른 커넥션에는 영향이 없다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3b66f4a6-23bb-411c-bd16-b6c61a38e7e6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3b66f4a6-23bb-411c-bd16-b6c61a38e7e6.png)
 
 > **5. 외래키 없이 갈 때의 보완책**
 

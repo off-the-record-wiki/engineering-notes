@@ -13,7 +13,7 @@
 
 #### 제 1 정규형 : 테이블의 모든 컬럼이 원자적인 값만을 가져야 한다
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/42550edf-b14b-496a-b196-930cee6064fd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/42550edf-b14b-496a-b196-930cee6064fd.png)
 
 * 갱신 이상 : '션' 회원의 주소가 '부산시 해운대구'로 변경된다면 이 회원이 주문한 모든 데이터를 다 찾아서 주소를 일일이 수정해야 한다. 만약 하나라도 빠뜨린다면 데이터 일관성이 깨진다.
 * 삽입 이상 : 아직 한 번도 주문하지 않은 새로운 회원을 시스템에 등록하고 싶은데 이 테이블 구조로는 주문 정보가 없으면 회원 정보를 추가할 수 없다.
@@ -30,7 +30,7 @@
 
 #### 제 2 정규형 : 테이블의 모든 컬럼이 기본 키에 대해 완전 함수 종속이어야 한다 & 제 1 정규형을 만족해야 한다
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/80c9aed3-c72a-420e-8b22-aa4301b62ba5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/80c9aed3-c72a-420e-8b22-aa4301b62ba5.png)
 
 > 문제점
 >
@@ -40,7 +40,7 @@
 
 #### 제 3 정규형 : 이행적 함수 종속이 존재하지 않아야 한다 & 제 2 정규형을 만족해야 한다
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ff491a9-abcc-4b70-8a70-b980ef3d24d8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9ff491a9-abcc-4b70-8a70-b980ef3d24d8.png)
 
 > 문제점
 > 

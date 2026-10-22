@@ -18,7 +18,7 @@
 
 * 멀티 쓰레드 환경에서는 task를 수행하는 동안 성능 향상을 위해 변수 데이터들을 메인 메모리에서 활용하는 것이 아닌 CPU 캐시에 저장하고 활용한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0bba826d-2c01-4a4b-8f18-5b0b86e3e008.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0bba826d-2c01-4a4b-8f18-5b0b86e3e008.png)
 
 * 즉, 쓰레드 간에 같은 변수에 접근한다고하더라도 같은 값을 가지지 않고 다른 값을 가지게 되는 것이다.
 * 즉, `volatile`이 사용된 필드는 멀티 쓰레드 상황에서 CPU 캐시를 사용하지 않고 메인 메모리로부터 데이터를 저장하고 읽기에 문제 상황을 해결할 수 있다.

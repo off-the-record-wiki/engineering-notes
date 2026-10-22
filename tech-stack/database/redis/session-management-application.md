@@ -2,7 +2,7 @@
 
 ## 📚 Hash 자료 구조 (HSET, HGET, HGETALL)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5efbb6e3-3292-458c-bfe9-d075b4efb912.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5efbb6e3-3292-458c-bfe9-d075b4efb912.png)
 
 * Redis에서 Hash는 하나의 key 안에 여러 개의 field-value 쌍을 저장할 수 있는 자료구조이다. 
 * Hash는 json 객체의 구성과 유사해서, 여러 속성들을 묶어서 저장할 때 적합하다.
@@ -46,11 +46,11 @@ $ HGET user hobby
 * 이 로컬 스토리지 세션은 서버가 한 대일 경우에는 문제가 안 된다. 하지만 서버가 여러 대 이상일 때는 문제가 발생한다. **왜냐하면 각 서버가 가지고 있는 세션 정보를 서버들끼리 공유하지 않기 때문이다.** 
 * 그렇게 되면 한 명의 사용자가 로드밸런서에 의해 여러 서버에 요청을 골고루 보내게 될텐데, 어떤 요청에서는 인증이 성공하지만 어떤 요청에서는 인증이 실패하는 상황이 발생한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/20ac22c2-853e-469c-a2f5-39125ded4fe7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/20ac22c2-853e-469c-a2f5-39125ded4fe7.png)
 
 * 따라서 이를 해결하기 위해 세션 정보를 공유하기 위한 기존 서버와 별개인 외부 세션 스토리지가 필요하다. 외부 세션 스토리지를 사용하게 되면 세션 정보를 외부 세션 스토리지 한 곳에 저장해두면 되기 때문에, 세션 정보를 서로 공유할 수 있게 된다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/27147dd2-dc62-47c9-9c6d-76dc6431c763.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/27147dd2-dc62-47c9-9c6d-76dc6431c763.png)
 
 > * 기존 스프링 내부의 인메모리 기반으로 세션을 관리하더라도 서버 간 세션을 공유하지 않기 때문에 별도의 외부 저장소인 레디스를 세션으로 사용해 어드민 서버의 세션 관리 방식을 리팩토링한 경험이 있었다.<br>
 > * 물론 레디스라는 외부 스토리지를 사용하기 때문에 네트워크 지연은 발생할 수 있으나 서버의 확장이 이루어진다고 하더라도 세션을 공용으로 관리할 곳이 생기기 때문에 서버가 다운된다고 하더라도 안정적으로 서비스를 이어갈 수 있다.<br>

@@ -20,7 +20,7 @@
 
 #### 실행 순서 분석
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/63877ac3-53a4-4711-b78c-c104bb126afd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/63877ac3-53a4-4711-b78c-c104bb126afd.png)
 
 * CAS 연산은 원자적이지 않은 2개의 연산을 CPU 하드웨어 차원에서 특별하게 하나의 원자적인 연산으로 묶어서 제공하는 기능이다.
 * 이것은 소프트웨어가 제공하는 기능이 아니라 하드웨어가 제공하는 기능이다.

@@ -7,7 +7,7 @@
 
 #### Elasticsearch의 Join Query
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0cc51f81-eddc-44bf-b6eb-21fa8736b04d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0cc51f81-eddc-44bf-b6eb-21fa8736b04d.png)
 
 * 마찬가지로 **Parent - Child 관계**를 다룬다.
 * Elasticsearch는 이 관계를 **`join` 필드 타입**으로 관리한다. 이 타입으로 **부모 문서와 자식 문서 사이의 관계를 정의**한다.

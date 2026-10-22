@@ -2,14 +2,14 @@
 
 #### 인스턴스 변수의 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f2dc579a-86bc-4b3d-b382-bb08279436eb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f2dc579a-86bc-4b3d-b382-bb08279436eb.png)
 
 * 인스턴스 변수의 경우 **힙 영역**에서 보관된다.
 * 쓰레드마다 해당 인스턴스 공유 자원을 같이 사용하게 되기 때문에 동시성 문제가 발생할 수 있다.
 
 #### 지역 변수의 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/395c8f0f-26eb-454a-b640-540c1a8883d5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/395c8f0f-26eb-454a-b640-540c1a8883d5.png)
 
 * 지역 변수의 경우 각 쓰레드 별로 생성되는 **스택 영역**에서 보관된다.
 * MyCounter 인스턴스에서 공유되는 자원이 없기 때문에 동시성 문제에서 벗어날 수 있다.

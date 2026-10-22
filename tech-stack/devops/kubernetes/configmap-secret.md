@@ -2,7 +2,7 @@
 
 #### Kubernetes - ConfigMap
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d1e0622b-5299-4a6d-88c3-97446e0c5149.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d1e0622b-5299-4a6d-88c3-97446e0c5149.png)
 
 * ConfigMap은 애플리케이션의 일반 설정값을 key-value 형태로 저장하는 Kubernetes 오브젝트이다.
 * 설정을 컨테이너 이미지와 분리하므로 동일한 이미지를 개발, 테스트 및 운영 환경에서 재사용할 수 있다.
@@ -22,7 +22,7 @@ data:
 
 #### Kubernetes - Secret
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9bfd07c1-b524-4bd9-97a6-d7bcff93265b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9bfd07c1-b524-4bd9-97a6-d7bcff93265b.png)
 
 * Secret은 비밀번호, API 토큰, 인증서처럼 민감한 데이터를 저장하는 Kubernetes 오브젝트이다.
 * Pod는 Secret을 환경 변수 또는 Volume에 마운트된 파일로 사용할 수 있다.

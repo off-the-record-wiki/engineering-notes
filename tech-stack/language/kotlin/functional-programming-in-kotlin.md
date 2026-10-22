@@ -3,7 +3,7 @@
 ## 📚 Kotlin에서 배열과 컬렉션 프레임워크를 다루는 방법
 
 * Kotlin의 Collection 프레임워크 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5228384a-00ae-4fc4-ab09-b4e4a6792fd3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5228384a-00ae-4fc4-ab09-b4e4a6792fd3.png)
 
 * 가변 컬렉션 - 컬렉션에 element를 추가, 삭제할 수 있다.
 * 불변 컬렉션 - 컬렉션에 element를 추가, 삭제할 수 없다.

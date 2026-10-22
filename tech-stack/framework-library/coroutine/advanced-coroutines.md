@@ -5,35 +5,35 @@
 * 쓰레드 간에 데이터를 전달하거나 자원을 공유하는 경우에는 가변 변수를 통해 상태를 공유하고 업데이트 해야 한다.
 * 여러 쓰레드에서 가변 변수에 동시에 접근해 값을 변경하면 데이터 손실이나 불일치로 버그가 발생할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/62019aa8-3a4e-4885-afdf-270702e7ba54.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/62019aa8-3a4e-4885-afdf-270702e7ba54.png)
 
 * JVM은 쓰레드마다 스택 영역이라고 불리는 메모리 공간을 갖고 있고, 이 스택 영역에서는 원시 타입의 데이터나 힙 영역에 저장된 객체에 대한 참조가 저장된다.
 * 힙 영역은 JVM에 올라간 쓰레드들에서 공통으로 사용되는 메모리 공간으로 복잡한 데이터가 저장된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bade2003-ddd0-4e12-ba0c-449c544ecac2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bade2003-ddd0-4e12-ba0c-449c544ecac2.png)
 
 * 컴퓨터는 CPU 레지스터, CPU 캐시 메모리, 메인 메모리 영역으로 구성된다.
 * 각 CPU는 CPU 캐시 메모리를 중간에 두고 데이터 조회 시 메인 메모리까지 가지 않고 CPU 캐시 메모리를 조회할 수 있도록 해서 메모리 접근 속도를 향상시킨다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/769e12d6-2bf4-4c08-b361-ce7196ca35c1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/769e12d6-2bf4-4c08-b361-ce7196ca35c1.png)
 
 * JVM의 스택 영역과 힙 영역에 저장되는 데이터는 컴퓨터의 각 메모리 공간 중 어디에나 저장될 수 있다.
 * 이로 인해 '공유 상태의 메모리 가시성 문제'와 '공유 상태에 대한 경쟁 상태 문제'가 발생할 수 있다.
 * ** 공유 상태의 메모리 가시성 문제**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c66581fe-86b8-4237-8631-4483f3749a92.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c66581fe-86b8-4237-8631-4483f3749a92.png)
 
 * 공유 상태의 메모리 가시성 문제란, 하나의 쓰레드가 다른 쓰레드가 변경한 상태를 확인하지 못하는 문제이다.
 * 이 문제는 서로 다른 CPU에서 실행되는 쓰레드들에서 공유 상태를 조회하고 업데이트할 때 발생한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/73a35e6d-d85f-471a-be40-7e3f2f02dbbc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/73a35e6d-d85f-471a-be40-7e3f2f02dbbc.png)
 
 * 공유 상태의 메모리 가시성 문제를 해결하려면 변수 선언 시 `@Volatile` 어노테이션을 설정하면 해당 어노테이션이 설정된 변수의 값을 읽고 쓸 때는 CPU 캐시 메모리를 사용하지 않는다.
 * 직접 메인 메모리에 접근해서 가져오기 때문에 문제 해결이 가능하나 이 방식은 성능 저하가 유발된다.
 
 **공유 상태에 대한 경쟁 상태 문제**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b370ab22-fd20-44e2-a7ed-7ac8fddf9cb1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b370ab22-fd20-44e2-a7ed-7ac8fddf9cb1.png)
 
 * 메인 메모리에서만 `count` 변수의 값을 변경시키더라도 여러 쓰레드가 동시에 메인 메모리에 저장된 값에 접근할 수 있다.
 * 이렇게 되면 생각했던 결과인 1002가 아니라 1001이 나오게 된다. 공유 상태의 변수를 읽고 업데이트할 때 많이 발생한다.
@@ -188,19 +188,19 @@ fun main(): Unit = runBlocking<Unit> {
 > * `CoroutineStart.DEFAULT` 옵션이 사용되면 코루틴 빌더 함수를 호출한 즉시 코루틴이 생성되고 코루틴의 실행이 `CoroutineDispatcher`에 요청된다.
 > * 코루틴 빌더 함수를 호출한 코루틴은 계속해서 실행된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b915e656-8c04-43ea-9d8c-eb32028fc020.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b915e656-8c04-43ea-9d8c-eb32028fc020.png)
 
 > **CoroutineStart.ATOMIC**
 > * 코루틴이 실행 요청됐지만 `CoroutineDispatcher`가 사용할 수 있는 쓰레드가 모두 사용 중이어서 쓰레드로 보내지지 않는 경우 코루틴은 생성 상태에 머물게 된다.
 > * 생성 상태 코루틴에 취소가 요청되면 해당 코루틴은 취소되고 종료된다.
 > * 이 `CoroutineStart.ATOMIC` 옵션을 적용한 코루틴은 생성 상태일 때 취소되지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0cf034c6-7ddc-4c13-9fbf-ea9f54a22102.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0cf034c6-7ddc-4c13-9fbf-ea9f54a22102.png)
 
 > **CoroutineStart.UNDISPATCHED**
 > * `CoroutineStart.UNDISPATCHED` 옵션이 적용된 코루틴은 `CoroutineDispatcher` 객체의 작업 대기열을 거치지 않고 호출자 쓰레드에서 즉시 실행된다.
 > * `CoroutineStart.UNDISPATCHED` 옵션이 적용되더라도, 일시 중단 후 재개될 때는 `CoroutineDispatcher`에 실행 요청된다.
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/28e20dda-379b-4185-a2b7-633080287e74.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/28e20dda-379b-4185-a2b7-633080287e74.png)
 
 #### 무제한 디스패처
 
@@ -208,7 +208,7 @@ fun main(): Unit = runBlocking<Unit> {
 * 무제한 디스패처를 사용해 실행된 코루틴은 중단 시점 이후 재개를 코루틴을 재개시킨 쓰레드에서 처리한다.
 * `CoroutineStart.UNDISPATCHED` 옵션이 적용된 코루틴은 재개 시 `CoroutineDispatcher`에 실행 요청된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ad9c860a-6684-4439-9fa4-1be0a6dd89d8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ad9c860a-6684-4439-9fa4-1be0a6dd89d8.png)
 
 #### 코루틴의 동작 방식과 Continuation
 
@@ -222,7 +222,7 @@ fun main() {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/babd629c-a2fd-4904-94fa-f69120ecabdb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/babd629c-a2fd-4904-94fa-f69120ecabdb.png)
 
 * 코루틴은 코드를 실행하는 도중 일시 중단하고 필요한 시점에 다시 재개하는 기능을 지원한다.
 * 코루틴은 Coroutination Passing Style이라 불리는 프로그래밍 방식을 통해 실행 정보를 저장하고 전달한다.
@@ -269,4 +269,4 @@ fun main(): Unit = runBlocking<Unit> {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ff407c20-cde5-45aa-b3e9-b74784e307da.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ff407c20-cde5-45aa-b3e9-b74784e307da.png)

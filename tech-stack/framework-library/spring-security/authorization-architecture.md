@@ -2,7 +2,7 @@
 
 ### Authorization
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a21412dc-f206-42a0-8d7a-2fb019bc3a96.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a21412dc-f206-42a0-8d7a-2fb019bc3a96.png)
 
 * 인가 즉, 권한 부여는 특정 자원에 접근할 수 있는 사람을 결정하는 것을 의미한다.
 * Spring Security는 `GrantedAuthority` 클래스를 통해 권한 목록을 관리하고 있으며, 사용자의 `Authentication` 객체와 연결된다.
@@ -18,11 +18,11 @@
 * 기본적으로 역할 기반 인가 규칙은 역할 앞에 `ROLE_`를 접두사로 사용한다. 즉, "USER" 역할을 가진 보안 컨텍스트가 필요한 인가 규칙이 있다면 Spring Security는 기본적으로 "ROLE_USER"를 반환하는 GrantedAuthority를 찾게 된다.
 * `GrantedAuthorityDefaults`로 사용자 지정할 수 있으며 `GrantedAuthorityDefaults`는 역할 기반 인가 규칙에 사용할 접두사를 사용자 정의하는데 사용된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6a303fd9-281f-442f-8307-68da6358ab7e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6a303fd9-281f-442f-8307-68da6358ab7e.png)
 
 ### AuthorizationManager
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/401e5240-40c6-4d09-a683-cc13c4de2a95.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/401e5240-40c6-4d09-a683-cc13c4de2a95.png)
 
 * `AuthorizationManager`는 인증된 사용자가 요청 자원에 접근할 수 있는가를 결정할 수 있는 인터페이스로서 인증된 사용자의 권한 정보와 요청 자원 보안 요구사항 기반으로 권한 부여 결정을 내린다.
 * `AuthorizationManager`는 Spring Security 요청 기반, 메서드 기반 인가 구성 요소에서 호출되며 최종 액세스 제어 결정을 수행한다.
@@ -35,15 +35,15 @@
 * Spring Security는 요청 기반의 인증된 사용자 및 특정 권한을 가진 사용자의 자원접근 허용 여부를 결정하는 인가 관리자 클래스들을 제공한다.
 * 대표적으로 `AuthorityAuthorizationManager`, `AuthenticatedAuthorizationManager`, 그리고 요청을 위임하는 `RequestMatcherDelegatingAuthorizationManager`가 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a0560663-dac4-4e25-92f5-b2b73fcb0560.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a0560663-dac4-4e25-92f5-b2b73fcb0560.png)
 
 #### [AuthenticatedAuthorizationManager](https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html#authz-authenticated-authorization-manager)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d57d7aab-e175-478a-a428-616fa7a7612f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d57d7aab-e175-478a-a428-616fa7a7612f.png)
 
 #### [AuthorityAuthorizationManager](https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html#authz-authority-authorization-manager)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0c66511c-e85c-4c38-83a5-f9db5d07f80a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0c66511c-e85c-4c38-83a5-f9db5d07f80a.png)
 
 * `AuthorityAuthorizationManager`는 매핑된 요청 패턴과 권한 정보를 사용해 사용자 요청 정보와 `Authentication` 권한을 비교해서 서로 일치하는가를 검사한다.
 
@@ -53,7 +53,7 @@
 * `PreAuthorizationManager`, `PostAuthorizeAuthorizationManager`, `Jsr250AuthorizationManager`, `SecuredAuthorizationMaanger`가 있다.
 * 메서드 기반 권한 부여는 내부적으로 AOP 방식에 의해 초기화 설정이 이루어지며 메서드 호출을 `MethodInterceptor`가 가로채어 처리하고 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cd3c3512-827c-4040-953c-ec2f22da3ecb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cd3c3512-827c-4040-953c-ec2f22da3ecb.png)
 
 * 스프링 컨테이너가 초기화 시, 생성되는 전체 빈을 검사하면서 빈이 가진 메서드 중에서 보안이 설정된 메서드가 있는지를 탐색한다.
 * 보안이 설정된 메서드가 있다면 스프링은 그 빈의 프록시 객체를 자동으로 생성해준다.
@@ -65,12 +65,12 @@
 
 #### Method Interceptor 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/635e8df9-5c21-415e-a1df-73618336c83c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/635e8df9-5c21-415e-a1df-73618336c83c.png)
 
 ### @PreAuthorize 처리 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bf6a3e4e-4816-4940-ab0d-d848f8665c67.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bf6a3e4e-4816-4940-ab0d-d848f8665c67.png)
 
 ### @PostAuthorize 처리 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ea5aa62f-8962-4315-9b2c-03df75e956ac.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ea5aa62f-8962-4315-9b2c-03df75e956ac.png)

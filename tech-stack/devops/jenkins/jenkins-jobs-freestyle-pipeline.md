@@ -12,7 +12,7 @@
   * 하지만 빌드 과정이 복잡해지거나 여러 단계로 나뉘면 관리하기가 어렵다.
 * Pipeline Project
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4e1ab1aa-f7ac-4a80-9102-20e9ac89eb3b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4e1ab1aa-f7ac-4a80-9102-20e9ac89eb3b.png)
 
 * 코드를 직접 작성하여 전체 빌드, 테스트, 배포 과정을 정의하는 방식이다.
 * `Jenkinsfile`을 활용하여 작업 단계를 스크립트로 기록한다.
@@ -25,6 +25,6 @@
 * 반면 Pipeline의 경우 전체 빌드 및 배포 구성이 일반적인 소프트웨어 코드처럼 저장된다.
 * Freestyle과 달리 코드 변경 사항을 추적할 수 있고 현대 CI/CD에 필수적인 병렬 실행, 여러 단계 구성 등 복잡한 워크플로우를 코드로 유연하게 제어할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d7f45259-f934-428b-9104-02fbd0f0331c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d7f45259-f934-428b-9104-02fbd0f0331c.png)
 
 * Jenkins의 타임존은 위와 같이 변경할 수 있다.

@@ -8,11 +8,11 @@
 * 기본적으로 스프링 시큐리티가 제공하는 기본 로그인 페이지를 사용하며 사용자 이름과 패스워드가 포함된 간단한 양식을 제공한다.
 * 사용자는 웹 폼을 통해 자격 증명(Credentials)을 제공하고 Spring Security는 `HttpServletRequest`에서 값을 읽어온다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e904c67-dac4-42c6-80f9-36d55b9ab6b9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e904c67-dac4-42c6-80f9-36d55b9ab6b9.png)
 
 * `FormLoginConfigurer` 설정 클래스를 통해 여러 API들을 설정할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b0384f34-a6bf-4ee0-8670-f1d52dedf904.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b0384f34-a6bf-4ee0-8670-f1d52dedf904.png)
 
 * 기본적으로 `UsernamePasswordAuthenticationFilter`를 사용한다.
 * formLogin은 SPA나 API 서버에서는 잘 사용하지 않는다.
@@ -20,16 +20,16 @@
 * `UsernamePasswordAuthenticationFilter`는 `AbstractAuthenticationProcessingFilter`를 확장한 클래스로서 `HttpServletRequest`에서 제출된 사용자 이름과 비밀번호(자격증명)로부터 인증을 수행한다.
 * 인증 프로세스가 초기화 될 때 로그인 페이지와 로그아웃 페이지 생성을 위한 `DefaultLoginPageGeneratingFilter` 및 `DefaultLogoutPageGeneratingFilter` 가 초기화 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de879952-04af-4516-b600-5a831b653537.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de879952-04af-4516-b600-5a831b653537.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e55c525e-f01d-4980-8013-0de69d4aeded.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e55c525e-f01d-4980-8013-0de69d4aeded.png)
 
 #### 기본 인증 - HttpBasic() & BasicAuthenticationFilter
 
 * HTTP는 액세스 제어와 인증을 위한 프레임워크를 제공하며 가장 일반적인 인증 방식은 Basic 인증 방식이다.
 * RFC 7235 표준이며, 인증 프로토콜은 HTTP 인증 헤더에 기술되어 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe95f7ed-78e8-4d61-84a4-672064d3da9b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe95f7ed-78e8-4d61-84a4-672064d3da9b.png)
 
 1) 클라이언트는 인증 정보 없이 서버에 접속을 시도한다.
 2) 서버가 클라이언트에게 인증하라는 요구를 보낼 때 401 Unauthorized 응답과 함께 WWW-Authentication 헤더를 기술해서 realm(보안 영역)과 Basic 인증 방법을 보낸다.
@@ -46,7 +46,7 @@
 * 인증 이후 세션을 사용하는 경우와 사용하지 않는 경우에 따라 처리 흐름의 차이가 존재한다.
 * 세션을 사용하는 경우 서버 측의 세션 저장소에서 관리되기 때문에 인증 과정을 거치지 않으나 세션을 사용하지 않으면 매 요청마다 인증 과정을 거치게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/177714d4-51d4-4100-ba66-d875f05c6eec.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/177714d4-51d4-4100-ba66-d875f05c6eec.png)
 
 #### 기억하기 인증 - RememberMe() & RememberMeAuthenticationFilter
 
@@ -68,7 +68,7 @@
 * `RememberMeAuthenticationFilter`는 `SecurityContextHolder`에 `Authentication`이 포함되지 않은 경우 실행되는 필터이다.
 * 세션이 만료되었거나 애플리케이션 종료로 인해 상태가 소멸된 경우 토큰 기반 인증을 사용해 유효성을 검사하고 토큰이 검증되면 자동 로그인 처리를 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67ee98c4-349b-4b54-a1ae-4b2a28f4b676.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67ee98c4-349b-4b54-a1ae-4b2a28f4b676.png)
 
 #### 익명 인증 사용자 - Anonymous() & AnonymousAuthenticationFilter
 
@@ -77,12 +77,12 @@
 * 인증 사용자와 익명 사용자를 구분해서 어떤 기능을 수행하고자 할 때 유용하게 사용 가능하며 익명 인증 객체를 세션에 저장하지 않는다.
 * 익명 인증 사용자의 권한을 별도로 운용할 수 있다. 인증된 사용자가 접근할 수 없도록 구성한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ac5d239b-6db9-4759-9707-e68eb30951de.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ac5d239b-6db9-4759-9707-e68eb30951de.png)
 
 * 만약 익명 요청에서 `Authentication`을 얻고 싶다면 `@CurrentSecurityContext`를 사용하면 된다.
 * CurrentSecurityContextResolver에서 요청을 가로채어 처리한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c0714f0b-1d5f-4e4b-8292-e45702e10693.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c0714f0b-1d5f-4e4b-8292-e45702e10693.png)
 
 #### 로그아웃 - logout() & LogoutFilter
 
@@ -90,18 +90,18 @@
 * 로그아웃 실행은 기본적으로 `POST /logout`으로도 가능하나 CSRF 기능을 비활성화 혹은 `RequestMatcher`를 사용하면 GET, PUT, DELETE 모두 가능하다.
 * 로그아웃 필터를 거치지 않고 스프링 MVC에서 커스텀 구현도 가능하며 로그인 페이지가 커스텀하게 생성될 경우 로그아웃 기능 역시 커스텀으로 구현해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e7437641-72e2-4e59-9e9b-b43868a6e2ed.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e7437641-72e2-4e59-9e9b-b43868a6e2ed.png)
 
 #### 요청 캐시 - RequestCache / SavedRequest & RequestCacheAwareFilter
 
 * `RequstCache`는 인증 절차 문제로 리다이렉트 된 후에 이전에 했던 요청 정보를 담고 있던 `SavedRequest` 객체를 쿠키 혹은 세션에 저장하고 필요시 다시 가져와 실행하는 캐시 메커니즘이다.
 * `SavedRequest`는 로그인과 같은 인증 절차 진행 후 사용자를 인증 이전의 마지막 페이지로 안내하며 이전 요청과 관련된 여러 정보를 저장한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9fae23e1-d4df-432f-ade9-d1d9426368c0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9fae23e1-d4df-432f-ade9-d1d9426368c0.png)
 
 >❗그러나 만약 인증되지 않은 사용자가 매번 요청을 보내면 위와 같은 흐름이 계속 진행될텐데 불필요한 과정이 될 수가 있다. 그래서 요청을 저장하지 않도록 하려면 `NullRequestCache` 구현을 사용할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/af60c3dc-d65c-406c-9c85-7fbaf7d13bdb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/af60c3dc-d65c-406c-9c85-7fbaf7d13bdb.png)
 
 * `RequestCacheAwareFilter`는 이전에 저장했던 웹 요청을 다시 불러오는 역할을 한다.
 * `SavedRequest`가 현재 Request와 일치하면 이 요청을 필터 체인의 `doFilter` 메서드에 전달하고 `SavedRequest`가 없으면 필터는 원래 Request를 그대로 진행시킨다.

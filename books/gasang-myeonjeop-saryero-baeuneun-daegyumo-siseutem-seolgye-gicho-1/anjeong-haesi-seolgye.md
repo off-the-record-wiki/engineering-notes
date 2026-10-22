@@ -19,7 +19,7 @@ serverIndex = hash(key) % N (N은 서버의 개수이다.)
 
 #### 해시 공간과 해시 링
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/efd0cd2a-eae2-4e80-99f4-117c843831f8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/efd0cd2a-eae2-4e80-99f4-117c843831f8.png)
 
 * 해시 함수 f로 SHA-1을 사용하고 해시 함수의 출력 값 범위를 `x0`부터 `xn`이라고 가정하자.
 * SHA-1의 해시 공간(hash space) 범위는 `0`부터 `2^160 - 1`까지로 알려져 있다.
@@ -27,33 +27,33 @@ serverIndex = hash(key) % N (N은 서버의 개수이다.)
 
 #### 해시 서버
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/51471ab2-8878-407f-80c5-8712a592d198.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/51471ab2-8878-407f-80c5-8712a592d198.png)
 
 * 해시 함수 f를 사용하면 서버 IP나 이름을 링 위의 어떤 위치에 대응시킬 수 있다.
 
 #### 해시 키
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/844113d1-826e-48d0-9bb9-6858294f3128.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/844113d1-826e-48d0-9bb9-6858294f3128.png)
 
 * 캐시 키 key0, key1, key2, key3 또한 해시 링 위에 어느 지점에 배치할 수 있다.
 
 #### 서버 조회
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7abf17a5-323d-41a5-9161-447059f66a87.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7abf17a5-323d-41a5-9161-447059f66a87.png)
 
 * 어떤 키가 저장되는 서버는 해당 키의 위치로부터 시계 방향으로 링을 탐색해나가면서 만나는 첫 번째 서버다.
 * 따라서 key0은 서버 0에 저장되고, key1은 서버 1에 저장되며, key2는 서버 2, key3은 서버 3에 저장된다.
 
 #### 서버 추가
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/61b38542-ba8a-4547-8401-6040c00b5ce2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/61b38542-ba8a-4547-8401-6040c00b5ce2.png)
 
 * 서버를 추가하더라도 키 가운데 일부만 재배치하면 된다.
 * 예를 들어, `s0`와 `s3` 사이에 `s4`라는 새로운 서버가 추가되었다고 가정하자. `s0`와 `s4` 사이에 있는 키들(여기서는 k0)만 재배치하면 된다.
 
 #### 서버 제거
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c8409842-40c5-4bbf-b5ab-d7d75af7d42f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c8409842-40c5-4bbf-b5ab-d7d75af7d42f.png)
 
 * 서버가 제거되더라도 키 가운데 일부만 재배치된다.
 * 예를 들어, `s1`이 삭제되었을 때 `k1`만 `s2`로 재배치하면 된다.
@@ -68,7 +68,7 @@ serverIndex = hash(key) % N (N은 서버의 개수이다.)
 
 #### 가상 노드
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9c197022-976f-4601-8088-f2630db2d288.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9c197022-976f-4601-8088-f2630db2d288.png)
 
 * 가상 노드는 실제 노드 또는 서버를 가리키는 노드로서, 하나의 서버는 링 위에 여러 개의 가상 노드를 가질 수 있다.
 * 가상 노드를 통해 키의 분포를 더 균등하게 할 수 있다. 표준편차가 작아져서 데이터가 고르게 분포되기 때문이다.

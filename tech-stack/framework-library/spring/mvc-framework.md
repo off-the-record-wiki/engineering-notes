@@ -2,7 +2,7 @@
 
 #### 프론트 컨트롤러 패턴
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/45d6857d-4e67-4077-bb59-01a4966f972d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/45d6857d-4e67-4077-bb59-01a4966f972d.png)
 
 * 프론트 컨트롤러 패턴(Front Controller Pattern 특징)
   * 단일 진입점 : 모든 HTTP 요청이 하나의 서블릿으로 집중된다.

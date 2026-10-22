@@ -12,11 +12,11 @@
   * `@Aspect`를 보고 어드바이저로 변환해서 저장한다.
   * 어드바이저를 기반으로 프록시를 생성한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3fe3cebd-7a36-4c0a-88e6-9a6141b95ce0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3fe3cebd-7a36-4c0a-88e6-9a6141b95ce0.png)
 
 #### @Aspect를 어드바이저로 변환해서 저장하는 과정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ba4e7581-c894-4f78-ae9b-09278f22a135.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ba4e7581-c894-4f78-ae9b-09278f22a135.png)
 
 1. 스프링 애플리케이션 실행 시점에 자동 프록시 생성기를 호출한다.
 2. 모든 `@Aspect` 빈을 조회한다.

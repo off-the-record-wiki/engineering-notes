@@ -7,19 +7,19 @@
 
 #### 토큰 검사 및 프로세스 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4e0543f7-064c-4d88-a91a-c9f65b0d0d9f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4e0543f7-064c-4d88-a91a-c9f65b0d0d9f.png)
 
 #### OpaqueTokenIntrospector
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2324ffd1-0bce-42da-bc82-50786d25bfa0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2324ffd1-0bce-42da-bc82-50786d25bfa0.png)
 
 * 문자열 토큰을 RestTemplate를 사용해 인가 서버 엔드포인트로 요청한다.
 * 토큰이 검증되면 최종 OAuth2AuthenticatedPrincipal 타입의 객체로 디코딩하여 반환한다.
 * `OAuth2AuthenticationPrincipal`은 `BearerTokenAuthentication`의 Principal 속성에 저장된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/322e6ee9-ec01-4e50-a1f5-0a3ac0ca5c7a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/322e6ee9-ec01-4e50-a1f5-0a3ac0ca5c7a.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b88b4f9d-cbc1-4f55-a860-80f6cdfde5c5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b88b4f9d-cbc1-4f55-a860-80f6cdfde5c5.png)
 
 > `NimbusOpaqueTokenIntrospector`은 사장됨.
 

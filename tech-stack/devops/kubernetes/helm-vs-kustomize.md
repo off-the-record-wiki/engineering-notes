@@ -2,7 +2,7 @@
 
 #### Kubernetes - Helm
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4df58a30-c65a-4e13-a93c-9f05dde18dad.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4df58a30-c65a-4e13-a93c-9f05dde18dad.png)
 
 * Helm은 Kubernetes 애플리케이션을 쉽게 설치하고 관리하기 위한 패키지 관리자이다.
 * 애플리케이션 구성은 템플릿과 기본 설정값을 묶은 차트(Chart) 단위로 배포된다.
@@ -78,7 +78,7 @@ spec:
 
 #### Kubernetes - Kustomize
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1b251500-9224-43d4-9f5c-378e2f35fd07.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1b251500-9224-43d4-9f5c-378e2f35fd07.png)
 
 * Kustomize는 Kubernetes 매니페스트를 템플릿 없이 환경별로 수정하고 조합하는 구성 관리 도구이다.
 * 공통 리소스는 Base에 정의하고, 개발·스테이징·운영 환경의 차이는 Overlay로 관리한다.

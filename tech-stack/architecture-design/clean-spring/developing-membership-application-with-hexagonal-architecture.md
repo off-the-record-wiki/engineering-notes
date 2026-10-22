@@ -28,7 +28,7 @@
 
 #### 포트(Port)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5c3df246-b1e4-4567-959b-7ad5a5921727.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5c3df246-b1e4-4567-959b-7ad5a5921727.png)
 
 * 애플리케이션이 외부 세계와 의도를 가지고 상호작용하는 아이디어를 캡처한 것을 말한다.
 * 단순히 데이터를 주고받는 것이 아니라 명확한 목적과 방향을 가지고 외부와 연결된다.
@@ -36,14 +36,14 @@
 
 #### 기능 요구 인터페이스(Required Interface)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e5df4fdc-340e-46a1-95f4-7f5e95405bbd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e5df4fdc-340e-46a1-95f4-7f5e95405bbd.png)
 
 * 제공 인터페이스(Provided Interface) : 애플리케이션이 외부에 제공하는 기능의 목록이다.
 * 요구 인터페이스(Required Interface) : 애플리케이션이 자기 일을 완수하기 위해 외부에 요구하는 기능의 목록이다.
 
 #### 어댑터(Adapter)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6d3a65db-93a6-4c2d-a28d-d87276a860f4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6d3a65db-93a6-4c2d-a28d-d87276a860f4.png)
 
 * 애플리케이션의 포트를 액터가 직접 연결할 수 없다면 인터페이스의 변환을 위한 어댑터를 도입한다.
 * 브라우저를 통해서 애플리케이션의 회원 가입 포트의 기능 제공 인터페이스를 사용한다면?
@@ -82,11 +82,11 @@
 * 액터는 정의된 포트를 통해서만 연결해야 한다.
 * 포트의 인터페이스에는 기술 의존성을 가지지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fc653abb-c38f-4096-b345-4e7267affc98.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fc653abb-c38f-4096-b345-4e7267affc98.png)
 
 #### 헥사고날과 도메인 모델 패턴을 적용한 대칭형 계층 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6d083a7a-1b67-4b34-8d74-1a4f6653eb4c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6d083a7a-1b67-4b34-8d74-1a4f6653eb4c.png)
 
 * 외부에서 내부로 향하는 일종의 계층 구조이다.
 * 코드의 의존 방향은 내부로만 향해야 한다. 즉, 어댑터 → 애플리케이션 → 도메인이 된다.

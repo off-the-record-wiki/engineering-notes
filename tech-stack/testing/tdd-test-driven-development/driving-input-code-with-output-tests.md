@@ -7,7 +7,7 @@
 
 #### 시간 확인
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b204d0ff-0a92-4989-b79e-628256429fac.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b204d0ff-0a92-4989-b79e-628256429fac.png)
 
 * 시간의 경우 정확히 같은 값(`isEqualTo`)으로 비교하지 않는다.
   * 왜냐하면 등록 시간은 서버가 요청을 처리하는 순간 `LocalDateTime.now(UTC)`로 생성된다. 테스트는 그 정확한 나노초를 알 수 없다.

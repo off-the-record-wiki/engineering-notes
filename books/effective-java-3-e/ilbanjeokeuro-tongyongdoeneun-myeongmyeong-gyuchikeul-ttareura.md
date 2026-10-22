@@ -16,14 +16,14 @@
 * 널리 통용되는 약어가 아니라면 줄여쓰지 않는다.
   * 만약 널리 통용되는 약어라면 첫 글자만 대문자로 표기한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0b2859f5-baad-4137-b3c5-227783855086.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0b2859f5-baad-4137-b3c5-227783855086.png)
 
 #### 메서드와 필드
 
 * 하나 이상의 단어로 이루어지며, Camel Case로 작성한다.
 * 상수 필드는 예외로, 모두 대문자로 작성하며 단어 사이는 언더바(_)로 구분한다
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/db00fdca-24a6-4cc9-bba3-31f7e034fda3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/db00fdca-24a6-4cc9-bba3-31f7e034fda3.png)
 
 #### 타입 매개 변수
 

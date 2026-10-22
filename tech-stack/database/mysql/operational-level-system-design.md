@@ -2,7 +2,7 @@
 
 #### 실시간 변동 데이터 처리를 위한 스트리밍 데이터 처리 기법⭐⭐⭐
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/832bba94-de3a-49de-bf0b-6d38290f3ddf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/832bba94-de3a-49de-bf0b-6d38290f3ddf.png)
 
 **1. Data Collection — 데이터가 발생하는 곳**
 * Web/App Server : 사용자가 앱에서 클릭·검색·결제 → 서버가 "클릭 이벤트" 발생한다.
@@ -32,7 +32,7 @@
   * DB 부하 → 서비스 영향 : 대량 스캔이 버퍼풀·I/O·CPU를 점유해 같은 DB를 쓰는 실서비스 응답이 함께 느려진다.
   * 장애 대응의 어려움 : 한 트랜잭션으로 8시간 돌다 실패하면 처음부터. 재시작·부분복구·멱등성 보장이 어렵다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e9eee5eb-ccd5-4d45-9cf2-5d8ae30ab216.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e9eee5eb-ccd5-4d45-9cf2-5d8ae30ab216.png)
 
 **해결 개념 - 연산을 DB 밖으로 위임한다**
 * DB에게 집계를 시키지 말고, 데이터만 병렬로 꺼내와 밖에서 나눠 계산한다.
@@ -40,7 +40,7 @@
   * 계산 위임 — GROUP BY·SUM 같은 무거운 연산을 MySQL이 아니라 Spark 클러스터가 수행한다.
   * 병렬 데이터 로딩 — 하나의 큰 테이블을 order_id 범위로 쪼개 여러 Executor가 동시에 나눠 읽는다. 순차 스캔이 병렬 스캔으로 바뀐다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/41fd6e1e-7bfd-428c-9965-2c32e2dd3e9e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/41fd6e1e-7bfd-428c-9965-2c32e2dd3e9e.png)
 
 **1. 병렬 읽기용 뷰 정의**
 
@@ -94,7 +94,7 @@ SELECT * FROM daily_summary;
 
 > 핵심 : 이미 정합성이 보장된 단 하나의 소스. DB의 트랜잭션 로그를 진실의 원천으로 삼는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9e9139ab-d733-4b56-be69-37ff2b38cd66.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9e9139ab-d733-4b56-be69-37ff2b38cd66.png)
 
 #### CDC 파이프라인 — 4개 계층
 
@@ -115,7 +115,7 @@ SELECT * FROM daily_summary;
 
 > 왜 Kafka를 중간에 두나? - Debezium이 소비자에 직접 밀어주면, 소비자 하나가 느리면 전체가 막히고 재처리도 어렵다. Kafka가 이벤트를 보존하기에 소비자별 속도 차이·장애·나중 합류(replay)를 모두 흡수한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/db87060b-a92f-4680-a448-f10bcaa5a3b2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/db87060b-a92f-4680-a448-f10bcaa5a3b2.png)
 
 **1. Debezium 동작 원리 — 스냅샷 → 스트리밍**
 * 커넥터가 처음 붙을 때 풀어야 하는 문제 : 지금까지 쌓인 데이터(과거)와 앞으로 바뀔 데이터(미래)를 빠짐도 중복도 없이 이어붙이는 것이다. 이 때, 순서가 핵심이다.
@@ -170,7 +170,7 @@ public void signUp(User user) {
 **DB를 큐로 쓴다.**
 * 메시지 브로커(Kafka·SQS) 없이 DB 테이블 하나로 큐를 구현하는 패턴으로 규모가 폭발하기 전까지 가장 실용적이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a5ae5348-176a-4224-9004-18251069dfe8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a5ae5348-176a-4224-9004-18251069dfe8.png)
 
 **jobs 테이블 설계**
 * 테이블 하나가 큐이자 상태 저장소이자 감사 로그가 된다. 컬럼 하나하나가 특정 요구를 담당한다.
@@ -234,7 +234,7 @@ COMMIT;   -- 락 해제. 이후 앱 코드가 실제 작업(이메일 발송 등
 
 > 핵심 : 중복 방지의 핵심은 원자성. “잡 선택 → RUNNING 표시”가 한 트랜잭션 안에서 락으로 보호되므로, 두 워커가 같은 잡을 RUNNING으로 만드는 경쟁이 불가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3e7ce9a9-108b-45bd-892d-6b15488852ba.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3e7ce9a9-108b-45bd-892d-6b15488852ba.png)
 
 **실패와 재시도 - 지수 백오프**
 * 일시적 실패(네트워크 순단 등)는 즉시 재시도하면 더 악화된다. 재시도 간격을 점점 벌리는 지수 백오프로 상대 시스템에 숨 쉴 틈을 준다.
@@ -271,6 +271,6 @@ WHERE id = @job_id;
 **2. 해결 - 단일 진실 + 목적별 읽기 모델**
 * 두 개의 검증된 패턴을 결합한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6042938d-f1d7-43b6-a9c2-4dee1d427c9b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6042938d-f1d7-43b6-a9c2-4dee1d427c9b.png)
 
 * 각 NoSQL은 MySQL이 못하는 특정 질의를 대신한다. 선택 기준은 데이터 모델과 질의 형태가 된다.

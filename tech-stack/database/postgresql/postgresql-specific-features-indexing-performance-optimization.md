@@ -53,7 +53,7 @@ WHERE metadata ? 'tags';
 
 #### BRIN 인덱스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6bdc5f49-43d8-4da7-92a0-e9b537470c50.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6bdc5f49-43d8-4da7-92a0-e9b537470c50.png)
 
 * 행 하나하나가 아니라 블록 묶음마다 최솟값·최댓값만 저장한다.
 * 조회할 때는 범위가 겹치지 않는 블록 묶음을 통째로 건너뛴다.
@@ -146,7 +146,7 @@ ORDER BY created_at + INTERVAL '0' LIMIT 20   -- Seq Scan → Sort → Limit
 
 **6. Range 파티셔닝: 필요 없는 테이블은 아예 열지 않는다**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0620b1df-6c04-4629-87dc-fd2fb82dfad9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0620b1df-6c04-4629-87dc-fd2fb82dfad9.png)
 
 ```
 transactions_part (부모: 데이터 없음, 행을 자식 테이블로 보내는 역할만 함)
@@ -155,7 +155,7 @@ transactions_part (부모: 데이터 없음, 행을 자식 테이블로 보내�
  └─ _2025   [2025-01-01, 2026-01-01)
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c3f6deab-8b83-4a25-83e4-edc52c98560a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c3f6deab-8b83-4a25-83e4-edc52c98560a.png)
 
 * 파티션 프루닝 : `WHERE created_at >= '2024-01-01' AND created_at < '2024-04-01'`으로 조회하면 `_2024` 하나만 나온다. 나머지 파티션들이 계획에서 빠지는데 이를 파티션 프루닝이라고 한다.
 * BRIN을 테이블 단위로 적용한 것과 같은 원리이다. BRIN이 범위가 겹치지 않는 블록 묶음을 건너뛰듯이 프루닝은 범위가 겹치지 않는 파티션 전체를 건너뛴다.
@@ -168,7 +168,7 @@ transactions_part (부모: 데이터 없음, 행을 자식 테이블로 보내�
 
 **7. List 파티셔닝: 값 목록으로 나눈다**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e3945cfd-ca58-45dd-863a-081bb25e6867.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e3945cfd-ca58-45dd-863a-081bb25e6867.png)
 
 * 범위가 아니라 'deposit', 'withdrawal'처럼 정해진 값으로 나뉜다. 지역, 테넌트, 상태처럼 값의 종류가 정해진 컬럼에 적합하다.
 * `Range`와 같은 함정이 있는데 목록에 없는 값이나 `NULL`은 들어갈 곳이 없어 오류가 발생한다. 그래서 `NOT NULL`을 붙이고 새로운 값이 생길 수 있다면 `DEFAULT` 파티션이 필요하다.

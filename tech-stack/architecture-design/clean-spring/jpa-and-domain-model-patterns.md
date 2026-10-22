@@ -2,7 +2,7 @@
 
 #### JPA 모델과 도메인 모델은 다른지?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/412d48f2-4ece-43c6-a597-9ffb6a0cf220.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/412d48f2-4ece-43c6-a597-9ffb6a0cf220.png)
 
 * 도메인 모델은 DB와 매핑되는 데이터 모델과는 다르며 이를 분리해야 한다.
   * 어댑터 계층에 JPA 엔티티 등의 모델을 따로 만들고

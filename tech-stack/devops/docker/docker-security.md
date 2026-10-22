@@ -16,7 +16,7 @@
 * Docker Desktop에서는 기본 제공
 * Docker Desktop, Docker Hub, Docker CLI, Docker Scout 대시보드와 상호작용가능한 독립적인 서비스 플랫폼
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4c851e10-a37e-43ce-b993-cda24c108015.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4c851e10-a37e-43ce-b993-cda24c108015.png)
 
 ## 📚 Docker Daemon Security
 

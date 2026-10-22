@@ -271,7 +271,7 @@ public interface InvocationHandler {
 
 * 프록시 인스턴스에서 메서드가 호출될 때 실행되는 로직을 정의한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c100e2f7-109f-4ce6-9322-85e2503e06d3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c100e2f7-109f-4ce6-9322-85e2503e06d3.png)
 
 > [📚JDK Dynamic Proxy](https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/proxy.html)
 >

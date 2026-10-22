@@ -10,7 +10,7 @@
 
 * `@Tag` : 테스트 메서드에 태그를 추가해 테스트 그룹을 만들어 원하는 테스트 그룹만을 실행할 수 있는 방법
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/44f30f09-926e-469f-8ea1-36536299bf3e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/44f30f09-926e-469f-8ea1-36536299bf3e.png)
 
 #### JUnit5 커스텀 태그
 

@@ -106,7 +106,7 @@ try {
 * 대표적인 접근 제어 모델로는 역할 기반 접근 제어(Role-Based Access Control, RBAC)이 있다.
 * RBAC는 역할별로 실행 가능한 기능 집합을 할당하고 사용자에게는 역할을 부여한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b669d62b-a885-4a37-b394-6efece111681.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b669d62b-a885-4a37-b394-6efece111681.png)
 
 * 그림과 같이 역할은 허용된 기능 집합을 갖는다.
 * 역할별 권한 부여 방식과 사용자별 권한 부여 방식은 각각 장단점이 있기 때문에 단독으로 사용하기보다는 함께 사용하는 경우가 많다.
@@ -126,7 +126,7 @@ try {
 * 단방향 암호화는 해시 함수를 사용해서 데이터를 해시 값으로 변환한다.
 * 해시 함수 알고리즘에는 SHA-256, MD5, BCrypt 등이 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cee335a1-789d-4a0b-a6db-cff5de5b4c26.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cee335a1-789d-4a0b-a6db-cff5de5b4c26.png)
 
 * SHA-256과 같은 해시 알고리즘은 원본 데이터를 유추하기 어렵게 하기 위해 원본 데이터가 조금만 달라도 완전히 다른 해시 값을 생성한다.
 * 예를 들어, '가나다라'를 암호화하면 해시 값이 'df2ef824'로 시작하는데 '가나다마'를 암호화하면 해시 값이 'fa262235'로 시작하는 식이다.

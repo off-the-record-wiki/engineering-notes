@@ -9,7 +9,7 @@
   * 빠른 피드백과 버그 최소화 : 코드를 푸시하자마자 자동으로 테스트가 실행되므로 문제 발생 시 즉각 피드백을 받을 수 있다.
   * 강력한 플러그인 연동 : 다양한 오픈 소스 플러그인을 지원하여 Docker, AWS, Github, Slack 등 기존에 사용하던 다양한 개발 도구들과 쉽게 연동이 가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/50f57a53-134e-4107-9408-c5561216ba17.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/50f57a53-134e-4107-9408-c5561216ba17.png)
 
 ***
 

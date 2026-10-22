@@ -8,7 +8,7 @@
 
 #### Strict Consistency(엄격한 일관성)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/daf26d3e-ff7f-47d6-a531-5a07a9e6ad44.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/daf26d3e-ff7f-47d6-a531-5a07a9e6ad44.png)
 
 * 강한 일관성은 데이터가 변경되는 즉시 모든 사본에 동일하게 반영되어, 어떤 시점에 어떤 사용자가 데이터를 읽더라도 항상 동일한 값을 보장하는 방식이다. 즉, 데이터가 한 번 갱신되면 그 직후부터는 어디에서 읽든 같은 결과가 나와야 한다.
 * 쉽게 말하면, 어떤 사용자가 값을 변경했다면 다른 사용자는 절대로 “이전 값”을 보아서는 안 된다. 강한 일관성에서는 최신 데이터가 모든 시스템에 반영되기 전까지 읽기나 쓰기 과정이 제어토록 만든다.
@@ -18,7 +18,7 @@
 
 #### Eventual Consistency(최종적 일관성)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2f74912b-1e9d-4266-a3c5-3c9c7ac8671d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2f74912b-1e9d-4266-a3c5-3c9c7ac8671d.png)
 
 * 최종 일관성은 데이터를 어떻게 저장하든, 최종적으로는 해당 데이터를 갖고 있는 모든 데이터베이스가 동일한 상태로 수렴하면 된다는 개념이다.
 * 즉, 데이터가 변경된 직후에는 잠시 동안 각 사본의 상태가 서로 다를 수 있지만, 시간이 지나면 결국 같은 값으로 맞춰진다는 것을 의미한다.
@@ -37,7 +37,7 @@
 
 #### Database per service Pattern
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/973e1559-e274-43f1-b32c-1e97664af089.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/973e1559-e274-43f1-b32c-1e97664af089.png)
 
 * 장점
   * 마이크로 서비스 - 느슨하게 결합, 확장 가능, 독립적
@@ -50,14 +50,14 @@
   * 서비스에는 데이터 교환, 서비스 간 통신을 위한 방법이 필요 - 각 서비스는 명확한 API 제공이 필요하며 Communications Resilience로 재시도 및 회로 차단기 패턴을 필요로 한다.
   * 마이크로서비스 간의 분산 트랜잭션 - Consistency + Atomicity 관점에서 부정적 영향을 미치며 복잡한 쿼리, 여러 데이터 저장소에서 조인 쿼리를 실행하기 어렵다.<br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9abe1562-d404-4d2f-98ec-f44043c43a5f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9abe1562-d404-4d2f-98ec-f44043c43a5f.png)
 
 * Database per service 패턴을 따르지 않고 여러 마이크로서비스가 공유 데이터베이스를 사용한다.
 * 공유 데이터베이스의 사용 - 마이크로서비스는 확장성, 복원성, 독립성이라는 속성을 잃게 된다. 또한 공유 데이터베이스는 단일 장애 지점으로 인해 마이크로서비스가 차단될 수 있다.
 
 #### RDB와 NoSQL
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/19bf155b-314c-4e2e-8446-a65bffe062af.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/19bf155b-314c-4e2e-8446-a65bffe062af.png)
 
 * 관계형 데이터베이스 테이블
   * 고정된 스키마
@@ -69,7 +69,7 @@
   * FK : 한 테이블의 기본 키가 다른 테이블에서 사용되는 경우
   * UK : 중복된 값을 가질 수 없는 키
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/853c990c-40c1-4058-aef9-bb91602c667c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/853c990c-40c1-4058-aef9-bb91602c667c.png)
 
 * Non-Relational Database
 * 구조화되지 않은 데이터를 저장
@@ -97,14 +97,14 @@
 
 #### Data Partitioning
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/10376bdd-029b-417f-9d15-e67f89e0209a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/10376bdd-029b-417f-9d15-e67f89e0209a.png)
 
 * 수평 분할은 샤드를 기준으로 하는 방식이며 이 샤드는 데이터의 특정 하위 집합을 보유하게 된다.
 * 파티션 키를 기준으로 테이블 데이터를 수평으로 분할한다.
 * 각 파티션은 별도의 데이터 저장소이지만 모든 파티션은 동일한 스키마를 가지고 있다.
 * 파티션 키는 모든 파티션에 데이터를 분배하는 데 제공된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/50ddb6d3-3264-4f33-a0fc-669ec4748622.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/50ddb6d3-3264-4f33-a0fc-669ec4748622.png)
 
 * 수직 분할은 행을 기준으로 하는 방식이며 각 분할은 데이터베이스 테이블에 대한 열의 하위 집합을 보유하게 된다.
 * 열에 따라 분할된 데이터는 가장 많이 방문한 열과 다른 서버의 다른 열로 나눌 수 있다.
@@ -112,7 +112,7 @@
 
 #### Data Sharding
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/abbaa31d-a088-4af6-99d3-5cecb1823ca2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/abbaa31d-a088-4af6-99d3-5cecb1823ca2.png)
 
 * 데이터를 샤드 또는 청크라고 하는 고유한 작은 데이터베이스 조각으로 분리한다.
 * 각 샤드는 동일한 스키마를 가지고 있으며 고유한 데이터 하위 집합을 보유한다.
@@ -124,7 +124,7 @@
 
 #### MySQL 기반 Sharding 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6b4e9f75-072b-4407-8edc-ed892766d302.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6b4e9f75-072b-4407-8edc-ed892766d302.png)
 
 ```java
 // UUID 문자열을 받아 해시 기반 샤딩 키(int)로 변환

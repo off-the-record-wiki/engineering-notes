@@ -2,7 +2,7 @@
 
 #### Kubernetes ‐ Startup Probe
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fda3947f-ed3e-45ce-a3da-29a0f96ee410.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fda3947f-ed3e-45ce-a3da-29a0f96ee410.png)
 
 * 애플리케이션이 정상적으로 시작되었는지를 검사한다.
 * 시작 시간이 오래 걸리는 애플리케이션에 적합하다.
@@ -12,7 +12,7 @@
 
 #### Kubernetes ‐ Liveness Probe
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1df7b155-d8cd-4062-9043-222baf77d280.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1df7b155-d8cd-4062-9043-222baf77d280.png)
 
 * 실행 중인 컨테이너가 정상적으로 동작하고 있는지를 검사한다.
 * 프로세스가 실행 중이지만 교착 상태처럼 응답할 수 없는 상황을 감지할 수 있다.
@@ -22,7 +22,7 @@
 
 #### Kubernetes ‐ Readiness Probe
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4c5a44f6-eab8-4d8f-ab85-ea94e133ca83.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4c5a44f6-eab8-4d8f-ab85-ea94e133ca83.png)
 
 * 컨테이너가 외부 요청을 처리할 준비가 되었는지를 검사한다.
 * 검사에 실패하면 Pod가 Service의 트래픽 대상에서 제외된다.
@@ -32,7 +32,7 @@
 
 #### 표준 가이드라인
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/80959256-c655-4d67-8338-80a4d5e69fd2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/80959256-c655-4d67-8338-80a4d5e69fd2.png)
 
 ```yaml
 apiVersion: v1

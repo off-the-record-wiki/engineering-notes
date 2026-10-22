@@ -2,7 +2,7 @@
 
 #### Virtual Thread 개념
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3c078786-38b2-479c-a0f6-837825fcd6ec.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3c078786-38b2-479c-a0f6-837825fcd6ec.png)
 
 * Heap 영역에 수많은 Virtual Thread를 할당해놓고, 플랫폼 쓰레드에 대상 Virtual Thread를 마운트/언마운트하여 컨텍스트 스위칭을 수행한다. 그렇기 때문에 컨텍스트 스위칭 비용이 작아질 수 밖에 없다.
 * 쓰레드 크기와 컨텍스트 스위칭 비용이 많이 감소한 모델이기 때문에 Spring MVC/Tomcat 등의 모델이 Netty/WebFlux 모델에 비해 가진 단점이 많이 희석되었다.
@@ -45,7 +45,7 @@
 
 * 다음과 같이 Virtual Thread의 상태에 따라서 플랫폼 쓰레드에 마운트/언마운트해 실행을 관리한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c9e9a429-3d2e-4706-a406-e6c216c3cd24.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c9e9a429-3d2e-4706-a406-e6c216c3cd24.png)
 
 * 플랫폼 쓰레드에 마운트/언마운트할 때에는 `park` 혹은 `unpark` 메서드를 사용한다.
 
@@ -111,7 +111,7 @@ sealed abstract class BaseVirtualThread extends Thread
 * 하지만 Virtual Thread가 플랫폼 쓰레드에 고정되어 장점을 활용할 수 없는 경우가 있다.
 * Virtual Thread 내에서 `synchronized` 동기화를 사용하거나 JNI를 통해 네이티브 메서드를 사용하는 경우이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/79300ca2-ef92-457c-8e9d-895e857696bd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/79300ca2-ef92-457c-8e9d-895e857696bd.png)
 
 #### SpringBoot에서의 Virtual Thread
 

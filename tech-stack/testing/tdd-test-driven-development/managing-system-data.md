@@ -10,7 +10,7 @@
 
 ***
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/589831bc-42d6-490b-be73-13b492869b68.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/589831bc-42d6-490b-be73-13b492869b68.png)
 
 * 데이터베이스 제약 조건을 통해 데이터의 일관성과 무결성을 유지하기 쉽다.
 * 데이터베이스 스키마는 모델과 코드에 비해 변경 비용이 크기 때문에 시스템 설계 유연성이 낮아진다.
@@ -32,7 +32,7 @@
 
 ***
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/45f52bde-1ee6-450e-b8ab-169adc784223.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/45f52bde-1ee6-450e-b8ab-169adc784223.png)
 
 * 클라이언트에 제공되는 가치가 설계 결정의 주도권을 가진다.
 * 비즈니스 지식이 시스템에 풍부한 어휘로 표현된다.
@@ -52,4 +52,4 @@
 
 ***
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/05f48ebb-23c7-4529-919b-45bf7eece7a7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/05f48ebb-23c7-4529-919b-45bf7eece7a7.png)

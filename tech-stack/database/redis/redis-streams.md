@@ -2,7 +2,7 @@
 
 #### Redis Streams - Stream이란
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3c1e8207-39c2-4989-9b5d-5d93f29d81c3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3c1e8207-39c2-4989-9b5d-5d93f29d81c3.png)
 
 * **추가만 가능한(append-only) 로그** 자료구조다. 메시지를 넣으면 사라지지 않고 순서대로 쌓이며, 여러 소비자가 각자의 위치에서 읽어갈 수 있다.
 * Pub/Sub이 "지금 듣고 있는 사람에게만 뿌리고 잊는" 방식이라면, Streams는 **저장하고 · 누가 어디까지 읽었는지 추적하고 · 실패하면 다시 처리**할 수 있다.
@@ -29,7 +29,7 @@ XTRIM orders MINID ~ 1735200000000         # 특정 시각 이전 삭제
 
 #### Redis Streams - 두 가지 읽기 방식
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/28875920-fc32-4173-a4ec-fe7ed6d6cf95.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/28875920-fc32-4173-a4ec-fe7ed6d6cf95.png)
 
 |방식|명령|특징|
 |:---|:---|:---|
@@ -50,7 +50,7 @@ XREADGROUP GROUP order-workers worker-1 COUNT 10 BLOCK 0 STREAMS orders >
 
 #### Redis Streams - 메시지 생명주기와 PEL
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a11ba738-0c31-43d3-9ca2-e4ecfab04d4b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a11ba738-0c31-43d3-9ca2-e4ecfab04d4b.png)
 
 **1. 메시지 발행 및 전달(Production)**
 
@@ -74,7 +74,7 @@ XREADGROUP GROUP order-workers worker-1 COUNT 10 BLOCK 0 STREAMS orders >
 
 #### Redis Streams - 밀린 메시지 조회와 회수
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/57ee086e-0a97-45ef-819f-28d4ea31610a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/57ee086e-0a97-45ef-819f-28d4ea31610a.png)
 
 ```shell
 # PEL 요약 : 대기 건수, 최소/최대 ID, 소비자별 건수
@@ -97,7 +97,7 @@ XAUTOCLAIM orders order-workers worker-2 60000 0 COUNT 10
 
 #### Redis Streams - Pub/Sub과의 비교
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/550d324b-c637-4c51-9184-745154246e86.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/550d324b-c637-4c51-9184-745154246e86.png)
 
 |구분|Pub/Sub|Streams|
 |:---|:---|:---|

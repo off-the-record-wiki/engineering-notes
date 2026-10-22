@@ -42,7 +42,7 @@
 SELECT * FROM stock_trade_history WHERE stock_code = '005930' FOR SHARE;
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4b132dde-bca5-4da8-8502-54589e7664d9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4b132dde-bca5-4da8-8502-54589e7664d9.png)
 
 > **배타 락(Exclusive Lock, X-Lock)**
 > 
@@ -53,7 +53,7 @@ SELECT * FROM stock_trade_history WHERE stock_code = '005930' FOR SHARE;
 SELECT * FROM stock_trade_history WHERE stock_code = '005930' FOR UPDATE;
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c51586ff-a0ea-4f56-85df-16fb2bfee8bc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c51586ff-a0ea-4f56-85df-16fb2bfee8bc.png)
 
 > **1. 주의 : 일반 SELECT는 락을 걸지 않는다**
 >
@@ -69,4 +69,4 @@ SELECT * FROM stock_trade_history WHERE stock_code = '005930' FOR UPDATE;
 > * 예방 : 여러 행을 잠글 때 항상 같은 순서로 접근하고, 트랜잭션과 락 보유 시간을 짧게 유지한다.
 > * 관측 : `SHOW ENGINE INNODB STATUS`의 `LATEST DETECTED DEADLOCK`, `performance_schema.data_locks`
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/94ead65a-1f81-4885-8566-3fc9f8b2be4b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/94ead65a-1f81-4885-8566-3fc9f8b2be4b.png)

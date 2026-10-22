@@ -37,7 +37,7 @@ EXPLAIN ANALYZE SELECT * FROM product WHERE category_id = 11;
 
 * 예상 rows와 실제 rows를 비교한다. 차이가 크면 통계 정보가 부정확하거나 옵티마이저가 잘못된 판단을 내릴 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/28e6b451-ba7e-48a2-a3d8-53216adf5fc5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/28e6b451-ba7e-48a2-a3d8-53216adf5fc5.png)
 
 #### EXPLAIN ANALYZE - 실행 통계 1
 
@@ -99,7 +99,7 @@ for row in 드라이빙 테이블: // 바깥 루프, 먼저 읽는 쪽
 * `Sort: o.total_price DESC, limit input to 10 row(s) per chunk` : 60,033건 전체를 정렬하지 않고 10칸짜리 순위표로 상위 10건만 유지한다.
 * `Limit: 10 row(s)` : 최종 10건만 클라이언트로 반환.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6bd35403-3986-4581-808b-5bc335463259.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6bd35403-3986-4581-808b-5bc335463259.png)
 
 #### 명확한 드라이빙 테이블을 선택하라.
 
@@ -113,7 +113,7 @@ for row in 드라이빙 테이블: // 바깥 루프, 먼저 읽는 쪽
 
 #### EXPLAIN ANALYZE - Top-N 최적화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/50590844-6ecf-4e20-824e-d3df26a63b1d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/50590844-6ecf-4e20-824e-d3df26a63b1d.png)
 
 * 불필요한 계산을 하지 않는다 - `Top-N` 힙은 들어온 값이 현재 등수보다 낮다면 비교 한 번으로 끝내고 버린다. 순위조차 매기지 않는다.
 * 메모리가 상수다 - 전체를 버퍼에 넣고 `sort_buffer_size`를 넘어서면 `filesort on disk`가 발생해 속도가 수십 ~ 수백 배 느려진다. 이렇게 정렬용 메모리 공간이 부족하여 처리하던 데이터를 디스크의 임시 파일로 넘겨 기록하는 현상을 디스크 스필이라고 한다. `Top-N` 힙은 항상 딱 N행만 들고 있다. 입력이 1만이든 1억이든 힙 크기는 `O(N)` 고정이라, 디스크 스필이 구조적으로 발생할 수 없다
@@ -130,7 +130,7 @@ for row in 드라이빙 테이블: // 바깥 루프, 먼저 읽는 쪽
 
 #### EXPLAIN ANALYZE - 파이프라인 모델 최적화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3d0c5b4b-c393-4b1c-8349-6c9ff590db14.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3d0c5b4b-c393-4b1c-8349-6c9ff590db14.png)
 
 * 각 노드가 상위 노드의 호출에 반응해 한 행씩 데이터를 전달하는 구조를 데이터베이스 아키텍처 공식 용어로 반복자 모델이라고 한다.
 * 부모가 자식에게 다음 행을 달라고 요청하면 자식이 한 행만 만들어서 위로 올린다. 이걸 끝날 때까지 반복한다.

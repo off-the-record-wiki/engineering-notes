@@ -17,7 +17,7 @@
 
 #### GraphQL 장/단점
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9dd80361-d7dd-42d2-b1b5-3bce102d5c05.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9dd80361-d7dd-42d2-b1b5-3bce102d5c05.png)
 
 * 장점
   * 데이터를 얻기 위해 여러 번 호출하지 않고 특정 필드만 선택하여 쿼리를 제공할 수 있다.

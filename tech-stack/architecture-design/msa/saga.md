@@ -12,7 +12,7 @@
 
 #### Choreography
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/318caa9e-f095-4d33-a1cc-cdb28dc65f9c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/318caa9e-f095-4d33-a1cc-cdb28dc65f9c.png)
 
 * 중앙 통제자 없이 각 서비스가 이벤트를 매개로 자율적으로 협력하는 방식이다.
 * 실패가 되면 보상 이벤트로 되돌린다. 예를 들어 재고가 부족하면 실패 이벤트를 발행해 결제가 이를 구독해 환불하고 주문을 취소 상태로 바꾼다.
@@ -22,7 +22,7 @@
 
 #### Orchestration
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d83746b5-2747-4cbf-8ed6-877b0decc0dd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d83746b5-2747-4cbf-8ed6-877b0decc0dd.png)
 
 * 오케스트레이터라는 중앙 조정자가 전체 트랜잭션 흐름을 지휘하는 방법이다.
 * 예를 들어, 주문 요청이 들어오면 결제하라는 명령을 보내고 응답을 기다린다. 이 성공 응답을 받으면 다음으로 재고를 차감하라는 명령을 보내고, 또 응답을 받으면 다음으로 넘어간다.

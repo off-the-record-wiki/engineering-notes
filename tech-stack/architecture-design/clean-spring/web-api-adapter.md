@@ -2,7 +2,7 @@
 
 #### Entity vs DTO
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e6a65c8f-42bf-4329-b787-91a9c0237ad0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e6a65c8f-42bf-4329-b787-91a9c0237ad0.png)
 
 > **❗애플리케이션(서비스) 계층의 리턴 타입은 DTO여야 하는가, 엔티티여야 하는가?**
 >
@@ -24,7 +24,7 @@
 > * 애플리케이션 → 인바운드 어댑터 (프로세스 내부) : 같은 언어, 같은 트랜잭션 문맥. 변환 이득이 없다. 즉, 엔티티로 전달해도 무방하다.
 > * 어댑터 → 시스템 밖 (HTTP 응답, 메시지, 외부 계약) : 직렬화 문제(LAZY 필드 초기화 폭탄, 순환 참조), 내부 스키마 유출, API 계약의 독립적 진화가 걸린다. 즉, DTO로 전달하는 것을 권장한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c0b34c50-b374-4027-a674-273d78e72be1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c0b34c50-b374-4027-a674-273d78e72be1.png)
 
 **1. User Interface (Presentation) — 사용자 인터페이스 계층**
 * 사용자(또는 외부 시스템)에게 정보를 보여주고 명령을 받아들이는 책임을 진다.

@@ -4,7 +4,7 @@
 
 * 인덱스가 있다고 무조건 인덱스를 사용하는 것이 아니다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/03d9bc50-18a2-4d94-aa36-7f3a825f27e8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/03d9bc50-18a2-4d94-aa36-7f3a825f27e8.png)
 
 | 상황 | I/O 패턴 | 비용 |
 |:---:|:---:|:---:|
@@ -59,7 +59,7 @@ FROM mysql.engine_cost;
 * 디스크 읽기가 메모리 읽기보다 4배 비싸다. 따라서 이 비율이 옵티마이저의 판단에 큰 영향을 미친다. 버퍼 풀에 데이터가 많이 캐시되어 있으면 I/O 비용이 낮아져서 옵티마이저가 더 적극적으로 인덱스를 사용할 수 있다.
 * 이런 내용을 토대로 결국 옵티마이저는 비용이 가장 낮은 계획을 고른다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec04c9b9-aa04-4270-b66c-5badb4d0edf5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ec04c9b9-aa04-4270-b66c-5badb4d0edf5.png)
 
 #### 테이블 통계 정보
 
@@ -151,7 +151,7 @@ AND index_name = 'idx_orders_member_id';
 * 인덱스가 있는 컬럼은 옵티마이저가 분포를 들여다볼 수단이 있다.
 * 반면 인덱스가 없는 컬럼은 그 수단이 없다. 기본 통계만으로는 추정할 방법이 없다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8adeac75-c7d7-4507-959b-33f3dd9e18d8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8adeac75-c7d7-4507-959b-33f3dd9e18d8.png)
 
 * MySQL 8.0에서 도입된 히스토그램(Histogram)은 바로 이 문제를 해결한다. 히스토그램은 컬럼의 값 분포 통계를 옵티마이저에게 제공하여 편향된 데이터에서도 어느 정도 정확한 행 수 추정을 가능케 한다.
 ```sql
@@ -177,7 +177,7 @@ WHERE TABLE_NAME = 'orders' AND COLUMN_NAME = 'order_status';
 * `buckets` : 히스토그램을 만들 때 쓸 버킷(칸) 수의 상한이다. `WITH n BUCKETS`로 지정하지 않으면 기본값 100이 들어간다. 주의할 점은, 이 값은 "최대 몇 칸까지 쓸 수 있는가"라는 상한일 뿐 실제로 만들어진 칸 수가 아니다.
 * `sampling_rate`: 히스토그램을 만들 때 테이블에서 얼마나 표본을 뽑았는지를 나타내는 비율(0~1)이다. `0.0148...` 은 전체의 약 1.48%만 읽어 분포를 추정했다는 뜻이 된다. 1.0이면 전수 조사다. MySQL은 `histogram_generation_max_mem_size`(기본 20MB) 메모리 한도 안에서 가능한 만큼만 샘플링이므로 테이블이 클수록 이 비율은 낮아진다. 즉 히스토그램도 인덱스 통계와 마찬가지로 샘플링 기반 추정이며, 그래서 빈도 값에 약간의 오차가 있을 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3873e37e-8378-46e7-bf6e-aa373ea64881.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3873e37e-8378-46e7-bf6e-aa373ea64881.png)
 
 * Singleton 히스토그램의 버킷은 [값, 누적 빈도] 쌍으로 저장된다.
   * 누적 빈도는 줄자에서 각 칸이 끝나는 위치다. 첫 칸부터 지금 칸까지를 모두 더한 값이라 갈수록 커지기만 하고, 마지막 칸은 반드시 1.0이 된다.
@@ -190,7 +190,7 @@ WHERE TABLE_NAME = 'orders' AND COLUMN_NAME = 'order_status';
 | **Singleton** | 고유 값 수 <= 버킷 수 | `[값, 누적 빈도]` | 높음 (각 값의 정확한 빈도) |
 | **Equi-Height** | 고유 값 > 버킷 수 | `[하한, 상한, 누적 빈도, 고유 값 수]` | 중간 (범위로 근사) |
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/af91a17a-3ac7-467b-8ce5-7cd034577c0b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/af91a17a-3ac7-467b-8ce5-7cd034577c0b.png)
 
 #### 히스토그램과 인덱스의 관계
 

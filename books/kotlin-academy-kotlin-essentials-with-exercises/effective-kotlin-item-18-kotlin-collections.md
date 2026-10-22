@@ -2,7 +2,7 @@
 
 #### 인터페이스 계층 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/788289e2-c93f-4b5e-b6ef-493bcc283953.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/788289e2-c93f-4b5e-b6ef-493bcc283953.png)
 
 * 계층 구조 최상위에는 원소들을 순서대로 순회할 때 이용하는 `Iterable`이 있다.
 * `iterator()` 메서드가 있기 때문에 for문을 사용해 Iterable 객체를 탐색할 수 있다.

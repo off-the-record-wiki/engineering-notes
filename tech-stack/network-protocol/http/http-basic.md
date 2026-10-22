@@ -28,21 +28,21 @@
 * 지금은 HTTP 지속 연결을 통해 문제를 해결했다.
 * HTTP/2, HTTP/3에서 더 많은 최적화가 이루어지고 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b2a22ee2-a0c4-4eb5-ab57-f8bb2ce109a3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b2a22ee2-a0c4-4eb5-ab57-f8bb2ce109a3.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2d610fe7-cfca-4464-8730-e62b0bcb6308.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2d610fe7-cfca-4464-8730-e62b0bcb6308.png)
 
 ## 📚 HTTP 메시지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f6f37fc4-3da0-4473-b252-85c9fb5ab341.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f6f37fc4-3da0-4473-b252-85c9fb5ab341.png)
 
 * 요청 메시지 - HTTP 메서드
 * 요청 메시지 - 요청 대상
 * 요청 메시지 - HTTP 버전
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/30057da2-8559-47b0-8b8a-a71b6a05d73d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/30057da2-8559-47b0-8b8a-a71b6a05d73d.png)
 
 * 응답 메시지(HTTP 헤더) - HTTP 전송에 필요한 모든 부가정보
 * 응답 메시지(HTTP 메시지 바디) - 실제 전송할 데이터
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/37e589f1-7653-4055-873a-7eb8d79b12e5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/37e589f1-7653-4055-873a-7eb8d79b12e5.png)

@@ -19,7 +19,7 @@
 * 요소를 찾을 때도 같은 방식으로 버킷을 찾은 다음, 해당 버킷 내에 같은 요소가 있는지만 확인하면 된다.
 * 해시 함수는 같은 요소라면 동일한 값을 반환하기에 다른 버킷을 확인할 필요가 없다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/85f8540b-edf2-41ff-a478-ef7a000a68b3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/85f8540b-edf2-41ff-a478-ef7a000a68b3.png)
 
 #### 가변성과 관련된 문제
 

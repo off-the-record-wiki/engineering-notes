@@ -11,4 +11,4 @@
 * 클라이언트의 책임이 가벼워진다.
 * 무한 스크롤 UI에서 많이 사용된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4091c839-a688-4414-b849-941474077844.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4091c839-a688-4414-b849-941474077844.png)

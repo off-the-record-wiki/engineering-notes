@@ -2,7 +2,7 @@
 
 #### Jenkins와 Git Repository 연결하기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0abc45e8-7e26-4496-93bf-2acf4a0e3461.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0abc45e8-7e26-4496-93bf-2acf4a0e3461.png)
 
 * `SCM` : Git
 * `Repository URL` : 레포지토리 URL
@@ -55,4 +55,4 @@ pipeline {
 
 #### 전체 파이프라인 흐름 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/83fb9497-9cbf-4e9c-8146-dfc9edb6cfe3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/83fb9497-9cbf-4e9c-8146-dfc9edb6cfe3.png)

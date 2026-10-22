@@ -9,7 +9,7 @@
 
 #### ICP가 없는 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a8393113-d355-417d-a301-dde0c5fe2d59.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a8393113-d355-417d-a301-dde0c5fe2d59.png)
 
 * MySQL 엔진에서 스토리지 엔진에 `category_id = 11`인 데이터를 요청한다.
 * [스토리지 엔진] : 인덱스에서 `category_id = 11`인 첫 번째 인덱스 레코드를 찾는다.
@@ -28,12 +28,12 @@
 
 #### ICP 도입 후 아키텍처
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7e391c1d-2601-44f8-bbfc-218a1dd2f08f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7e391c1d-2601-44f8-bbfc-218a1dd2f08f.png)
 
 * ICP는 MySQL 엔진이 처리하던 인덱스 조건을 스토리지 엔진으로 밀어넣는다는 뜻이다.
 * 스토리지 엔진은 인덱스 페이지 안에 존재하는 조건을 활용해 테이블로 가기 전 필터링을 직접 수행할 수 있게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70330442-c020-415a-9be7-0bd594c93e3a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/70330442-c020-415a-9be7-0bd594c93e3a.png)
 
 * MySQL 엔진에서 스토리지 엔진에 `category_id = 11`만 보내는 것이 아니라 인덱스로 평가할 수 있는 조건까지 함께 밀어넣는다.
 * [스토리지 엔진] : 인덱스에서 `category_id = 11`인 인덱스 레코드를 찾는다.
@@ -53,7 +53,7 @@
 * SELECT, WHERE, ORDER BY, GROUP BY에 사용되는 모든 컬럼이 인덱스에 포함되어 있으면 클러스터드 인덱스(테이블 데이터)에 접근할 필요가 없다.
 * 따라서 인덱스만 읽고 결과를 반환하면 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f5d40b10-8b31-4ffd-94c1-f54ee2542ef5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f5d40b10-8b31-4ffd-94c1-f54ee2542ef5.png)
 
 * Before/After 차이 정리 : `SELECT *` 혹은 `필요한 컬럼만`
 * 커버링 인덱스가 적용되려면 쿼리에 사용되는 모든 컬럼이 인덱스에 포함되어야 한다.
@@ -85,7 +85,7 @@
 * 핵심은 선행 컬럼 A의 카디널리티(값의 종류 수)이다. 만약 A가 성별처럼 값이 2~3개 종류뿐이라면 A의 묶음에서 B를 범위 스캔하고 A의 또 다른 묶음에서 B를 범위 스캔한다.
 * 이렇게 선행 컬럼의 값을 하나씩 건너뛰며(skip) 각 묶음 안에서 후행 컬럼 범위 스캔을 돌리는 것을 스킵 스캔이라고 한다. A가 2종류라면 범위 스캔을 2번만 반복하면 되니, 인덱스를 못 타고 풀 테이블 스캔을 하는 것보다 훨씬 효율적이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a9eca677-fc2e-4b4e-82df-dd7690a0d33a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a9eca677-fc2e-4b4e-82df-dd7690a0d33a.png)
 
 * 복합 인덱스는 선행 컬럼 기준으로 먼저 정렬된 뒤 후행 컬럼으로 정렬된다. 
 * 여기서 핵심은 grade = 'A' 그룹만 떼어놓고 보면 score가 이미 정렬되어 있다는 점이다. 마찬가지로 grade = 'B' 그룹만 떼어놓고 봐도 score는 예쁘게 정렬되어 있다.
@@ -99,7 +99,7 @@
 
 * MySQL의 스킵 스캔은 쿼리가 사용하는 컬럼이 모두 인덱스 안에 들어있는 경우, 즉 커버링 인덱스가 성립하는 경우에만 사용할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/041ad3d9-112b-4c0c-ad1b-216b97318413.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/041ad3d9-112b-4c0c-ad1b-216b97318413.png)
 
 #### 스킵 스캔 발동 조건
 

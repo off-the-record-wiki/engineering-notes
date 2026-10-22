@@ -2,7 +2,7 @@
 
 #### Topic을 소스로 가지는 Table의 RocksDB 동작 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fae784d3-5d67-4d55-bde1-f7d083775f29.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fae784d3-5d67-4d55-bde1-f7d083775f29.png)
 
 * `Push`쿼리 수행 시 `RocksDB`가 기동되어 `Stateful` SQL을 수행한다.
 * `Change Log`는 `Push`쿼리 수행중에 데이터 변경 사항을 내부 토픽으로 가지며, `RocksDB` 복구 시 사용된다.

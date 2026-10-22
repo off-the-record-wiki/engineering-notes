@@ -63,4 +63,4 @@ services:
       - prometheus
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7af35f31-bcd9-467f-9925-f6160d340d27.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7af35f31-bcd9-467f-9925-f6160d340d27.png)

@@ -4,7 +4,7 @@
 
 > [KSQLDB Aggregate Functions](https://docs.confluent.io/platform/current/ksqldb/developer-guide/ksqldb-reference/aggregate-functions.html)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/32270a13-c89f-4a50-bed0-08a4c43fd48c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/32270a13-c89f-4a50-bed0-08a4c43fd48c.png)
 
 * `Group by`절에 기술된 컬럼 값으로 그룹화한 뒤 집계(Aggregation) 함수와 함께 사용되어 그룹화된 집계 정보를 제공한다.
 * `Group by`절에 기술된 컬럼 값으로 반드시 1의 집합을 갖게 된다.
@@ -17,7 +17,7 @@
 
 #### Mview(Materialized View)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d1ae39fc-a00d-4f6d-a750-2aae8f0e0022.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d1ae39fc-a00d-4f6d-a750-2aae8f0e0022.png)
 
 * `Mview`는 대량의 데이터에 대한 분석 SQL을 보다 빠르게 추출하기 위해서 사용된다.
 * `Mview` 쿼리에 사용되는 테이블들의 변경사항을 즉각 또는 느리게 변경 로그를 적용하여 `Mview`에 반영한다.
@@ -62,7 +62,7 @@ show queries;
 
 #### Mview CTAS(CREATE TABLE AS SELECT) 데이터 처리 동작 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c67b0214-629a-4654-a9d6-5d5a06fb676a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c67b0214-629a-4654-a9d6-5d5a06fb676a.png)
 
 ```
 customer_activity_stream 토픽
@@ -86,7 +86,7 @@ customer_activity_stream 토픽
 
 #### Mview 생성 시 auto.offset.reset 값에 따른 유의사항
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fdaeb16b-a5e4-4e65-bb46-c1da69ca6b72.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fdaeb16b-a5e4-4e65-bb46-c1da69ca6b72.png)
 
 * CTAS로 persistent query를 띄우면 내부적으로 컨슈머 그룹이 하나 생기는데 이 그룹은 커밋된 오프셋이 없는 상태로 시작한다. 그 때, 어디서부터 읽을지를 이 값이 결정한다.
 * `earliest` : 토픽에 남아 있는 가장 오래된 오프셋. 보관된 전체 이력의 집계가 담긴다.
@@ -162,7 +162,7 @@ print customer_activity_mv02_asvalue_topic from beginning;
   * Stream과 Table 조인
   * Stream에 기타 Stateful한 처리가 필요한 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d982f08c-e2d9-4119-882e-cb56ee875d9d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d982f08c-e2d9-4119-882e-cb56ee875d9d.png)
 
 ```
 ① consume ─► ② deserialize ─► ③ repartition ─► ④ aggregate
@@ -225,7 +225,7 @@ consume → deserialize → WHERE 평가 → SELECT * 복사 → serialize → p
 **1. Key 컬럼으로 Group by 수행**
 * key 컬럼으로 Group by를 수행할 경우 별도의 Repartition이 필요 없이 파티션 기반의 분산 처리가 가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a482fa28-38b9-4eed-81e6-d6a43c83f6ed.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a482fa28-38b9-4eed-81e6-d6a43c83f6ed.png)
 
 **2. Key가 아닌 다른 컬럼으로 Group by 수행**
 * key가 아닌 컬럼으로 Group by를 수행할 경우 개별 Stream Task가 모든 파티션을 조회해서 해당 컬럼값으로 데이터를 1차 분류한 뒤에 Group by를 수행해야 한다.
@@ -234,4 +234,4 @@ consume → deserialize → WHERE 평가 → SELECT * 복사 → serialize → p
 * Partition이 네트워크로 연결된 노드별로 분산되어 있을 경우 네트워크 전송 시간 및 부하 소모
 * RocksDB는 분산 DB가 아니라 Local DB이므로 분산된 데이터를 기법으로 Stateful 연산이 불가하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f6784915-2b59-41a5-9029-be0833591996.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f6784915-2b59-41a5-9029-be0833591996.png)

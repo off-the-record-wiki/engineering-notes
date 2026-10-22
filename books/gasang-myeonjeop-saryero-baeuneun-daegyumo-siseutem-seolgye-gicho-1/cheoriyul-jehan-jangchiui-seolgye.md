@@ -19,7 +19,7 @@
 
 1. 서버 측에 처리율 제한 장치는 두는 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/595b883c-557e-4c8f-b354-61dd87771877.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/595b883c-557e-4c8f-b354-61dd87771877.png)
 
 * 처리율 제한 장치를 API 서버에 두는 대신, 처리율 제한 미들웨어를 만들어 해당 미들웨어로 하여금 API 서버로 가는 요청을 통제하도록 하는 것이다.
 * 앞선 두 요청은 API 서버로 전송된 것이다. 하지만 세 번째 요청은 처리율 제한 미들웨어에 의해 가로막히고 클라이언트로는 HTTP 상태 코드 429가 반환된다. HTTP 상태 코드 429는 사용자가 너무 많은 요청을 보내려고 했음(Too Many Requests)을 알린다.
@@ -37,7 +37,7 @@
 
 #### [처리율 제한 알고리즘 - 토큰 버킷 알고리즘](https://en.wikipedia.org/wiki/Token_bucket)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6447c413-e853-4f33-af5f-d831ea58a8b0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6447c413-e853-4f33-af5f-d831ea58a8b0.png)
 
 * 토큰 버킷은 지정된 용량을 갖는 컨테이너이다. 이 버킷에는 사전 설정된 양의 토큰이 주기적으로 채워진다.
 * 토큰이 꽉 찬 버킷에는 더 이상의 토큰은 추가되지 않는다. 토큰 공급기(refiller)는 이 버킷에 매초 r개의 토큰을 추가한다.
@@ -47,7 +47,7 @@
 
 #### [처리율 제한 알고리즘 - 누출 버킷 알고리즘](https://en.wikipedia.org/wiki/Leaky_bucket)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cc4853e0-2b3e-48d2-830c-1fe75800d7fa.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cc4853e0-2b3e-48d2-830c-1fe75800d7fa.png)
 
 * 누출 버킷(leaky bucket) 알고리즘은 토큰 버킷 알고리즘과 비슷하지만 요청 처리율이 고정되어 있다는 점이 다르다.
 * 누출 버킷 알고리즘은 보통 FIFO 큐로 구현한다.
@@ -62,7 +62,7 @@
 
 #### 처리율 제한 알고리즘 - 고정 윈도 카운터 알고리즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/afe1563a-e3fb-4e71-9f38-cc6d2d86789a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/afe1563a-e3fb-4e71-9f38-cc6d2d86789a.png)
 
 * 고정 윈도 카운터 알고리즘은 타임라인을 고정된 간격의 윈도우로 나누고 각 윈도우마다 카운터를 붙인다.
 * 요청이 접수될 때마다 카운터의 값을 1씩 증가하고 카운터의 값이 사전에 설정된 임계치에 도달하면 새 윈도우가 열릴 때까지 요청을 버린다.
@@ -75,7 +75,7 @@
 
 #### 처리율 제한 알고리즘 - 이동 윈도우 로깅 알고리즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c8fbf203-9953-44f8-b9cc-c6109fffae35.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c8fbf203-9953-44f8-b9cc-c6109fffae35.png)
 
 * 고정 윈도우 카운터 알고리즘이 경우 윈도우 경계 부근에 트래픽이 집중되는 경우 시스템에 설정된 한도보다 많은 요청을 처리하게 된다.
   * 요청의 타임스탬프를 추적한다. 타임스탬프 데이터는 보통 레디스의 정렬 집합 같은 캐시에 보관한다.
@@ -87,7 +87,7 @@
 
 #### 처리율 제한 알고리즘 - 이동 윈도우 카운터 알고리즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/13e9a7cb-6aa5-4a6a-b8b7-61ec7977a182.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/13e9a7cb-6aa5-4a6a-b8b7-61ec7977a182.png)
 
 * 이동 윈도우 카운터 알고리즘은 고정 윈도우 카운터 알고리즘과 이동 윈도우 로깅 알고리즘을 결합한 것이다.
 * 장점 : 이전 시간대의 평균 처리율에 따라 현재 윈도우의 상태를 계산하므로 짧은 시간에 몰리는 트래픽에도 잘 대응한다. 메모리 효율이 좋다.
@@ -95,7 +95,7 @@
 
 #### 처리율 한도 초과 트래픽 처리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b545a560-9048-4bd1-8fd0-4a2d78539dd6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b545a560-9048-4bd1-8fd0-4a2d78539dd6.png)
 
 * 어떤 요청이 한도 제한에 걸리면 API는 HTTP 429 응답(Too Many Requests)을 클라이언트에게 보낸다.
 * 경우에 따라서는 한도 제한에 걸린 메시지를 나중에 처리하기 위해 큐에 보관할 수 있다. 예를 들어 어떤 주문이 시스템 과부하 때문에 한도 제한에 걸렸다고 가정할 때, 해당 주문들은 보관했다가 나중에 처리할 수도 있다.

@@ -21,7 +21,7 @@ public class RefMain {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7365823d-29b4-4b50-96c1-f915d73c50a4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7365823d-29b4-4b50-96c1-f915d73c50a4.png)
 
 * `Address` 타입의 참조 변수 address1과 address2는 같은 인스턴스를 가리킨다.
 * 따라서, address2의 값을 변경했는데 둘 다 바뀌는 것이다.
@@ -92,7 +92,7 @@ public class RefMain2 {
 }
 ```
 
-![불변 객체 동작 구조](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ba636838-202f-45cf-825b-36e774bb2136.png)
+![불변 객체 동작 구조](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ba636838-202f-45cf-825b-36e774bb2136.png)
 
 #### 불변 객체 값 변경
 

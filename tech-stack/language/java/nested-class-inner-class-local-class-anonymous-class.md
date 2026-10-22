@@ -76,22 +76,22 @@ public class Outer {
 
 > ❗각 변수의 생명 주기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1ed5df9c-dd88-4dda-b5cb-7784fe676b6d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1ed5df9c-dd88-4dda-b5cb-7784fe676b6d.png)
 
 > * 메서드 영역 : `static`이 붙은 변수(클래스 변수)는 메서드 영역에 존재한다. 프로그램 종료 시까지 관리된다.<br>
 > * 힙 영역 : 생성된 인스턴스는 힙 영역에 존재한다. GC 되기 전까지 존재한다.<br>
 > * 스택 영역 : 메서드 호출이 끝나면 사라진다.(지역 변수 포함)<br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/31d6bf3c-4b0b-4a03-bd37-161e8cd07b85.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/31d6bf3c-4b0b-4a03-bd37-161e8cd07b85.png)
 
 > * 지역 변수가 인스턴스 변수보다 생명주기가 매우 짧고 스택 영역에서 메서드가 종료되면 비워지기 때문에 힙 영역의 인스턴스가 스택 영역에 있는 지역 변수를 찾을 수 없는데도 불구하고 정상적으로 동작하는 것을 볼 수 있는데 이는 지역 변수 캡처로 가능한 것이다.<br>
 > * 지역 변수 캡처는 인스턴스를 생성할 때 필요한 지역 변수를 복사해서 보관하는 것을 말한다.<br>
 > * 정확히 말하면 힙 영역에 있는 인스턴스가 캡처된 지역 변수에 접근하는 것이다. 이 때, 지역 변수는 `final` 키워드가 붙은 것과 같아 변경이 불가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fce9b9f3-4057-4367-90ad-748bfbd7c75c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fce9b9f3-4057-4367-90ad-748bfbd7c75c.png)
 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1fe5f9b1-c126-44b5-8e1a-e82443a70280.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1fe5f9b1-c126-44b5-8e1a-e82443a70280.png)
 
 #### 익명 클래스
 

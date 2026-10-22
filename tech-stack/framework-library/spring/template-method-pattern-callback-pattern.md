@@ -2,7 +2,7 @@
 
 #### 템플릿 메서드 패턴
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bb342be2-1eda-4177-8310-fdeb3da303ab.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bb342be2-1eda-4177-8310-fdeb3da303ab.png)
 
 * 부모 클래스에 알고리즘의 골격인 템플릿을 정의하고 일부 변경되는 로직은 자식 클래스에서 정의하는 것
 * 자식 클래스가 알고리즘 전체 구조를 변경하지 않고 특정 부분만 재정의 가능하다.
@@ -36,7 +36,7 @@ public abstract class AbstractTemplate {
 
 #### 전략 패턴
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/09faece8-5bb6-4b6f-ac37-4f40655ffc69.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/09faece8-5bb6-4b6f-ac37-4f40655ffc69.png)
 
 * Context에서 Strategy 인터페이스를 주입받는다.
 * Context에서 `execute()`를 호출할 때 Strategy에 위임한다.
@@ -69,7 +69,7 @@ public class ContextV1 {
 * 콜백(Callback) : 다른 코드의 인수로서 넘겨주는 실행 가능한 코드
 * 기존 전략 패턴에서 주입 방식 대신 파라미터 방식으로 넘겨주는 방식이 이에 해당한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4582f984-057d-4421-94a4-aa134f4fa2c1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4582f984-057d-4421-94a4-aa134f4fa2c1.png)
 
 ```java
 @Slf4j

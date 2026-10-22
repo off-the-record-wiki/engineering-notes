@@ -2,7 +2,7 @@
 
 #### 서버와 동시 실행
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f1a55f89-949a-4613-ac1a-f071893f131a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f1a55f89-949a-4613-ac1a-f071893f131a.png)
 
 * 서버는 클라이언트 요청을 처리하기 위해 DB에 쿼리를 보내고 그 결과를 받는다.
 * 동시에 여러 클라이언트가 서버에 연결하는 만큼, 서버도 동시애 여러 쿼리를 DB에 보낸다.
@@ -147,7 +147,7 @@ select * from 테이블 where 조건 for update
 * 하나의 트랜잭션이 특정 레코드에 대한 잠금을 획득한 경우 잠금을 해제할 때까지 다른 트랜잭션은 동일 레코드에 대한 잠금을 획득하지 못하고 대기해야 한다.
 * 레코드에 대한 잠금은 트랜잭션이 종료될 때, 반환된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/480cf93a-af31-4b4f-9809-38e5f6130ded.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/480cf93a-af31-4b4f-9809-38e5f6130ded.png)
 
 #### 분산 잠금
 
@@ -163,7 +163,7 @@ select * from 테이블 where 조건 for update
 * 대신 데이터를 조회한 시점의 값과 수정하는 시점의 값이 같은지를 비교하는 방식으로 동시성 문제를 처리한다.
 * 보통 비선점 잠금을 구현할 때는 정수 타입의 버전 컬럼을 사용한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eb1804b0-27c8-4a0c-884b-9ceab1eccafa.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eb1804b0-27c8-4a0c-884b-9ceab1eccafa.png)
 
 #### 증분 쿼리
 
@@ -195,7 +195,7 @@ update SUBJECT set joinCount = joinCount + 1 where id = ?
 * 교착 상태는 2개 이상의 쓰레드가 서로가 획득한 잠금을 대기하면서 무한정 기다리는 상황을 말한다.
 * 교착 상태가 발생하지 안혿록 신경을 써야겠지만, 복잡한 코드 구조에서 잠금을 사용하면 개발자 자신도 모르게 교착 상태가 발생할 수 있다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5352ac46-c5be-4bd3-86bc-09aab26592f9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5352ac46-c5be-4bd3-86bc-09aab26592f9.png)
 
 #### 기아(starvation) 상태
 

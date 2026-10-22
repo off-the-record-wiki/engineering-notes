@@ -71,7 +71,7 @@ $ docker run -d --name [CONTAINER NAME] [IMAGE NAME] # 컨테이너에 이름을
 $ docker run -d -p 4000:80 nginx
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8d567e1d-f17a-4a11-bb38-2c4d49a85540.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8d567e1d-f17a-4a11-bb38-2c4d49a85540.png)
 
 * 도커를 실행하는 전체 컴퓨터(호스트 컴퓨터)의 4000번 포트를 내부의 도커 컨테이너 80번 포트로 연결하도록 설정한다.
 
@@ -125,7 +125,7 @@ $ docker logs -f [CONTAINER ID or CONTAINER NAME]
 * 호스트 컴퓨터 내부에 Nginx 컨테이너를 동작시킨 결과를 그림으로 확인하면 아래와 같다.
 * 호스트 컴퓨터에서 터미널을 실행시켜 컨테이너 내부로 들어가려면 `exec -it` 명령어를 사용한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ce306c63-29d6-4dfb-aa1a-9558c604451b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ce306c63-29d6-4dfb-aa1a-9558c604451b.png)
 
 ```bash
 $ docker exec -it [CONTAINER ID] bash

@@ -26,7 +26,7 @@
 
 > [📚MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 > 
-> ![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f8a803ab-cdde-4a11-b1a6-021284a027e1.png)
+> ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f8a803ab-cdde-4a11-b1a6-021284a027e1.png)
 > 
 > * MVC는 사용자 인터페이스 개발에 흔히 사용되는 소프트웨어 아키텍처 패턴으로, 프로그램 로직을 서로 연결된 세 가지 요소로 분리한다.
 > 

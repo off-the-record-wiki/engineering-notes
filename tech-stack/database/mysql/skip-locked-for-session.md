@@ -20,14 +20,14 @@
 * 1개만 잠금에 성공하고 나머지는 그 락이 풀릴 때까지 줄 서서 대기한다.
 * 결과적으로 워커를 늘려도 사실상 순차 처리가 되어 버린다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b01a8dab-efed-4b83-a0d4-a1ceba226581.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b01a8dab-efed-4b83-a0d4-a1ceba226581.png)
 
 #### SKIP LOCKED 사용 — 경합 없이 병렬 처리
 
 * 워커 A가 1번을 잠그면, 워커 B는 1번을 건너뛰고 2번을 잠근다. 대기가 없다.
 * 워커 수만큼 서로 다른 작업을 동시에 처리할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c50bd608-1c06-448d-9646-bdd373f3329e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c50bd608-1c06-448d-9646-bdd373f3329e.png)
 
 ```sql
 -- 사용 예시 : 워커 한 사이클

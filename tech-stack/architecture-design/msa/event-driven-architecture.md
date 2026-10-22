@@ -6,7 +6,7 @@
 * 데이터가 필요할 때 요청 대신 서비스에서 이벤트를 소비한다.
 * 이벤트를 통한 서비스 간 비동기 소통으로 느슨한 결합을 달성할 수 있어 분리된 통신이 가능하다. 독립적, 서비스간 의존성을 최소화할 수 있으며 확장성 및 유연성 향상을 도모할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eef911aa-c908-4003-a176-1df5eeddde33.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eef911aa-c908-4003-a176-1df5eeddde33.png)
 
 * 실시간 메시징 플랫폼
   * 메시지 큐나 이벤트 버스를 사용한다.

@@ -2,7 +2,7 @@
 
 #### 인덱스 머지 - 이론
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c823d6cc-311b-4dc2-a225-627a2e49fdd5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c823d6cc-311b-4dc2-a225-627a2e49fdd5.png)
 
 * 서로 다른 두 컬럼에 조인이 걸리고 단일 인덱스 하나로는 그중 한쪽밖에 커버하지 못할 때 두 인덱스를 동시에 활용할 수 있는 방법이 있다.
 * 그 전에 이걸 `UNION` 쿼리로 합칠 수도 있을 것이라는 생각도 하게 되는데 `UNION`은 두 결과의 중복을 제거하고자 임시 테이블에 모아 정렬과 중복 제거를 한다.
@@ -14,7 +14,7 @@
 * 기본적으로 하나의 테이블 접근에는 하나의 인덱스만 사용된다. 그런데 예외가 있다.
 * 옵티마이저가 여러 인덱스를 각각 스캔한 뒤 결과를 합치거나 교차시키는 전략을 선택하는 경우가 있다. 인덱스 머지에는 3가지 알고리즘이 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dc492dfd-ecb5-496b-a1ce-c9c40ad2e973.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dc492dfd-ecb5-496b-a1ce-c9c40ad2e973.png)
 
 | 알고리즘 | 적용 조건 | Extra 표시 |
 |:---:|:---:|:---:|
@@ -58,7 +58,7 @@ WHERE category_id = 11 AND product_status = 'ACTIVE';
 
 #### 인덱스 머지 vs 복합 인덱스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f97c7b88-2186-4eed-8a91-901c17d83a91.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f97c7b88-2186-4eed-8a91-901c17d83a91.png)
 
 * 실제로 성능 차이는 각 상황마다 다르지만 대부분의 경우 복합 인덱스 1개가 인덱스 머지보다 효율적이다.
 
@@ -99,7 +99,7 @@ SELECT @@optimizer_switch;
 * PK 순서로 정렬해두면 테이블 접근이 앞에서 뒤로 한 방향으로만 흐른다. 따라서 디스크가 앞뒤로 튀지 않으니 랜덤 I/O가 순차 I/O에 가까워진다.
 * 게다가 이렇게 되면 한 페이지에 여러 데이터를 모아서 조회할 가능성도 높아진다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe4cd68c-8b68-4cdd-bce5-15d3b2a74c11.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe4cd68c-8b68-4cdd-bce5-15d3b2a74c11.png)
 
 * 읽는 페이지의 집합은 똑같은데 읽는 순서가 달라지는 것만으로 디스크 I/O 패턴이 완전히 바뀌는데 이것이 MRR의 전부라고 봐도 무방하다.
 * 스토리지 엔진에서 PK 정렬이라는 한 수로 끌어다 쓰는 것이다.
@@ -159,7 +159,7 @@ CREATE INDEX idx_member_lower_email ON member ((LOWER(email)));
 * 함수 기반 인덱스는 내부적으로 숨겨진 가상 생성 컬럼(hidden virtual generated column)으로 구현된다.
 * MySQL의 `LOWER(email)` 결과를 계산해 별도의 가상 컬럼에 저장하고, 그 컬럼에 인덱스를 건다. 쿼리에서 `LOWER(email)`을 사용하면 옵티마이저가 이 가상 컬럼의 인덱스를 자동으로 매칭한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4f33f447-bb23-4abb-a0bc-6b579f728c27.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4f33f447-bb23-4abb-a0bc-6b579f728c27.png)
 
 * 함수의 계산 결과를 인덱스가 들고 있으니, 그 결과를 조회하는 쿼리는 인덱스만으로 끝낼 수 있다.
 * PK에는 함수 기반 키 파트를 포함할 수 없다.(가상 컬럼은 PK가 될 수 없다)
@@ -304,7 +304,7 @@ WHERE o.member_id = 2800000;
 
 * 결과적으로 인덱스가 많을수록 쓰기 성능은 그에 비례해 저하된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cf42c78d-8f1a-4c43-b13a-1f31ba031c3e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cf42c78d-8f1a-4c43-b13a-1f31ba031c3e.png)
 
 > **❗읽기 vs 쓰기 비율에 따른 전략 선택이 필요 : 인덱스를 얼마나 만들지는 서비스의 읽기/쓰기 비율에 따라 달라진다**
 

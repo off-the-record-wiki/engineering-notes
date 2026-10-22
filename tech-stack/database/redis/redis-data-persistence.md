@@ -9,7 +9,7 @@
 
 #### RDB
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/75f02ece-4a9c-4759-85b5-f23530e7a8a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/75f02ece-4a9c-4759-85b5-f23530e7a8a8.png)
 
 * Redis는 인메모리 데이터를 주기적으로 파일에 저장하는데 Redis 프로세스가 장애로 인해 종료되더라도 해당 파일을 읽어들이면 이전 상태를 동일하게 복구할 수 있다.
 * RDB 방식은 스냅샷 이벤트가 발생할 때마다 저장된다.
@@ -52,7 +52,7 @@ save 60 10000   # 60초        안에 10000건 이상 변경되면 저장
 
 #### AOF
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6c35923b-6051-47d9-9952-202a423a7bd1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6c35923b-6051-47d9-9952-202a423a7bd1.png)
 
 * AOF는 Redis 서버에 전달되는 모든 쓰기(Write) 명령을 순서대로 파일에 저장한다.
 * 서버가 재시작되면 이 파일에 기록된 명령들을 처음부터 다시 실행(Replay)하여 데이터를 복구한다. 그래서 파일이 클수록 **재시작 시간이 길어진다.**
@@ -91,7 +91,7 @@ save 60 10000   # 60초        안에 10000건 이상 변경되면 저장
 
 #### Hybrid
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/84a473a6-7ee1-4775-bfe4-42042733984b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/84a473a6-7ee1-4775-bfe4-42042733984b.png)
 
 * Redis 4.0부터 도입된 하이브리드 영속성 방식은 RDB의 빠른 복구와 AOF의 데이터 안정성을 모두 취하는 메커니즘이다.
 * 설정은 `aof-use-rdb-preamble yes`이며, **Redis 4.0부터 기본값으로 켜져 있다.**(AOF를 켜면 자동으로 이 방식이 적용된다)

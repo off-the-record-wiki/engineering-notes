@@ -2,20 +2,20 @@
 
 #### 로드 밸런서(Load Balancer)란?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2f86d55a-e9ea-42f0-ba9c-d2b92a58141e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2f86d55a-e9ea-42f0-ba9c-d2b92a58141e.png)
 
 * 많은 트래픽이 발생해 한 대의 서버로는 사양이 부족한 경우가 발생한다.
 * 이를 해결하기 위해 여러 서버를 운영하기도 한다.
 * 사용자의 요청을 여러 대의 웹 애플리케이션 서버에 골고루 전달하기 위한 분산 장치가 필요한데 이것을 바로 로드 밸런서(Load Balancer)라고 한다.
 * Nginx를 로드 밸런서로 활용하게 되면 아래와 같은 플로우를 보이게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3aacdaf7-67eb-4c0f-9480-835184805473.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3aacdaf7-67eb-4c0f-9480-835184805473.png)
 
 * 결과적으로 Nginx를 도입해 Load Balancer 역할을 수행하면서 트래픽을 적절하게 분배가 가능해진다.
 
 #### 하나의 EC2에서 백엔드 서버 2개를 로드 밸런싱하는 예제
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8f2fd95d-472a-4197-b57f-88fd0b1ad60a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8f2fd95d-472a-4197-b57f-88fd0b1ad60a.png)
 
 * 서버를 2개 띄워(8080번, 8081번) Nginx를 앞단에 배치하여 로드 밸런서를 적용해보려고 한다.
 
@@ -64,6 +64,6 @@ server {
 
 > health 메서드로 로드 밸런서가 제대로 동작을 하는지 확인
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ecdad3b6-8e98-4bb1-b6cd-a114d5c805c6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ecdad3b6-8e98-4bb1-b6cd-a114d5c805c6.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0be0a3e6-dfa3-4c40-af7d-4df8d55e6e72.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0be0a3e6-dfa3-4c40-af7d-4df8d55e6e72.png)

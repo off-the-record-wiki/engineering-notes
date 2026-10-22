@@ -2,7 +2,7 @@
 
 #### 쓰레드 스케줄러
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8bbfa8aa-bf86-458c-aaf9-968ab16fb3df.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8bbfa8aa-bf86-458c-aaf9-968ab16fb3df.png)
 
 * 쓰레드 스케줄러란, 여러 쓰레드가 실행 중이면 운영체제의 쓰레드 스케줄러가 어떤 쓰레드를 얼마나 오래 실행할지 정하는 역할을 한다.
 * 쓰레드 스케줄러는 쓰레드의 실행 시점을 관리하는 역할을 한다.

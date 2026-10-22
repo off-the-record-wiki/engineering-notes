@@ -5,7 +5,7 @@
 * 스프링은 동적 프록시를 통합해서 편리하게 만들어주는 프록시 팩토리라는 기술을 제공한다.
 * 프록시 팩토리는 인터페이스가 있으면 JDK 동적 프록시를 사용하고 구체 클래스만 있다면 CGLIB를 사용한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e3d12f6-7ea8-4b3c-9d58-f25d3485f114.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e3d12f6-7ea8-4b3c-9d58-f25d3485f114.png)
 
 * 프록시 팩토리는 내부적으로 어댑터들을 가지고 있다.
   * JDK 동적 프록시 : 프록시 팩토리가 내부적으로 `InvocationHandler`를 하나 만들고 이 핸들러가 `Advice`를 호출하도록 연결한다.
@@ -94,7 +94,7 @@ public class DynamicAdvisedInterceptor implements MethodInterceptor {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fbbc1ada-ddbe-4844-8f22-ca6bb110df26.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fbbc1ada-ddbe-4844-8f22-ca6bb110df26.png)
 
 #### 포인트컷, 어드바이스, 어드바이저
 
@@ -104,7 +104,7 @@ public class DynamicAdvisedInterceptor implements MethodInterceptor {
 
 > [📚AOP(Aspect-oriented programming)](https://en.wikipedia.org/wiki/Aspect-oriented_programming)
 > 
-> ![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/56f6cacf-f134-45ea-9508-64cfd4a0e59f.png)
+> ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/56f6cacf-f134-45ea-9508-64cfd4a0e59f.png)
 >
 > **1. AOP란?**
 > * AOP는 애플리케이션의 핵심 비즈니스 로직과 프로그램 전체에 걸쳐 공통적으로 적용되는 부가 기능을 분리하여 모듈화하는 프로그래밍의 패러다임이다.
@@ -122,7 +122,7 @@ public class DynamicAdvisedInterceptor implements MethodInterceptor {
 > * 클래스 로딩 시점 위빙 : 클래스 로더가 바이트 코드를 메모리에 올릴 때 로직을 삽입한다.
 > * 런타임 위빙 : 프로그램이 실행 중일 때 프록시 객체를 동적으로 생성해 부가 기능을 끼워 넣는다.
 >
-> ![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0b31327e-640b-421e-b63f-725d9903fd2b.png)
+> ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0b31327e-640b-421e-b63f-725d9903fd2b.png)
 
 
 #### Pointcut

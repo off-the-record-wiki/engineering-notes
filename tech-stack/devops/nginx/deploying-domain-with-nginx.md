@@ -13,11 +13,11 @@
 
 > 도메인 등록
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9833f8d2-832b-4d05-af4d-4a6e9177ada0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9833f8d2-832b-4d05-af4d-4a6e9177ada0.png)
 
 > 도메인 검색 후 요금 정보 확인
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f14a44ce-f658-4f40-a888-b3248db953d2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f14a44ce-f658-4f40-a888-b3248db953d2.png)
 
 > ❗이메일 정보 정확하게 입력 후 비용 지불하고 도메인 발급을 확인한다.
 

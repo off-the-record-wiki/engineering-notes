@@ -2,7 +2,7 @@
 
 #### 다중 마스터 복제(Multi-Master Replication)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/11c06a79-3c9d-4cb5-bda8-1affc0e69bf6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/11c06a79-3c9d-4cb5-bda8-1affc0e69bf6.png)
 
 * 이 설계는 데이터베이스의 `auto_increment` 기능을 활용하는 것이다. 다만 다음 ID의 값을 구할 때 1만큼 증가시켜 얻는 것이 아니라 k만큼 증가시켜 얻는다.
 * 여기서 k는 현재 사용 중인 데이터베이스 서버의 수다. 이렇게 하면 규모 확장성 문제를 어느 정도 해결할 수 있는데, 데이터베이스 수를 늘리면 초당 생산 가능 ID 수도 늘릴 수 있다. 하지만 이 방법은 다음과 같은 단점이 있다.
@@ -20,7 +20,7 @@
 
 #### 티켓 서버
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/352b2b37-844b-4c2a-868b-d283e96c5321.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/352b2b37-844b-4c2a-868b-d283e96c5321.png)
 
 * 티켓 서버는 유일성이 보장되는 ID를 만들어 내는 데 쓰일 수 있는 흥미로운 방법이다.
 * 플리커(Flickr)는 분산 기본 키를 만들어 내기 위해 이 기술을 활용했다.
@@ -30,7 +30,7 @@
 
 #### [SnowFlake](https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/985c76aa-73a0-4abb-acab-86ede0a707fb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/985c76aa-73a0-4abb-acab-86ede0a707fb.png)
 
 * Twitter는 Snowflake라 불리는 독창적인 ID 생성 기법을 사용한다.
 * 사인(sign) 비트 : 1비트를 할당. 현재 쓰임새가 없지만 나중을 위해 유뵤해 둔다. 음수와 양수를 구별하는 데 사용할 수 있다.

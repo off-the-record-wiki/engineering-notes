@@ -2,7 +2,7 @@
 
 #### NoSQL이란
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/579bb3da-7362-4f75-92c2-8183db6344d5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/579bb3da-7362-4f75-92c2-8183db6344d5.png)
 
 * 특정 요구사항에 맞춰 데이터를 저장하고 조회하기 위한 기법을 제공하는 데이터베이스를 NoSQL이라고 한다.
 * NoSQL 데이터베이스는 전통적인 관계형 데이터베이스보다 덜 제한적인 일관성 모델을 이용하는 데이터의 저장 및 검색을 위한 메커니즘을 제공한다. 이런 접근에 대한 동기에는 디자인의 단순화, 수평적 확장성, 세세한 통제를 포함한다.
@@ -32,7 +32,7 @@
 
 #### CAP 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4c14f212-71a6-4efe-8c0e-a7750e16439f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4c14f212-71a6-4efe-8c0e-a7750e16439f.png)
 
 * Consistency(일관성) : 모든 노드가 같은 순간에 같은 데이터를 볼 수 있다. 한 노드의 데이터가 변경되면 모든 노드의 데이터도 동일한 값으로 바꾼다.
 * Availability(가용성) : 모든 요청이 성공 또는 실패 결과를 반환할 수 있다.

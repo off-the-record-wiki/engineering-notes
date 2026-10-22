@@ -5,14 +5,14 @@
 * 클러스터드 인덱스 : 테이블당 딱 하나. PK 기준으로 만들어지며, 리프 노드에 행 데이터 전체가 저장된다.
 * 세컨더리 인덱스 : PK가 아닌 컬럼에 만드는 일반 인덱스. 리프 노드에는 인덱스 키와 PK만 저장된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/424d6ca1-1b95-4b15-beda-646b9e9219f6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/424d6ca1-1b95-4b15-beda-646b9e9219f6.png)
 
 * 클러스터드 인덱스(Clustered Index) : 테이블당 딱 하나만 존재하는 인덱스다. 리프 노드에 실제 행 데이터가 전체가 저장되어, 인덱스 자체가 곧 테이블이다. 기본적으로 PK를 기준으로 만들어지며, 데이터가 PK 순서대로 물리적으로 정렬되어 저장된다.
 * 세컨더리 인덱스(Secondary Index) : PK 외의 컬럼에 만드는 일반적인 인덱스이다. 한 테이블에 여러 개 만들 수 있다. 리프 노드에는 실제 데이터 대신 인덱스 컬럼 값과 PK 값만 저장된다. 실제 데이터가 필요한 경우라면 PK로 클러스터드 인덱스를 한 번 더 타야 한다.
 
 #### 클러스터드 인덱스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2fc1c9b2-f20f-4b01-978c-518bc59ea926.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2fc1c9b2-f20f-4b01-978c-518bc59ea926.png)
 
 * 리프 노드에는 실제 데이터가 저장되어 있다.
 * 리프 노드끼리는 양방향으로 연결되어 있다.
@@ -30,11 +30,11 @@
 * `BIGINT AUTO_INCREMENT`: PK값이 순서대로 증가한다.
 * `BIGINT` : PK값이 완전 랜덤이다. 크기/타입은 동일하므로 오직 "랜덤 삽입"의 영향만 측정된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f0d2d8f1-0279-477c-a1e0-c80bb87245f7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f0d2d8f1-0279-477c-a1e0-c80bb87245f7.png)
 
 #### 클러스터드 인덱스 - 순차 PK vs 랜덤 PK INSERT에서 성능 차이
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a1816304-144d-42a6-8ce4-7fc4b48282c5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a1816304-144d-42a6-8ce4-7fc4b48282c5.png)
 
 * `AUTO_INCREMENT`는 항상 현재 최대값보다 큰 값이 생성된다. 따라서 데이터 삽입시 클러스터드 인덱스의 마지막 리프 페이지에 순차적으로 추가된다. 맨 끝에 계속 append하는 셈이니 페이지 분할이 거의 일어나지 않는다. 반면 랜덤 값은 무작위다. 따라서 클러스터드 인덱스의 임의의 위치에 끼어든다. 이미 가득 찬 페이지 사이에 들어가야 하므로 빈번한 페이지 분할이 빈번하게 발생한다. 페이지 분할은 단순 CPU 작업이 아니라 새 페이지 할당 + 데이터 이동 + 부모 노드 갱신 + 디스크 쓰기까지 동반한다.
 * 순차 PK는 B+Tree의 오른쪽만 건드린다. 삽입에 필요한 페이지는 사실상 루프 ⭢ 오른쪽 경로 몇 개뿐이고, 이 페이지들은 계속 재사용되어 버퍼 풀에 영구 상주한다. 따라서 디스크를 거의 읽지 않는다. 반면 랜덤 PK는 완전히 다른 위치의 리프 페이지를 건드린다. 데이터가 쌓일수록 리프 페이지 수가 늘고 버퍼 풀에 다 올라오지 못하는 페이지가 생긴다. 그 순간부터 삽입할 때마다 해당 페이지를 디스크로부터 읽어와서 수정 후 다시 쓰기라는 랜덤 디스크 I/O가 발생한다.
@@ -70,24 +70,24 @@
 
 #### 2단 점프 - 세컨더리 인덱스 동작 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7d6b6110-3cfe-4c83-8a89-0cf5e95342cd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7d6b6110-3cfe-4c83-8a89-0cf5e95342cd.png)
 
 * `Index lookup` : 세컨더리 인덱스에서 조건을 찾고 PK로 클러스터드 인덱스로 2단 점프해 실제 데이터를 가져온다.
 * `Limit` : `Index lookup`이 가져다주는 데이터를 받다가 N건이 채워지면 더 이상 인덱스를 탐색하지 않고 즉시 종료한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7f10d091-35da-4d27-b4e9-9179a8b7868c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7f10d091-35da-4d27-b4e9-9179a8b7868c.png)
 
 #### 세컨더리 인덱스 - 커버링 인덱스(Covering Index)
 
 * 2단 점프를 아예 없애려면 쿼리가 요구하는 모든 컬럼이 세컨더리 인덱스에 포함되어 있으면 클러스터드 인덱스를 재탐색할 필요가 없다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0b2763e6-e3c6-43cf-9a9c-60e3df8fe841.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0b2763e6-e3c6-43cf-9a9c-60e3df8fe841.png)
 
 #### 세컨더리 인덱스 - 실무 활용
 
 * 세컨더리 인덱스의 리프 노드에서 동일한 인덱스 키 값을 가진 레코드. 즉 타이브레이커의 경우 다시 PK값 순서로 정렬되어 저장된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bda48605-3f68-4559-9314-cf68d0a307e6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bda48605-3f68-4559-9314-cf68d0a307e6.png)
 
 #### PK의 크기
 
@@ -95,7 +95,7 @@
 * PK가 `CHAR(36)`(최대 144바이트)일 때 : 144바이트 x 1억 건 x 인덱스 5개 = 약 72GB
 * PK 타입을 문자열로 바꾸면 잉여 공간 낭비가 상상을 초월한다. 인덱스가 뚱뚱해지면 16KB 페이지 하나에 담을 수 있는 데이터 건수가 확연히 줄어든다. 트리는 더더욱 깊어지고 한정된 버퍼 풀은 금방 가득찬다. 결국 잦은 디스크 I/O를 유발해 시스템 전체 성능을 저하시킨다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1e31744b-6d70-4ea5-acc4-366e3774e89e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1e31744b-6d70-4ea5-acc4-366e3774e89e.png)
 
 * 이런 이유로 MySQL을 사용할 경우 짧고 순차적인 PK를 사용하는 것을 권장한다.
 
@@ -104,7 +104,7 @@
 * 세컨더리 인덱스의 2단 점프 구조가 소량의 데이터를 찾을 경우에는 인덱스가 훨씬 빠르지만 조회하는 데이터의 범위가 넓어지면 상황이 완전히 달라진다.
 * 특정 지점을 넘어서면 인덱스를 타는 것보다 차라리 풀 테이블 스캔이 더 빨라지는 순간이 온다. 이것은 랜덤 I/O와 순차 I/O의 근본적인 성능 차이 때문이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1dc2ff63-ea96-4507-8e76-9d067b1ccb9b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1dc2ff63-ea96-4507-8e76-9d067b1ccb9b.png)
 
 | 저장 매체 | 순차 접근(Sequential) | 랜덤 접근(Random) | 성능 차이 (순차 기준) |
 |---|---|---|---|
@@ -127,7 +127,7 @@
 
 #### 인덱스 스캔 = 랜덤 I/O, 풀 스캔 = 순차 I/O
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3074b965-55dd-4319-bf42-429f551ecd09.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3074b965-55dd-4319-bf42-429f551ecd09.png)
 
 * 인덱스 스캔(세컨더리 인덱스를 통한 접근) = 랜덤 I/O : 세컨더리 인덱스에서 PK를 찾고 그 PK로 클러스터드 인덱스를 재탐색한다. 각 행이 서로 다른 페이지에 흩어져 있으면 매번 다른 위치의 페이지를 읽어야 한다.
 * 풀 테이블 스캔 = 순차 I/O : 클러스터드 인덱스의 리프 노드를 처음부터 끝까지 연결 리스트를 따라 읽는다. 연속된 페이지를 순서대로 읽으므로 순차 I/O 패턴을 보인다. 디스크의 순차 읽기는 랜덤 읽기보다 훨씬 빠르다.
@@ -155,7 +155,7 @@ SELECT
 
 * 히트율이 99% 이상이면 대부분의 읽기가 메모리에서 처리되어 I/O 패턴 차이가 줄어든다. 히트율이 낮으면 디스크 I/O가 발생하므로 랜덤 I/O와 순차 I/O 차이가 명확해진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8aadf607-8c61-4b9a-b793-662a7f00904c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8aadf607-8c61-4b9a-b793-662a7f00904c.png)
 
 * 인덱스를 설계했는데 타지 않았다고 해서 강제로 인덱스 사용을 부여하게 되면 역효과가 발생한다.
 
@@ -164,7 +164,7 @@ EXPLAIN ANALYZE SELECT * FROM product FORCE INDEX (idx_product_category_id)
 WHERE category_id BETWEEN 11 AND 19;
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1afb334f-5994-4cf3-87cf-0b0dfc70baf3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1afb334f-5994-4cf3-87cf-0b0dfc70baf3.png)
 
 * 옵티마이저가 인덱스를 무시하고 풀 스캔을 선택한 것은 바보가 아니라 원리를 알고 있고 비효율적이라는 것을 알기 때문이다.
 
@@ -178,7 +178,7 @@ WHERE category_id BETWEEN 11 AND 19;
 
 #### MySQL, Oracle, PostgreSQL 설계 철학 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/06e5875a-cd03-40b7-a443-a378b7da3fa9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/06e5875a-cd03-40b7-a443-a378b7da3fa9.png)
 
 * 힙 구조란, PK 순서와 상관없이 데이터가 삽입되는 순서대로 무작위로 쌓이는 방식이다.
 * 클러스터드 구조란, 비슷한 PK 값을 가진 행들이 디스크 위에서 서로 가까이 뭉쳐있다는 의미이다.
@@ -192,22 +192,22 @@ WHERE category_id BETWEEN 11 AND 19;
 
 > **❗어떤 구조가 인덱스 읽기에 더 유리한 구조일까?**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/57699090-489d-4ba5-9c12-e97331a85678.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/57699090-489d-4ba5-9c12-e97331a85678.png)
 
 > * 힙(Heap) : 세컨더리 인덱스를 탐색한 뒤, 리프 노드에 있는 물리적 주소로 디스크 블록에 직접 1회 접근해 데이터를 가져온다.
 > * 클러스터드 : 세컨더리 인덱스를 탐색한 뒤, 리프 노드의 PK를 얻고 그 PK로 클러스터드 인덱스를 처음부터 재탐색한다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/94f23377-f0e5-403b-bafc-5f1627f96790.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/94f23377-f0e5-403b-bafc-5f1627f96790.png)
 
 > * 힙(Heap) : 세컨더리 조회와 비슷한 비용이 발생한다.
 > * 클러스터드 : 추가 블록 읽기 없이 즉시 반환 가능해 압도적으로 빠르다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b9fb0bc6-3b27-4de9-a457-ce1dc1677bc9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b9fb0bc6-3b27-4de9-a457-ce1dc1677bc9.png)
 
 > * 힙(Heap) : PK 인덱스는 PK 순서대로 정렬되어 있지만, 실제 힙 데이터는 PK 순서로 저장되어 있지 않다. 인덱스를 따라가며 각 행을 힙에서 꺼내면 여기저기 흩어진 블록을 찌르는 대량의 랜덤 I/O가 발생한다.
 > * 클러스터드 : 데이터 자체가 PK 순서대로 물리적으로 정렬되어 있다. PK 범위 검색은 디스크 페이지가 연속적으로 읽히는 순차 I/O가 발생해 압도적으로 빠르다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe8f3c5a-0eea-4395-bad3-fee34dd4e156.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe8f3c5a-0eea-4395-bad3-fee34dd4e156.png)
 
 > * 힙(Heap) : 세컨더리 인덱스를 순서대로 훑으면서 각 행마다 ROWID/CTID로 힙 블록에 직접 1회 접근한다. 행마다 1회의 랜덤 I/O가 발생한다.
 > * 클러스터드 : 행마다 랜덤 I/O 1회가 발생하는 것은 맞다. 그런데 여기서 리프 노드의 PK 값을 가지고 클러스터드 인덱스를 재탐색하는 과정이 반복된다.

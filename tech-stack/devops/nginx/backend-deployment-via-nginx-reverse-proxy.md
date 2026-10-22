@@ -5,13 +5,13 @@
 * 프록시(Proxy)란, "중계"의 의미를 가진다.
 * 프록시 서버는 중계 서버를 말한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fdbcdcc1-c5b7-472a-a390-8c6776864ce5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fdbcdcc1-c5b7-472a-a390-8c6776864ce5.png)
 
 * 위와 같이 원 서버(Origin Server)의 정보를 노출시키지 않도록 하기 위해 앞단에 중계 서버(Proxy Server)를 두는 방식을 리버스 프록시라고 한다.
 
 #### 포워드 프록시(Forward Proxy) 개념
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/90720dee-b70d-4ed8-9b08-08bd26a890c0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/90720dee-b70d-4ed8-9b08-08bd26a890c0.png)
 
 * 반대로 위와 같이 보내려고 하는 요청을 관리 또는 보안 처리를 위한 용도로 사용하는 서버를 포워드 프록시 서버라고 한다.
 * 리버스 프록시를 적용하는 이유는 들어오는 요청을 관리 또는 보안 처리를 하기 위해 사용하기 위함이다. 만약 리버스 프록시를 적용하지 않고 직접적으로 들어오는 요청을 백엔드 서버가 받아 처리하게 된다면 보안적으로 문제가 된다.
@@ -41,7 +41,7 @@ include conf.d/websites/*.conf;
 
 #### Spring Boot 서버에 무료 도메인 적용 예제
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d2c6bf0f-3f61-4635-824c-8b75d9aff5ec.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d2c6bf0f-3f61-4635-824c-8b75d9aff5ec.png)
 
 #### Spring Boot 서버에 HTTPS 적용 예제
 
@@ -49,7 +49,7 @@ include conf.d/websites/*.conf;
 $ sudo certbot --nginx -d <도메인 네임명>
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aa448d13-f830-4d70-90cb-984f0ca00488.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aa448d13-f830-4d70-90cb-984f0ca00488.png)
 
 > HTTPS 인증서 발급 후 HTTPS 관련 내용이 추가되었는지 확인
 
@@ -131,4 +131,4 @@ server {
 
 > 고의적으로 새로 고침을 여러 번 시도하면 다음과 같이 429 상태 코드가 반환된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8f8bd0ff-8b5d-4a64-b091-60244c534a85.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8f8bd0ff-8b5d-4a64-b091-60244c534a85.png)

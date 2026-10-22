@@ -16,7 +16,7 @@
 
 #### URL 단축
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/273a0813-8f72-44ed-b748-03676ffb9982.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/273a0813-8f72-44ed-b748-03676ffb9982.png)
 
 * 이 해시 함수는 다음 요구사항을 만족해야 한다.
   * 입력으로 주어지는 긴 URL이 다른 값이면 해시 값도 달라야 한다.
@@ -24,7 +24,7 @@
 
 #### 데이터 모델 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67fb48a4-d2df-4435-9306-67bb2eed0330.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67fb48a4-d2df-4435-9306-67bb2eed0330.png)
 
 * `<단축 URL, 원래 URL>`의 순서쌍을 위와 같이 관계형 데이터베이스에 저장하는 것이다.
 
@@ -41,13 +41,13 @@
 
 **2. 해시 후 충돌 해소**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0b3092ce-28df-414f-8df0-a2c7acd5bff6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0b3092ce-28df-414f-8df0-a2c7acd5bff6.png)
 
 * 긴 URL을 줄이려면 원래 URL을 7글자 문자열로 줄이는 해시 함수가 필요하다. 손쉬운 방법으로는 CRC32, MD5, SHA-1과 같이 잘 알려진 해시 함수를 이용한다.
 * 그 중에서 CRC32가 계산한 가장 짧은 해시값조차도 7보다는 길다. 이 문제를 해결할 첫 번째 방법은 계산된 해시 값에서 처음 7개의 글자만 이용하는 것이다.
 * 하지만 이렇게 하면 해시 결과가 서로 충돌할 확률이 높아진다. 충돌이 실제로 발생했을 경우 충돌이 해소될 때까지 사전에 정한 문자열을 해시값에 덧붙인다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1486c119-b8b3-4092-9289-142440565138.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1486c119-b8b3-4092-9289-142440565138.png)
 
 * 위와 같은 방법을 사용하면 충돌을 해소할 수 있지만 단축 URL을 생성할 때 한 번 이상 데이터베이스 질의를 해야 하므로 오버헤드가 크다.
 * 데이터베이스 대신 블룸 필터를 사용하면 성능을 높일 수 있다.
@@ -70,7 +70,7 @@
 
 #### URL 단축기 상세 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b75df39d-5bdc-4865-9331-0c2ecfba7184.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b75df39d-5bdc-4865-9331-0c2ecfba7184.png)
 
 1. 입력으로 긴 URL을 받는다.
 2. 데이터베이스에 해당 URL이 있는지 검사한다.
@@ -83,7 +83,7 @@
 
 #### URL 리디렉션 상세 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a771673c-df76-46a2-a2e3-787b6ae87653.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a771673c-df76-46a2-a2e3-787b6ae87653.png)
 
 1. 사용자가 단축 URL을 클릭한다.
 2. 로드밸런서가 해당 클릭으로 발생한 요청을 웹 서버에 전달한다.

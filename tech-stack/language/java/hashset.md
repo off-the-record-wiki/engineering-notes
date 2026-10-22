@@ -92,7 +92,7 @@ public class Member {
 * 구현하지 않은 경우 기본적으로 Object 클래스에서 지원해주는 메서드를 그대로 사용하게 된다.
 * 따라서, 객체의 참조값을 기준으로 비교를 하기 때문에 인스턴스 논리값이 같다고 하더라도 동일성과 동등성 측면 비교 시 모두 false가 나오게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8d2a63be-167e-4cc7-b7a0-8487bd239098.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8d2a63be-167e-4cc7-b7a0-8487bd239098.png)
 
 * 인스턴스의 논리값이 같다고 하더라도 객체의 참조값이 다르기 때문에 결과적으로는 다른 값을 반환하게 되기 때문에 같다고 인식하지 않는다.
 
@@ -101,10 +101,10 @@ public class Member {
 * `hashCode()` 메서드를 재정의했기 때문에 같은 논리값을 가지는 2개의 인스턴스에 대해 비교를 할 경우 같은 해시 코드를 가지게 된다.
 * 하지만 `equals()` 메서드는 Object 클래스에서 지원해주는 기능을 사용하기 때문에 기본적으로 객체의 참조값을 기준으로 비교한다. 따라서 false가 나오게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/562c81e3-a51c-4bdc-aab3-464077cfc894.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/562c81e3-a51c-4bdc-aab3-464077cfc894.png)
 
 #### ❓`hashCode()`와 `equals()`를 모두 구현한 경우
 
 * 메서드를 재정의하면 같은 해시 코드를 가짐과 동시에 객체의 논리값을 기준으로 비교한다. 따라서 true가 나오게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c338857d-a145-415b-8d0f-6149c9b1efcc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c338857d-a145-415b-8d0f-6149c9b1efcc.png)

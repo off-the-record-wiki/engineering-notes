@@ -217,7 +217,7 @@ PUT /my_index/_doc/20
 
 #### 두 가지 방식
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/47c35951-65b0-4a54-b540-2b0f9975366c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/47c35951-65b0-4a54-b540-2b0f9975366c.png)
 
 * **Default Routing** — 문서 ID를 해싱해 shard를 정한다.
 * **Custom Routing** — shard를 결정할 **커스텀 값(routing key)** 을 직접 지정한다. 더 효율적인 쿼리가 가능해진다.
@@ -268,7 +268,7 @@ GET /my_index/_search?routing=user123
 
 #### 읽기 요청의 처리 순서
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c460c434-d100-455d-98dc-5c9b48395f71.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c460c434-d100-455d-98dc-5c9b48395f71.png)
 
 * **Client Request** — 클라이언트가 Elasticsearch 노드(coordinating node)로 요청을 보낸다. 검색 쿼리, ID로 문서 조회, 집계 등이 모두 해당한다.
 * **Coordinating Node** — 요청 처리를 담당한다. 요청을 파싱해 **어떤 인덱스와 shard를 조회해야 하는지 판단**한다.
@@ -279,7 +279,7 @@ GET /my_index/_search?routing=user123
 
 #### Adaptive Replica Selection (ARS)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/11134184-8d3b-4cd1-b574-ceb82b0fdca5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/11134184-8d3b-4cd1-b574-ceb82b0fdca5.png)
 
 * **읽기 요청을 처리할 최적의 shard 복사본(primary 또는 replica)을 동적으로 선택**해 읽기 성능과 효율을 개선하도록 설계된 기능이다.
 * 이 선택은 **노드의 현재 성능과 부하 지표**를 근거로 이루어진다.
@@ -296,7 +296,7 @@ GET /my_index/_search?routing=user123
 
 #### 쓰기 요청의 처리 순서
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a870a66d-1aa2-45e6-b727-e5d2346150cb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a870a66d-1aa2-45e6-b727-e5d2346150cb.png)
 
 * **Client Request** — 클라이언트가 문서를 쓰기 위해 Elasticsearch 노드(coordinating node)로 색인 요청을 보낸다. 요청에는 **문서 내용과 저장할 인덱스**가 담긴다.
 * **Document Routing** — coordinating node가 **어느 shard가 이 문서를 담아야 하는지** 결정한다. 기본적으로 **문서 ID의 해시**로 shard를 정하며, custom routing을 설정할 수도 있다.
@@ -310,7 +310,7 @@ GET /my_index/_search?routing=user123
 
 #### 핵심 개념 네 가지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f4adc451-c9d4-4eb6-9b23-8f30eeb439a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f4adc451-c9d4-4eb6-9b23-8f30eeb439a8.png)
 
 | 개념 | 의미 |
 |---|---|
@@ -323,7 +323,7 @@ GET /my_index/_search?routing=user123
 
 #### Global Checkpoint의 진행
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ef5f958b-771b-4f5e-8229-b89b4fa2ed71.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ef5f958b-771b-4f5e-8229-b89b4fa2ed71.png)
 
 **1단계 — 첫 쓰기**
 
@@ -364,13 +364,13 @@ Replica2:  99 → 99 → 100 → 101
 
 * 두 클라이언트가 같은 문서를 동시에 다룰 때 일어나는 일이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7098663a-54da-4800-a242-375400d926f4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7098663a-54da-4800-a242-375400d926f4.png)
 
 * 각자 자기가 읽은 값(10)을 기준으로 계산했기 때문에, **나중 쓰기가 앞선 쓰기를 덮어쓴다.**
 
 #### Optimistic Concurrency Control (OCC)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91eb8b4c-0c25-4327-919a-0634a25ddb3f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/91eb8b4c-0c25-4327-919a-0634a25ddb3f.png)
 
 * OCC는 Elasticsearch가 **여러 클라이언트의 동시 읽기는 허용하되, 특정 시점에 쓸 수 있는 클라이언트는 하나뿐임을 보장**하는 방식이다.
 * **`if_primary_term`** 과 **`if_seq_no`** 로 구현한다.

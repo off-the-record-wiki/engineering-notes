@@ -17,4 +17,4 @@
 
 ### ExceptionTranslationFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0d258849-44ff-4af4-821e-df56b559c841.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0d258849-44ff-4af4-821e-df56b559c841.png)

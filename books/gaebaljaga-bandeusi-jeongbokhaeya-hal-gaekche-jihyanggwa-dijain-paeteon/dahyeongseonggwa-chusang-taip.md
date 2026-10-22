@@ -2,7 +2,7 @@
 
 #### 다형성과 상속
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/390c73cb-cdba-4408-8dce-4d57f2f19f9d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/390c73cb-cdba-4408-8dce-4d57f2f19f9d.png)
 
 * 다형성(Polymorphism)은 한 객체가 여러 가지 모습을 갖는다는 것을 의미한다.
 * 여기서 모습이란 타입을 뜻하는데, 즉, 다형성이란 하나의 객체가 여러 타입을 가질 수 있다는 것을 뜻한다.
@@ -15,7 +15,7 @@
 
 #### 추상 타입과 실제 구현체의 연결
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7c244b74-70a4-48e9-99c9-99d856cf1374.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7c244b74-70a4-48e9-99c9-99d856cf1374.png)
 
 * `collector.collect(log)` 하나의 호출이, 실제 객체가 무엇이냐에 따라 파일, 소켓, DB 테이블로 기록된다.
 

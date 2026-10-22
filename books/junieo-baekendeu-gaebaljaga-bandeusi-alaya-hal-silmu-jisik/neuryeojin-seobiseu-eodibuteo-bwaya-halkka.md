@@ -106,7 +106,7 @@
 * 데이터 특성에 따른 차이는 있지만 일반적으로 캐시에서 데이터를 읽는 속도가 DB보다 빠르기 때문에 자주 조회되는 데이터를 캐시에 보관하면 응답 시간을 줄일 수 있다.
 * 캐시는 (키, 값) 형태로 데이터를 저장하므로 저장하는 대상에 따라 적절한 캐시 키를 선택해야 한다. 예를 들어, 게시글 상세 정보는 `articles:번호` 형태의 캐시 키를 사용하고 최신 인기 글은 `articles:hot10`을 키로 사용하는 식이다. 또한 캐시를 사용할 때는 캐시 키가 겹치지 않도록 주의해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f96d7bc-9b89-4956-b7da-3e07de443638.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f96d7bc-9b89-4956-b7da-3e07de443638.png)
 
 1. 프로그램은 먼저 캐시에서 키에 해당하는 값을 조회한다. 값이 존재하면 바로 사용한다.
 2. 존재하지 않으면 DB 쿼리를 실행해 값을 조회한 후 해당 값을 캐시에 저장하고 사용한다. 이후 동일한 요청이 들어오면 캐시에 저장된 값을 바로 사용한다.
@@ -192,7 +192,7 @@ Cache-Control : max-age=60
 * 이로 인해 빠르게 네트워크가 포화되어 응답 시간이 급격히 느려진다. 이런 문제를 해결하는 방법 중 하나는 CDN을 사용하는 것이다.
 * CDN은 컨텐츠를 제공하기 위한 별도의 네트워크를 의미한다. 이를 통해 클라이언트에 컨텐츠를 더 빠르고 효율적으로 전달할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5bed80fe-15d0-4a3e-83a7-de8945785961.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5bed80fe-15d0-4a3e-83a7-de8945785961.png)
 
 #### CDN(Content Delivery Network, 콘텐츠 전송 네트워크)
 
@@ -207,7 +207,7 @@ Cache-Control : max-age=60
 2. `Edge Server` : 전 세계 곳곳에 위치한 분산 서버이며, 오리진 서버의 컨텐츠를 캐싱하고 있다. 캐시 정책에 따라 컨텐츠를 업데이트하며 CDN은 가장 가까운 엣지 서버에서 사용자에게 컨텐츠를 제공하기 때문에 사용자가 최신 컨텐츠를 빠르게 받아볼 수 있다.
 3. `DNS Server` : CDN에서 오리진 서버와 엣지 서버를 연결해주는 역할을 한다. 사용자가 오리진 서버에 요청을 보내게 되면 DNS 서버는 사용자를 가장 가까운 엣지 서버로 라우팅해준다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5bed80fe-15d0-4a3e-83a7-de8945785961.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5bed80fe-15d0-4a3e-83a7-de8945785961.png)
 
 1. 사용자는 CDN이 제공하는 URL을 통해 컨텐츠에 접근한다.
 2. CDN 서버에 요청한 컨텐츠가 없으면 오리진 서버에서 읽어와 제공한다.

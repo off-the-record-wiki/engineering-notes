@@ -22,7 +22,7 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eb5562ae-6d2e-41f7-a949-7d67b04c83e5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eb5562ae-6d2e-41f7-a949-7d67b04c83e5.png)
 
 * 자식 코루틴을 생성하는 코루틴 빌더 함수에 새로운 `CoroutineContext` 객체가 전달되면 부모 코루틴에서 전달받은 `CoroutineContext` 구성 요소들은 자식 코루틴 빌더 함수로 전달된 `CoroutineContext` 객체의 구성 요소들로 덮어 씌여진다.
 
@@ -49,19 +49,19 @@ fun main() = runBlocking<Unit> {
 
 #### 코루틴의 구조화와 작업 제어
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/09390154-4cce-4a32-823a-e83cfdeeb28b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/09390154-4cce-4a32-823a-e83cfdeeb28b.png)
 
 * 코루틴의 구조화는 하나의 큰 비동기 작업을 작은 비동기 작업으로 나눌 때 일어난다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5a11f2b4-a043-44f4-b48c-faa40038b5f2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5a11f2b4-a043-44f4-b48c-faa40038b5f2.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dee7fb84-ee75-47f1-92f6-a70f5256af49.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dee7fb84-ee75-47f1-92f6-a70f5256af49.png)
 
 * 코루틴으로 취소가 요청되면 자식 코루틴에 취소가 전파된다.
 * 부모 코루틴은 모든 자식 코루틴이 실행 완료되어야 완료될 수 있다.
 * 코루틴의 구조화는 큰 작업을 연관된 여러 작은 작업으로 나누는 방식으로 일어나는데 작은 작업이 완료되어야 큰 작업이 완료될 수 있기 때문이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9866e982-512f-4a7f-b1ee-30836340dced.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9866e982-512f-4a7f-b1ee-30836340dced.png)
 
 * 실행 완료 중(Completing) 상태란 부모 코루틴의 모든 코드가 실행됐지만, 자식 코루틴이 실행 중인 경우 부모 코루틴이 갖는 상태이다.
 * 부모 코루틴은 더 이상 실행할 코드가 없더라도 자식 코루틴들이 모두 완료될 때까지 기다리는데 이 때, '실행 완료 중' 상태에 머무른다.
@@ -84,13 +84,13 @@ public interface CoroutineScope {
 * `CoroutineScope`는 내부에 코루틴 실행 환경인 `CoroutineContext`를 가지는 단순한 인터페이스이다.
 * `CoroutineScope` 인터페이스를 구현한 구체 클래스를 사용하면 `CoroutineScope` 객체를 생성할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f23f43c9-fbf0-40e0-9c3f-65c606d062ef.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f23f43c9-fbf0-40e0-9c3f-65c606d062ef.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c4a765ea-2d54-4b6f-b724-edd56ac189eb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c4a765ea-2d54-4b6f-b724-edd56ac189eb.png)
 
 * `CoroutineScope`를 취소하려면 다음과 같이 취소할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9c99ae58-1015-470f-b8eb-ad5388371ab6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9c99ae58-1015-470f-b8eb-ad5388371ab6.png)
 
 * `CoroutineScope` 객체는 현재 `CoroutineScope`이 활성화 되어있는지 확인하는 `isActive` 프로퍼티를 제공한다.
 * `isActive` 프로퍼티는 `CoroutineContext`로부터 `Job` 객체를 꺼내 `isActive`를 확인한다.
@@ -121,19 +121,19 @@ fun main() = runBlocking<Unit> {
 
 #### Job 구조화 깨기 1 - CoroutineScope 사용해 구조화 깨기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/454a20b8-331f-4c20-8c1d-60ef98d8b222.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/454a20b8-331f-4c20-8c1d-60ef98d8b222.png)
 
 * `CoroutineScope` 생성 함수는 새로운 루트 `Job`을 가진 `CoroutineContext`를 생성한다.
 
 #### Job 구조화 깨기 2 - Job 객체 생성해 구조화 깨기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1a611aea-e75d-48ac-ae27-9e866f06c4ca.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1a611aea-e75d-48ac-ae27-9e866f06c4ca.png)
 
 * `Job` 생성 함수로 새로운 루트 `Job`을 생성할 수 있다.
 
 #### 구조화 깨서 일부 코루틴만 취소되지 않도록 하기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67e702e1-f4fc-4bfc-9375-99fbd28f19f2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67e702e1-f4fc-4bfc-9375-99fbd28f19f2.png)
 
 * `Job` 생성 함수는 부모 `Job`을 인자로 받을 수 있다.
   * 만약 parent 인자가 입력되지 않으면 `parent = null`이 되어 루트 `Job`이 생성된다.
@@ -147,9 +147,9 @@ fun main() = runBlocking<Unit> {
 public fun Job(parent: Job? = null): CompletableJob = JobImpl(parent)
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe011d9a-937d-4d73-9171-ba5df22cbd8d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe011d9a-937d-4d73-9171-ba5df22cbd8d.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/77ae6d68-1acc-46e1-8a45-d017d98b4a0b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/77ae6d68-1acc-46e1-8a45-d017d98b4a0b.png)
 
 * 이 때, 생성함수로 생성된 `Job` 객체는 자동으로 실행 완료되지 않기 때문에 명시적으로 `complete()` 함수를 호출해야 한다.
 

@@ -75,7 +75,7 @@ public class SseController {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9bee4c0b-4266-47ee-8639-cc672bdb64d1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9bee4c0b-4266-47ee-8639-cc672bdb64d1.png)
 
 * SSE 응답 프레임의 4개 필드(data/id/event/retry)를 쓰려면 반환 타입이 `Flux<ServerSentEvent<T>>`여야 한다. `Flux<String>`은 data만 나가고 나머지는 못 붙인다.
 * `Flux.interval`은 `parallel` 스케줄러의 별도 스레드에서 tick을 발행한다. 무한 스트림이므로 클라이언트가 끊으면 서버는 그걸 cancel 신호로 감지한다. 이 때, `doOnCancel/doFinally`로 리소스 정리 훅을 걸어두는 게 좋다.
@@ -145,7 +145,7 @@ public class TimeWebSocketHandler implements WebSocketHandler {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/14237b38-5ccc-4e2c-9c14-f4178f0b9ab8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/14237b38-5ccc-4e2c-9c14-f4178f0b9ab8.png)
 
 * Phase 1 : HTTP 핸드셰이크로 WebSocket 수립. TCP 연결 후 WS 프로토콜로 전환.
 * Phase 2 : `Mono.zip(send, receive)`이 핵심. `send()`는 interval 기반 무한 스트림이라 혼자서는 완료를 모른다. 클라이언트가 끊으면 `receive()`가 완료되고, `zip()`이 그 완료를 받아 나머지(send)를 취소하며 세션 전체를 종료시킨다.

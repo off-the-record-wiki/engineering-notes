@@ -69,7 +69,7 @@ public fun <T> CoroutineScope.async(
 * 코루틴이 실행 완료되었을 때 결과값이 반환되므로 언제 수신될 지 알 수 없다.
 * 따라서 만약 결과값이 필요하다면 결과값이 수신될 때까지 대기해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d8d56f39-7f08-4827-9fe0-d6f5dfeb2d97.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d8d56f39-7f08-4827-9fe0-d6f5dfeb2d97.png)
 
 ```kotlin
 fun main() = runBlocking<Unit> {
@@ -86,16 +86,16 @@ fun main() = runBlocking<Unit> {
 * `Deferred` 객체의 `await()` 함수를 호출하면 `Deferred` 코루틴이 실행 완료될 때까지 `await()` 함수를 호출한 코루틴이 일시 중단된다.
 * `Deferred` 코루틴이 실행 완료되면 결과값이 반환되고 호출부의 코루틴이 재개된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/87d73802-5d8a-4868-91aa-7663bb8a5946.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/87d73802-5d8a-4868-91aa-7663bb8a5946.png)
 
 #### 복수의 코루틴으로부터 결과를 수신받기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0443a974-ab55-4590-a741-77dba427fc82.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0443a974-ab55-4590-a741-77dba427fc82.png)
 
 * `async-await` 구조를 연속적으로 호출하게 되면 병렬 실행이 되지 않고 순차 실행이 된다.
 * 코루틴을 병렬로 실행하기 위해서는 코루틴을 모두 실행한 다음 `await()`을 호출해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/65c60aa7-1215-4954-9035-022beba133fb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/65c60aa7-1215-4954-9035-022beba133fb.png)
 
 * 서로 간에 종속성이 없는 코루틴들에 대한 `await()` 호출은 모든 코루틴이 실행 요청된 후에 해야한다.
 

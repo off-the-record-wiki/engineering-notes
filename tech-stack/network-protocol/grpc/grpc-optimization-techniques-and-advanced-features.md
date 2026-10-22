@@ -10,7 +10,7 @@
 * 요청마다 만들게 된다면 핸드셰이크 비용이 그대로 누적된다.
 * 스텁 : `.proto` 정의로부터 생성된 클라이언트 측 대리 객체이다. 원격 호출을 로컬 메서드 호출처럼 보이게 만들어준다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c5649a44-9a5b-43b3-b3c1-3fe7f6c1d8c3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c5649a44-9a5b-43b3-b3c1-3fe7f6c1d8c3.png)
 
 * 채널은 TCP와 TLS 핸드셰이크를 포함한 HTTP/2 커넥션을 감싸고 있어 생성 비용이 비싸므로, 애플리케이션 수명 동안 하나만 만들어 모든 스레드가 공유해야 한다.
 * 스텁은 직렬화와 메서드 경로 변환만 담당하는 얇은 프록시라 생성 비용이 거의 없지만, 핫 패스에서의 불필요한 할당을 막기 위해 서비스마다 한 번 만들어 캐시해두는 것이 정석이다.
@@ -20,7 +20,7 @@
 
 #### gRPC Performance Best Practice - Keep-Alive 핑 메커니즘과 연결 유지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7a11f6cc-50d4-4e30-a9b3-38f1978e782c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7a11f6cc-50d4-4e30-a9b3-38f1978e782c.png)
 
 * Keep-Alive 핑은 유휴 시간이 keepalive_time에 도달하면 채널이 HTTP/2 PING 프레임을 보내고 서버가 같은 페이로드로 ACK를 반향하는 아주 가벼운 왕복으로, 이 트래픽이 중간 NAT와 LB의 유휴 타이머까지 함께 초기화해 연결이 조용히 폐기되는 것을 막는다.
 * 핑의 두 번째 역할은 죽은 연결을 빠르게 드러내는 것인데, 중간 장비가 연결을 버릴 때 FIN이나 RST가 클라이언트까지 도달하지 않는 경우가 많아 핑이 없으면 채널은 끊긴 연결을 READY로 착각한 채 다음 요청이 타임아웃될 때까지 아무것도 모른다.
@@ -38,7 +38,7 @@
 
 #### 통신 안정화를 위한 Flow Control과 코드 재사용을 위한 Interceptors - Flow Control 기본 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/649f34ed-46bc-4dc5-a2b4-d4cc5a3546c0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/649f34ed-46bc-4dc5-a2b4-d4cc5a3546c0.png)
 
 * Flow Control은 송신자가 마음대로 데이터를 밀어 넣지 못하게 막는 크레딧 방식의 신용 한도로, 수신자가 허락한 바이트 수(윈도우)만큼만 보낼 수 있고 보낸 만큼 윈도우가 깎이며 수신 애플리케이션이 실제로 데이터를 소비한 뒤 `WINDOW_UPDATE` 프레임으로 그만큼을 돌려줘야 다시 전송이 가능해진다.
 * 여기서 핵심은 윈도우를 돌려주는 주체가 네트워크가 아니라 수신 애플리케이션의 소비 속도라는 점인데, 그래서 소비자가 느려지면 `WINDOW_UPDATE`가 늦게 오고 윈도우가 0에 도달하면 송신 측이 스스로 전송을 멈추며, 이 압력이 소켓을 거쳐 송신 애플리케이션의 write 블로킹이나 `is_ready = false` 신호까지 역류한다. 이것이 백프레셔이고, 버퍼를 무한정 쌓다 OOM으로 죽는 대신 생산 속도를 소비 속도에 맞춰 늦추는 안전장치다.
@@ -48,7 +48,7 @@
 
 #### 통신 안정화를 위한 Flow Control과 코드 재사용을 위한 Interceptors - 백프레셔와 윈도우 업데이트 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e7422f4c-756a-4caa-9b3f-4de411f48130.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e7422f4c-756a-4caa-9b3f-4de411f48130.png)
 
 * 윈도우는 수신자가 송신자에게 미리 내준 신용 한도이며, 송신자는 DATA를 보낼 때마다 보낸 바이트 수만큼 잔량을 깎고 잔량이 0이 되는 순간 더 보낼 프레임이 남아 있어도 스스로 전송을 멈춘다. 이 정지는 에러가 아니라 정상 동작이며, 재전송이나 폐기 없이 그저 기다린다.
 * `WINDOW_UPDATE`를 촉발하는 것은 데이터가 도착한 시점이 아니라 수신 애플리케이션이 실제로 읽어간 시점인데, 이 한 가지 사실이 백프레셔 전체를 설명한다. 소비가 늦으면 반환이 늦고, 반환이 늦으면 송신 윈도우가 마르고, 그 압력이 소켓을 거쳐 송신 애플리케이션의 write 블로킹이나 `is_ready = false`로 되돌아온다.
@@ -58,7 +58,7 @@
 
 #### 통신 안정화를 위한 Flow Control과 코드 재사용을 위한 Interceptors - gRPC 데이터 전송 생명주기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/87459546-4c99-41ee-8608-430b8ef13aba.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/87459546-4c99-41ee-8608-430b8ef13aba.png)
 
 * RPC 한 건은 HTTP/2 스트림 하나의 수명과 정확히 일치하며, HEADERS 프레임으로 시작해 하나 이상의 DATA 프레임을 거쳐 TRAILERS 프레임으로 끝난다. 이 구조 덕분에 하나의 연결 위에서 수많은 RPC가 각자의 스트림으로 독립적으로 살고 죽을 수 있다.
 * 나가는 길의 변환은 직렬화 → 압축 → 프레이밍 순서로 일어나는데, protobuf로 바이트가 된 메시지 앞에 `[1바이트 압축 플래그][4바이트 길이]`의 5바이트 프리픽스가 붙는다. 이 프리픽스가 있어 수신 측은 TCP 스트림에서 메시지 경계를 정확히 잘라낼 수 있고, 하나의 DATA 프레임에 여러 메시지가 실리거나 반대로 한 메시지가 여러 프레임에 쪼개져도 문제가 없다.
@@ -68,7 +68,7 @@
 
 #### 통신 안정화를 위한 Flow Control과 코드 재사용을 위한 Interceptors - 인터셉터 패턴과 공통 기능 처리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/343b3b00-cd24-44af-b873-4e35fc5c0f02.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/343b3b00-cd24-44af-b873-4e35fc5c0f02.png)
 
 * 인터셉터는 모든 RPC가 반드시 통과하는 중첩된 껍질로, 각 껍질은 요청을 받아 원하는 일을 한 뒤 안쪽 껍질을 호출하고 그 결과를 받아 다시 바깥으로 돌려준다. 이 구조 덕분에 인증·로깅·재시도 같은 횡단 관심사가 서비스 핸들러 코드에서 완전히 사라지고, 껍질 하나를 갈아 끼우면 전체 RPC에 한 번에 적용된다.
 * 통과 방향이 요청과 응답에서 반대라는 점이 실무의 핵심인데, 등록 순서가 곧 바깥 껍질 순서이고 응답은 정확히 역순으로 되돌아오므로 "시작 시각 기록 → 안쪽 호출 → 경과 시간 기록" 같은 코드가 자연스럽게 한 함수 안에 담긴다. 따라서 순서를 잘못 잡으면 기능이 조용히 무력화되는데, 예컨대 인증을 로깅보다 바깥에 두면 인증 실패 요청이 로그에 남지 않는다.
@@ -83,12 +83,12 @@
 
 #### Graceful Shutdown을 통한 리소스 정리 & Request Hedging을 통한 최적화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d35027e4-c295-4137-804f-42071cdca71d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d35027e4-c295-4137-804f-42071cdca71d.png)
 
 * 우아한 종료의 정의는 단순한데, 새로 들어오는 요청은 받지 않으면서 이미 받은 요청은 끝까지 처리하고 내려가는 것이다. 반대로 프로세스를 즉시 죽이면 처리 중이던 RPC가 모두 `UNAVAILABLE로`로 끊기고, 그 실패는 재시도할 수 없는 쓰기 작업이었다면 그대로 데이터 불일치로 남는다.
 * 이를 가능하게 하는 것이 HTTP/2의 `GOAWAY` 프레임인데, 서버가 "이 연결로는 더 이상 새 스트림을 받지 않겠다"는 뜻을 클라이언트에 알리면서 이미 열린 스트림은 계속 살려두기 때문이다. 클라이언트는 이 신호를 받고 진행 중인 RPC는 그대로 끝내고 새 호출만 다른 서브채널이나 새 연결로 보내며, 애플리케이션 코드는 아무것도 하지 않아도 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a1029e69-a041-41b4-8270-c8f20193b2a7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a1029e69-a041-41b4-8270-c8f20193b2a7.png)
 
 * 헤징은 실패를 기다리지 않는 재시도이다. 일반 재시도가 "실패를 확인한 뒤 다시 보낸다"면, 헤징은 첫 요청을 보낸 뒤 hedgingDelay가 지나도 응답이 없으면 실패 여부와 무관하게 다른 서버로 같은 요청을 한 번 더 보내고, 가장 먼저 도착한 응답을 채택한 뒤 나머지는 즉시 취소한다. 목표는 평균 지연이 아니라 꼬리 지연(p99) 으로, 서버 한 대가 GC나 일시적 부하로 느려진 상황에서 그 한 건이 전체 지연을 끌어올리는 것을 막는다.
 * 대가는 명확한데, 헤징은 같은 요청을 여러 번 실행시키므로 부하가 시도 횟수만큼 곱해진다. `hedgingDelay`는 정상 응답 시간의 p90~p95 언저리로 잡아 대부분의 요청이 헤지 전에 끝나게 해야 하고, 이 값을 너무 짧게 잡으면 거의 모든 요청이 두세 번씩 나가 서버를 스스로 무너뜨린다.

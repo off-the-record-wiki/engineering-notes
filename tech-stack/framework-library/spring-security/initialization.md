@@ -23,13 +23,13 @@
 * `HttpSecurityConfiguration`에서 `HttpSecurity`를 생성하고 초기화를 진행한다.
 * `HttpSecurity`는 보안에 필요한 각 설정 클래스와 필터들을 생성하고 최종적으로 `SecurityFilterChain` 스프링 빈을 생성한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7659c68a-c662-4263-8480-b2c16357706c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7659c68a-c662-4263-8480-b2c16357706c.png)
 
 * `WebSecurityConfiguration`에서 `WebSecurity`를 생성하고 초기화를 진행한다.
 * `WebSecurity`는 `HttpSecurity`에서 생성된 `SecurityFilterChain` 스프링 빈을 `SecurityBuilder`에 저장한다.
 * `WebSecurity`가 `build()`를 실행하면 `SecurityBuilder`에서 `SecurityFilterChain`을 꺼내어 `FilterChainProxy` 생성자에 전달한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/16065845-e9d5-47ee-81c7-54307d29de0c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/16065845-e9d5-47ee-81c7-54307d29de0c.png)
 
 #### SecurityFilterChain
 
@@ -161,7 +161,7 @@ public final class DefaultSecurityFilterChain implements SecurityFilterChain, Be
 * `DelegatingFilterProxy`는 "springSecurityFilterChain" 이름으로 생성된 빈을 ApplicationContext에서 찾아 요청을 위임한다.
 * 실제 보안 처리를 수행하지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7795ff28-35e6-4284-aae0-c9314708fb97.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7795ff28-35e6-4284-aae0-c9314708fb97.png)
 
 #### FilterChainProxy
 
@@ -171,7 +171,7 @@ public final class DefaultSecurityFilterChain implements SecurityFilterChain, Be
 * `HttpSecurity`를 통해 API 추가 시 관련 필터들이 추가된다.
 * 사용자 요청들을 필터 순서대로 호출함으로 보안 기능을 동작시키고 필요 시 커스텀으로 필터를 개발 및 등록해 기존의 필터 전후로 순서까지 지정해 추가할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7552c2ff-f7d2-4fae-b6fd-9fbb22ef78c1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7552c2ff-f7d2-4fae-b6fd-9fbb22ef78c1.png)
 
 ```java
 @ManagementContextConfiguration(value = ManagementContextType.CHILD, proxyBeanMethods = false)
@@ -215,7 +215,7 @@ class ServletManagementChildContextConfiguration {
 
 * `SecurityFilterChain` 클래스 빈을 등록한 후 인증 API 및 인가 API를 설정한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c6ac2f4c-b6e2-4e5d-a8fd-e0c8b459a1c3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c6ac2f4c-b6e2-4e5d-a8fd-e0c8b459a1c3.png)
 
 * `@EnableWebSecurity` 어노테이션을 필수로 작성해야 한다.
 * 모든 설정 코드는 반드시 람다 형식으로 작성해야 한다.

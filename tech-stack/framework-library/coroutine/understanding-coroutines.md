@@ -4,11 +4,11 @@
 
 * 서브루틴이란, 함수(루틴) 내에서 함수가 호출될 경우 호출된 함수를 서브루틴이라고 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de8ca9f9-b699-4aa7-a1ea-82402f098d37.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de8ca9f9-b699-4aa7-a1ea-82402f098d37.png)
 
 * 루틴에 의해 서브루틴이 호출되면 서브루틴의 실행이 완료될 때까지 다른 작업을 할 수 없는 것과 다르게 코루틴은 함께 실행되는 루틴으로 서로 간에 쓰레드 사용을 양보하며 함께 실행된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d28d105e-bcd6-42d2-8cd4-a111b0ad45d7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d28d105e-bcd6-42d2-8cd4-a111b0ad45d7.png)
 
 #### 코루틴의 쓰레드 양보
 
@@ -44,7 +44,7 @@ fun getElapsedTime(startTime: Long): String = "지난 시간: ${System.currentTi
 * `yield()` 함수를 통해 직접 쓰레드를 양보하는 경우도 필요하다.
 * 단일 쓰레드만 사용하는 상황에서 명시적으로 `yield()`를 사용하는 경우가 종종 생긴다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/49d1033e-303d-410f-a7a3-d00d09656c02.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/49d1033e-303d-410f-a7a3-d00d09656c02.png)
 
 **1. 취소 안되는 코드 - 같은 쓰레드 공유(디스패처 X)**
 
@@ -69,4 +69,4 @@ fun getElapsedTime(startTime: Long): String = "지난 시간: ${System.currentTi
 * 코루틴이 일시 중단된 후 재개되면 `CoroutineDispatcher` 객체는 재개된 코루틴을 다시 쓰레드에 보낸다.
 * 이 때, `CoroutineDispatcher` 객체는 코루틴을 사용할 수 있는 쓰레드 중 하나에 보내기 때문에 코루틴이 재개된 후의 실행 쓰레드는 일시 중단되기 전의 쓰레드와 다를 수가 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cb416b81-7b55-4e5e-a849-6d09e9e1482f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cb416b81-7b55-4e5e-a849-6d09e9e1482f.png)

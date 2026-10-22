@@ -2,7 +2,7 @@
 
 #### OAuth2AuthorizationEndpointConfigurer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a780a96f-0a0b-4947-8030-2d577ab73907.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a780a96f-0a0b-4947-8030-2d577ab73907.png)
 
 * OAuth2 권한 부여 엔드포인트에 대한 사용자 정의를 할 수 있는 기능을 제공한다.
 * OAuth2 권한 부여 요청에 대한 전처리, 기본처리 및 후처리 로직을 커스텀하게 구성할 수 있도록 하는 API를 지원한다.
@@ -10,7 +10,7 @@
 
 #### OAuth2AuthorizationEndpointFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4a2480d2-7a27-4b95-bb42-bb668e7cae4e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4a2480d2-7a27-4b95-bb42-bb668e7cae4e.png)
 
 * OAuth2 인증 요청을 처리하는 필터이며 다음과 같은 기본값으로 구성된다.
   * `OAuth2AuthorizationCodeRequestAuthenticationConverter` : 클라이언트 요청 파라미터를 `OAuth2AuthorizationCodeRequestAuthenticationToken`으로 변환하고 `AuthenticationProvider`에게 전달한다.
@@ -24,7 +24,7 @@
 
 #### Code 요청과 응답 플로우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/76452b3d-7478-42e8-9623-3d09275902d0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/76452b3d-7478-42e8-9623-3d09275902d0.png)
 
 * `response_type` : 필수(값은 code 고정)
 * `client_id` : 필수(인가 서버에 등록된 클라이언트 식별자)
@@ -35,7 +35,7 @@
 
 #### OAuth2AuthorizationConsent
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9cb121c6-e464-45d1-9c5a-a144c36055ea.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9cb121c6-e464-45d1-9c5a-a144c36055ea.png)
 
 * `OAuth2AuthorizationConsent` 는 OAuth2 권한 부여 요청 흐름의 권한부여 "동의“(결정)를 나타낸다.
 * 클라이언트에 대한 액세스를 승인할 때 리소스 소유자는 클라이언트가 요청한 권한의 하위 집합만 허용할 수 있다.
@@ -44,14 +44,14 @@
 
 #### OAuth2AuthorizationConsentService
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/48d6caf3-f154-46db-8446-a2252feaa026.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/48d6caf3-f154-46db-8446-a2252feaa026.png)
 
 * `OAuth2AuthorizationConsent` 저장되고 기존 `OAuth2AuthorizationConsent`를 조회하는 클래스로 주로 OAuth2 권한 부여 요청 흐름을 구현하는 구성 요소에 의해 사용된다.
 * 기본 구현체는 `InMemoryOAuth2AuthorizationConsentService`와 `JdbcOAuth2AuthorizationConsentService`가 있다.
 
 #### OAuth2ClientAuthenticationConfigurer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9a752fa2-5c16-4c9b-946d-58555cf7a071.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9a752fa2-5c16-4c9b-946d-58555cf7a071.png)
 
 * OAuth2 클라이언트 인증을 위한 사용자 정의하는 기능을 제공한다.
 * 클라이언트 인증 요청에 대한 전처리, 기본 처리 및 후처리 로직을 커스텀하게 구현할 수 있도록 API를 지원한다.
@@ -60,7 +60,7 @@
 
 #### OAuth2ClientAuthenticationFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/44dc7e02-4c5f-4f98-9219-053bfa6075af.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/44dc7e02-4c5f-4f98-9219-053bfa6075af.png)
 
 * 클라이언트 인증 요청을 처리하는 필터이며 다음과 같은 기본값으로 구성된다.
 * `DelegatingAuthenticationConverter`
@@ -76,7 +76,7 @@
 
 #### OAuth2TokenEndpointConfigurer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5cb330a5-d27a-4d3a-a58e-17ce4d7affad.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5cb330a5-d27a-4d3a-a58e-17ce4d7affad.png)
 
 * OAuth2 토큰 엔드포인트에 대한 사용자 정의 할 수 있는 기능을 제공한다.
 * OAuth2 토큰 요청에 대한 전처리, 기본 처리 및 후처리 로직을 커스텀하게 구현할 수 있도록 API를 지원한다.
@@ -85,7 +85,7 @@
 
 #### OAuth2TokenEndpointFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ea7a06a3-c5eb-4f46-a671-5de4c3d79060.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ea7a06a3-c5eb-4f46-a671-5de4c3d79060.png)
 
 * 클라이언트의 토큰 요청을 처리하는 필터이며 다음과 같은 기본값으로 구성된다.
   * `DelegatingAuthenticationConverter` : 각 특정 유형의 AuthenticationConverter 를 호출해서 처리를 위임한다.
@@ -102,7 +102,7 @@
 
 #### OAuth 2.0 Token Endpoint - Authorization Code
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f91556e-36e5-4ae4-9baa-3871e386712f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f91556e-36e5-4ae4-9baa-3871e386712f.png)
 
 **Access Token Response**
 
@@ -123,7 +123,7 @@
 
 #### OAuth 2.0 Token Endpoint - Client Credentials
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/714651da-f6fa-4da1-b9a4-820033c9e0e5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/714651da-f6fa-4da1-b9a4-820033c9e0e5.png)
 
 * OAuth 전용 설계가 아니다. 폼 로그인과 동일한 Spring Security 골격(Filter → Converter → Token → Provider)을 그대로 쓴다.
 * 토큰들은 하나의 OAuth2Authorization 안에 형제로 묶여 있다. 그래서 하나를 무효화하면 나머지까지 연쇄로 죽일 수 있다.
@@ -131,7 +131,7 @@
 
 #### OAuth 2.0 Token Endpoint - Refresh Token
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/56b72661-456c-457d-a31e-2cf181d5cee3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/56b72661-456c-457d-a31e-2cf181d5cee3.png)
 
 * 토큰을 발급받은 클라이언트와 지금 요청한 클라이언트가 같은지, 그 클라이언트가 refresh_token 그랜트를 쓸 수 있는지를 `isActive()`보다 먼저 본다.
 * 최초 부여 범위를 넘는 scope는 거절해 리프레시로 권한을 넓히지 못하게 막는다. 반대로 scope를 생략하면 최초 부여분을 그대로 승계하는데, 같은 상황에서 빈 집합이 되는 client_credentials와 정반대이다.
@@ -139,14 +139,14 @@
 
 #### OAuth 2.0 Token Endpoint - Authorization Code with PKCE
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b02e6c40-8254-489e-a75e-47d40990b513.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b02e6c40-8254-489e-a75e-47d40990b513.png)
 
 * PKCE는 두 지점에 걸쳐 있다. authorize는 code_challenge를 저장만 하고, 실제 대조는 token 엔드포인트의 클라이언트 인증 단계에서 code_verifier와 일어난다. 원본은 앞쪽 절반만 그려서 왜 안전한지가 설명되지 않는다.
 * code_challenge는 무조건 필수가 아니다. requireProofKey 기본값이 false라 이 설정이 꺼져 있고 code_verifier도 없으면 PKCE를 통째로 건너뛴다. confidential client는 기본적으로 PKCE 없이 동작한다.
 
 #### OAuth2TokenIntrospectionEndpointConfigurer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fb33594a-4d8c-41a1-826b-d4ce986d09a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fb33594a-4d8c-41a1-826b-d4ce986d09a8.png)
 
 * OAuth2 토큰 검사 엔드포인트에 대한 사용자 정의 할 수 있는 기능을 제공한다.
 * `OAuth2TokenIntrospectionEndpointFilter`를 구성하고 이를 OAuth2 인증 서버 `SecurityFilterChain`빈에 등록한다.
@@ -154,7 +154,7 @@
 
 #### OAuth2TokenIntrospectionEndpointFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9dc8e1f2-b8b8-48cf-8b82-72b0e091f27f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9dc8e1f2-b8b8-48cf-8b82-72b0e091f27f.png)
 
 * OAuth2 검사 요청을 처리하는 필터이며 다음과 같은 기본값으로 구성된다.
 * `OAuth2TokenIntrospectionAuthenticationProvider` : `OAuth2TokenIntrospectionAuthenticationToken`를 받아 인증 처리를 하는 `AuthenticationProvider` 구현체이다.
@@ -178,7 +178,7 @@
 
 #### OAuth2AuthorizationServerConfigurer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/550dcdc8-fcb1-4540-a71d-01166da4c058.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/550dcdc8-fcb1-4540-a71d-01166da4c058.png)
 
 * OAuth2 Authorization Server 메타데이터 엔드포인트 대한 지원을 제공한다.
 * `OAuth2AuthorizationServerMetadataEndpointFilter`를 구성하고 이를 OAuth2 인증 서버 `SecurityFilterChain`빈에 등록한다.
@@ -205,7 +205,7 @@
 
 #### OidcUserInfoEndpointFilter
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bfb9e897-175c-40fe-a9fd-85161984d1b2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bfb9e897-175c-40fe-a9fd-85161984d1b2.png)
 
 * UserInfo 요청을 처리하고 OidcUserInfo 응답을 반환하는 필터이며 다음과 같은 기본값으로 구성된다.
 * `OidcUserInfoAuthenticationProvider` : 요청된 scope 를 기준으로 ID 토큰에서 표준 클레임을 추출하는 userInfoMapper을 가지고 있다.

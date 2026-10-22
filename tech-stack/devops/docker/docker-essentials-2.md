@@ -5,7 +5,7 @@
 * 컨테이너를 만드는 데 필요한 읽기 전용 템플릿
 * 컨테이너 실행에 필요한 파일과 설정 값 등을 포함한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6be458a4-ffa4-4862-bf40-9944589ba7a2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6be458a4-ffa4-4862-bf40-9944589ba7a2.png)
 
 ## 📚 Dockerfile
 
@@ -28,4 +28,4 @@
 * Docker를 통해 생성하는 Image들을 저장해주는 저장소
 * Docker Image들의 위치 제어 및 CI/CD를 위한 자동화 Pipeline 구축 가능
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/feb96bdd-7862-4b0b-a4e2-75afb3dbc325.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/feb96bdd-7862-4b0b-a4e2-75afb3dbc325.png)

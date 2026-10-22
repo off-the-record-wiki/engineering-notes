@@ -7,14 +7,14 @@
 
 #### Kibana로 Data View 생성하기(Stack Management ⭢ Data Views)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/742bcf40-c286-4ca6-87a0-4157eee34274.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/742bcf40-c286-4ca6-87a0-4157eee34274.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/518d65d2-484b-472b-9114-aca5ebf47bb3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/518d65d2-484b-472b-9114-aca5ebf47bb3.png)
 
 #### Discover을 통한 로그 검색(Discover)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/95eb7826-87a1-4d05-aad0-4188d1cd3f35.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/95eb7826-87a1-4d05-aad0-4188d1cd3f35.png)
 
 #### 대시보드로 로그 시각화(Dashboards)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ded385b1-abad-4a60-9afa-58cc05929748.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ded385b1-abad-4a60-9afa-58cc05929748.png)

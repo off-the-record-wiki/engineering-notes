@@ -7,7 +7,7 @@
 
 #### Cache Aside Strategy(Look-Aside)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9d696c6d-475b-4e52-805c-61b77c3b3a8e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9d696c6d-475b-4e52-805c-61b77c3b3a8e.png)
 
 **1단계 : 캐시 확인(GET key)**
 
@@ -42,7 +42,7 @@
 
 #### Write Through Strategy
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/71569719-98cd-4516-9da1-2fe4d378e460.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/71569719-98cd-4516-9da1-2fe4d378e460.png)
 
 **1단계 : 캐시에 먼저 기록(SET key value)**
 
@@ -67,7 +67,7 @@
 
 #### Write Around Strategy
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8e0fcac2-3871-4014-9122-0395bedb9adc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8e0fcac2-3871-4014-9122-0395bedb9adc.png)
 
 **1단계 : 쓰기는 캐시를 우회(Around)해서 DB로만**
 
@@ -88,7 +88,7 @@
 
 #### Read Through Strategy
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9d302c11-9a7b-407c-88d9-ba1deab639a5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9d302c11-9a7b-407c-88d9-ba1deab639a5.png)
 
 **1단계 : 캐시 요청(GET key)**
 
@@ -121,7 +121,7 @@
 
 #### Cache Stampede(캐시 쇄도) 문제와 대응
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/22532bf7-6455-4adb-a236-84f40903ad2c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/22532bf7-6455-4adb-a236-84f40903ad2c.png)
 
 **1단계 : 캐시 만료 직후 (The Gap)**
 

@@ -25,7 +25,7 @@
   * 서비스 간 통신 필요성과 외부 서비스에 대한 종속성이 증가한다.
   * 오류가 발생할 가능성이 증가한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dc96932f-cf6d-42b5-8467-38df86df1213.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dc96932f-cf6d-42b5-8467-38df86df1213.png)
 
 #### Resilience Pattern(Retry)
 
@@ -40,7 +40,7 @@
   * 마이크로서비스가 자체 수정 ⭢ 스스로를 수정할 시간 허용한다.
   * 서비스에 지속적인 장애가 발생, 장시간 사용할 수 없는 경우라면 실패한 요청이 지나치게 많아지게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e1c6d7cd-573b-4c66-9373-0c2d08771aa1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e1c6d7cd-573b-4c66-9373-0c2d08771aa1.png)
 
 #### Resilience Pattern(Circuit Breaker)
 
@@ -56,7 +56,7 @@
 * **Open(열림)** : Circuit Breaker가 열린 상태. 오류가 발생하는 동안 애플리케이션이 작업을 반복적으로 실행하려고 하지 않도록 처리한다.
 * **Half Open(반열림)** : Circuit Breaker는 오류가 계속 발생하는지 확인하기 위해 몇 가지 작업을 실행한다. 오류가 발생하면 Circuit	Breaker가 열리고 오류가 발생하지 않으면 Circuit Breaker는 닫힌다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8c81140f-dcb5-4bd4-8431-dc0b3ee7601a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8c81140f-dcb5-4bd4-8431-dc0b3ee7601a.png)
 
 #### Resilience Pattern(Bulkhead Pattern)
 
@@ -66,7 +66,7 @@
   * 한 위치에서 서비스를 격리해 다른 서비스에 영향을 미치지 않도록 한다.
   * 오류 장소를 격리하고 나머지 서비스를 보호한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3e7e37a6-0417-4a72-a552-395b4b69289e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3e7e37a6-0417-4a72-a552-395b4b69289e.png)
 
 #### Resilience Pattern(Timeout Pattern)
 
@@ -76,7 +76,7 @@
 * 마이크로서비스에서 서비스 호출이 완료되는 데 너무 오래 걸리는 것을 방지한다.
 * 특정 서비스가 요청을 완료하는 데 예상보다 오래 걸리는 경우 ⭢ 요청을 취소하고 빠른 실패(fail-fast) 처리를 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/28b94c65-595e-48ed-aad0-6ff6060bb162.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/28b94c65-595e-48ed-aad0-6ff6060bb162.png)
 
 #### Resilience Pattern(Fallback Pattern)
 
@@ -89,7 +89,7 @@
   * 특정 서비스를 사용할 수 없거나 요청을 완료하는데 너무 오래 걸리는 경우
   * 오류 메시지 표시 혹은 나중에 다시 시도할 수 있는 옵션을 제공한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/49c18bb9-7b2b-474d-ae9f-ae181b33a1a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/49c18bb9-7b2b-474d-ae9f-ae181b33a1a8.png)
 
 #### Observability: Distributed Logging/Tracing
 
@@ -104,7 +104,7 @@
   * 장바구니 항목 추가 ⭢ 장바구니 서비스 ⭢ 결제 처리
   * 서비스 ⭢ 제품 카탈로그 서비스 추적
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/15d51a8e-019c-49e7-a7c0-d419b5bb3e0a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/15d51a8e-019c-49e7-a7c0-d419b5bb3e0a.png)
 
 #### Microservices: Health Checks
 

@@ -13,6 +13,6 @@
 
 #### 부하 테스트 실습
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/07cf3819-3436-470d-bd94-17ee34b53a2e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/07cf3819-3436-470d-bd94-17ee34b53a2e.png)
 
 * 부하 테스트 툴(k6)은 테스트하고자 하는 시스템과 반드시 독립적으로 분리해서 구성해야 한다. 왜냐하면 부하 테스트 툴 자체도 트래픽을 만들어내면서 컴퓨팅 리소스(CPU, 메모리 등)를 사용하기 때문이다.

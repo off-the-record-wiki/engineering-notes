@@ -5,7 +5,7 @@
 * 동기(synchronous) 방식은 순차적으로 실행되며 동기 방식은 한 작업이 끝날 때까지 다음 작업이 진행되지 않는다.
 * 비동기(asynchronous) 방식은 한 작업이 끝날 때까지 기다리지 않고 바로 다음 작업을 처리한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/afe76059-89f8-4d49-8393-9834b214f1ea.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/afe76059-89f8-4d49-8393-9834b214f1ea.png)
 
 #### 비동기 방식을 사용해도 되는 특징 정리
 
@@ -93,7 +93,7 @@ while (true) {
 
 #### 3. 비동기 연동 방법 - 트랜잭션 아웃박스 패턴
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/19fc2308-a9bd-488e-95b2-4fc10a90eb06.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/19fc2308-a9bd-488e-95b2-4fc10a90eb06.png)
 
 * 트랜잭션 아웃박스 패턴은 분산 시스템에서 데이터베이스 업데이트와 메시지 발행 사이의 원자성을 보장하기 위한 설계 패턴이다.
 * MSA 환경에서 자사 서비스 DB를 업데이트한 후 다른 서비스에 알리고자 이벤트를 발행하는데 다음과 같은 장애 시나리오가 발생할 수 있다.
@@ -139,7 +139,7 @@ while (true) {
 
 #### 5. 비동기 연동 방법 - CDC(Change Data Capture)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2202de4c-4e01-48a2-9a29-c8862ac21038.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2202de4c-4e01-48a2-9a29-c8862ac21038.png)
 
 * Oracle이나 MySQL같은 DBMS는 데이터가 변경되면 그 변경 내용을 통지하는 기능을 제공한다.
 * INSERT/UPDATE/DELETE 쿼리를 실행하면 DB의 데이터가 변경된다. DB는 변경된 데이터를 CDC 처리기에 전송한다.

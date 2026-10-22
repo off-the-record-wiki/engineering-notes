@@ -9,7 +9,7 @@
   * 프로그래밍 방식 트랜잭션 관리
     * 트랜잭션 매니저 또는 트랜잭션 템플릿 등을 사용해서 트랜잭션 관련 코드를 직접 작성하는 방식이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/be6b6f45-1c75-42d3-bed3-9be80a86ac30.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/be6b6f45-1c75-42d3-bed3-9be80a86ac30.png)
 
 * `@Transactional` 어노테이션이 특정 클래스나 메서드에 하나라도 있으면 트랜잭션 AOP는 프록시를 만들어 스프링 컨테이너에 등록한다.
 * 실제 객체 대신에 프록시인 CGLIB를 스프링 빈에 등록한다.
@@ -26,7 +26,7 @@
 
 #### 트랜잭션 AOP 주의 사항
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9de1590e-b813-4e31-ae48-155d861ecccf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9de1590e-b813-4e31-ae48-155d861ecccf.png)
 
 > [📚@Transactional](https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html)
 > 
@@ -110,11 +110,11 @@ public class InternalCallV1Test {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ca4e3c3f-beeb-4209-9a6c-e3080adb8fe4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ca4e3c3f-beeb-4209-9a6c-e3080adb8fe4.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cb2c463c-49fd-48b3-bf72-9b9077c81baf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cb2c463c-49fd-48b3-bf72-9b9077c81baf.png)
 
 * 스프링의 트랜잭션 AOP 기능은 public 메서드에만 트랜잭션을 적용하도록 기본 설정이 되어 있다. 
 

@@ -68,7 +68,7 @@ class InsufficientFunds : Exception()
 
 #### 가변 컬렉션과 읽기 전용 컬렉션의 구분
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/86ca70f2-61d9-4d12-a4d1-977e0e13222f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/86ca70f2-61d9-4d12-a4d1-977e0e13222f.png)
 
 * `Iterable`, `Collection`, `Set`, `List` 인터페이스들은 모두 읽기 전용으로 변경을 허용하는 메서드가 아예 없다.
 * `MutableIterable`, `MutableCollection`, `MutableSet`, `MutableList` 인터페이스들은 모두 가변 컬렉션으로 변경을 허용하는 메서드를 추가한다.

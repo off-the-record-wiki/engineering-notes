@@ -7,7 +7,7 @@
   * 키는 중복될 수 없으나 값은 중복될 수 있다.
   * Map은 순서를 유지하지 않는다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e63239ff-4ec0-4155-bf0d-6741ddebdae5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e63239ff-4ec0-4155-bf0d-6741ddebdae5.png)
 
 * Map은 키와 값을 보관하는 자료구조이다.
 * 키와 값을 하나로 묶어서 보관하는 것을 Entry라고 한다.
@@ -16,7 +16,7 @@
   * 특징 : 삽입, 삭제, 검색 작업은 해시 자료 구조를 사용하므로 일반적으로 `O(1)` 시간 복잡도를 가진다.
   * 순서 : 순서를 보장하지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8b6a185a-1c5d-4830-af93-8f14518e278b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8b6a185a-1c5d-4830-af93-8f14518e278b.png)
 
 * LinkedHashMap
   * 구조 : LinkedHashMap은 HashMap과 유사하지만 연결 리스트를 사용하여 삽입 순서 또는 접근 순서에 따라 요소를 유지한다.
@@ -47,7 +47,7 @@
   * 가장 먼저 넣은 것이 가장 먼저 나오는 구조이다.
   * 큐에 값을 넣는 것을 offer, 값을 빼는 것을 poll이라고 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3f323349-163e-44c8-861c-c7ba77bfd9fe.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3f323349-163e-44c8-861c-c7ba77bfd9fe.png)
 
 #### Deque(Double Ended Queue)
 

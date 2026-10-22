@@ -2,7 +2,7 @@
 
 #### 조인의 동작 원리 - NLJ
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bd7fbcfc-9eba-4753-bdad-838bbc262308.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bd7fbcfc-9eba-4753-bdad-838bbc262308.png)
 
 ```
 for each row in 바깥쪽_테이블 { -- 외부 루프
@@ -23,7 +23,7 @@ for each row in 바깥쪽_테이블 { -- 외부 루프
 
 #### NLJ와 인덱스 - Driven Table
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1a4c5563-73b2-4924-b122-2a515d05225d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1a4c5563-73b2-4924-b122-2a515d05225d.png)
 
 * 드리븐 테이블 탐색은 시작할 때마다 비용이 든다. 왜냐하면 인덱스 탐색 한 번은 루트에서 리프까지 내려가는 작업이기 때문이다.
 * 결국 같은 양을 읽어도 루프 횟수가 큰 쪽이 더 느리다. 드리븐에서 가져오는 행이 늘어나는 것은 상대적으로 싸다. 그래서 조인 튜닝의 1순위는 항상 드라이빙 테이블 결과를 줄이는 것이다.
@@ -34,7 +34,7 @@ for each row in 바깥쪽_테이블 { -- 외부 루프
 
 #### 해시 조인 - 인덱스가 없을 때
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c9f56f72-6bf9-47e8-85e3-efc4a4ee4bf5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c9f56f72-6bf9-47e8-85e3-efc4a4ee4bf5.png)
 
 * 해시 탐색은 키를 해시 함수에 넣으면 위치가 한 번에 계산된다. 따라서 행 수가 아무리 많아도 탐색 비용은 거의 일정하다.
 * 해시 테이블은 키-값 쌍을 저장하는 자료구조다. 키를 해시 함수에 넣으면 숫자가 하나 계산되는데, 그 숫자가 곧 데이터가 저장될 위치다. 저장할 때도 찾을 때도 같은 계산을 하므로 데이터가 5건이든 500만 건이든 키만 있다면 위치를 O(1) 시간 복잡도로 한 번에 찾아간다.
@@ -55,7 +55,7 @@ for each row in 바깥쪽_테이블 { -- 외부 루프
 
 * 드라이빙 테이블은 SQL에 쓴 순서대로 정해지는 것이 아니다. 옵티마이저가 비용을 계산해서 직접 고르는 것이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e56055dc-88f4-4c97-95a3-cf1a6e7baf8f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e56055dc-88f4-4c97-95a3-cf1a6e7baf8f.png)
 
 * WHERE 조건으로 결과가 가장 적게 나오는 테이블이 드라이빙 테이블이 되어야 한다. 옵티마이저는 이 통계를 기반으로 판단을 자동으로 해주고 있었던 것이다.
 

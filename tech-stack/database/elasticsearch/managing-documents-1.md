@@ -58,7 +58,7 @@
   * **TF-IDF**(Term Frequency–Inverse Document Frequency), **BM25**(Best Matching 25) 등의 알고리즘으로 문서가 쿼리에 얼마나 부합하는지 점수화한다.
   * 이 점수를 기준으로 검색 결과 랭킹을 결정한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7e935e25-017e-42e4-ade9-91e9baa71310.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7e935e25-017e-42e4-ade9-91e9baa71310.png)
 
 #### 실시간 처리
 
@@ -66,7 +66,7 @@
   * 데이터 색인과 조회가 거의 동시에 이루어진다.
   * **인메모리 버퍼**에 들어오는 문서를 모으고, 이 버퍼를 **주기적으로 flush**해 인덱스의 **새 세그먼트**를 생성하는 방식으로 구현한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/857cb65e-0fa3-4aa9-ac2f-527ccd00b272.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/857cb65e-0fa3-4aa9-ac2f-527ccd00b272.png)
 
 #### 클러스터 관리
 
@@ -104,7 +104,7 @@
 LOGS → [beats(Data Collection)] → [logstash(Data Processing)] → [elasticsearch(Storage)] → [kibana(Visualize)]
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fe6e3ec4-1dc6-4736-a537-304cf47f332a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fe6e3ec4-1dc6-4736-a537-304cf47f332a.png)
 
 **확장 구성**: 수집(beats)과 처리(logstash) 사이에 **Kafka나 Redis**를 버퍼로 두어 유입량 급증을 흡수하고 처리 단계를 분리할 수 있다.
 
@@ -126,7 +126,7 @@ LOGS → beats → [Kafka / Redis] → logstash → elasticsearch → kibana
 | **Ingest Node** | 색인 전에 필터링이나 보강 같은 데이터 변환을 처리한다 |
 | **Coordinating Node** | 클라이언트 요청을 라우팅하고 노드 간 검색 부하를 분산한다 |
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/25502a23-d375-41c2-bbf4-5d14903f062f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/25502a23-d375-41c2-bbf4-5d14903f062f.png)
 
 #### Index, Document, Shard
 
@@ -146,11 +146,11 @@ LOGS → beats → [Kafka / Redis] → logstash → elasticsearch → kibana
 * **Gateway** — Elasticsearch가 **클러스터와 인덱스의 상태를 영속화**하는 메커니즘이다. 메타데이터를 유지하며, 노드 장애 시 이 정보를 복구할 수 있다.
 * **Discovery Module** — 새 노드가 기존 클러스터에 매끄럽게 합류하도록 보장하고, 노드 상태 변화를 관리한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/523fbb1d-526b-497d-9223-935013964f14.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/523fbb1d-526b-497d-9223-935013964f14.png)
 
 #### 전체 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e9e571b-4716-4cf6-9653-54bae5c5ca2c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e9e571b-4716-4cf6-9653-54bae5c5ca2c.png)
 
 #### Replication이란
 

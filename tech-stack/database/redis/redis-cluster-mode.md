@@ -4,14 +4,14 @@
 
 #### Standalone
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f10d2d2-9478-42c3-8c45-f16634f0b69f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f10d2d2-9478-42c3-8c45-f16634f0b69f.png)
 
 * 하나의 Redis로 서비스하는 모드이다.
 * 매우 간단하고 설정이 쉬우나 고가용성(HA, High Availability)이 없고 단일 장애점(SPOF, Single Point of Failure)이 되는 문제가 있다. 이 인스턴스 하나가 죽으면 캐시/세션 전체가 사라진다.
 
 #### Replica
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/385cdbda-89e6-48ff-9e53-bffc2a83fb52.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/385cdbda-89e6-48ff-9e53-bffc2a83fb52.png)
 
 * Master Node는 쓰기 요청을 처리한다.
 * Replica Node는 주로 읽기 요청을 처리한다.(기본 설정이 읽기 전용 `replica-read-only yes`)
@@ -29,7 +29,7 @@
 
 #### Sentinel
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ffa1d1ee-83bb-458b-9c2d-2adba6228f27.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ffa1d1ee-83bb-458b-9c2d-2adba6228f27.png)
 
 * 모니터링(Monitoring) : 각 센티널은 마스터와 복제본 노드들에 주기적으로 PING 메시지를 보내서 살아있는지 확인한다.
 * 다운 판정은 2단계로 이루어진다. 오탐(네트워크 순단)으로 인한 불필요한 failover를 막기 위해서다.
@@ -47,7 +47,7 @@
 
 #### Cluster
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e84e7a50-5424-42d5-a7e5-6a048768dc71.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e84e7a50-5424-42d5-a7e5-6a048768dc71.png)
 
 * 16384개의 슬롯 : Redis 클러스터는 전체 데이터를 총 16,384개의 가상 슬롯으로 나눈다.
 * 데이터 분산 : 사용자가 데이터를 저장할 때, `CRC16(key) mod 16384` 해싱 결과값에 따라 특정 슬롯에 할당되고, 각 Master가 슬롯 구간을 나눠 담당한다.

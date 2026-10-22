@@ -7,24 +7,24 @@
 
 #### Authorization Code Grant Type
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c90933d4-b44c-4c56-a3f2-a63a1021b3eb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c90933d4-b44c-4c56-a3f2-a63a1021b3eb.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9174110d-8454-4491-9e0a-9c8c9d14caed.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9174110d-8454-4491-9e0a-9c8c9d14caed.png)
 
 * 사용자가 애플리케이션을 승인하면 인가서버는 Redirect URI로 임시 코드를 담아서 애플리케이션으로 다시 리다이렉션한다.
 * 애플리케이션은 해당 임시 코드를 인가서버로 전달하고 액세스 토큰으로 교환한다.
 * 애플리케이션이 액세스 토큰을 요청할 때 해당 요청을 클라이언트 암호로 인증할 수 있으므로 공격자가 인증 코드를 가로채서 스스로 사용할 위험이 줄어든다.
 * 액세스 토큰이 사용자 또는 브라우저에 표시되지 않고 애플리케이션에 다시 전달되는 가장 안전한 방법이므로 토큰이 다름 사람에게 노출될 위험이 줄어든다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/035e7dec-b070-4c4c-9648-e3c9f68585b8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/035e7dec-b070-4c4c-9648-e3c9f68585b8.png)
 
 * 인가서버에게 code를 요청한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/864252fe-dbb6-4022-944c-efa404d38bdb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/864252fe-dbb6-4022-944c-efa404d38bdb.png)
 
 * 사용자의 승인 및 동의 하에 인가서버가 클라이언트에게 code를 발급한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ac2eba81-f6aa-4a65-9f34-51a4e906cae5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ac2eba81-f6aa-4a65-9f34-51a4e906cae5.png)
 
 * 클라이언트의 권한 부여가 승인되고 그 결과로 토큰을 획득한다.
 
@@ -40,7 +40,7 @@
 
 #### Client Credentials Grant Type
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ed53da34-d481-4c48-b97c-acbcccfb727e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ed53da34-d481-4c48-b97c-acbcccfb727e.png)
 
 * 애플리케이션이 리소스 소유자인 동시에 클라이언트 역할을 한다.
 * 리소스 소유자에게 권한을 위임받아 리소스에 접근하는 것이 아니라 직접 애플리케이션을 사용할 목적으로 사용하는 것이다.
@@ -50,16 +50,16 @@
 
 #### Refresh Token Grant Type
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5d86a08a-84cf-442e-b35d-b2623fc8f0c7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5d86a08a-84cf-442e-b35d-b2623fc8f0c7.png)
 
 * 액세스 토큰이 발급될 때 함께 제공되는 토큰으로서 액세스 토큰이 만료되더라도 함께 발급받았던 리프레시 토큰이 유효하다면 인증 과정을 처음부터 반복되지 않아도 액세스 토큰을 재발급 받을 수 있다.
 * 한 번 사용된 리프레시 토큰은 폐기되거나 재사용이 가능하다.
 
 #### [PKCE](https://datatracker.ietf.org/doc/html/rfc7636)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/abbc4dd5-b521-47dc-bb13-4ec6faea9220.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/abbc4dd5-b521-47dc-bb13-4ec6faea9220.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1abdef95-5d77-4c6d-a257-e52f3536f4bf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1abdef95-5d77-4c6d-a257-e52f3536f4bf.png)
 
 * 코드 교환을 위한 증명 키로서 CSRF 및 권한 부여 코드 삽입 공격 방지를 위한 Authorization Code Grant Flow의 확장 버전이다.
 * 권한 부여 코드 요청시 `Code Verifier`와 `Code Challenge`를 추가해 만약 Authorization Code Grant Flow에서 `authorization code`가 탈취되었을 때, `access token`을 발급하지 못하도록 차단한다.
@@ -72,4 +72,4 @@
   * 토큰 교환시 `code_challenge_method`가 `plain`이면 인가 서버는 전달된 Code Verifier와 보관하고 있는 `Code Challenge` 문자열과 일치하는지 확인만 하면 된다.
   * `code_challenge_method`가 `S256`이면 인가 서버는 전달된 Code Verifier를 가져와서 동일한 `S256` 해시 메서드를 사용해 변환한 다음 보관된 `Code Challenge` 문자열과 비교해서 일치 여부를 판단한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fa3f5dbc-c0c2-4b78-924c-078535599c01.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fa3f5dbc-c0c2-4b78-924c-078535599c01.png)

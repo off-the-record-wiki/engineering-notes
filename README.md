@@ -1,8 +1,8 @@
-# Study
+# engineering-notes
 
 A repository of notes on the technologies I have studied and the books I have read as a backend developer.
 
-Detailed study notes live in the [Wiki](https://github.com/thought-corner/study/wiki).
+Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/engineering-notes/wiki).
 
 ## Explore
 

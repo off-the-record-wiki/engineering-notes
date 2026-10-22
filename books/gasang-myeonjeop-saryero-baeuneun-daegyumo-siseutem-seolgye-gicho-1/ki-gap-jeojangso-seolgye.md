@@ -27,7 +27,7 @@
 
 #### 이상적 상태
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/944428f9-eb27-4d66-bc73-541b5e77a77b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/944428f9-eb27-4d66-bc73-541b5e77a77b.png)
 
 * 3대의 복제(Replica) 노드 N1, N2, N3에 데이터를 복제하여 보관하는 상황을 가정하면 다음과 같다.
 * 이상적 환경이라면 네트워크가 파티션되는 상황은 절대로 일어나지 않을 것이다. N1에 기록된 데이터는 자동적으로 N2, N3에 복제된다.
@@ -35,7 +35,7 @@
 
 #### 실셰게의 분산 시스템
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/50c3ce8c-7647-445a-812c-58a6ace84c3c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/50c3ce8c-7647-445a-812c-58a6ace84c3c.png)
 
 * 분산 시스템은 파티션 문제를 피할 수 없다. 파티션 문제가 발생하면 일관성과 가용성 사이에서 하나를 선택해야만 한다.
 * 예를 들어, N3에 장애가 발생해 N1, N2와 통신할 수 없게 되면 N3에 기록되었으나 아직 N1, N2로 전달되지 않은 데이터가 있다면 N1, N2는 오래된 사본을 가지게 된다.
@@ -61,7 +61,7 @@
 
 **3. 데이터 일관성**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f2e7ee4e-c9be-42cf-9e92-83f5291ed985.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f2e7ee4e-c9be-42cf-9e92-83f5291ed985.png)
 
 * 여러 노드에 다중화된 데이터는 적절히 동기화가 되어야 한다. 정족수 합의 프로토콜을 사용하면 읽기/쓰기 연산 모두에 일관성을 보장할 수 있다.
 * N = 사본 개수
@@ -87,7 +87,7 @@
 
 #### 장애 감지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/932e98d9-5adb-49fb-9612-e49ce20294ab.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/932e98d9-5adb-49fb-9612-e49ce20294ab.png)
 
 * 모든 노드 사이에 멀티캐스팅 채널을 구축하는 것이 서버 장애를 감지하는 가장 손쉬운 방법이나 이 방법은 서버가 많을 때 비효율적이다.
 * 가십 프로토콜(gossip protocol) 같은 분산형 장애 감지 솔루션을 채택하는 편이 보다 효율적이다. 가십 프로토콜의 동작 원리는 다음과 같다.
@@ -116,7 +116,7 @@
 
 #### 쓰기 경로(Write Path)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/40a027f2-0697-485a-a156-f38844ab424c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/40a027f2-0697-485a-a156-f38844ab424c.png)
 
 * 먼저 쓰기 요청이 커밋 로그(commit log) 파일에 기록된다.
 * 데이터가 메모리 캐시에 기록된다.
@@ -124,7 +124,7 @@
 
 #### 읽기 경로(Read Path)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c00816fc-c9c2-495f-a3b6-0fc205025bf7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c00816fc-c9c2-495f-a3b6-0fc205025bf7.png)
 
 * 데이터가 메모리에 있는지 검사한다. 만약 없다면 블룸 필터로 간다.
 * 데이터가 메모리에 없으므로 블룸 필터를 검사한다.

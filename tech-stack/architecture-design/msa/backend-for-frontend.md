@@ -2,7 +2,7 @@
 
 #### Backend for Frontend
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d2349276-f85b-4911-a2dd-2ae850637e5a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d2349276-f85b-4911-a2dd-2ae850637e5a.png)
 
 * 단일 API Gateway ⭢ SPOF
   * 단일하고 복잡한 API Gateway는 아키텍처에 병목 현상을 발생시킨다.

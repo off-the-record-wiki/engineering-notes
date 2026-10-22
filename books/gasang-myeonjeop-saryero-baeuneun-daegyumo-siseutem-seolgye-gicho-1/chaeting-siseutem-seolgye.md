@@ -2,14 +2,14 @@
 
 #### [폴링](https://en.wikipedia.org/wiki/Polling_(computer_science))
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/14ad4914-027f-4ddf-b9d9-c241cdc7b819.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/14ad4914-027f-4ddf-b9d9-c241cdc7b819.png)
 
 * 클라이언트가 주기적으로 서버에게 새로운 메시지가 있는지 물어보는 방법이다.
 * 폴링 비용은 폴링을 자주하면 할수록 올라간다. 답해줄 메시지가 없는 경우에는 서버 자원이 불필요하게 낭비된다는 문제가 있다.
 
 #### [롱 폴링](https://en.wikipedia.org/wiki/Push_technology#Long_polling)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5b39bb3e-433d-4ddf-b820-2922bcc76a31.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5b39bb3e-433d-4ddf-b820-2922bcc76a31.png)
 
 * 폴링은 여러가지로 비효율적일 수 있어서 나온 기법이 롱 폴링 방식이다.
 * 롱 폴링의 경우 클라이언트는 새 메시지가 반환되거나 타임아웃 될 때까지 연결을 유지한다. 클라이언트는 새 메시지를 받으면 기존 연결을 종료하고 서버에 새로운 요청을 보내 모든 젍차를 다시 시작한다. 이 방법에는 다음과 같은 약점들이 있다.
@@ -20,21 +20,21 @@
 
 #### [웹소켓](https://en.wikipedia.org/wiki/WebSocket)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3df888cc-f751-4b93-92f9-b610afcfcb8e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3df888cc-f751-4b93-92f9-b610afcfcb8e.png)
 
 * 웹소켓(WebSocket)은 서버가 클라이언트에게 비동기 메시지를 보낼 때 널리 사용하는 기술이다.
 * 웹소켓 연결은 클라이언트가 시작한다. 한 번 맺어진 연결은 항구적이며, 양방향이다. 이 연결은 처음에는 HTTP 연결이지만 특정 핸드셰이크 절차를 거쳐 웹소켓 연결로 업그레이드된다. 이 항구적인 연결이 만들어지면 서버는 클라이언트에게 비동기적으로 메시지를 전송할 수 있는 상태가 된다.
 * 웹소켓은 일반적으로 방화벽이 있는 환경에서 잘 동작한다. 80번이나 443번처럼 HTTP 혹은 HTTPS 프로토콜이 사용하는 기본 포트번호를 그대로 사용하기 때문이다.
 * 웹소켓은 이에 더해 양방향 메시지 전송까지 가능하게 하므로, 웹소켓 대신 HTTP를 굳이 고집할 이유가 없다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/79a21648-aa44-4b2e-8155-63c10b3706a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/79a21648-aa44-4b2e-8155-63c10b3706a8.png)
 
 * 웹소켓을 이용하면 메시지를 보낼 때나 받을 때 동일한 프로토콜을 사용할 수 있으므로 설계뿐 아니라 구현도 단순하고 직관적이다.
 * 유의할 것은 웹소켓 연결은 항구적으로 유지되어야 하기 때문에 서버 측에서 연결 관리를 효율적으로 해야 한다는 것이다.
 
 #### 시스템 개략적 설계안
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/48e8b65c-382d-4939-a814-d980314e54d8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/48e8b65c-382d-4939-a814-d980314e54d8.png)
 
 **1. 무상태(Stateless) 서비스**
 * 로드밸런서 뒤에 위치한다. 로드밸런서가 하는 일은 요청을 그 경로에 맞는 서비스로 정확하게 전달한다. 로드밸런서 뒤에 오는 서비스는 모놀리틱 서비스일 수도 있고 마이크로서비스일 수도 있다.
@@ -47,7 +47,7 @@
 
 **4. 규모 확장성** 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1a4ebfd3-668d-4cc7-9303-43af9daf8493.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1a4ebfd3-668d-4cc7-9303-43af9daf8493.png)
 
 * 모든 것을 서버 한 대에 담은 설계는 좋은 점수를 받기 어렵다. SPOF가 가장 큰 문제이기 때문이다.
   * 채팅 서버는 클라이언트 사이에 메시지를 중계하는 역할을 담당한다.
@@ -73,7 +73,7 @@
 
 **1. 1 : 1 채팅을 위한 메시지 테이블**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/18851717-7af4-468f-a9a0-122854463952.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/18851717-7af4-468f-a9a0-122854463952.png)
 
 * 이 테이블의 PK는 `message_id`로, 메시지 순서를 쉽게 정할 수 있도록 하는 역할을 담당한다.
 * 두 메시지가 동시에 만들어질 수 있기 때문에, `created_at`을 사용하여 메시지 순서를 정하면 위험해진다.
@@ -90,7 +90,7 @@
 
 #### 상세 설계 - 서비스 탐색
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a23401e1-05b2-424a-87f0-b650243272d6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a23401e1-05b2-424a-87f0-b650243272d6.png)
 
 * 서비스 탐색 기능의 주된 역할은 클라이언트에게 가장 적합한 채팅 서버를 추천하는 것이다.
 * 이 때, 사용되는 기준으로는 클라이언트의 위치, 서버 용량 등이 있다.
@@ -99,7 +99,7 @@
 
 #### 상세 설계 - 1:1 채팅 메시지 처리 흐름
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/da54436e-5aad-43e4-bad7-4b6d0e4c7d00.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/da54436e-5aad-43e4-bad7-4b6d0e4c7d00.png)
 
 1. 사용자 A가 채팅 서버 1로 메시지를 전송한다.
 2. 채팅 서버 1은 ID 생성기를 사용해 해당 메시지의 ID를 결정한다.
@@ -110,7 +110,7 @@
 
 #### 상세 설계 - 여러 단말 사이의 메시지 동기화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/782929b5-895e-4a4c-bff7-97b968462f66.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/782929b5-895e-4a4c-bff7-97b968462f66.png)
 
 * 사용자 A는 2대의 단말을 사용하고 있다. 사용자 A가 전화기에서 채팅 앱에 로그인한 결과로 채팅 서버 1과 해당 단말 사이에 웹 소켓이 만들어진다.
 * 다른 기기에서 로그인한 결과 또한 별도 웹 소켓이 채팅 서버 1에 연결되어 있다.
@@ -121,4 +121,4 @@
 
 #### 상세 설계 - 소규모 그룹 채팅에서의 메시지 흐름
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1e0fc511-e774-4c3a-bc89-1025d95b31b3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1e0fc511-e774-4c3a-bc89-1025d95b31b3.png)

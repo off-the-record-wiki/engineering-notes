@@ -2,7 +2,7 @@
 
 #### 피드 발행 흐름 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cddb520c-5909-4048-85e8-ba94b32a3aa2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cddb520c-5909-4048-85e8-ba94b32a3aa2.png)
 
 * 웹 서버
   * 웹 서버는 클라이언트와 통신할 뿐 아니라 인증이나 처리율 제한 등의 기능도 수행한다.
@@ -22,7 +22,7 @@
 
 #### 팬아웃 서비스 동작 원리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2c9b058c-bd2a-4ee6-b7c7-aa9e04a56807.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2c9b058c-bd2a-4ee6-b7c7-aa9e04a56807.png)
 
 1. 그래프 데이터베이스에서 친구 ID 목록을 조회한다. 그래프 데이터베이스는 친구 관계나 친구 추천을 관리하기 적합하다.
 2. 사용자 정보 캐시에서 친구들의 정보를 조회한다. 그런 후에 사용자 설정에 따라 친구 가운데 일부를 걸러낸다.
@@ -31,7 +31,7 @@
 
 #### 피드 읽기 흐름 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/265fea0f-64c1-413d-a57b-a4ebd14c2e8d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/265fea0f-64c1-413d-a57b-a4ebd14c2e8d.png)
 
 1. 사용자가 뉴스 피드를 읽으려는 요청을 보낸다.
 2. 로드밸런서가 요청을 웹 서버 가운데 하나로 보낸다.
@@ -42,7 +42,7 @@
 
 #### 캐시 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1cf9aae5-598a-4093-b9cb-f8582af46618.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1cf9aae5-598a-4093-b9cb-f8582af46618.png)
 
 * 캐시는 뉴스 피드 시스템의 핵심 컴포넌트다.
 * 뉴스 피드 : 뉴스 피드 ID를 보관한다.

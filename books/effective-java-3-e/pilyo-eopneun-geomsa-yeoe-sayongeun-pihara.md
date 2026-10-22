@@ -4,7 +4,7 @@
 * 만약 복구가 가능하고 호출자가 그 처리를 해주길 원한다면 옵셔널 반환을 고려해보자.
 * 옵셔널로 상황 처리하기에 충분한 정보가 제공되지 않을 때만 검사 예외를 던져야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/849308e0-adb4-4cfa-bd5b-8dd9c4838125.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/849308e0-adb4-4cfa-bd5b-8dd9c4838125.png)
 
 #### 검사 예외(Checked Exception)
 * 애플리케이션 수행 중에 발생할 수 있는 예외를 검사하고 대비하라는 목적으로 사용해야 한다.

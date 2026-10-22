@@ -13,7 +13,7 @@
 
 #### 단일 인덱스와 복합 인덱스 내부 동작 차이
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/196df440-65c5-4021-8cc8-a0ee54bb5c67.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/196df440-65c5-4021-8cc8-a0ee54bb5c67.png)
 
 #### 인덱스 도입의 트레이드오프
 

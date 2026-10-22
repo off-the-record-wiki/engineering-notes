@@ -1,6 +1,6 @@
 # (Effective Java Item 47) Java - 반환 타입으로는 스트림보다 컬렉션이 낫다
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3e9a262c-730c-4240-8dc2-496dfac50ed7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3e9a262c-730c-4240-8dc2-496dfac50ed7.png)
 
 * `Stream`을 `Iterable`로 변환하는 과정에서 어댑터 메서드가 필요하다.
 * `Stream`의 경우 클래스 다이어그램을 보듯이 `Iterable`을 구현하지 않기 때문에 별도의 어댑터 메서드가 필요한 것이다.

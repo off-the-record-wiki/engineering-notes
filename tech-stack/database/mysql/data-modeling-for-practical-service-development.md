@@ -95,7 +95,7 @@ CREATE TABLE market_specific_trades (
         );
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/83afacf1-ccf4-4204-a664-a2184b314046.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/83afacf1-ccf4-4204-a664-a2184b314046.png)
 
 #### 파티셔닝 개요
 

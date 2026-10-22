@@ -2,7 +2,7 @@
 
 #### KSQLDB Join
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3b0e69b2-3ba7-4c21-9862-adb9d9099fa0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3b0e69b2-3ba7-4c21-9862-adb9d9099fa0.png)
 
 * `customer_id`를 키로 양쪽을 같은 파티션에 정렬(co-partition)해, 짝이 될 레코드가 항상 같은 태스크에 모이게 만든다.
 * 각 태스크는 한쪽을 로컬 state store에 붙들어두고, 반대쪽 레코드가 도착하면 로컬 조회 → 컬럼 병합 → 새 토픽에 발행을 이벤트 단위로 반복한다.
@@ -98,7 +98,7 @@ inner join simple_user_table b within 2 hours on a.user_id= b.user_id emit chang
 * KSQLDB는 시간의 흐름에 따른 Event Stream 데이터 처리에 기반한다.
 * 조인 데이터는 조인 대상인 Stream 또는 Table의 서로 다른 데이터 생성 시점을 감안해 생성된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/56c868ed-d137-4a47-8043-c0c669e2722d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/56c868ed-d137-4a47-8043-c0c669e2722d.png)
 
 #### 조인 시 Co-Partitioning 제약
 

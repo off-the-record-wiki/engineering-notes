@@ -2,7 +2,7 @@
 
 ## 📚 List 자료구조(RPUSH, LRANGE, LPOP)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/400adcef-2091-45c1-873b-1df854b3235c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/400adcef-2091-45c1-873b-1df854b3235c.png)
 
 * Redis에서 List는 순서대로 데이터를 저장할 수 있는 자료구조이다. 이런 특성 때문에 실제 서비스에서 스택과 큐로 주로 사용된다.
 
@@ -25,7 +25,7 @@ $ LPOP my_list # 1
 $ LPOP my_list # 2
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ab88928-fc37-4b7a-bca3-f4cc6a101f76.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9ab88928-fc37-4b7a-bca3-f4cc6a101f76.png)
 
 * **Write Back** 전략을 활용하면 된다. 
 * **Write Back** 전략이란 클라이언트의 요청이 들어오면 먼저 Redis에 데이터를 쌓아두고 클라이언트에게 먼저 응답을 반환하고나서 Redis에 쌓인 데이터를 스케줄러가 주기적으로 DB에 한꺼번에 저장하는 방식을 뜻한다. 
@@ -38,4 +38,4 @@ $ LPOP my_list # 2
 > a. 일정 시간 간격으로 업데이트: 캐시에서 변경된 데이터를 일정 시간 간격으로 모아서 한 번에 백엔드 저장소에 반영<br>
 > b. 특정 이벤트 발생 시 업데이트: 캐시의 데이터가 변경된 후 특정 이벤트가 발생했을 때 백엔드 저장소를 업데이트<br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b527bfb7-b10b-4cfa-90b4-4142bac1c7b2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b527bfb7-b10b-4cfa-90b4-4142bac1c7b2.png)

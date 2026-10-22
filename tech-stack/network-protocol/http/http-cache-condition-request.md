@@ -2,13 +2,13 @@
 
 ## 📚 캐시 기본 동작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f76af586-dd9a-4eb1-85a4-655ab0a491db.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f76af586-dd9a-4eb1-85a4-655ab0a491db.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e2df7e68-5b6e-4b42-9faa-a8a423aba217.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e2df7e68-5b6e-4b42-9faa-a8a423aba217.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6b61480c-6cc4-4ac6-b5cd-a4d89043e231.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6b61480c-6cc4-4ac6-b5cd-a4d89043e231.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/13adfc7d-b929-460c-8eb3-001625e022a1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/13adfc7d-b929-460c-8eb3-001625e022a1.png)
 
 * 캐시가 없을 때
   * 데이터가 변경되지 않아도 계속 네트워크를 통해서 데이터를 다운로드 받아야 한다.
@@ -16,13 +16,13 @@
   * 브라우저 로딩 속도가 느리다.
   * 느린 사용자 경험
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6714403b-f6f4-44a2-843d-6b0ab60c5c2d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6714403b-f6f4-44a2-843d-6b0ab60c5c2d.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/96d13646-fb20-4286-be40-aca24186b9f3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/96d13646-fb20-4286-be40-aca24186b9f3.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a6d90711-67cf-44fc-9990-9f7c459b697c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a6d90711-67cf-44fc-9990-9f7c459b697c.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ab78d4c3-94d2-48c0-8d96-6e5e282d7e45.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ab78d4c3-94d2-48c0-8d96-6e5e282d7e45.png)
 
 * 캐시가 있을 때
   * 캐시 덕분에 캐시 가능 시간동안 네트워크를 사용하지 않아도 된다.
@@ -30,11 +30,11 @@
   * 브라우저 로딩 속도가 매우 빠르다. 
   * 빠른 사용자 경험
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/198796e6-b2e7-43b0-97a7-0195c0d14a83.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/198796e6-b2e7-43b0-97a7-0195c0d14a83.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ee9c986e-688b-411d-a82a-4b17f9cefc12.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ee9c986e-688b-411d-a82a-4b17f9cefc12.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e4486cd9-f3ea-4c1f-ac0e-978aa7ec82fb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e4486cd9-f3ea-4c1f-ac0e-978aa7ec82fb.png)
 
 * 캐시 유효 시간이 초과하면 서버를 통해 데이터를 다시 조회해서 캐시를 갱신한다.
 * 이 때, 다시 네트워크 다운로드가 발생한다.
@@ -45,14 +45,14 @@
   * 서버에서 기존 데이터를 변경한다.
   * 서버에서 기존 데이터를 변경하지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/282e4c42-4d8c-4135-8c30-ae683b4b4f98.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5b276ab8-8792-4916-a3be-f96f3f355abf.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f12b9b87-2376-4598-9970-b94850d98a93.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3ad3963d-df99-4ad4-8427-65b167ecb22f.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/61dbf291-8b66-4900-b6b6-e862e0930e15.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/18f9b3f7-33f3-4147-bdd6-5ab28ac9831a.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/857456de-9a52-4d04-ac53-c4f8eac11a8b.png)
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c0838935-f772-4df7-9d70-57cb758fc2d9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/282e4c42-4d8c-4135-8c30-ae683b4b4f98.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5b276ab8-8792-4916-a3be-f96f3f355abf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f12b9b87-2376-4598-9970-b94850d98a93.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3ad3963d-df99-4ad4-8427-65b167ecb22f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/61dbf291-8b66-4900-b6b6-e862e0930e15.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/18f9b3f7-33f3-4147-bdd6-5ab28ac9831a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/857456de-9a52-4d04-ac53-c4f8eac11a8b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c0838935-f772-4df7-9d70-57cb758fc2d9.png)
 
 * 검증 헤더 추가 - `Last-Modified`
 * 캐시 유효 시간이 초과한 경우
@@ -97,9 +97,9 @@
 
 ## 📚 프록시 캐시
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/397e36a6-5d92-4ef5-af3b-36cfa1f0335a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/397e36a6-5d92-4ef5-af3b-36cfa1f0335a.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/685ccf67-5347-44c3-9d39-ed4a2534a08c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/685ccf67-5347-44c3-9d39-ed4a2534a08c.png)
 
 * 프록시 캐시 서버를 도입함으로써 원서버에 직접 접근했을 때 소요되는 시간보다 적게 걸린다.(효율적)
 

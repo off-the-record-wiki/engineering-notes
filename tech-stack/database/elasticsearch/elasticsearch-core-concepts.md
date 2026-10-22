@@ -39,9 +39,9 @@ services:
       - ELASTICSEARCH_HOSTS=http://elastic:9200 # kibana가 통신할 Elasticsearch 주소 알려주기
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c2f2a912-7d85-4a82-b528-605d86a4a9c9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c2f2a912-7d85-4a82-b528-605d86a4a9c9.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f741a192-6eaf-4d89-92da-630d02373169.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f741a192-6eaf-4d89-92da-630d02373169.png)
 
 > * ❗MySQL과 통신하려면 SQL을 사용하듯이 ElasticSearch와 통신하려면 REST API를 사용한다.
 

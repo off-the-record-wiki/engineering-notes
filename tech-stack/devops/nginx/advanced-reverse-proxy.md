@@ -4,7 +4,7 @@
 
 **1. 리버스 프록시**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d5afe233-9cf0-442d-9393-304ec0bdcb24.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d5afe233-9cf0-442d-9393-304ec0bdcb24.png)
 
 ```nginx
 location /api/ {
@@ -63,7 +63,7 @@ location /api/ {
 
 **2. 포워드 프록시**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f760c745-b9e6-446d-8781-e54c9024925d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f760c745-b9e6-446d-8781-e54c9024925d.png)
 
 * 프록시가 클라이언트 측에 서서 클라이언트 A·B의 요청을 대신 외부 서버로 보내고, 받은 응답을 각 클라이언트에게 돌려준다.
 * 외부 서버 입장에서는 프록시의 IP만 보이기 때문에 이번에는 서버가 아니라 클라이언트의 존재가 숨겨진다.
@@ -139,13 +139,13 @@ http {
 
 **1. L4 로드 밸런싱**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/faf07227-ac63-4572-ada8-aa310ebc1704.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/faf07227-ac63-4572-ada8-aa310ebc1704.png)
 
 * L4는 TCP/UDP 헤더의 출발지·목적지 IP와 Port만 보고 연결을 통째로 한 서버에 넘기기 때문에, 패킷 내용을 파싱하지 않아 오버헤드가 거의 없고 HTTP든 gRPC든 DB 프로토콜이든 가리지 않고 분산할 수 있다.
 
 **2. L7 로드 밸런싱**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d7eb236b-a078-4992-8bb9-7a58193d8172.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d7eb236b-a078-4992-8bb9-7a58193d8172.png)
 
 * L7은 TLS를 종료하고 HTTP 메시지를 해석해 URL 경로·Host·헤더·쿠키까지 보고 분배하므로, `/api`는 API 서버로 `/static`은 정적 서버로 보내거나 쿠키로 sticky session을 잡는 식의 정교한 라우팅과 캐싱·압축·WAF 같은 부가 기능이 가능하다.
 * 대신 L7은 요청마다 파싱과 암복호화 비용을 치르고 TLS 인증서를 로드밸런서가 들고 있어야 하며, 앞서 본 nginx 리버스 프록시가 바로 이 L7에 해당된다. 실제로 L4(NLB)로 트래픽을 받고 뒤에 L7(Nginx·ALB)을 두는 조합도 흔하다.
@@ -170,7 +170,7 @@ http {
 
 #### [Nginx 성능 최적화 방법](https://blog.nginx.org/blog/performance-tuning-tips-tricks)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e2b559bc-b0d1-445c-a363-047421a2240e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e2b559bc-b0d1-445c-a363-047421a2240e.png)
 
 * 리눅스에서는 열려 있는 파일뿐 아니라 네트워크 연결(소켓)도 전부 "파일 디스크립터(FD)"라는 번호표를 하나씩 받아가며, 프로세스가 동시에 가질 수 있는 번호표 개수에는 상한이 있다.
 * 리버스 프록시는 클라이언트와 연결 하나, 백엔드와 연결 하나를 동시에 열어두기 때문에 요청 한 건에 FD를 2개 쓴다. `worker_connections 4096`은 동시 요청 4096개가 아니라 실질적으로 약 2048건이다.
@@ -178,19 +178,19 @@ http {
 
 #### HTTPS SSL/TLS CA 인증서 적용 및 HTTP/2 Protocol 구현
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/860bf267-3f94-4b6d-8276-d408a69b5852.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/860bf267-3f94-4b6d-8276-d408a69b5852.png)
 
 * HTTP는 요청과 응답을 평문으로 보내기 때문에 같은 와이파이에 있는 사람, ISP, 경유하는 프록시 등 경로상의 누구나 비밀번호·쿠키·토큰을 그대로 읽을 수 있고, 내용을 바꿔치기해도 양쪽이 알아채지 못한다.
 * HTTPS는 TLS로 감싸서 기밀성(내용 암호화), 무결성(변조 시 검증 실패), 인증(인증서로 상대가 진짜 그 서버인지 확인) 세 가지를 동시에 제공하므로, 흔히 "암호화"로만 설명되지만 실제로는 인증서 검증이 중간자 공격을 막는 핵심이다.
 * 다만 암호화되는 것은 URL 경로·헤더·본문이고 접속한 도메인(SNI)과 IP는 여전히 노출되며, TLS는 전송 구간만 보호하므로 앞서 다룬 리버스 프록시에서 TLS를 종료하면 그 뒤 백엔드 구간은 다시 평문이 된다. 신뢰할 수 없는 네트워크를 지난다면 그 구간도 따로 암호화해야한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0a044556-3498-4b37-ad3a-e2f61678e2c0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0a044556-3498-4b37-ad3a-e2f61678e2c0.png)
 
 * 핸드셰이크의 목적은 암호화 자체가 아니라 상대가 진짜 그 서버인지 확인하고, 둘만 아는 세션키를 만드는 것이다. ClientHello/ServerHello로 사용할 TLS 버전과 암호 스위트를 맞추고, 서버 인증서로 신원을 확인한 뒤 키 교환을 마친다.
 * 브라우저의 인증서 검증이 실제 보안의 핵심이라서 CA 체인·도메인 일치·유효기간 중 하나라도 어긋나면 그 자리에서 연결을 끊는다. 자체 서명 인증서를 쓸 때 나오는 경고가 바로 이 단계이고, 이 검증이 없다면 중간자가 자기 공개키를 끼워 넣어 통신을 통째로 가로챌 수 있다.
 * 신원 확인과 키 합의에는 느린 비대칭키 연산을 쓰고, 핸드셰이크가 끝난 뒤 실제 데이터는 빠른 대칭키(세션키)로 암호화한다. 이 왕복 비용 때문에 keepalive로 연결을 재사용하는 것이 HTTPS 환경에서 특히 중요하며, TLS 1.3에서는 이 과정이 1-RTT로 줄어들었다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/53fdfcad-6331-453c-b9ff-28815cae51a7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/53fdfcad-6331-453c-b9ff-28815cae51a7.png)
 
 * HTTP/1.1은 한 연결에서 앞 요청의 응답이 끝나야 다음 요청이 나가는 구조라, 느린 응답 하나가 뒤의 모든 요청을 붙잡는 HOL 블로킹이 생긴다. 브라우저가 도메인당 연결을 6개까지 여는 것은 이 제약을 우회하려는 임시방편이고, "연결 여러 개"는 원인이 아니라 결과다.
 * HTTP/2는 요청·응답을 프레임 단위로 쪼개 하나의 연결 안에서 여러 스트림으로 뒤섞어 주고받으므로 서로를 기다리지 않으며, 여기에 바이너리 프레이밍·HPACK 헤더 압축·스트림 우선순위가 더해져 연결 수와 헤더 낭비가 동시에 줄어든다.

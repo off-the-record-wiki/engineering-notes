@@ -13,15 +13,15 @@
 * AI가 텍스트를 숫자로 된 좌표(Vector)로 바꿨다면, 이제 "어떤 단어들이 서로 비슷한 의미를 가질까?"를 수학적으로 계산할 수 있게 된다.
 * 두 벡터 사이의 각도 세타
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e49ad399-b199-42eb-bd1f-c883407a2d81.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e49ad399-b199-42eb-bd1f-c883407a2d81.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/81c8a918-49c5-495f-9eb1-18e56f877825.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/81c8a918-49c5-495f-9eb1-18e56f877825.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c96ecca3-1023-4435-a23d-a650b664ef68.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c96ecca3-1023-4435-a23d-a650b664ef68.png)
 
 #### Cosine Similarity(코사인 유사도)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7f6b57cf-e3ab-4135-bed7-12f3e02906cd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7f6b57cf-e3ab-4135-bed7-12f3e02906cd.png)
 
 * 수학적으로 계산하기 위해 제2 코사인 법칙(Law of Cosines)을 활용한 코사인 유사도 공식이 사용된다.
 * 백엔드 성능을 고려할 때, 이 공식은 수백 ~ 수천 차원의 엄청난 고차원 데이터 공간에서도 연산이 아주 빠르고 정확하게 잘 동작하기 때문에 LLM 생태계에서 가장 표준적으로 사용된다.
@@ -31,7 +31,7 @@
 * 이런 수학적 배경을 바탕으로 Spring AI 프레임워크는 백엔드 개발자들이 복잡한 수학 공식 없이도 유사도를 쉽게 다룰 수 있도록 수치화된 Similarity Score(유사도 점수)를 제공한다.
 * 값의 범위는 0.0 ~ 1.0으로 점수가 1에 가까울수록 완벽하게 똑같거나 매우 높은 의미적 유사성을 가진다는 뜻. 반대로 0에 가까울수록 전혀 관련 없는 데이터로 판별한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec16eb9f-796a-4b8e-b8ce-45c678a801da.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ec16eb9f-796a-4b8e-b8ce-45c678a801da.png)
 
 * 임베딩 모델을 사용해 벡터값을 계산할 수 있다.
 * Spring AI는 개발자가 다양한 Vector Database를 통일된 코드로 쉽게 다룰 수 있도록 VectorStore라는 공통 인터페이스(구현 클래스)를 제공한다.
@@ -204,7 +204,7 @@ public interface VectorStore extends DocumentWriter, VectorStoreRetriever {
 
 #### [ETL 파이프라인](https://docs.spring.io/spring-ai/reference/api/etl-pipeline.html#page-title)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c526ec87-c0dc-4c3f-a3d3-95eac8ac42ff.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c526ec87-c0dc-4c3f-a3d3-95eac8ac42ff.png)
 
 * 다양한 형태의 원본 데이터를 AI가 소화하기 가장 좋은 형태로 가공하여 DB에 밀어 넣는 ETL(Extract, Transform, Load) 파이프라인을 체계적인 클래스 구조를 말한다.
 
@@ -239,4 +239,4 @@ public interface VectorStore extends DocumentWriter, VectorStoreRetriever {
 
 #### Spring AI RAG 기본 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fa6cb343-b5da-48f7-b937-1856a7328796.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fa6cb343-b5da-48f7-b937-1856a7328796.png)

@@ -10,7 +10,7 @@
 
 #### Logstash
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ca5725bb-58b0-4280-ae36-89ca2901f495.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ca5725bb-58b0-4280-ae36-89ca2901f495.png)
 
 * L(Logstash) : 각 서버에서 로그를 수집, 변환하여 Elasticsearch로 전달하는 도구이다.
 * Logstash는 세 가지 단계(입력, 필터, 출력 구조)를 통해 움직인다.
@@ -28,7 +28,7 @@
 
 #### Logback + Logstash + Elasticsearch 아키텍처 구성
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/17b74604-1d34-46cc-8946-fdaf2fd74e47.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/17b74604-1d34-46cc-8946-fdaf2fd74e47.png)
 
 * ElasticSearch는 로그 한 줄을 각각의 Document로 만든다.
 * 터미널에서 보는 로그 한 줄이 Logstash를 거치면 JSON 덩어리 하나로 변환되는데 이걸 ElasticSearch에서는 도큐먼트(Document)라고 부른다.

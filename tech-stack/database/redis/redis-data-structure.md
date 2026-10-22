@@ -18,7 +18,7 @@ select DB 번호
 
 #### String 자료구조 - SDS 구조와 3가지 인코딩
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-string-encoding.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-string-encoding.png)
 
 * 값의 형태에 따라 3가지 인코딩 방식이 **자동으로 선택**된다 → 메모리 효율을 위해서
   * `int` : 값이 64비트 정수로 표현 가능할 때. Redis 객체 헤더(16바이트) + 정수값(8바이트) = 약 24바이트
@@ -29,17 +29,17 @@ select DB 번호
 
 #### String 자료구조 - SET / GET
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-set-get.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-set-get.png)
 
 #### String 자료구조 - 카운터 명령어(INCR / DECR / INCRBY / DECRBY)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-counter-commands.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-counter-commands.png)
 
 * `INCR`, `DECR`, `INCRBY`, `DECRBY`의 명령어에서 만약 키가 존재하지 않는 경우 카운터 초기화와 증감 연산을 모두 처리해준다.
 
 #### String 자료구조 - 싱글 스레드와 원자적 연산
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-atomic-incr.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-atomic-incr.png)
 
 * Redis는 기본적으로 싱글 쓰레드(Single-Thread) 모델 위에서 동작한다. 즉, 여러 클라이언트가 동시에 `INCR` 요청을 보내더라도 Redis 서버 내부에서는 이 요청들이 순차적으로 하나씩 처리된다.
 * 한 번에 하나의 명령어만 처리하기 때문에 한 명령어가 수행되는 동안 다른 명령어가 끼어들어 데이터(값)를 수정할 수 없다.
@@ -53,13 +53,13 @@ select DB 번호
 
 #### String 자료구조 - 네트워크 RTT(Round Trip Time)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-rtt-comparison.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-rtt-comparison.png)
 
 * Redis 자체의 처리 시간은 짧으나 네트워크 왕복 시간은 Redis가 제어를 할 수 없는 영역이다.
 
 #### String 자료구조 - MSET / MGET
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-mset-mget.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-mset-mget.png)
 
 * RTT(Round Trip Time) 자체를 줄이기 위해 여러 값을 읽고 넣을 수 있는 `MSET`, `MGET`을 제공한다.
 * 서로 다른 종류의 명령을 한 번에 몰아 보내려면 **파이프라이닝(Pipelining)** 을 사용한다.(Redis Pipelining & RTT 문서 참고)
@@ -67,7 +67,7 @@ select DB 번호
 
 #### String 자료구조 - TTL 관리(SETEX / SETNX / SET 옵션)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-set-options.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-set-options.png)
 
 * 메모리는 제한적이기 때문에 만료일자를 지정해두고 사용해서 오래된 데이터를 제거해주어야 한다.
 * `SETEX key seconds value` : 저장과 동시에 TTL을 부여한다.
@@ -76,7 +76,7 @@ select DB 번호
 
 #### List 자료구조 - 전체 구조와 시간 복잡도
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-list-structure.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-list-structure.png)
 
 * Redis의 List 자료구조는 **논리적으로는** 양방향 연결 리스트(Doubly Linked List)처럼 동작한다.(실제 내부 구현은 아래의 quicklist)
 * 어느 지점을 건드리는지에 따라 성능이 극명히 갈린다.
@@ -97,7 +97,7 @@ select DB 번호
 
 #### List 자료구조 - LPUSH / RPUSH
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-lpush-rpush.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-lpush-rpush.png)
 
 * `LPUSH` : 가장 앞은 단 한 번에 찾을 수 있기 때문에 시간 복잡도는 O(1)이다.
 * `RPUSH` : Redis의 List는 양방향 구조이므로 마지막 노드를 찾기 위해 전체를 순회할 필요가 없다. 그렇기 때문에 시간 복잡도는 O(1)이다.
@@ -105,7 +105,7 @@ select DB 번호
 
 #### List 자료구조 - LPOP / RPOP
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-lpop-rpop.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-lpop-rpop.png)
 
 * `LPOP` : `LPUSH`와 마찬가지로 O(1)이다.
 * `RPOP` : `RPUSH`와 마찬가지로 O(1)이다.
@@ -114,7 +114,7 @@ select DB 번호
 
 #### List 자료구조 - LRANGE
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-lrange.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-lrange.png)
 
 * `LRANGE`는 리스트의 start 인덱스부터 stop 인덱스까지의 모든 요소를 가져온다.(start와 stop **모두 포함**)
   * 양수 인덱스(0부터 시작)
@@ -127,7 +127,7 @@ select DB 번호
 
 #### List 자료구조 - LLEN / LINDEX
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-llen-lindex.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-llen-lindex.png)
 
 * `LLEN`
   * Redis는 List 객체 내부에 `len` 필드를 두고 요소가 추가되거나 삭제될 때마다 이 값을 갱신한다.
@@ -139,7 +139,7 @@ select DB 번호
 
 #### Set 자료구조 - 네 가지 성질
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-set-structure.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-set-structure.png)
 
 **1. 중복 없는 컬렉션**
 
@@ -165,7 +165,7 @@ select DB 번호
 
 #### Set 자료구조 - SADD / SREM
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-sadd-srem.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-sadd-srem.png)
 
 **1. SADD(Set ADD) - 요소 추가**
 
@@ -183,7 +183,7 @@ select DB 번호
 
 #### Set 자료구조 - SMEMBERS / SISMEMBER
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-smembers-sismember.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-smembers-sismember.png)
 
 **1. SMEMBERS - 모든 요소 조회**
 
@@ -202,7 +202,7 @@ select DB 번호
 
 #### Hash 자료구조 - 네 가지 성질
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-hash-structure.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-hash-structure.png)
 
 **1. Field-Value 쌍 저장**
 
@@ -226,7 +226,7 @@ select DB 번호
 
 #### Hash 자료구조 - HSET / HGET
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-hset-hget.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-hset-hget.png)
 
 **1. HSET(Hash SET) - 필드 설정**
 
@@ -248,7 +248,7 @@ select DB 번호
 
 #### Hash 자료구조 - HMSET / HMGET
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-hmset-hmget.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-hmset-hmget.png)
 
 **1. HMSET(Hash Multiple SET) - 여러 필드 설정**
 
@@ -267,7 +267,7 @@ select DB 번호
 
 #### Hash 자료구조 - HINCRBY / HINCRBYFLOAT
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-hincrby.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-hincrby.png)
 
 **1. HINCRBY - 정수 증가**
 
@@ -290,7 +290,7 @@ select DB 번호
 
 #### Hash 자료구조 - HEXISTS / HKEYS / HVALS
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-hash-info.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-hash-info.png)
 
 **1. HEXISTS - 필드 존재 확인**
 
@@ -312,7 +312,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - 네 가지 성질
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zset-structure.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zset-structure.png)
 
 **1. 중복 없는 요소(Set의 유일성)**
 
@@ -336,7 +336,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - ZADD
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zadd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zadd.png)
 
 **1. 요소 존재 여부 확인(추가 또는 업데이트 분기)**
 
@@ -357,7 +357,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - ZRANGE / ZREVRANGE
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zrange.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zrange.png)
 
 * ZRANGE(오름차순 조회)
 * ZREVRANGE(내림차순 조회) - Redis 6.2부터는 `ZRANGE key start stop REV` 형태로 통합되었다.
@@ -369,7 +369,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - ZRANK / ZREVRANK
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zrank.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zrank.png)
 
 * ZRANK(오름차순 순위)
 * ZREVRANK(내림차순 순위)
@@ -380,7 +380,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - ZINCRBY
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zincrby.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zincrby.png)
 
 * ZINCRBY(점수 증감 명령어)
 * 양수/음수 모두 가능(증가 및 감소) : 덧셈, 뺄셈과 같은 기본 연산이 가능하며 만약 키나 요소가 존재하지 않는다면 초기값을 0으로 간주하고 입력한 값으로 새롭게 요소를 생성한 뒤 정렬 위치를 맞춘다.
@@ -388,7 +388,7 @@ select DB 번호
 
 #### Sorted Set 자료구조 - ZREM
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/redis-zrem.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/redis-zrem.png)
 
 * ZREM(요소 삭제 명령어)
 * 지정 요소 삭제 및 다중 삭제(Multiple Deletion) : 특정 요소 1개만 지울 수도 있지만, 여러 개의 요소를 한 번의 명령어로 동시에 지울 수도 있다.

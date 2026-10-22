@@ -18,7 +18,7 @@
 * Manager 노드에서 Swarm 모드 활성화
 * Worker 노드를 Manager 노드에 등록
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/249bea5a-55e0-4c88-8bef-4b92c557a2d3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/249bea5a-55e0-4c88-8bef-4b92c557a2d3.png)
 
 ## 📚 [Docker Swarm Service](https://docs.docker.com/engine/swarm/services/)
 

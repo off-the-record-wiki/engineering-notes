@@ -44,15 +44,15 @@ public class X {
 
 > 경우 1 : 순차 실행(Thread-1 먼저 도달)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5f1d7f40-5e71-49f3-a7fe-ab48fa44195b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5f1d7f40-5e71-49f3-a7fe-ab48fa44195b.png)
 
 > 경우 2 : 순차 실행(Thread-2 먼저 도달)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6315d67d-8c95-42d9-8da9-f057ce5edeb2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6315d67d-8c95-42d9-8da9-f057ce5edeb2.png)
 
 > 경우 3 : 읽기와 쓰기 사이에서 선점
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cf3396b9-b03a-4344-b443-62034c136795.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cf3396b9-b03a-4344-b443-62034c136795.png)
 
 #### 동시성 방어 원칙 1 : 단일 책임 원칙(SRP)
 

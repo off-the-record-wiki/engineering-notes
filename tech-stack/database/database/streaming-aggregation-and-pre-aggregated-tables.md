@@ -2,7 +2,7 @@
 
 #### 인덱스 정렬 대신 스트리밍 집계는?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67885e23-db40-4712-82d6-58b4fa257ba7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67885e23-db40-4712-82d6-58b4fa257ba7.png)
 
 * MySQL이 `GROUP BY`를 처리하는 방식은 크게 3가지로 나뉜다.
 

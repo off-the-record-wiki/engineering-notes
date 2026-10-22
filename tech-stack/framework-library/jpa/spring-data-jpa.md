@@ -2,7 +2,7 @@
 
 ## 📚 공통 인터페이스 구성
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0f629665-44d7-4566-bd7c-3bc5ce9fd60e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0f629665-44d7-4566-bd7c-3bc5ce9fd60e.png)
 
 * 핵심 인터페이스 목록
   * JpaRepository

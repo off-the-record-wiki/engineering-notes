@@ -62,11 +62,11 @@ Server: Docker Desktop 4.42.0 (195023)
   * 격리된 시스템 자원 및 네트워크를 사용할 수 있는 독립적인 실행 단위
   * 읽기 전용 상태인 이미지에 변경된 사항을 저장할 수 있는 컨테이너 계층에 저장
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/964f4856-8b48-4902-805b-b22b8e67cfdd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/964f4856-8b48-4902-805b-b22b8e67cfdd.png)
 
 ### [ Docker Container LifeCycle ] : Docker Container 실행과 중지에 따른 상태 변화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/35146e49-00a3-419d-ab16-4fea42ee7f9a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/35146e49-00a3-419d-ab16-4fea42ee7f9a.png)
 
 > [참고 - Docker Hub](https://hub.docker.com/)
 
@@ -79,5 +79,5 @@ Server: Docker Desktop 4.42.0 (195023)
 $ docker run -p host_port:container_port <IMAGE_NAME>
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/328fe2f4-e5b4-4c02-bc81-d4eb8f8e3ea0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/328fe2f4-e5b4-4c02-bc81-d4eb8f8e3ea0.png)
 > [참고](https://linuxhandbook.com/docker-port-mapping/)

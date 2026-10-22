@@ -5,9 +5,9 @@
 * 스프링 시큐리티에서 사용자가 인증을 한 이후 요청에 대해 계속 사용자 인증 상태를 유지하기 위해 사용되는 클래스이다.
 * 인증 상태 영속 메커니즘은 사용자가 인증을 하게 되면 해당 사용자 인증 정보와 권한이 `SecurityContext`에 저장되고 `HttpSession`을 통해 요청 간 영속성이 이루어지는 방식이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dddca966-bb52-4eda-aa98-552cb63dfe72.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dddca966-bb52-4eda-aa98-552cb63dfe72.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e41020c6-d5b6-4af3-b54f-0e2f6583043f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e41020c6-d5b6-4af3-b54f-0e2f6583043f.png)
 
 * `HttpSesssionSecurityContextRepository` : 요청 간 `HttpSession`에 보안 컨텍스트 저장, 후속 요청 시 컨텍스트 영속성 유지
 * `RequestAttributeSecurityContextRepository` : `ServletRequest`에 보안 컨텍스트 저장, 후속 요청 시 컨텍스트 영속성 유지 불가
@@ -28,6 +28,6 @@
 >❗`SecurityContextHolder`는 내부적으로 쓰레드 로컬을 사용하기 때문에 만약 WAS 내부의 쓰레드 풀에서 쓰레드가 재사용될 경우 쓰레드 로컬은 쓰레드가 종료될 때까지 값이 유지되기 때문에 이전 요청의 인증 정보가 그대로 남아있을 수 있는 가능성이 있다.<br> 
 >❗만약 명시적으로 비워주지 않게 된다면 권한 오염 문제가 발생한다.<br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8dc56b4e-5cdf-4a59-906c-cafd128816f1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8dc56b4e-5cdf-4a59-906c-cafd128816f1.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/43ec3be2-c72d-46a2-842a-3be9dfba3929.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/43ec3be2-c72d-46a2-842a-3be9dfba3929.png)

@@ -34,17 +34,17 @@
 * 이 내장 톰켓 서버가 서블릿 컨테이너에 서블릿을 생성한다.
 * 이 서블릿 컨테이너가 종료되면 서블릿 역시 함께 종료된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7fa14010-c0f9-4b5d-bd0e-00ac1dddd460.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7fa14010-c0f9-4b5d-bd0e-00ac1dddd460.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/32cb1ca6-1695-464e-8ef0-5623e481d237.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/32cb1ca6-1695-464e-8ef0-5623e481d237.png)
 
 > [📚Servlet Container](https://en.wikipedia.org/wiki/Web_container)
 >
 > * 서블릿 컨테이너는 서블릿 생명주기를 관리하고 특정 URL을 특정 서블릿에 매핑하며, URL 요청자가 적절한 접근 권한을 가지고 있는지 확인하는 역할을 담당한다.
 > * 서블릿 컨테이너는 서블릿, JSP, 그리고 서버 측 코드를 포함하는 기타 파일들에 대한 요청을 처리한다. 서블릿 컨테이너는 서블릿 인스턴스를 생성하고, 서블릿을 로드 및 언로드하며, 요청 및 응답 객체를 생성/관리하고 그 외의 다양한 서블릿 관리 작업을 수행한다.
-> ![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a1adddf3-dc8f-4fc3-9df2-5d77387d83c6.png)
+> ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a1adddf3-dc8f-4fc3-9df2-5d77387d83c6.png)
 > 
 > * 쓰레드(OS & JVM) : OS 스케줄러와 JVM이 쓰레드 생성, CPU 할당, 컨텍스트 스위칭을 관리하고 자바에서 Thread 객체는 JVM 메모리 영역을 차지하며 실행된다.
 > * 서블릿(Servlet Container & WAS) : 서블릿 컨테이너가 관리한다. 컨테이너는 서블릿의 `init()`, `service()`, `destroy()`라는 생명주기를 관리하며, 개발자는 비즈니스 로직에만 집중하게 해준다.

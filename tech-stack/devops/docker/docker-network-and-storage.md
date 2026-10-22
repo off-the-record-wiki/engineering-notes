@@ -4,7 +4,7 @@
 
 * Container Isolation : Docker Container는 격리된 환경에서 작동한다. -> 즉, 다른 Container와 통신이 불가능하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/543bc2ab-f764-4eec-8d2b-19f929897559.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/543bc2ab-f764-4eec-8d2b-19f929897559.png)
 
 ### [ Docker Network Type ]
 

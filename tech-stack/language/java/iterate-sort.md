@@ -18,7 +18,7 @@ public interface Iterator<E> {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eb41d89d-f88f-41f2-be29-06fde0d40908.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eb41d89d-f88f-41f2-be29-06fde0d40908.png)
 
 * 최상위 인터페이스에 Iterable이 있고 컬렉션 인터페이스가 이 인터페이스를 상속받고 하위 클래스가 구현을 하기 때문에 컬렉션을 구현한 클래스들은 전부 순회가 가능하다. 
 

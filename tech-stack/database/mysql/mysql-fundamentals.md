@@ -313,7 +313,7 @@ WHERE email = 'withdraw@example.com';
 
 #### MySQL SELECT Guide - S-Lock / X-Lock과 읽기·쓰기 차단
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ec4761ff-3017-4003-805a-0f9af91ddb44.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ec4761ff-3017-4003-805a-0f9af91ddb44.png)
 
 * X-Lock은 다른 트랜잭션의 쓰기와 잠금 읽기(FOR SHARE / FOR UPDATE)를 차단한다. 이 때, 주의할 점은 일반 SELECT는 MVCC 스냅숏을 읽으므로 X-Lock에 블로킹되지 않는다.
 * 일반 SELECT는 락을 잡지 않는 일관된 비잠금 읽기(consistent nonlocking read)다.
@@ -359,7 +359,7 @@ SELECT * FROM orders WHERE status = 'PAID' ORDER BY created_at DESC;
 * 메모리 정렬이면 버퍼에서 바로 반환한다.
 * `External Sort`면 병합된 임시 파일에서 읽어서 반환한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9c8375ec-4f03-4c75-b426-39fb1515f9d5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9c8375ec-4f03-4c75-b426-39fb1515f9d5.png)
 
 #### MySQL SELECT Guide - ORDER BY 컬럼 순서와 성능
 

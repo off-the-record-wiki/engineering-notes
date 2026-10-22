@@ -11,7 +11,7 @@
 
 ***
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ac806aed-92f7-48c7-b00f-724d87dbf0fa.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ac806aed-92f7-48c7-b00f-724d87dbf0fa.png)
 
 #### DI(Dependency Injection)을 이용한 의존 객체 사용
 

@@ -2,7 +2,7 @@
 
 #### JCA(Java Cryptography Architecture) & JCE(Java Cryptography Extention)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/56850edb-bea6-4e16-9767-7e82b7b065fe.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/56850edb-bea6-4e16-9767-7e82b7b065fe.png)
 
 * 자바는 JCA & JCE 프레임워크를 통해 자체적인 보안 관련 기능을 제공하고 있으며 전자서명(Digital Signature), 메시지 다이제스트(Message Digest, hashs), 인증서와 인증
 서 유효성 검사(Certificate Validation), 키 생성 및 관리 그리고 보안 랜덤 수(Secure Random Number) 생성 등 현대 정보 통신 암호 기술 중에서 필수적인 것은 모두 제공하
@@ -12,7 +12,7 @@
 
 **1. MessageDigest - 입력 정보의 메시지 다이제스트(해시)를 계산하는 데 사용**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/029eda12-b98b-4b9c-aff5-21533356d6a8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/029eda12-b98b-4b9c-aff5-21533356d6a8.png)
 
 * 메시지 다이제스트의 목적은 원본 파일이 그대로인지 파악하는 무결성 검사이다.
 * 메시지 다이제스트 알고리즘은 입력 값으로 전달된 다양한 길이의 원본 값을 고정 길이 해시 값으로 출력한다.
@@ -20,7 +20,7 @@
 
 **2. Signature - 초기화 시 전달받은 키를 가지고 데이터를 서명하고 전자 서명 유효성을 판단하는데 사용**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/48959bd8-3e98-4a45-8c05-55e45ecaca51.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/48959bd8-3e98-4a45-8c05-55e45ecaca51.png)
 
 * `Signature` 객체는 개인키로 서명하기 위해 초기화되고 서명할 원본 데이터가 제공된다. `Signature.sign()`은 개인키로 원본 데이터를 서명하면 해시된 데이터를 암호화한 Signature Bytes를 반환한다.
 * 검증이 필요한 경우 검증을 위해 `Signature` 객체를 생성 및 초기화하고 개인키와 쌍을 이루는 해당 공개 키를 제공한다. 원본 데이터와 Signature Bytes가 검증 `Signature` 객체에 전달되고 `verify()`를 실행하면 공개키로 Signature Bytes의 해시 데이터를 추출하고 원본 데이터를 해시한 값과 비교해서 일치하면 Signature 객체가 성공을 보고한다.
@@ -36,7 +36,7 @@
 
 > **MAC(Message Authentication Code)**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f873b14-7998-462f-b6a3-48d603893eab.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f873b14-7998-462f-b6a3-48d603893eab.png)
 
 * 메시지 인증 코드는 데이터가 변조(수정, 삭제, 삽입 등) 되었는지를 검증할 수 있도록 데이터에 덧붙이는 코드이다.
 * 해시 값을 생성한다는 점에서 메시지 다이제스트와 비슷하지만, 초기화 시 비밀키(SecretKey, 대칭키)를 요구한다는 점에서 다르다.
@@ -54,13 +54,13 @@
 
 > **RSA(Ron Rivest, Adi Shamir, Leonard Adleman)**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2aae7295-9035-4ed5-8f25-97e3da551b12.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2aae7295-9035-4ed5-8f25-97e3da551b12.png)
 
 * 현재 SSL/TLS에 가장 많이 사용되는 공개키 암호화 알고리즘으로 전세계 대부분의 인터넷 뱅킹(대한민국 포함)이 이 RSA-2048 암호화를 사용한다.
 
 #### Key 생성 모델 - Key
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/690e6c9f-6fd7-4b67-a69a-b160b878814a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/690e6c9f-6fd7-4b67-a69a-b160b878814a.png)
 
 * JCA에서 지원하는 모든 종류의 키에 대한 최상위 인터페이스이다.
   * `getAlgorithm()` : 키 알고리즘은 보통 대칭키 암호 방식(AES,DSA 등) 또는 비대칭키 연산 알고리즘(RSA)이다.
@@ -69,19 +69,19 @@
 
 #### Key 생성 모델 - KeyPair
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c0602d9e-1fe6-4d79-bd04-a8377275f317.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c0602d9e-1fe6-4d79-bd04-a8377275f317.png)
 
 * 키 쌍(공개 키와 개인 키)을 보관하고 접근할 수 있는 기능만 제공한다.
 
 #### Key 생성 모델 - KeyPairGenerator
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6bf4f144-9d63-4f93-829c-4b37799797f3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6bf4f144-9d63-4f93-829c-4b37799797f3.png)
 
 * 공개 및 개인 키 쌍을 생성하는 데 완전히 새로운 객체를 생성한다.
 
 #### Key 생성 모델 - KeyFactory
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de99c48e-094d-4ba0-ae08-17d61ea83e27.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de99c48e-094d-4ba0-ae08-17d61ea83e27.png)
 
 * 어떤 키 데이터 객체를 다른 타입의 키 데이터 객체로 전환하는데 사용한다.
 
@@ -106,7 +106,7 @@
 
 **2. JWS 구조**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ca36ddce-2ede-4131-b2e6-0cc3729eb866.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ca36ddce-2ede-4131-b2e6-0cc3729eb866.png)
 
 * JOSE Header
   * 일반적으로 JWT인 토큰 유형과 HMAC SHA256 또는 RSA와 같은 서명 알고리즘의 두 부분으로 구성된다.
@@ -138,7 +138,7 @@
 
 #### JWK
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5d2401e7-52da-4b65-84bd-f5b0cda8a4df.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5d2401e7-52da-4b65-84bd-f5b0cda8a4df.png)
 
 * 암호화 키를 저장하는 방식으로 인가서버에서 발행하는 JWT 토큰의 암호화 및 서명에 필요한 암호화 키의 다양한 정보를 담은 JSON 객체 표준이다.
 * JwkSetUri 정보를 설정하면 인가서버로부터 JWK 형태의 정보를 다운로드할 수 있고 JWT 를 검증할 수 있다.
@@ -147,19 +147,19 @@
 * 자바 표준 보안 클래스를 사용하여 대칭키, 비대칭키 방식의 JWT 의 암호화 및 전자서명, 이후 검증을 위한 키 생성, 변환 등을 지원한다.
 * 구현체로서 `RSAKey`, `OctetSequenceKey`, `ECKey`, `OctetKeyPair`가 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de9c8474-4d9d-4940-839c-dc5b21e55a6f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de9c8474-4d9d-4940-839c-dc5b21e55a6f.png)
 
 * 공개키 기반 암호화 방식인 RSA 의 JSON Web Key 구현체로서 RSA JWK 의 가져오기와 내보내기를 지원한다.
 * PrivateKey와 PublicKey를 전달하여 새로운 RSAKey 를 생성할 수 있다.
 * JWT Claims을 PrivateKey로 서명하고 PublicKey로 검증할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/10f1945b-5d8b-4505-a6c8-8b5acdfde8f3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/10f1945b-5d8b-4505-a6c8-8b5acdfde8f3.png)
 
 * 대칭키 기반 암호와 방식의 JSON Web Key 구현체이다.
 * SecretKey를 전달하여 새로운 OctetSequenceKey를 생성할 수 있다.
 *  JWT Claims을 SecretKey로 서명하고 검증할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/08093850-700e-4724-a1c6-33988cf4d473.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/08093850-700e-4724-a1c6-33988cf4d473.png)
 
 * 암호화 알고리즘 방식에 따라 JWK의 구현체가 있고 각 구현체를 편리하게 생성할 수 있는 제너레이터 클래스이다.
   * `RSAKeyGenerator` – 비대칭 암호화 알고리즘 키를 포함하는 JWK 생성기

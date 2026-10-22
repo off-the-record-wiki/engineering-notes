@@ -6,7 +6,7 @@
 * Image : 그 설계도로 구워낸 읽기 전용 스냅샷. 불변이라 어디서 띄워도 똑같이 동작
 * Container : 이미지 위에 쓰기 레이어를 얹어 실제로 돌아가는 프로세스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/03380fdc-2029-40da-9d91-21d156a9fca7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/03380fdc-2029-40da-9d91-21d156a9fca7.png)
 
 #### Deployment Strategies
 
@@ -15,7 +15,7 @@
 * Canary : 마이크로서비스 하위 집합에 업데이트를 배포 ⭢ 시간이 지남에 따라 나머지 마이크로서비스에 업데이트를 점진적으로 롤아웃
 * A/B Test : 마이크로서비스 하위 집합에 업데이트를 배포 ⭢ 업데이트된 마이크로서비스의 성능을 수정되지 않은 마이크로서비스의 성능과 비교
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0df6c898-a423-4803-ae0a-526b05144cea.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0df6c898-a423-4803-ae0a-526b05144cea.png)
 
 #### Infrastructure as Code(IaC)
 

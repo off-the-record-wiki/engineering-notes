@@ -27,7 +27,7 @@ public class KafkaProducerConfig {
 
 #### Producer 메시지 비동기화 전송 방식과 동기화 전송 방식 비교
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0c12ea56-4ccf-43ef-9215-653836b91941.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0c12ea56-4ccf-43ef-9215-653836b91941.png)
 
 #### Sync(동기 방식)
 
@@ -44,7 +44,7 @@ public class KafkaProducerConfig {
 
 #### Callback을 이용한 Producer와 브로커와의 메시지 전송/재전송
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ae7a16a7-7abf-4985-8cda-51e2cb6e1edd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ae7a16a7-7abf-4985-8cda-51e2cb6e1edd.png)
 
 * `Ack`로 응답을 보낼 때, 내부에 실행 결과 혹은 Exception이 담기게 된다.
 
@@ -126,7 +126,7 @@ public class KafkaProducerConfig {
 
 #### Acks = 0인 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3ab82ce1-ef4e-4c71-b3f6-82080946bf8f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3ab82ce1-ef4e-4c71-b3f6-82080946bf8f.png)
 
 * Producer는 Broker가 메시지를 정상적으로 받았는가에 대한 `Ack` 메시지를 받지 않고 다음 메시지를 바로 전송한다.
 * 메시지가 제대로 전송되었는지 브로커로부터 확인을 받지 않기 때문에 메시지가 브로커에 기록되지 않더라도 재전송되지 않는다.
@@ -134,7 +134,7 @@ public class KafkaProducerConfig {
 
 #### Acks = 1인 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/89e9f547-4fe4-48dd-a4cc-b23063b1699f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/89e9f547-4fe4-48dd-a4cc-b23063b1699f.png)
 
 * Producer는 Broker가 메시지를 정상적으로 받았는가에 대한 `Acks` 메시지를 받고 다음 메시지를 전송한다. 만약 오류 메시지를 브로커로부터 받았다면 이전에 보냈던 메시지를 재전송한다.
 * 메시지가 모든 Replication에 복제되었는가의 여부는 확인하지 않고 메시지를 전송한다.
@@ -142,7 +142,7 @@ public class KafkaProducerConfig {
 
 #### Acks = all인 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c68eb738-22ad-4fcd-b5ae-7e817438803c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c68eb738-22ad-4fcd-b5ae-7e817438803c.png)
 
 * Producer는 Leader Broker가 메시지를 정상적으로 받은 뒤 `min.insync.replicas` 개수 만큼의 Replication에 복제를 수행한 뒤에 보내는 `Ack` 메시지를 받은 후 다음 메시지를 바로 전송한다.
 * 이 때, 오류 메시지를 브로커로부터 받았다면 처음에 보낸 메시지를 재전송한다.
@@ -169,7 +169,7 @@ public class KafkaProducerConfig {
 
 #### Producer 메시지 배치 전송 내부 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b45819b1-1048-4f93-ae16-b5d24e97c1bf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b45819b1-1048-4f93-ae16-b5d24e97c1bf.png)
 
 * `KafkaProducer` 객체의 `send()` 메서드는 호출 시마다 하나의 `ProducerRecord`를 입력하지만 바로 전송되지않고 내부 메모리에서 단일 메시지를 토픽 파티션에 `Record Batch`단위로 묶인 뒤 전송된다.
 * 메시지들은 `Producer Client`의 내부 메모리에 여러 개의 Batch들로 `buffer.memory` 설정 사이즈만큼 보관될 수 있으며 여러 개의 Batch들로 한꺼번에 전송될 수 있다.
@@ -195,7 +195,7 @@ public class ProducerRecord<K, V> {
 
 #### Record Batch와 Record Accumulator 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a0bce108-0a0a-4ff8-93b5-ac1103c518bb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a0bce108-0a0a-4ff8-93b5-ac1103c518bb.png)
 
 * `Record Accumulator`는 `Partitioner`에 의해서 메시지 배치가 전송이 될 토픽과 파티션에 따라 저장되는 KafkaProducer 메모리 영역이다.
 * `Sender Thread`는 `Record Accumulator`에 누적된 메시지 배치를 꺼내서 브로커로 전송한다.
@@ -203,7 +203,7 @@ public class ProducerRecord<K, V> {
 
 #### linger.ms와 batch.size 파라미터 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e8c7f08-5b6d-44d5-9f18-98b1f2e1d79a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e8c7f08-5b6d-44d5-9f18-98b1f2e1d79a.png)
 
 * `Sender Thread`는 기본적으로 전송할 준비가 되어 있다면 `Record Accumulator`에서 1개의 Batch를 가져갈수도, 여러 개의 Batch를 가져갈 수도 있다. 또한 Batch에 메시지가 다 차지 않더라도 가져갈 수 있다.
 * `linger.ms`를 0보다 크게 설정하면 `Sender Thread`가 하나의 Batch Record를 가져갈 때까지 일정 시간 대기하여 `Record Batch`에 메시지를 많이 채울 수 있도록 설정할 수 있다.
@@ -211,40 +211,40 @@ public class ProducerRecord<K, V> {
 
 #### 전송/재전송 내부 메커니즘
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/db40264e-b7eb-4952-aa4e-746412e57d9f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/db40264e-b7eb-4952-aa4e-746412e57d9f.png)
 
 * `retries`와 `delivery.timeout.ms`를 이용해 재전송 횟수를 조정한다.
 * `retries`는 재전송 횟수를 설정한다.
 * `delivery.timeout.ms`는 메시지 재전송을 멈출 때까지의 시간이다.
 * `retries` 설정 횟수만큼 재전송을 시도하다가 `delivery.timeout.ms`가 되면 재전송을 중지한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bd3494b8-34a1-4fd5-8d6e-d5ca16aabe94.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bd3494b8-34a1-4fd5-8d6e-d5ca16aabe94.png)
 
 * `retry.backoff.ms`는 재전송 주기 시간을 설정한다.
 * `request.timeout.ms`만큼 기다린 후 재전송하기 전 30ms 이후 재전송을 시도한다. 이와 같은 방식으로 총 10회를 시도하고 더 이상 retry를 하지 않는다.
 * 만약 10회 이내에 `delivery.timeout.ms`에 도달하면 더 이상 retry를 하지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c73125be-8e09-45d5-93c5-6fa7d040bf05.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c73125be-8e09-45d5-93c5-6fa7d040bf05.png)
 
 * `max.in.flight.requests.per.connection`이란 브로커 서버 응답없이 Producer의 `Sender Thread`가 한 번에 보낼 수 있는 메시지 배치의 개수로 기본값은 5이다.
 
 #### 최대 한 번 전송(at most once)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b8923153-9db4-4350-a7c8-ad53a4c0fbd6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b8923153-9db4-4350-a7c8-ad53a4c0fbd6.png)
 
 * Producer는 Broker로부터 `Ack` 또는 에러 메시지 없이 다음 메시지를 연속적으로 보낸다.
 * 메시지가 소실될 수 있지만 중복 전송은 하지 않는다.
 
 #### 적어도 한 번 전송(at least once)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eea38ae3-e619-465b-8444-e9bb5f602b97.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eea38ae3-e619-465b-8444-e9bb5f602b97.png)
 
 * Producer는 Broker로부터 `Ack`를 받은 다음에 다음 메시지를 전송한다.
 * 메시지 소실은 없지만 중복 전송을 할 수 있다.
 
 #### 정확히 한 번 전송(exactly once)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3fd173f1-98c9-44c0-ad52-4bd7988dd51b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3fd173f1-98c9-44c0-ad52-4bd7988dd51b.png)
 
 * Producer는 Broker로부터 `Ack`를 받은 다음에 다음 메시지를 전송하되, Producer ID와 메시지 Sequence를 Header에 저장하여 전송한다.
 * 메시지 Sequence는 메시지 고유 Sequence 번호를 말하며 0부터 시작해 순차적으로 증가한다.
@@ -260,7 +260,7 @@ public class ProducerRecord<K, V> {
 
 #### Idempotence 기반에서 메시지 전송 순서 유지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9720e4a5-3103-41a0-bae3-ce081e99d954.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9720e4a5-3103-41a0-bae3-ce081e99d954.png)
 
 * 위의 예시를 본다면 B0이 가장 먼저, B1, B2 순에서 Producer에서 생성된 메시지 배치이다.
 * Idempotence 기반에서 `max.in.flight.requests.per.connection`만큼 여러 개의 배치들이 Broker에 전송된다.

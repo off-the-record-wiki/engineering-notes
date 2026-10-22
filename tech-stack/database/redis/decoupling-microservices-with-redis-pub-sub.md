@@ -2,7 +2,7 @@
 
 #### Loose Coupling을 위한 Redis Pub/Sub Messaging Pattern
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/312d9264-bfe5-444c-b17a-98b79638849d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/312d9264-bfe5-444c-b17a-98b79638849d.png)
 
 **1. 구성 요소의 역할**
 
@@ -26,7 +26,7 @@
 
 #### Redis Pub/Sub - 구독과 발행 명령어
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/429cffc5-a1cd-4152-b503-c576dd6b302b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/429cffc5-a1cd-4152-b503-c576dd6b302b.png)
 
 **1. 일반 구독(SUBSCRIBE) : 정확한 타겟팅**
 
@@ -57,7 +57,7 @@
 
 #### Redis Pub/Sub - 내부 자료구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fd269e63-02b9-426b-b234-79574a1f6357.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fd269e63-02b9-426b-b234-79574a1f6357.png)
 
 **1. pubsub_channels(Dictionary 구조)**
 
@@ -81,7 +81,7 @@
 
 #### Redis Pub/Sub - 메시지 전달 보장 수준
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cde3093a-02a0-41cb-acce-5291df69b63e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cde3093a-02a0-41cb-acce-5291df69b63e.png)
 
 **1. At-Most-Once(최대 1번 전달)**
 
@@ -112,7 +112,7 @@
 
 #### Redis Pub/Sub - 클러스터 환경에서의 동작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/743514a6-c035-4303-a789-5ade70da4f10.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/743514a6-c035-4303-a789-5ade70da4f10.png)
 
 **1. 동작 흐름 : 전사적 방송(Broadcasting)**
 

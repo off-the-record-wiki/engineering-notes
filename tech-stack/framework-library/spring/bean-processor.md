@@ -2,20 +2,20 @@
 
 #### 빈 후처리기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/98baf1e2-2db1-4591-b04b-b73b848c391d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/98baf1e2-2db1-4591-b04b-b73b848c391d.png)
 
 * `@Bean` 어노테이션을 명시해주거나 컴포넌트 스캔으로 스프링 빈을 등록하게 되면 스프링은 대상 객체를 생성하고 스프링 컨테이너의 빈으로 등록한다. 
 * 이 때, `@Bean`의 경우 빈 이름은 메서드 이름이 되고, 컴포넌트 스캔의 경우 클래스 이름의 첫 글자를 소문자로 바꾼 이름이 된다. 빈 객체는 생성된 객체이다.
 * 스프링 컨테이너의 빈으로 등록하기 직전에 조작을 하고 싶다면 빈 후처리기를 사용하면 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/99400449-9210-4222-aa19-fdfaa64633da.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/99400449-9210-4222-aa19-fdfaa64633da.png)
 
 * 생성 : 스프링 빈 대상이 되는 객체를 생성한다.
 * 전달 : 생성된 객체를 스프링 컨테이너의 빈으로 등록하기 전에 빈 후처리기에 전달한다.
 * 후처리 작업 : 빈 후처리기는 전달된 스프링 빈 객체를 조작하거나 다른 객체로 바꿔치기 할 수 있다.
 * 등록 : 후처리 작업 후 빈 후처리기는 빈을 반환한다. 전달된 빈을 그대로 반환하면 해당 빈이 등록되고 바꿔치기 하면 다른 객체가 빈으로 등록된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/09f958a6-65cb-461c-a3a5-66966384f7a3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/09f958a6-65cb-461c-a3a5-66966384f7a3.png)
 
 ```java
 @Slf4j
@@ -39,7 +39,7 @@ public Object postProcessAfterInitialization(Object bean, String beanName) throw
 
 #### 스프링이 제공하는 빈 후처리기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c754b2c3-7257-4c34-b382-0d64f68ecf85.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c754b2c3-7257-4c34-b382-0d64f68ecf85.png)
 
 1. 스프링이 스프링 빈 대상이 되는 객체를 생성한다.
 2. 생성된 객체를 스프링 컨테이너에 등록하기 전에 빈 후처리기에 전달한다.

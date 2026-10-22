@@ -13,7 +13,7 @@
 * Spring Security는 클라이언트 요청에 대해 위에서부터 아래로 나열된 순서대로 처리하며 요청에 대해 첫 번째 일치만 적용된다.
 * 예를 들어, `/admin/**`가 `/admin/db` 요청을 포함하므로 의도한 대로 권한 규칙이 올바르게 적용되지 않을 수 있다. 그렇기 때문에 엔드포인트를 정의할 때 좁은 범위의 경로를 먼저 정의하고 이후에 큰 범위 경로를 정의해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0a94de46-2f8d-4053-a602-2c74a3fc2f00.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0a94de46-2f8d-4053-a602-2c74a3fc2f00.png)
 
 * 권한 규칙은 내부적으로 `AuthorizationManager` 클래스에 의해 재구성되며 모든 요청은 여러 종류의 `AuthorizationMaanger`에 의해 승인 혹은 거부된다.
 
@@ -30,11 +30,11 @@ requestMatchers().access(new WebExpressionAuthorizationManager("expression"))
 
 * `securityMatcher`는 특정 패턴에 해당하는 요청에만 보안 규칙을 적용할 수 있도록 설정하는 것으로 중복해서 정의하면 마지막에 설정한 것으로 대체한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d52dc84a-11b8-400b-a04f-6a290cb4f3b1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d52dc84a-11b8-400b-a04f-6a290cb4f3b1.png)
 
 * `securityMatchers` 메소드는 특정 패턴에 해당하는 요청을 단일이 아닌 다중 설정으로 구성해서 보안 규칙을 적용할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc728e2f-c984-4eb3-a90c-2d3451bcf95d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc728e2f-c984-4eb3-a90c-2d3451bcf95d.png)
 
 ### 메서드 기반 권한 부여 - @PreAuthorize, @PostAuthorize
 

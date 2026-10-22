@@ -5,14 +5,14 @@
 * 동시 세션 제어는 사용자가 동시에 여러 세션을 생성하는 것을 관리하는 전략이다.
 * 해당 전략은 사용자 인증 후 활성화된 세션 수가 설정된 `maximumSessions`값과 비교해 제어 여부를 결정한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e5f6a42a-6f7c-40e3-a072-a0188113a138.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e5f6a42a-6f7c-40e3-a072-a0188113a138.png)
 
 ### 세션 고정 보호
 
 * 세션 고정 공격은 악의적인 공격자가 사이트에 접근해 세션을 생성한 다음 다른 사용자가 같은 세션으로 로그인하도록 유도하는 위험을 말한다.
 * 스프링 시큐리티는 사용자가 로그인할 때 새로운 세션을 생성하거나 세션 ID를 변경함으로써 이러한 공격에 자동으로 대응한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4072145d-8b38-4b82-9d26-cc64143b803b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4072145d-8b38-4b82-9d26-cc64143b803b.png)
 
 * **세션 고정 보호 전략**
   * `changeSessionId()` : 기존 세션을 유지하면서 세션 ID만 변경해 인증 과정에서 세션 고정 공격을 방지하도록 한다. 이는 기본 값으로 설정되어있다.
@@ -40,11 +40,11 @@
 * 요청이 시작된 이후 사용자가 인증되었는가를 감지하고 인증된 경우에는 세션 고정 보호 메커니즘을 활성화하거나 동시 다중 로그인을 확인하는 등 세션 관련 활동을 수행하기 위해 설정된 세션 인증 전략을 호출하는 필터 클래스이다.
 * 스프링 시큐리티 6이상에서는 `SessionManagementFilter`가 기본적으로 설정되지않으며 세션관리 API 설정을 별도로 구성해야한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/398253fa-88d9-42d7-9ab9-ccf71822a199.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/398253fa-88d9-42d7-9ab9-ccf71822a199.png)
 
 #### [ConcurrentSessionFilter](https://docs.spring.io/spring-security/reference/servlet/appendix/namespace/http.html#nsa-concurrency-control)
 
 * 각 요청에 대해 `SessionRegistry`에서 `SessionInformation`을 검색하고 세션이 만료로 표시되었는가를 확인하고 만료로 표시된 경우라면 로그아웃 처리를 수행한다.(세션 무효화 처리)
 * 각 요청에 대해 `SessionRegistry.refreshLastRequest(String)`를 호출해 등록된 세션이 가장 최근에 "마지막 업데이트"된 날짜/시간을 가지도록 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4c1b7a74-9fbf-4976-9eb4-a1fe5eb94f19.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4c1b7a74-9fbf-4976-9eb4-a1fe5eb94f19.png)

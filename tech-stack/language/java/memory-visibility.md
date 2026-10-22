@@ -4,18 +4,18 @@
 
 * CPU는 처리 성능을 개선하기 위해 중간에 캐시 메모리라는 것을 사용한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1b090c9c-4673-4199-adfc-b4bbc31c2ac7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1b090c9c-4673-4199-adfc-b4bbc31c2ac7.png)
 
 * CPU 연산은 매우 빠르기 때문에 CPU 연산을 따라가려면 CPU 가까이에 매우 빠른 메모리가 필요한데 이것을 캐시 메모리라고 한다.
 * 캐시 메모리는 CPU와 가까이 붙어 있고, 속도도 매우 빠른 메모리이다. 하지만 상대적으로 비싸기 때문에 큰 용량을 구성하기 어렵다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/32da758f-bd53-4a8f-89e0-cea9dea664fd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/32da758f-bd53-4a8f-89e0-cea9dea664fd.png)
 
 * 각 쓰레드가 보유한 캐시 메모리의 값이 변화하는 것이지 메인 메모리에 바로 반영되는 것이 아니다.
 * 캐시 메모리에 있는 값이 메인 메모리에 반영되는 시점은 알 수 없다.
 * 메인 메모리에 반영된 상태를 쓰레드가 사용하는 캐시 메모리로 다시 불러와야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d4767f37-7b73-4471-ae69-1f23f7de2d12.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d4767f37-7b73-4471-ae69-1f23f7de2d12.png)
 
 * 캐시 메모리를 메인 메모리에 반영하거나 메인 메모리 변경 내역을 캐시 메모리에 다시 불러오는 것 역시 언제 발생할지 알 수 없다.
 * 주로 컨텍스트 스위칭 시 캐시 메모리도 함께 갱신이 된다.

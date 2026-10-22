@@ -2,7 +2,7 @@
 
 #### API Gateway Pattern
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/517370eb-c313-4fae-9217-c87c8ebf1747.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/517370eb-c313-4fae-9217-c87c8ebf1747.png)
 
 * 클라이언트 애플리케이션에 대한 단일 진입점이다.
 * 클라이언트와 백엔드 사이에 위치하며 여러 마이크로서비스 요청을 1개의 응답으로 처리한다.
@@ -19,7 +19,7 @@
 
 #### Service Registry/Discovery Pattern
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/213fc9e7-47e7-437d-bbad-f1c08c077854.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/213fc9e7-47e7-437d-bbad-f1c08c077854.png)
 
 * 마이크로서비스를 배포하고 확장할 때 분산 애플리케이션에게 확장성을 제공한다.
 * 더 많은 마이크로서비스 및 인스턴스 추가가 가능하다.

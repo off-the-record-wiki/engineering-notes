@@ -38,8 +38,8 @@
 
 #### Redis Usage
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1faaad3c-c373-41b7-be48-5b58ddbc0422.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1faaad3c-c373-41b7-be48-5b58ddbc0422.png)
 
 #### Redis TradeOff
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e522bad7-af4b-450d-8a7d-5e5fc2fe18f5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e522bad7-af4b-450d-8a7d-5e5fc2fe18f5.png)

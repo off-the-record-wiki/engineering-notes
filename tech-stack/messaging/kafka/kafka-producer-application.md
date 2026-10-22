@@ -2,7 +2,7 @@
 
 #### 파티셔너
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7e8cfa46-de6d-4fa0-a73f-21da0026db16.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7e8cfa46-de6d-4fa0-a73f-21da0026db16.png)
 
 * 키가 있는 경우
   * 파티션이 명시되지 않았지만 키가 있을 경우 키의 해시를 기반으로 파티션을 선택한다.
@@ -50,14 +50,14 @@
 
 #### ISR와 acks 옵션
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3cb4eba6-0b33-4bc9-90fe-5e36624538c7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3cb4eba6-0b33-4bc9-90fe-5e36624538c7.png)
 
 * ISR은 리더 파티션의 상태와 팔로워 파티션의 상태가 모두 싱크가 된 상태를 말한다.
 * 복제 개수가 2인 토픽을 가정하면 위와 같이 리더 파티션 1개, 팔로워 파티션 1개가 존재한다.
 * 리더 파티션에 0부터 3까지의 오프셋이 있다고 가정할 때, 팔로워 파티션에 데이터 동기화가 완료되려면 0부터 3까지의 오프셋이 존재해야 한다.
 * 동기화가 완료되었다는 의미는 리더 파티션의 모든 데이터가 팔로워 파티션에 복제된 상태를 말하기 때문이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/443c5da3-0794-4112-8bfe-60af99e34440.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/443c5da3-0794-4112-8bfe-60af99e34440.png)
 
 * ISR이라는 용어가 나온 이유는 팔로워 파티션이 리더 파티션으로부터 데이터를 복제하는 데 걸리는 시간이 있기 때문이다.
 * 프로듀서가 특정 파티션에 데이터를 저장하는 작업은 리더 파티션을 통해 처리한다.
@@ -74,7 +74,7 @@
 
 #### acks=0
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/649821d1-3950-476f-a3d8-2be9f38fdaab.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/649821d1-3950-476f-a3d8-2be9f38fdaab.png)
 
 * acks를 0으로 설정하는 것은 프로듀서가 리더 파티션으로 데이터를 전송했을 때 리더 파티션으로 데이터가 저장되었는지 확인하지 않는다는 뜻이다.
 * 리더 파티션은 데이터가 저장된 이후에 데이터가 몇 번째 오프셋에 저장되었는지를 리턴하는데 acks가 0으로 설정되어 있다면 프로듀서는 리더 파티션에 데이터가 저장되었는지 여부에 대한 응답 값을 받지 않는다.
@@ -82,7 +82,7 @@
 
 #### acks=1
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1f3b5783-1f1d-4a72-b25a-7b56fdb7dc55.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1f3b5783-1f1d-4a72-b25a-7b56fdb7dc55.png)
 
 * acks를 1로 설정한 경우 프로듀서는 보낸 데이터가 리더 파티션에만 정상적으로 적재되었는가를 확인한다.
 * 만약 리더 파티션에 데이터가 정상적으로 적재되지 않았다면 리더 파티션에 적재될 때까지 재시도할 수 있다.
@@ -91,7 +91,7 @@
 
 #### acks=-1(all)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ee402ca-55cb-4c02-97c2-cf153e5e6c4d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9ee402ca-55cb-4c02-97c2-cf153e5e6c4d.png)
 
 * acks를 -1 혹은 all로 설정할 경우 프로듀서는 보낸 데이터가 리더 파티션과 팔로워 파티션에 모두 적재되었는지를 확인한다.
 * 리더 파티션뿐만 아니라 팔로워 파티션까지 데이터가 적재되었는지를 확인하기 때문에 0 또는 1 옵션에 비하면 상대적으로 속도가 느리다.
@@ -106,7 +106,7 @@
 
 #### min.insync.replicas=2, acks=-1(all)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/61a941f6-e04f-46d8-9f45-4da3fa08a809.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/61a941f6-e04f-46d8-9f45-4da3fa08a809.png)
 
 * `min.insync.replicas=2`로 설정했을 때부터 acks를 all로 설정하는 의미가 있다.
 * 이 경우 ISR의 2개 이상의 파티션에 데이터가 적재되었음을 확인했다는 뜻이기 때문이다.

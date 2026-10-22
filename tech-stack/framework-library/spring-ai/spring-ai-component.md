@@ -27,7 +27,7 @@
   * `SafeGuardAdvisor` : AI 모델이 해롭거나 부적절한 답변을 생성하지 않도록 사전에 방어막을 쳐준다.
 
 > **Advisor의 핵심 동작 원리 : 스택(Stack) 구조**
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f0402994-d1d0-4a8f-88fe-0cab0823a3eb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f0402994-d1d0-4a8f-88fe-0cab0823a3eb.png)
 
 > * 실행순서 규칙 : `getOrder()` 메서드가 반환하는 값이 작을수록(=우선순위가 높을수록) 체인의 가장 바깥쪽(=맨 위)에 위치한다.
 >   * 요청(Request) 단계 : 우선순위가 높은(=Order 값이 작은) Advisor가 가장 먼저 요청을 가로채서 전처리한다.

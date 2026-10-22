@@ -14,6 +14,6 @@
 
 ### PreSigned URL 아키텍처
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/92bcfbb0-1a97-4bdc-aac6-45b84d74ab11.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/92bcfbb0-1a97-4bdc-aac6-45b84d74ab11.png)
 
 * 아키텍처에는 AWS 리소스 위주로 구성이 되어있는데 부가적인 설명을 달아보자면 S3에 업로드 하기 위해 서버 측에 POST 요청을 보내 PreSigned URL을 발급받아야 하는 과정이 선행되어야 한다.

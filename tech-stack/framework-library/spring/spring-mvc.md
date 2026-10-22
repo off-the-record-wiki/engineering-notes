@@ -2,7 +2,7 @@
 
 #### 스프링 MVC 구조 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a2a52082-a954-4803-bf6f-2bbe5193f378.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a2a52082-a954-4803-bf6f-2bbe5193f378.png)
 
 **1. DispatcherServlet 상세 동작 로직**
 
@@ -15,7 +15,7 @@
 * View 반환 : `ViewResolver`는 논리적 뷰 이름을 물리적 뷰 이름으로 바꾸고 렌더링을 담당하는 `View` 객체를 반환한다.
 * 뷰 렌더링 : `View`객체가 모델 데이터를 사용하여 실제 HTML 등의 응답 화면을 생성한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/eab8da3e-4edc-4a06-afc9-046e335fe72d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eab8da3e-4edc-4a06-afc9-046e335fe72d.png)
 
 #### 로깅
 
@@ -201,7 +201,7 @@ AsyncAppender asyncAppender = new AsyncAppender();
 
 #### HTTP 메시지 컨버터
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7717a13d-5688-4d75-9178-231eab42c526.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7717a13d-5688-4d75-9178-231eab42c526.png)
 
 * `@ResponseBody`를 사용
   * HTTP BODY에 문자 내용을 직접 반환한다. 
@@ -288,7 +288,7 @@ public interface HttpMessageConverter<T> {
 
 #### 요청 매핑 핸들러 어댑터 구조
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/70186acb-bf4f-46e5-bedd-3f78ef6206d4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/70186acb-bf4f-46e5-bedd-3f78ef6206d4.png)
 
 **1. 파라미터 해석**
 
@@ -303,4 +303,4 @@ public interface HttpMessageConverter<T> {
 
 * `@RequestBody`나 `@ResponseBody`가 사용될 경우, 내부적으로 `HttpMessageConverter`를 호출하여 JSON, XML 등의 데이터를 객체로 변환하거나 그 반대로 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/016d2cc2-ff93-4ada-9585-e0e7977d1d25.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/016d2cc2-ff93-4ada-9585-e0e7977d1d25.png)

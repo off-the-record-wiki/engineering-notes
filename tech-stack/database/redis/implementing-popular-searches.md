@@ -2,14 +2,14 @@
 
 ## 📚 Sorted Set 자료 구조 (ZADD, ZRANGE, ZINCRBY)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/320649a5-0af8-494e-b41e-67536413facf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/320649a5-0af8-494e-b41e-67536413facf.png)
 
 * Redis에서 Sorted Set(ZSet)은 score(점수)를 기준으로 자동 정렬되는 중복 없는 자료구조이다.
 * 이런 특성 때문에 실제 서비스에서 랭킹 시스템, 실시간 인기 데이터 관리처럼 순서와 가중치가 중요한 경우에 주로 활용된다.
 
 > [Redis sorted sets](https://redis.io/docs/latest/develop/data-types/sorted-sets/)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/12d3f8c9-62ec-48d5-88f7-ad7785fa54b8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/12d3f8c9-62ec-48d5-88f7-ad7785fa54b8.png)
 
 ```java
 @Service

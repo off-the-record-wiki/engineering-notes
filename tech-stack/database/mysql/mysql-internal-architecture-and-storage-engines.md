@@ -2,7 +2,7 @@
 
 #### Internal Architecture and Storage Engines
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e5c2ad3f-b02f-4e7b-a041-9fe03c8d25c0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e5c2ad3f-b02f-4e7b-a041-9fe03c8d25c0.png)
 
 #### 각 계층별 역할
 
@@ -54,7 +54,7 @@
 
 #### MySQL Core Memory, Transaction Logs, and Buffers
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc574055-731b-498b-9e93-be37e3083ef1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc574055-731b-498b-9e93-be37e3083ef1.png)
 
 | 참여자 | 역할 |
 |---|---|

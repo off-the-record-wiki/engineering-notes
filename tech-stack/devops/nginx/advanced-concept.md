@@ -2,7 +2,7 @@
 
 #### 정적 파일 서빙 Path Matching 기법 root와 alias
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/273b1fca-9726-487d-9566-df2e88409a22.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/273b1fca-9726-487d-9566-df2e88409a22.png)
 
 ```nginx
 server {
@@ -42,7 +42,7 @@ server {
 
 #### 여러 도메인 호스팅을 위한 Virtual Host Setting
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f321bb1a-e082-489e-ac46-ff84c2f379bf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f321bb1a-e082-489e-ac46-ff84c2f379bf.png)
 
 ```nginx
 http {

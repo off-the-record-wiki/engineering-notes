@@ -23,7 +23,7 @@
 
 > GET : 리소스 조회
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c85f56a7-0613-42bd-ae34-4b6867d069b8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c85f56a7-0613-42bd-ae34-4b6867d069b8.png)
 
 * 리소스 조회
 * 서버에 전달하고 싶은 데이터는 쿼리 파라미터 혹은 쿼리 스트링을 통해서 전달한다.
@@ -31,7 +31,7 @@
 
 > POST : 요청 데이터 처리, 주로 등록에 사용
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/500636f4-6009-46a8-bfb9-b338bc582b8d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/500636f4-6009-46a8-bfb9-b338bc582b8d.png)
 
 * 요청 데이터 처리
 * 메시지 바디를 통해 서버로 요청 데이터 전달
@@ -43,7 +43,7 @@
 
 > PUT : 리소스 대체(완전 대체)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ee4e88ed-0b54-437d-94c5-28018799458c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ee4e88ed-0b54-437d-94c5-28018799458c.png)
 
 * 리소스가 있으면 대체한다.
 * 리소스가 없으면 생성한다.
@@ -51,7 +51,7 @@
 
 > PATCH : 리소스 대체(일부 대체)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3b1f72ea-be5b-429c-8187-66b7771491e4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3b1f72ea-be5b-429c-8187-66b7771491e4.png)
 
 * 리소스를 부분 변경한다.
 
@@ -59,7 +59,7 @@
 
 * 리소스를 삭제한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/baa4d36a-60ba-4a0b-b443-f2fbaa212efc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/baa4d36a-60ba-4a0b-b443-f2fbaa212efc.png)
 
 ## 📚 HTTP 메서드 - 기타 메서드
 

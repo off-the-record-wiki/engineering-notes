@@ -2,7 +2,7 @@
 
 #### CQRS(Command Query Responsibility Segregation) 패턴
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fc7603a5-d70c-4386-b182-06ec9d57eb5c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fc7603a5-d70c-4386-b182-06ec9d57eb5c.png)
 
 * DB를 읽기 및 쓰기 작업으로 분리하는데 이렇게 하는 이유는 비효율적인 조인이나 복잡한 쿼리를 피하기 위해서이다.
   * Command : 데이터 상태를 애플리케이션에 반영 및 변경
@@ -10,7 +10,7 @@
 
 #### CQRS Level 1 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fa777209-af60-49e2-a488-0e34babdcfa6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fa777209-af60-49e2-a488-0e34babdcfa6.png)
 
 * 분리 수준 : Controller 및 Service만 분리
 * 장점 : 간단한 구조, 구현 난이도 낮음
@@ -18,7 +18,7 @@
 
 #### CQRS Level 2 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f974e323-26b8-4773-9c49-afa0abe2124c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f974e323-26b8-4773-9c49-afa0abe2124c.png)
 
 * 분리 수준 : Controller, Service, DB 스키마 분리
 * 장점 : 읽기 모델을 조회 최적화하여 성능 향상 가능
@@ -26,7 +26,7 @@
 
 #### CQRS Level 3 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a2183cc5-20d6-4b1a-94c8-79293453a346.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a2183cc5-20d6-4b1a-94c8-79293453a346.png)
 
 * 분리 수준 : Controller, Service, DB 스키마, 물리적 DB 분리
 * 장점 : 읽기/쓰기 성능 및 확장성 극대화
@@ -34,14 +34,14 @@
 
 #### CQRS(Command Query Responsibility Segregation) - Read and Write Operations
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fc7603a5-d70c-4386-b182-06ec9d57eb5c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fc7603a5-d70c-4386-b182-06ec9d57eb5c.png)
 
 * DB 읽기 및 쓰기에 서로 다른 접근 방식으로 서로 다른 전략을 정의한다.
 * 이렇게 하는 이유는 읽기 및 쓰기 작업이 성능과 확장성 요구 사항이 다르기 때문이다.
 
 #### Event Sourcing
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/81eb55a5-2314-498a-ac0c-3a227e81555a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/81eb55a5-2314-498a-ac0c-3a227e81555a.png)
 
 * 데이터 변경 이력(상태 변화)을 DB(Event Store)에 저장한다.
 * 상태를 직접 저장하지 않고, 발생한 이벤트들을 저장한다.

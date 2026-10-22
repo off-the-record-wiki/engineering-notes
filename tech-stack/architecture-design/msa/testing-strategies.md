@@ -16,7 +16,7 @@
 * 단위 테스트는 마이크로서비스 애플리케이션 기능과 클래스의 신뢰성과 안정성 평가 기능을 담당한다.
 * 개발 단계에서는 모든 코드 구성 요소가 예상대로 작동하는지 확인하기 위해 단위 테스트를 수행한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1bbd13de-32a1-4347-80c8-b463aebf1094.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1bbd13de-32a1-4347-80c8-b463aebf1094.png)
 
 #### Microservices Integration Testing
 
@@ -27,7 +27,7 @@
 * MSA에서는 통합 코드와 외부 구성 요소가 제대로 통신하는지 확인한다.
 * 통합 테스트는 코드의 스키마가 데이터베이스 스키마와 일치하는지 확인한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/64cea82a-19a8-4930-90e4-1acd1abdc3eb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/64cea82a-19a8-4930-90e4-1acd1abdc3eb.png)
 
 #### Contract testing
 
@@ -36,7 +36,7 @@
 * 외부 서비스와 해당 경계 간의 상호 작용은 계약 준수 여부를 테스트하여 계약에서 소비 서비스에 대한 기대치와 일치하는지 확인한다.
 * 모든 서비스에 대한 테스트는 독립적으로 수행 ⭢ 각 서비스를 한 번에 하나씩 호출해 결과를 확인한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1f63478a-5253-4a4f-83e5-209135d843d2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1f63478a-5253-4a4f-83e5-209135d843d2.png)
 
 #### E2E testing
 
@@ -45,7 +45,7 @@
 * 중요한 변경 사항을 발견하려면 각 애플리케이션에서 E2E 테스트 양을 줄이고 단위 및 통합 테스트와 같은 하위 수준 테스트 접근 방식에 더 의존적이어야 한다.
 * 잘 계획된 마이크로서비스 테스트 접근 방식은 더 많은 단위 테스트, 더 적은 통합 및 구성 요소 테스트, 그리고 최소한의 E2E 테스트로 구성한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d3fcd5b3-745b-45a3-ae7c-617ea8baa90e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d3fcd5b3-745b-45a3-ae7c-617ea8baa90e.png)
 
 #### Testing Automation(CI/CD)
 

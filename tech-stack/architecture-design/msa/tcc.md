@@ -15,7 +15,7 @@
 * 장애 복구와 재시도 처리에 유연해서 비즈니스 정책에 따라 전략을 정할 수 있다.
 * 기존 시스템에 비해 설계와 구현이 복잡하다. 모든 단계 자체가 멱등하게 설계되어야 하며 네트워크 오류, 재시도 시나리오를 고려한 복잡한 로직 구현이 필요하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f4d3155e-f816-456d-b5a0-f4af0e54483d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f4d3155e-f816-456d-b5a0-f4af0e54483d.png)
 
 **1. Try(예약)**
 * 실제 확정이 아니라 "임시 점유"가 핵심이다.
@@ -40,4 +40,4 @@
 
 #### 상품 주문 및 재고 차감에서의 TCC 시나리오 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b0f0ac30-9801-483a-af9d-f952a8a019bd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b0f0ac30-9801-483a-af9d-f952a8a019bd.png)

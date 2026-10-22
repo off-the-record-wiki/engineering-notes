@@ -2,7 +2,7 @@
 
 #### 알림 유형별 지원 방안 - iOS 푸시 알림
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bfb6eac0-c4f1-4fca-bbb1-4d946d4ccc5a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bfb6eac0-c4f1-4fca-bbb1-4d946d4ccc5a.png)
 
 * iOS에서 푸시 알림을 보내기 위해서는 3가지 컴포넌트가 필요하다.
 * 알림 제공자(provider) : 알림 요청을 만들어 애플 푸시 알림 서비스(APNS)로 보내는 주체다. 알림 요청을 만들려면 다음과 같은 데이터가 필요하다.
@@ -13,32 +13,32 @@
 
 #### 알림 유형별 지원 방안 - 안드로이드 푸시 알림
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5348b347-5e6d-4d24-bbb9-b41bd6f9707e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5348b347-5e6d-4d24-bbb9-b41bd6f9707e.png)
 
 * 안드로이드 푸시 알림도 iOS와 비슷한 절차로 전송된다. APNS 대신 FCM(Firebase Cloud Messaging)을 사용한다는 점이 다르다.
 
 #### 알림 유형별 지원 방안 - SMS 메시지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3e27b18c-f764-431d-8a7d-46366522e719.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3e27b18c-f764-431d-8a7d-46366522e719.png)
 
 * SMS 메시지를 보낼 때는 제3사업자의 서비스를 많이 이용한다.
 * 이런 서비스는 대부분 상용 서비스라서 이용요금을 내야 한다.
 
 #### 알림 유형별 지원 방안 - 이메일
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67a9d849-93ff-4b78-b295-df66e6d0120a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67a9d849-93ff-4b78-b295-df66e6d0120a.png)
 
 * 많은 회사에서 상용 이메일 서비스를 이용한다.
 * 전송 성공률도 높고, 데이터 분석 서비스도 제공한다.
 
 #### 연락처 정보 수집 절차
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e4b939ab-b366-46b4-91b3-b69f162b0627.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e4b939ab-b366-46b4-91b3-b69f162b0627.png)
 
 * 알림을 보내려면 모바일 단말 토큰, 전화번호, 이메일 주소 등의 정보가 필요하다.
 * 사용자가 자사 앱을 설치하거나 처음으로 계정을 등록하면 API 서버는 해당 사용자 정보를 수집해 데이터베이스에 저장한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fb0c7f87-2060-48af-926f-f1376119f599.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fb0c7f87-2060-48af-926f-f1376119f599.png)
 
 * 이 데이터베이스에 연락처 정보를 저장할 테이블 구조는 위와 같다.
 * 필수 정보만 담은 개략적인 설계안으로서 이메일 주소와 전화번호는 `user` 테이블에 저장하고 단말 토큰은 `device` 테이블에 저장한다.
@@ -46,7 +46,7 @@
 
 #### 알림 전송 및 수신 절차(AS-IS)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/54f89b64-f461-4a9d-a2d2-100cdab7c4af.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/54f89b64-f461-4a9d-a2d2-100cdab7c4af.png)
 
 * SPOF(Single-Point-Of-Failure) : 알림 서비스에 서버가 하나밖에 없다는 것은, 그 서버에 장애가 생기면 전체 서비스 장애로 이어진다는 뜻이다.
 * 규모 확장성 : 한 대 서비스로 푸시 알림에 관계된 모든 것을 처리하므로 데이터베이스나 캐시 등 중요 컴포넌트의 규모를 개별적으로 늘릴 방법이 없다.
@@ -54,7 +54,7 @@
 
 #### 알림 전송 및 수신 절차(TO-BE)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c684d1de-92bb-4f00-8894-82b7a8270305.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c684d1de-92bb-4f00-8894-82b7a8270305.png)
 
 * 데이터베이스와 캐시를 알림 시스템 주 서버에서 분리한다.
 * 알림 서버를 증설하고 자동으로 수평적 규모 확장이 이루어질 수 있도록 한다.
@@ -62,7 +62,7 @@
 
 #### 안정성 - 데이터 손실 방지
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/58ddf840-2dd4-4e91-92cc-ff868855c1af.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/58ddf840-2dd4-4e91-92cc-ff868855c1af.png)
 
 * 알림 전송 시스템의 중요한 요구사항 가운데 하나는 어떤 상황에서도 알림이 소실되면 안 된다고 명시되어있으나 알림은 부가적인 비즈니스 기능이기에 이 말이 꼭 옳다고는 생각하지 않는다. 알림이 지연되거나 순서가 틀려도 괜찮다.
 
@@ -109,7 +109,7 @@
 
 #### 추가로 필요한 컴포넌트 및 고려사항 6 - 큐 모니터링
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f5c22a7d-a57c-4b53-953e-5329181a071b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f5c22a7d-a57c-4b53-953e-5329181a071b.png)
 
 * 알림 시스템을 모니터링 할 때 중요한 메트릭 하나는 큐에 쌓인 알림의 개수이다.
 * 이 수가 너무 크면 작업 서버들이 이벤트를 빠르게 처리하고 있지 못하다는 뜻이다.
@@ -117,7 +117,7 @@
 
 #### 추가로 필요한 컴포넌트 및 고려사항 7 - 이벤트 추적
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de41cd01-1b59-44eb-98ce-d0a7981cbf22.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de41cd01-1b59-44eb-98ce-d0a7981cbf22.png)
 
 * 알림 확인율, 클릭율, 실제 앱 사용으로 이어지는 비율 같은 메트릭은 사용자를 이해하는 데 중요하다.
 * 데이터 분석 서비스는 보통 이벤트 추적 기능도 제공한다.
@@ -125,7 +125,7 @@
 
 #### 최종 시스템 디자인 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/80dcb445-e235-4083-ac1f-42e8062d785c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/80dcb445-e235-4083-ac1f-42e8062d785c.png)
 
 * 알림 서버는 인증과 전송률 제한을 거친 요청을 받고 캐시와 데이터베이스에서 사용자 정보와 설정을 읽으며, 템플릿으로 알림 이벤트를 만든다.
 * 이벤트는 채널별 큐에 들어가고 작업 서버가 이를 꺼내 외부 서비스로 보낸다. 실패하면 재시도하고 전송 과정은 로그와 모니터링 시스템에 남으며, 사용자 클릭은 데이터 분석 서비스로 돌아온다.

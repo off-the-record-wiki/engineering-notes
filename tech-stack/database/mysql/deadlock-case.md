@@ -28,7 +28,7 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 1;
 ```
 * 두 트랜잭션이 여러 테이블(혹은 여러 행)을 업데이트할 때, 접근하는 순서가 엇갈리면 발생한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e0fd0e0c-b351-4a30-a920-68fe570e132d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e0fd0e0c-b351-4a30-a920-68fe570e132d.png)
 
 #### 읽기 락(S-Lock)에서 쓰기 락(X-Lock)으로 승급 시
 
@@ -53,4 +53,4 @@ UPDATE products SET stock = stock - 1 WHERE id = 99;
 ```
 * 이후에 `UPDATE`를 할 목적이라면 처음부터 `SELECT`를 할 때 S-Lock을 쓰지 말고 `FOR UPDATE`를 사용한 X-Lock을 걸면 데드락이 발생하지 않는다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/551c036a-e25c-4f35-9c30-dc83dc0e718c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/551c036a-e25c-4f35-9c30-dc83dc0e718c.png)

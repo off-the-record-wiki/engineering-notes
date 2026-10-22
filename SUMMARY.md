@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Study](README.md)
+* [engineering-notes](README.md)
 * [Tech Stack](tech-stack/README.md)
 * [Books](books/README.md)
 * [Claude Code](claude-code/README.md)

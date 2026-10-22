@@ -16,7 +16,7 @@ LIMIT 20;
 * 인덱스는 감으로 추가하면 실패할 가능성이 높다. 무엇보다 인덱스는 공짜가 아니다.
 * INSERT/UPDATE/DELETE시에 해당 인덱스를 계속 갱신해야 한다. 따라서 갱신 성능이 떨어지고 디스크 공간도 늘어난다. 효과도 없는 인덱스를 추가하면 공간적 측면에서 손해만 보는 셈이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6ffab187-c904-4438-831d-a2ddf61340a0.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6ffab187-c904-4438-831d-a2ddf61340a0.png)
 
 ```
 1. EXPLAIN으로 진단한다 - 옵티마이저가 이 쿼리를 어떻게 실행하는지 확인한다.
@@ -99,7 +99,7 @@ WHERE member_id = (
 
 * `Extra`는 `Using index`, `Using temporary`같은 키워드가 표시된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/348a47a9-1961-48fe-80a2-7d8b92692ac4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/348a47a9-1961-48fe-80a2-7d8b92692ac4.png)
 
 * EXPLAIN 직후에 `SHOW WARNINGS`를 실행하면 유용한 정보를 얻을 수 있다.
 
@@ -126,12 +126,12 @@ SHOW WARNINGS;
 * `index` : 인덱스 트리 전체 스캔. `index`는 인덱스 트리 전체를 스캔한다. 쿼리에 필요한 모든 컬럼이 인덱스에 들어 있으면, 테이블 데이터에 접근하지 않고 인덱스만 읽는다. 인덱스는 테이블보다 훨씬 작으므로, `ALL`보다 훨씬 작다.
 * `ALL` : 테이블 전체를 처음부터 끝까지 스캔한다. 대용량 테이블에서 가장 위험한 접근 유형이다. 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7e878dc4-b4d1-410f-84f5-a38720e4e4a9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7e878dc4-b4d1-410f-84f5-a38720e4e4a9.png)
 
 * `index` : 인덱스 트리를 스캔한다. 인덱스는 보통 테이블보다 크기가 작다.
 * `ALL` : 테이블을 스캔한다. 모든 컬럼을 포함하므로 보통 크기가 크다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9bbf8069-c0dc-46cf-ab0f-71623d2828c4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9bbf8069-c0dc-46cf-ab0f-71623d2828c4.png)
 
 #### 핵심 컬럼 분석 1 - `possible_keys`, `key`
 
@@ -139,7 +139,7 @@ SHOW WARNINGS;
   * 그런데 실제로 `possible_keys`에 인덱스가 있어도 `key`가 NULL인 특수한 경우가 있다. 옵티마이저가 생각할 때 선택 가능한 인덱스가 있지만, 선택하지 않는 것이 더 좋다고 생각하는 특수한 경우이다.
 * 이 경우 풀 스캔이 더 빠른데 인덱스로 데이터를 읽으면 다음과 같은 과정을 거친다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f736b6e2-cc51-485e-af3a-2c09601147d6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f736b6e2-cc51-485e-af3a-2c09601147d6.png)
 
 * 읽어야 할 행이 전체의 일부(일반적으로 20 ~ 30% 미만)일 때는 이 방식이 빠르다. 하지만 거의 모든 행을 읽어야 하는 상황이라면 N번의 랜덤 I/O가 발생하고 같은 데이터 페이지를 여러 번 오가며 읽어야 할 수도 있다.
 * 반면 풀 테이블 스캔은 데이터 페이지를 처음부터 끝까지 순차적으로 읽는다. 디스크는 이런 순차 I/O에 훨씬 강하다.
@@ -175,7 +175,7 @@ SHOW WARNINGS;
 
 #### 복합 인덱스 `key_len` 연산
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ad8668dd-c8d3-4923-a229-48bbde364740.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ad8668dd-c8d3-4923-a229-48bbde364740.png)
 
 * 운영 중인 쿼리의 EXPLAIN을 볼 때 `key_len`이 기대보다 짧으면 복합 인덱스의 일부 컬럼만 활용되고 있다는 뜻이다. 인덱스를 다 만들어 놓고 제대로 활용하지 못하는 상황이다.
 
@@ -191,7 +191,7 @@ SHOW WARNINGS;
 * `rows` : 조사할 추정 행 수. `rows`는 옵티마이저가 쿼리를 실행하기 위해 조사해야 한다고 추정하는 행 수이다.
 * `filtered` : 테이블 조건에 의해 필터링되어 남는 행의 추정 비율(%)이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c623a19c-0b5d-4ce3-b8f7-31a926104fcf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c623a19c-0b5d-4ce3-b8f7-31a926104fcf.png)
 
 #### Extra 컬럼 해석
 
@@ -199,7 +199,7 @@ SHOW WARNINGS;
 * `Using where` : WHERE 조건이 적용되어 읽은 행 중 일부를 필터링한다는 뜻이다.
 * 실행 엔진과 스토리지 엔진이 주고받는 순서 : 실행 엔진(Server Layer)은 쿼리 파싱, 조인/정렬/WHERE 평가 등을 담당하고 스토리지 엔진(Storage Engine)은 실제 데이터와 인덱스를 읽고 쓰는 역할을 담당한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dafd15e1-30c1-40e9-b6ef-ef8cc931f4bb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dafd15e1-30c1-40e9-b6ef-ef8cc931f4bb.png)
 
 * `Using where` 자체가 나쁜 것은 아니다. 하지만 서버 레벨 필터링이 많다면(=filterd 값이 낮다면) 인덱스 설게를 재검토할 필요가 있다.
 
@@ -223,4 +223,4 @@ SHOW WARNINGS;
 
 * `Using index condition`은 ICP(Index Condition Pushdown) 최적화가 적용되었다는 뜻이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/05b5e530-934b-401c-8425-be0ba27809b9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/05b5e530-934b-401c-8425-be0ba27809b9.png)

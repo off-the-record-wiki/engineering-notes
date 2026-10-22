@@ -2,7 +2,7 @@
 
 #### 컨슈머 그룹
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a14076d8-e759-42cb-93ef-4bda8fe78c5f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a14076d8-e759-42cb-93ef-4bda8fe78c5f.png)
 
 * 컨슈머 그룹으로 운영하는 방법은 컨슈머를 각 컨슈머 그룹으로부터 격리된 환경에서 안전하게 운영할 수 있도록 도와주는 카프카의 독특한 방식이다.
 * 컨슈머 그룹으로 묶인 컨슈머들은 토픽의 1개 이상 파티션에 할당되어 데이터를 가져갈 수 있다.
@@ -11,14 +11,14 @@
 
 #### 컨슈머 그룹 컨슈머가 파티션 개수보다 많은 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/999eb7e6-8d54-465f-bdf6-5b8ba4d0fa75.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/999eb7e6-8d54-465f-bdf6-5b8ba4d0fa75.png)
 
 * 4개의 컨슈머로 이루어진 컨슈머 그룹으로 3개의 파티션을 가진 토픽에서 데이터를 가져가기 위해 할당하면 1개의 컨슈머는 파티션을 할당받지 못하고 유휴 상태로 남게 된다.
 * 파티션을 할당받지 못한 컨슈머는 쓰레드만 차지하고 실질적인 데이터 처리를 하지 못하므로 애플리케이션 실행에 있어 불필요한 쓰레드로 남게 된다.
 
 #### 리밸런싱(Rebalancing)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/69cc1b5f-276d-4b8b-8c67-bfd6295b92d4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/69cc1b5f-276d-4b8b-8c67-bfd6295b92d4.png)
 
 * 컨슈머 그룹으로 이루어진 컨슈머 중 일부 컨슈머에서 장애가 발생하면 장애가 발생한 컨슈머에 할당된 파티션은 장애가 발생하지 않은 컨슈머에 소유권이 넘어간다.
 * 리밸런싱은 컨슈머가 추가되거나 혹은 컨슈머가 제외되는 상황에서 발생한다.
@@ -27,7 +27,7 @@
 
 #### 커밋(Commit)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6f2382aa-fdc6-466c-9170-ba12a07ee2c5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6f2382aa-fdc6-466c-9170-ba12a07ee2c5.png)
 
 * 컨슈머는 카프카 브로커로부터 데이터를 어디까지 가져갔는지 커밋(commit)을 통해 기록한다.
 * 특정 토픽의 파티션을 어떤 컨슈머 그룹이 몇 번째까지를 가져갔는지 카프카 브로커 내부에서 사용되는 내부 토픽(`__consumer_offsets`)에 기록된다.
@@ -77,7 +77,7 @@
 
 #### 멀티쓰레드 컨슈머
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/cb3bcb71-9035-426f-9cd2-4d9df7c18c61.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cb3bcb71-9035-426f-9cd2-4d9df7c18c61.png)
 
 * 카프카 처리량을 늘리기 위해 파티션과 컨슈머 개수를 늘려서 운영할 수 있다.
 * 파티션을 여러 개로 운영하는 경우 데이터를 병렬처리하기 위해서 파티션 개수와 컨슈머 개수를 동일하게 맞추는 것이 가장 좋은 방법이다.
@@ -87,7 +87,7 @@
 
 #### 컨슈머 랙
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f688c617-68cf-4d63-b293-5f3804a9584e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f688c617-68cf-4d63-b293-5f3804a9584e.png)
 
 * 컨슈머 랙(LAG)은 파티션의 최신 오프셋과 컨슈머 오프셋 간의 차이를 말한다.
 * 프로듀서는 계속해서 새로운 데이터를 파티션에 저장하고 컨슈머는 자신이 처리할 수 있는 만큼 데이터를 가져간다.
@@ -98,13 +98,13 @@
 
 #### 컨슈머 랙 모니터링 - 처리량 이슈
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2f9ec7eb-11cb-49fc-af24-79a2d6eb11d5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2f9ec7eb-11cb-49fc-af24-79a2d6eb11d5.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8e7e456a-32c2-475f-bf5e-8387ad17bc5f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8e7e456a-32c2-475f-bf5e-8387ad17bc5f.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/30080818-aba2-4fe1-95d8-fe128e4e57f7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/30080818-aba2-4fe1-95d8-fe128e4e57f7.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6c7ae0b6-772f-46ee-acf9-818ff9d9939b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6c7ae0b6-772f-46ee-acf9-818ff9d9939b.png)
 
 * 프로듀서 데이터 양이 늘어날 경우 컨슈머 랙이 늘어날 수 있다.
 * 이 경우 파티션 개수와 컨슈머 개수를 늘려 병렬처리량을 늘려 컨슈머 랙을 줄일 수 있다.
@@ -112,7 +112,7 @@
 
 #### 컨슈머 랙 모니터링 - 파티션 이슈
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d5b102bd-b75d-4123-b336-46b90ef60e4b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d5b102bd-b75d-4123-b336-46b90ef60e4b.png)
 
 * 프로듀서 데이터 양이 일정함에도 불구하고 컨슈머 장애로 인해 컨슈머 랙이 증가할 수도 있다.
 * 컨슈머는 파티션 개수만큼 늘려 병렬처리하며 파티션마다 컨슈머가 할당되어 데이터를 처리하게 되는데 위와 같이 2개의 파티션과 2개의 컨슈머가 각각 할당되어 데이터를 처리하는 상황에서 프로듀서가 보내는 데이터 양이 동일한데 1번 파티션에서 컨슈머 랙이 발생한다면 1번 파티션에 할당된 컨슈머에 이슈가 발생했음을 추측할 수 있다.

@@ -22,7 +22,7 @@ fun main() = runBlocking<Unit> {
     }
 }
 ```
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/aa2a43f0-f2e8-416d-ae7a-03c9d5977766.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/aa2a43f0-f2e8-416d-ae7a-03c9d5977766.png)
 
 #### 코루틴 순차 처리 - `joinAll()` 함수 사용해 복수의 코루틴 순차 처리하기
 
@@ -51,7 +51,7 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8378ad42-9c64-4028-af57-61de1db57973.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8378ad42-9c64-4028-af57-61de1db57973.png)
 
 #### CorountineStart.LAZY
 
@@ -100,7 +100,7 @@ fun main() = runBlocking<Unit> {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a690a704-cfec-430a-9e0e-55001e8a32fa.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a690a704-cfec-430a-9e0e-55001e8a32fa.png)
 
 * 엄밀히 말하자면 `cancel()` 함수는 코루틴을 곧바로 취소하지 않고 취소 확인용 플래그를 '취소 요청됨'으로 바꾸는 역할만 한다.
 * 이후 미래에 취소 확인용 플래그가 확인되는 시점이 되어서야 코루틴이 취소된다.
@@ -111,17 +111,17 @@ fun main() = runBlocking<Unit> {
 * 코루틴이 취소된 후 실행되어야 하는 코루틴이 있다면 코루틴을 취소할 때, `cancelAndJoin()` 함수를 사용하면 된다.
 * `cancelAndJoin()` = 취소 요청한 후 취소가 완료될 때까지 호출 코루틴 일시 중단
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/452fd9e9-ed03-4a78-9c06-2423ed3d4402.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/452fd9e9-ed03-4a78-9c06-2423ed3d4402.png)
 
 * `cancel()` 함수를 호출한다고 해서 코루틴이 즉시 취소되는 개념이 아니다.
 * 정확히 말하자면 `cancel()` 함수를 호출하면 Job 객체의 `isCancelled` 플래그의 값만 바뀌고 워커 쓰레드에서 이걸 인지하려면 `suspend` 블록에서 직접 확인을 해야하는데, `Thread.sleep()`은 JVM 쓰레드 블로킹이기 때문에 플래그를 체크하지 않는다.
 * 그래서 취소 협력을 하려면 `Thread.sleep()`가 아니라 `delay()`를 써야한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0e41cf8a-9381-4c4b-a609-9df9daf313d3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0e41cf8a-9381-4c4b-a609-9df9daf313d3.png)
 
 #### 코루틴 취소 확인 시점
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/674009e1-8b2c-4750-ae44-88293a48b798.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/674009e1-8b2c-4750-ae44-88293a48b798.png)
 
 * 이 `cancel()` 함수를 호출한다고 하더라도 코루틴 즉시 호출 취소가 되지 않기 때문에 워커 쓰레드에서 무한 루프가 종료되지 않는 문제가 발생한다.
 * 코루틴 취소 확인 시점을 만드는 방법은 다음과 같이 3가지 방법이 있다.
@@ -133,17 +133,17 @@ fun main() = runBlocking<Unit> {
 
 #### 코루틴의 상태와 Job 객체의 상태 변수 정리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/57a5c48b-4df6-4c3d-9f0c-ab762119b0e4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/57a5c48b-4df6-4c3d-9f0c-ab762119b0e4.png)
 
 * `Job` 객체는 코루틴을 추상화한 객체여서 코루틴의 상태를 간접적으로 나타내는 3가지 상태 변수를 외부로 공개한다.
 * `isActive` : 코루틴이 활성화 되어있는지 여부. 코루틴이 실행 중 상태일 때 `true`이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a6038a21-6161-4992-adc4-12cc2f6bd4e9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a6038a21-6161-4992-adc4-12cc2f6bd4e9.png)
 
 * `isCancelled` : 코루틴에 취소가 요청됐는지 여부. `cancel()` 함수가 호출되기만 하면 `true`를 반환하므로 취소 중인 상태도 포함된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bfe63652-31e2-4133-af31-2c878f925519.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bfe63652-31e2-4133-af31-2c878f925519.png)
 
 * `isCompleted` : 코루틴이 완료되었는지 여부. 코루틴이 실행 완료되거나 취소 완료되면 `true`를 반환한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5b733de2-c078-4752-862b-0e267bae6471.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5b733de2-c078-4752-862b-0e267bae6471.png)

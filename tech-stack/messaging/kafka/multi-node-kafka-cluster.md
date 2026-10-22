@@ -2,7 +2,7 @@
 
 #### 카프카 Replication과 Leader/Follower
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/136b1d33-da62-464d-8c97-530aa913cc53.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/136b1d33-da62-464d-8c97-530aa913cc53.png)
 
 * Producer와 Consumer는 Leader 파티션을 통해서 쓰기와 읽기를 수행한다.
 * 파티션의 Replication은 Leader에서 Follower로만 이루어지고 그 반대는 이루어지지 않는다.
@@ -10,14 +10,14 @@
 
 #### 단일 파티션의 Replication 과정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b297e313-4c3a-4cc7-9def-7b0803a23559.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b297e313-4c3a-4cc7-9def-7b0803a23559.png)
 
 * 파티션의 Replication은 Leader와 Follower로만 이루어진다.
 * 파티션 리더를 관리하는 브로커는 Producer/Consumer의 읽기/쓰기를 관리함과 동시에 파티션 팔로우를 관리하는 브로커의 Replication도 관리한다.
 
 #### 멀티 파티션의 Replication 과정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3efb406f-8401-46cd-9942-7171c699f17f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3efb406f-8401-46cd-9942-7171c699f17f.png)
 
 * 파티션의 Replication은 Leader와 Follower로만 이루어진다.
 * 파티션 리더를 관리하는 브로커는 Producer/Consumer의 읽기/쓰기를 관리함과 동시에 파티션 팔로우를 관리하는 브로커의 Replication도 관리한다.
@@ -34,7 +34,7 @@
 
 #### 멀티 브로커 환경에서 Producer의 bootstrap.servers 설정 이해
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4d765c7e-0ef5-4d8f-8a71-3c9a8620364a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4d765c7e-0ef5-4d8f-8a71-3c9a8620364a.png)
 
 * Producer는 `bootstrap.servers`에 기술되어 있는 브로커들의 List를 기반으로 접속한다.
 * `bootstrap.servers`는 브로커들의 Listener들의 List이다.
@@ -42,7 +42,7 @@
 
 #### Zookeeper
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/39d963f3-7a36-4653-938d-e20f1bafea2b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/39d963f3-7a36-4653-938d-e20f1bafea2b.png)
 
 * 분산 시스템 간의 정보를 신속하게 공유하기 위한 코디네이션 시스템을 말한다.
 * 클러스터 내의 개별 노드의 중요한 상태 정보를 관리하며 분산 시스템에서 리더 노드를 선출하는 역할 등을 수행한다.
@@ -51,7 +51,7 @@
 * 개별 노드들은 Zookeeper의 Z Node를 계속 모니터링하며, Z Node에 변경 발생 시 Watch Event가 트리거되어 변경 정보가 개별 노드들에게 통보된다.
 * Zookeeper 자체의 클러스터링 기능을 제공한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/875f88f6-e34c-4514-83d9-d2cc48b130bb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/875f88f6-e34c-4514-83d9-d2cc48b130bb.png)
 
 * 모든 카프카 브로커는 주기적으로 Zookeeper에 접속하면서 Session Heartbeat을 전송하여 자신의 상태를 보고한다.
 * Zookeeper는 `zookeeper.session.timeout.ms` 내에 Heartbeat을 받지 못하면 해당 브로커의 노드 정보를 삭제하고 Controller 노드에게 변경 사실을 통보해야 한다.
@@ -60,7 +60,7 @@
 
 #### Controller Broker
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ce2789e7-af54-4826-824f-499c242e9b8a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ce2789e7-af54-4826-824f-499c242e9b8a.png)
 
 * Zookeeper에 가장 처음 접속을 요청한 Broker가 Controller가 된다.
 * Controller는 파티션에 대한 Leader Election을 수행한다.
@@ -68,7 +68,7 @@
 
 #### Controller의 Leader Election(리더 선출) 프로세스
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ce64ce60-3ed6-4a9d-a973-e8948f2121dd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ce64ce60-3ed6-4a9d-a973-e8948f2121dd.png)
 
 * Broker #3이 다운되고 Zookeeper는 session 기간 동안 Heartbeat가 오지 않으므로 해당 브로커 노드의 정보를 갱신한다.
 * Controller는 Zookeeper를 모니터링하던 도증 Watch Event로 Broker #3이 다운되었다는 정보를 받는다.
@@ -84,13 +84,13 @@
 
 #### ISR의 조건
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9a790833-bf4f-48c2-854f-60221209c8ee.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9a790833-bf4f-48c2-854f-60221209c8ee.png)
 
 * 브로커가 Zookeeper에 연결되어있어야 한다.
 * `zookeeper.session.timeout.ms`로 지정된 기간 내에 Heartbeat을 지속적으로 Zookeeper로 보낸다.
 * `replica.time.max.ms`로 지정된 기간 내에 Leader의 메시지를 지속적으로 가져가야 한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8611a14d-cd3e-47b2-a399-e807aa7af640.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8611a14d-cd3e-47b2-a399-e807aa7af640.png)
 
 * Follower는 Leader에게 fetch 요청을 수행한다. Fetch 요청에는 Follower가 다음에 읽을 메시지의 offset 번호를 포함한다.
 * Leader는 Follower가 요청한 offset 번호와 현재 Leader Partition의 가장 최신 offset 번호를 비교해 Follower가 얼마나 Leader의 데이터 복제를 잘 수행하고 있는지를 판단한다.
@@ -100,7 +100,7 @@
 * `min.insync.replicas`는 브로커의 설정값으로 Producer가 `acks=all`로 성공적으로 메시지를 보낼 수 있는 최소한의 ISR 브로커 개수를 의미한다.
 * 이해하기 쉽게 한다면 `데이터를 최소한 몇 군데에 성공적으로 저장해야 '안전하게 저장됨'으로 인정할 것인가?`로 생각하면 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de73eac9-953b-4c2d-a626-a24e55aa80fc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de73eac9-953b-4c2d-a626-a24e55aa80fc.png)
 
 * 프로듀서(Producer)가 `acks=all`로 설정하고 메시지를 보낼 때 해당 옵션이 작동한다.
 * Leader Partition(리더): 모든 읽기와 쓰기 작업을 담당하는 원본 파티션이다.(무조건 1개)

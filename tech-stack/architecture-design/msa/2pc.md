@@ -36,7 +36,7 @@
 * REST/gRPC와 같은 HTTP API엔 XA 개념이 없고, Kafka/RabbitMQ와 같은 메시지 브로커, 대부분의 NoSQL, 외부 PG사 결제 API는 2PC에 참여하지 못한다.
 * 서비스마다 DB가 분리된 MSA에선 트랜잭션이 여러 DB·프로토콜에 걸치는데, 2PC는 이 이질적인 경계를 묶을 수단이 되지 못한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67e7f564-88b2-4c71-a9d5-9f5dbad6d6e8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67e7f564-88b2-4c71-a9d5-9f5dbad6d6e8.png)
 
 **1. Phase 1(Prepare)**
   * 트랜잭션 매니저(TM, 코디네이터)가 각 참여자(Resource Manager, 자기 DB를 소유한 서비스)에게 `prepare` 요청을 보낸다.

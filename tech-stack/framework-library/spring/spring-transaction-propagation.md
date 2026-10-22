@@ -2,22 +2,22 @@
 
 #### 스프링 트랜잭션 전파 - 트랜잭션 두 번 사용
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/45943864-9664-4399-9990-29771da9929a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/45943864-9664-4399-9990-29771da9929a.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/392755a7-1edf-422e-beb0-c51c6c8ac28d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/392755a7-1edf-422e-beb0-c51c6c8ac28d.png)
 
 * 트랜잭션이 각각 수행되면서 사용되는 DB 커넥션은 다르다.
 
 #### 스프링 트랜잭션 전파 - `REQUIRED`
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b3481c89-fdab-440e-9131-e118a3ccdf61.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b3481c89-fdab-440e-9131-e118a3ccdf61.png)
 
 * 모든 논리 트랜잭션이 커밋되어야 물리 트랜잭션이 커밋된다.
 * 하나의 논리 트랜잭션이라도 롤백이 된다면 물리 트랜잭션은 롤백된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/33b7ecd2-d377-40ac-a6b1-ea944b87665a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/33b7ecd2-d377-40ac-a6b1-ea944b87665a.png)
 
 ```
 1. 외부 트랜잭션이 시작된다.
@@ -38,7 +38,7 @@
 16. 실제 데이터베이스 커밋이 반영되고 물리 트랜잭션도 끝난다.
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8cce9fa9-2615-4722-a073-ae61d2211f79.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8cce9fa9-2615-4722-a073-ae61d2211f79.png)
 
 1. 신규 트랜잭션 여부의 중요성
 
@@ -64,11 +64,11 @@
 
 #### 외부 롤백
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0a19f4eb-926f-4f67-af04-e3e15833b3de.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0a19f4eb-926f-4f67-af04-e3e15833b3de.png)
 
 * 외부 트랜잭션이든 내부 트랜잭션이든 하나의 물리 트랜잭션 안에 여러 논리 트랜잭션이 포함된 상태에서 외부 트랜잭션에서 롤벡이 발생하게 되면 전체 물리 트랜잭션 역시 롤백이 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f25f3076-f405-462a-904f-1ce124b3508e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f25f3076-f405-462a-904f-1ce124b3508e.png)
 
 ```
 1. 로직2 실행이 끝나고 트랜잭션 매니저를 통해서 내부 트랜잭션을 커밋한다.
@@ -80,11 +80,11 @@
 
 #### 내부 롤백
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/956b340b-2333-451b-8bad-b40b03549650.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/956b340b-2333-451b-8bad-b40b03549650.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/91e90872-1653-45e4-8f91-4abdabedb4cc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/91e90872-1653-45e4-8f91-4abdabedb4cc.png)
 
 ```
 1. 로직2 실행이 끝나고 트랜잭션 매니저를 통해 내부 트랜잭션을 롤백한다.
@@ -104,14 +104,14 @@
 TransactionDefinition.PROPAGATION_REQUIRES_NEW
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1dae7fcd-1a1d-4ccf-8971-b6e062b63a12.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1dae7fcd-1a1d-4ccf-8971-b6e062b63a12.png)
 
 * 물리 트랜잭션을 분리하려면 내부 트랜잭션 시작시 REQUIRES_NEW 옵션을 사용하면 된다.
 * 외부 트랜잭션과 내부 트랜잭션이 별도의 물리 트랜잭션을 가진다.
 * 위와 달리 DB 커넥션을 따로 사용한다는 뜻이다.
 * 최종적으로 로직2의 트랜잭션 롤백이 발생하더라도 로직1의 트랜잭션 커밋은 이루어진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3854eb26-3f39-4891-9fc4-e399031f0f36.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3854eb26-3f39-4891-9fc4-e399031f0f36.png)
 
 ```
 1. 외부 트랜잭션을 시작한다.
@@ -128,7 +128,7 @@ TransactionDefinition.PROPAGATION_REQUIRES_NEW
 12. 로직2가 수행되는데 이 때, 커넥션이 필요한 경우 트랜잭션 동기화 매니저에 보관된 커넥션을 획득해서 사용한다.
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4f3695d5-55fd-4e9d-b768-9c005bd4de64.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4f3695d5-55fd-4e9d-b768-9c005bd4de64.png)
 
 ```
 1. 로직2가 끝나고 트랜잭션 매니저를 통해 내부 트랜잭션을 롤백한다.

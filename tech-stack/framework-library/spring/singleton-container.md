@@ -26,7 +26,7 @@ public class SingletonService {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c707dc57-b110-4caf-a8e2-6714cdd48fad.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c707dc57-b110-4caf-a8e2-6714cdd48fad.png)
 
 * 싱글톤 패턴의 단점
   * 위와 같이 접근 제어자로 생성자를 제한하는 등 싱글톤 패턴을 구현하는 코드 자체가 많다.
@@ -43,7 +43,7 @@ public class SingletonService {
 * 스프링 컨테이너는 싱글톤 컨테이너 역할을 한다. 이렇게 싱글톤 객체를 생성하고 관리하는 기능을 싱글톤 레지스트리라고 한다.
 * 고객의 요청이 올 때마다 객체를 생성하는 것이 아니라 아래와 같이 이미 만들어진 객체를 공유해서 객체를 재사용할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d9ac10a7-883a-4b36-9452-3ea060eba75e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d9ac10a7-883a-4b36-9452-3ea060eba75e.png)
 
 > [📚Singleton Registry Pattern](https://stackoverflow.com/questions/16744424/whats-the-difference-between-singleton-and-registry-design-pattern)
 > 
@@ -153,7 +153,7 @@ public class StatefulService {
 * 구성 파일에 `@Configuration` 어노테이션을 붙이면 포함된 메서드에 붙어 있는 `@Bean`을 호출해서 스프링 빈을 생성한다.
 * CGLIB라는 바이트 코드 조작 라이브러리를 통해 구성 파일 클래스를 상속받은 임의의 다른 클래스를 만들고 그 클래스를 스프링 빈으로 등록하여 싱글톤으로 등록하는 것이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7764112a-6239-4ce8-8ff5-962bd46cfe18.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7764112a-6239-4ce8-8ff5-962bd46cfe18.png)
 
 * 만약에 `@Bean`만 사용하게 되면 싱글톤으로 관리되지 않는다.
 * 설정 정보는 항상 `@Configuration` & `@Bean`을 같이 사용해 싱글톤으로 관리하자.

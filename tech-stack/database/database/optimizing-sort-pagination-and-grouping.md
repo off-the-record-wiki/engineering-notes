@@ -13,7 +13,7 @@
 | 정렬 | 메모리에서 처리 | 메모리 초과 (뒤에서 이야기) |
 | 전체 시간 | 약 1.2초 | 약 1.9초 |
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/25a73342-ce1f-4659-9fa0-fcbbf54d6da8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/25a73342-ce1f-4659-9fa0-fcbbf54d6da8.png)
 
 * 1,000 페이지 쿼리가 거치는 단계를 분해하면 다음과 같다. 핵심은 2단계에서 500만 건을 전부 줄 세우는 것이 아니라, Top-N 힙으로 상위 20,020행(LIMIT + OFFSET)만 추려 정렬한다는 점이다.
 
@@ -40,27 +40,27 @@
 
 **디스크 머지 소트의 동작 방법**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4e1d43fc-c724-4c38-9caf-bcdade4ca825.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4e1d43fc-c724-4c38-9caf-bcdade4ca825.png)
 
 * 정렬은 메모리, 보관과 병합은 디스크의 혼합이다. 메모리 구간이 빨랐던 건 디스크를 한 번도 건드리지 않았기 때문이고, 여기서 느려진 것은 청크를 디스크에 쓰고 다시 읽어 병합하는 디스크 I/O가 더해졌기 때문이다.
 * OFFSET을 0부터 10만까지 늘려가며 쿼리의 정렬 방식과 실행 시간을 측정한 그림을 보면 이해가 빠르다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dbecc3c1-de9c-422f-aeb5-8c9f6024375b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dbecc3c1-de9c-422f-aeb5-8c9f6024375b.png)
 
 * **메모리 구간(OFFSET 0 ~ 약 2,126)** : 비용 대부분은 풀 스캔이 차지하고, 우선순위 큐는 매모리 안에서 끝나므로 OFFSET이 늘어도 시간이 거의 변하지 않는다. 풀 스캔으로 500만 건을 읽는 비용은 OFFSET과 무관하게 늘 똑같다. N(OFFSET + LIMIT)이 20에서 2,000개로 커져도 빠른 메모리 안 순위표가 조금 커질 뿐이고, 500만 건을 훑는 비용에 비하면 차이는 거의 티가 나지 않는다.
 * **전환점(OFFSET + LIMIT이 약 2,146을 넘는 순간)** : 우선순위 큐가 버퍼를 초과하면서 디스크 머지 소트로 바뀌고, 시간이 폭증한다. OFFSET을 조금 늘렸을 뿐인데 정렬 비용이 그만큼 증가하게 된다.
 * **디스크 구간(OFFSET 약 2,150 이상)** : 디스크 머지 소트로 고정되고, 이제부터는 OFFSET이 커질수록 시간이 완만히 상승한다. 머지로 정렬된 결과에서 앞쪽 OFFSET 건을 만들어 버려야 하기 때문이다. OFFSET이 깊어질수록 병합으로 뽑아내야 하는 행도 늘어난다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/66909be1-2b9f-4872-bc69-3e8f53e6592f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/66909be1-2b9f-4872-bc69-3e8f53e6592f.png)
 
 #### 인덱스를 활용한 정렬 최적화
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f7a372a-a63c-4c3c-b2bf-9a13fbf6ab23.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f7a372a-a63c-4c3c-b2bf-9a13fbf6ab23.png)
 
 * `LIMIT`과 `OFFSET`은 행을 다 만든 다음에 잘라내는 맨 마지막 단계기 때문에 인덱스를 설계했다고 하더라도 `OFFSET 20000`과 같은 깊은 경우는 해결이 어렵다.
 * 결국 정렬 비용을 줄이기 위해 인덱스를 사용해서 해결했으나 `OFFSET`은 인덱스로 완벽히 해결되지 않았다. 인덱스를 타든 안 타든 깊은 `OFFSET`은 건너뛸 행까지 모두 처리해야 하므로 깊이에 비례해 비싸진다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ae6c8df0-6e38-497f-9b0e-6b2f6f9c2b2c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ae6c8df0-6e38-497f-9b0e-6b2f6f9c2b2c.png)
 
 #### 지연 조인 최적화
 
@@ -118,17 +118,17 @@ ORDER BY o.ordered_at DESC;
 * 지연 조인을 사용하더라도 커버링 스캔은 여전히 `OFFSET + LIMIT`개의 인덱스 엔트리를 훑어야 한다.
 * 결국 OFFSET 자체는 남아있는 것이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d3a88806-cd2f-4b5c-8f99-136d97049371.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d3a88806-cd2f-4b5c-8f99-136d97049371.png)
 
 * 인덱스를 타고 있음에도 불구하고 페이지가 깊어질수록 실행 시간이 읽고 버리는 행 수에 정비례해서 증가한다.
 * OFFSET의 내부 동작은 읽고 버리는 것이 핵심이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fd518d5c-1055-4e4a-ad3e-145a7d9de096.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fd518d5c-1055-4e4a-ad3e-145a7d9de096.png)
 
 * OFFSET 크기에 비례하여 낭비가 증가한다.
 * 인덱스는 정렬 비용(filesort)을 제거하지만, 건너뛰기 비용 자체는 제거하지 못한다. 따라서 페이지 깊이(OFFSET 크기)에 비례하여 성능이 선형적으로 저하된다. 이것이 OFFSET 페이징의 구조적 한계다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bc7f59ec-4627-47b5-b65c-6120a96d8302.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc7f59ec-4627-47b5-b65c-6120a96d8302.png)
 
 * OFFSET 페이징에는 성능 말고도 한 가지 더 주의할 점이 있다.
 * `ORDER BY` 컬럼 값이 동일한 행이 여러 개 있으면 MySQL은 실행 계획에 따라 다른 순서로 반환할 수 있다. 이것은 페이지 간 행이 중복되거나 누락되는 문제를 일으킨다.
@@ -144,7 +144,7 @@ LIMIT 20 OFFSET 0;
 * `order_id`는 PK로 유니크하다. 이렇게 하면 정렬 순서가 항상 동일하게 결정되어 페이지 간 중복/누락이 발생하지 않는다.
 * `ordered_at`만으로 정렬할 경우 값이 같은 행끼리는 우열이 정해지지 않아 실행마다 배치 순서가 달라질 수 있는데 여기에 `order_id`를 더하면 모든 행의 정렬 키가 유일함을 보장할 수 있기 때문에 가능한 순서가 단 하나로 확정된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f397fc36-67be-484c-9df8-c2131fd69130.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f397fc36-67be-484c-9df8-c2131fd69130.png)
 
 * OFFSET 페이징은 구현이 간단하고 SQL 표준에 가까운 방식이다. 그러나 이 OFFSET 페이징은 구조적으로 뒷페이지가 느려질 수밖에 없다.
 
@@ -179,16 +179,16 @@ ORDER BY order_id DESC
 LIMIT 20;
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d9b2dc56-cbf6-4ed9-9928-93d34314f922.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d9b2dc56-cbf6-4ed9-9928-93d34314f922.png)
 
 * 이전 타이 브레이커 문제의 경우 `order_id`라는 유니크한 키를 추가했다. 그러나 실제 주문 화면 목록에서 원하는 정렬은 최신순이다.
 * `ordered_at`으로 커서를 잡으면 해결이 되지 않는다. 왜냐하면 `ordered_at`은 같은 '초'에 여러 주문이 들어올 수 있기 때문이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2a450f62-8fd4-4283-a645-68786d9c966c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2a450f62-8fd4-4283-a645-68786d9c966c.png)
 
 * 여기서도 해법은 간단하다. 정렬 기준이 유니크하지 않으면, 마지막으로 본 위치를 시각 하나로 콕 집을 수 없다. 유니크한 값을 덧붙이면 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6c5fa52c-e030-4155-af15-1173d2eeb2f7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6c5fa52c-e030-4155-af15-1173d2eeb2f7.png)
 
 * 차이는 더 깊이 들어갈 때 드러난다.
 
@@ -198,7 +198,7 @@ LIMIT 20;
 | OFFSET | 깊은 위치 (OFFSET 2,999,980) | 3,000,000 | 약 0.27 sec |
 | 커서 기반 | 어느 위치든 | 20 | 약 0.002 sec |
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/00a3083b-c5a2-496b-be85-fda0a63edfbf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/00a3083b-c5a2-496b-be85-fda0a63edfbf.png)
 
 > **커서 기반 페이징의 제약사항 정리**
 >
@@ -226,7 +226,7 @@ LIMIT 20;
   * 타이트 인덱스 스캔(Tight Index Scan) : 인덱스 전체를 정렬된 순서 그대로 읽으며 세는 방법
   * 임시 테이블 : 인덱스를 못 써서 임시 테이블을 따로 만드는 방법
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/fcffb957-cc00-4d0d-989f-ac27240dcec3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/fcffb957-cc00-4d0d-989f-ac27240dcec3.png)
 
 * 각 그룹의 첫(또는 마지막) 키만 집어 읽고 나머지는 통째로 건너뛰는 방식이 바로 루스 인덱스 스캔이다.
 * 루스 인덱스 스캔은 아무 때나 걸리지 않는다. 다음과 조건이 충족되어야만 가능하다.
@@ -240,12 +240,12 @@ LIMIT 20;
 | 5 | GROUP BY 컬럼 이후의 인덱스 부분은 상수 동등 조건이어야 한다 |
 | 6 | 접두사 인덱스는 불가 (전체 컬럼을 인덱싱해야 함) |
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/edd29987-24c8-4cab-8ce9-6ed2626b67f4.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/edd29987-24c8-4cab-8ce9-6ed2626b67f4.png)
 
 * `GROUP BY`는 같은 그룹끼리 모아 집계값 하나를 내는 동작이다. 그런데 행이 그룹과 무관한 순서로 뒤섞여 들어오면 MySQL은 한 그룹이 언제 끝났는지 알 수 없다. 그래서 모든 그룹의 중간 집계 상태를 동시에 들고 있어야 하는데, 이 상태를 담아둘 공간이 바로 임시 테이블이다.
 * 그룹 키로 임시 테이블을 만들어 두고, 행을 한 줄 읽을 때마다 해당 그룹 칸을 찾아 값을 갱신하는 방식이다. 이것이 `GROUP BY`절에 `Using temporary`가 뜨는 기본 동작이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/89590486-1494-4d61-9148-9e68ed10a46f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/89590486-1494-4d61-9148-9e68ed10a46f.png)
 
 * 이렇게 인덱스 전체를 정렬된 순서 그대로 읽되, 그 정렬을 활용해 추가 정렬, 임시 테이블 없이 그룹핑하는 방식이 타이트 인덱스 스캔 방식이다.
 * 루스 인덱스 스캔이 각 분류의 첫 번째만 읽었다면 타이트 인덱스 스캔은 순서대로 나열된 것들을 처음부터 끝까지 읽되 같은 분류가 연속이라 세기 쉬운 방식이다.
@@ -255,13 +255,13 @@ LIMIT 20;
 
 * 루스 인덱스 스캔도, 타이트 인덱스 스캔도 공통 전제는 `GROUP BY`절 컬럼을 인덱스가 정렬해 준다는 것이다. 그래야 같은 그룹이 인덱스 안에 연속으로 모여 첫 줄만 잡거나 경계만 감지하면 됐다. 그 전제가 무너지면 즉, `GROUP BY`절 컬럼이 인덱스를 활용하지 못하면 MySQL은 임시 테이블을 만들어 그룹핑한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0761e450-8460-4abf-bf7b-37e53ed8b602.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0761e450-8460-4abf-bf7b-37e53ed8b602.png)
 
 * 인덱스를 사용해서 `Using temporary`를 회피한다. 결국 임시 테이블을 피하는 핵심은 `GROUP BY`절 컬럼을 인덱스가 정렬하게 만드는 것이다.
 
 #### GROUP BY + ORDER BY 조합의 함정
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9e91c38a-905f-4dd3-8ce5-b956ad960408.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9e91c38a-905f-4dd3-8ce5-b956ad960408.png)
 
 * `filesort`가 정렬하는 대상은 원본이 아니라 그룹 결과다. 따라서 비용은 그룹 수에 달려 있다.
   * 그룹이 적으면(수십 ~ 수백) : 그냥 둔다.

@@ -2,7 +2,7 @@
 
 #### Kubernetes - PV(PersistentVolume)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/09dedd64-fdbc-45f1-8e69-b2ffa4120839.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/09dedd64-fdbc-45f1-8e69-b2ffa4120839.png)
 
 * PV는 Pod에서 사용할 영구 저장 공간을 표현하는 Kubernetes 오브젝트이다.
 * PV의 생명주기는 Pod와 독립적이므로 Pod가 삭제되거나 재생성되어도 데이터를 유지할 수 있다.
@@ -57,7 +57,7 @@ volumes:
 
 #### Kubernetes - Deployment
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/99213186-ca9a-4c60-98e9-c1a8883bee52.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/99213186-ca9a-4c60-98e9-c1a8883bee52.png)
 
 * Deployment는 주로 상태가 없는 애플리케이션의 여러 Pod를 선언적으로 배포하고 관리하는 Kubernetes 오브젝트이다.
 * Deployment는 ReplicaSet을 생성하고, ReplicaSet은 지정된 개수의 Pod가 계속 실행되도록 관리한다.
@@ -89,7 +89,7 @@ spec:
 
 #### Kubernetes - Service
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/3e47bf26-9e9a-4e6b-98b4-644b96cba98c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/3e47bf26-9e9a-4e6b-98b4-644b96cba98c.png)
 
 * Service는 여러 Pod에 접근할 수 있는 고정된 IP 주소와 DNS 이름을 제공하는 Kubernetes 오브젝트이다.
 * Label Selector와 일치하는 Pod를 찾아 해당 Pod들의 EndpointSlice를 구성하고 트래픽을 분산한다.
@@ -114,7 +114,7 @@ spec:
 
 #### Kubernetes - HPA(Horizontal Pod Autoscaler)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f86160d2-e892-4066-81da-72dc79edb0fd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f86160d2-e892-4066-81da-72dc79edb0fd.png)
 
 * HPA는 CPU, 메모리 또는 사용자 정의 지표를 기준으로 Pod의 복제본 수를 자동 조정하는 Kubernetes 오브젝트이다.
 * 부하가 증가하면 Pod를 추가하는 Scale-out을 수행하고, 부하가 감소하면 Pod를 줄이는 Scale-in을 수행한다.

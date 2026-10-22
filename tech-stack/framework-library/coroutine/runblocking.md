@@ -5,7 +5,7 @@
 * `runBlocking()` 함수는 이 함수를 호출한 쓰레드를 사용해 실행되는 코루틴을 만들어낸다.
 * `runBlocking()` 함수는 코루틴이 종료될 때 쓰레드 점유가 해제된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b4f9dea1-ccbb-49cf-a5c9-e923b90d084f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b4f9dea1-ccbb-49cf-a5c9-e923b90d084f.png)
 
 > [📚runBlocking](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html)
 > 

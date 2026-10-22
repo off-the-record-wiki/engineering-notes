@@ -336,11 +336,11 @@ public class Zoo {
 * 실행 엔진(Execution Engine)
 * 가비지 컬렉터(Garbage Collector)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/985c2e77-7a42-491f-b78d-bb26ba12699c.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/985c2e77-7a42-491f-b78d-bb26ba12699c.png)
 
 #### 1. 클래스 로더(Class Loader) 
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/073b5b61-0d14-4cd2-9266-4b34cc0d0fcd.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/073b5b61-0d14-4cd2-9266-4b34cc0d0fcd.png)
 
 **1. 클래스 로더의 3가지 원칙 (Delegation Model)**
 
@@ -377,7 +377,7 @@ public class Zoo {
 
 #### 2. 런타임 데이터 영역(Runtime Data Area)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/443b3be0-19da-4d9b-a0a6-c26e95ed1b22.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/443b3be0-19da-4d9b-a0a6-c26e95ed1b22.png)
 
 **1. 데이터 영역의 분류(공유 vs 독립)**
 
@@ -422,7 +422,7 @@ public class Zoo {
 > * 단순히 네트워크 문제라고 하기에는 발생 주기가 예측이 불가능했다. 사수님께 원인 추적 방법에 대한 피드백을 여쭤보았고 사수님은 몇 번의 명령어를 입력하시더니 나에게 `kubectl describe` 명령어의 결과를 보여주셨고 "메모리와 관련된 문제니 해당 부분을 찾아보라"고 조언해주셨다.
 > * WebFlux 모듈이기 때문에 GC가 적용되지 않는다는 백그라운드 지식을 가진 상태로 DataDog의 Non-Heap Usage를 그래프를 통해 조회한 결과 다음과 같았다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/677c3f1e-21d9-4fe8-918f-bd511e864bb5.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/677c3f1e-21d9-4fe8-918f-bd511e864bb5.png)
 
 > * `jvm.non_heap_memory`가 하루 동안 163MiB → 167MiB로 완만하게 우상향하고 있었다. 이는 JVM이 Non-Heap 영역의 메모리를 계속 점유하고 있다는 의미다. Non-Heap은 GC가 관리하는 Heap 영역이 아니기 때문에 자동으로 회수되지 않고 누적되고 있었다.
 > * 원인을 파악하기 위해 먼저 WebFlux의 메모리 구조를 살펴봤다. Spring MVC(Tomcat)는 요청/응답 처리 시 Heap 기반 버퍼를 사용하며, 처리 완료 후 GC에 의해 자동 회수되지만 Spring Webflux(Netty)는 요청 처리 시 Direct Buffer Pool에서 버퍼를 할당하는데, 이는 Off-Heap 메모리 영역이라 GC의 대상이 되지 않았다. 다만 처리 완료 후 Pool로 반환되어 재사용되기 때문에 직접적인 누수 원인은 아니었다.
@@ -446,7 +446,7 @@ resources:
 
 #### 3. 실행 엔진(Execution Engine)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/af88c138-8128-49fb-bba6-b1950f258ddc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/af88c138-8128-49fb-bba6-b1950f258ddc.png)
 
 **1. 인터프리터와 JIT의 상호작용(Adaptive Optimization)**
 
@@ -476,15 +476,15 @@ resources:
 
 #### 4. 가비지 컬렉터(Garbage Collector)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9f7dc658-7a36-48df-8afb-7b776c56c9cc.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9f7dc658-7a36-48df-8afb-7b776c56c9cc.png)
 
 * 가비지 컬렉터(Garbage Collector) : 사용하지 않는 객체를 자동으로 메모리에서 정리해 메모리 누수를 방지하고 효율적인 메모리 관리를 수행한다,
 
 #### 가비지 컬렉션(Garbage Collection, GC)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7dfe4058-f122-48ec-8dd2-198ca6f09c2b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7dfe4058-f122-48ec-8dd2-198ca6f09c2b.png)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/919bc7f1-130a-4dbd-b878-e5003f2a93de.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/919bc7f1-130a-4dbd-b878-e5003f2a93de.png)
 
 **1. GC의 대전제 : Weak Generational Hypothesis**
 
@@ -504,7 +504,7 @@ resources:
 
 #### 가비지 컬렉터(Garbage Collector)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/301da895-a927-4eb7-95f3-6f56ceda692f.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/301da895-a927-4eb7-95f3-6f56ceda692f.png)
 
 #### 힙 메모리 내 객체 생존 흐름
 * Eden 영역에서 객체를 생성

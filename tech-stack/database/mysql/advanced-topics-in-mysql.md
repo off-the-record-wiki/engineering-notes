@@ -26,7 +26,7 @@
   * Failed : 시스템 오류 등으로 인해 디스크 반영에 실패하거나 트랜잭션을 정상적으로 진행할 수 없는 상태이다.
   * Aborted : 실패(Failed) 상태가 확인되어, 트랜잭션에서 수행했던 모든 작업을 취소(ROLLBACK)하고 트랜잭션 시작 이전 상태로 되돌려진(철회된) 상태이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/056326c2-0329-471c-b4f5-c3e6e4f39abf.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/056326c2-0329-471c-b4f5-c3e6e4f39abf.png)
 
 #### 트랜잭션 활성(Active) 상태 분석
 
@@ -53,7 +53,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
   * 상태 결정 : 위 과정이 성공적으로 끝나면 ➔ 완료(Committed) 상태가 된다. 단, 디스크 용량 부족이나 하드웨어 장애로 실패하면 ➔ 실패(Failed) 상태가 된다.
 * 바이너리 로그가 켜져 있다면(복제 환경의 기본) 커밋은 **내부 2단계 커밋(Internal XA)** 으로 처리된다. Redo Log에 prepare 기록 → Binlog 기록 → Redo Log에 commit 기록. 이렇게 해야 크래시가 나도 Redo Log와 Binlog 사이의 일관성(복제본과 원본의 일치)이 보장된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/83a98ef2-2a6a-4cf7-9a4a-7e0324fb000d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/83a98ef2-2a6a-4cf7-9a4a-7e0324fb000d.png)
 
 #### innodb_flush_log_at_trx_commit
 
@@ -68,7 +68,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 * 대부분의 중요한 서비스(결제, 회원 정보 등등)에서는 성능을 조금 희생하더라도 데이터의 절대적인 안전을 위해 기본값인 1을 사용한다.
 * 반면 로그 수집이나 단순 통계처럼 약간의 데이터 유실이 치명적이지 않으면서 쓰기 성능이 극도로 중요할 때는 0이나 2를 고려할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f597137e-c65d-484f-9b95-d6b7637c2543.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f597137e-c65d-484f-9b95-d6b7637c2543.png)
 
 #### 완료(Committed) 상태 분석
 
@@ -100,7 +100,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 * `Redo Log(리두 로그)` : 해당 로그는 수행했던 작업을 다시 실행(Redo)하여 복구하는데 쓰인다.
 * `Undo Log(언두 로그)` : 작업 중 문제가 생겼을 때, 과거 상태로 돌아가는데 쓰인다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d88ccf5a-98c7-4dfd-b628-67351c20eef1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d88ccf5a-98c7-4dfd-b628-67351c20eef1.png)
 
 #### 자동 커밋(Autocommit = 1) 동작
 
@@ -148,7 +148,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 * 복제(Replication) : 메인 DB(Source/Master)가 자신이 한 일을 `Binlog`에 적어두면, 보조 DB(Replica/Slave)들이 이 로그를 가져가서 자기 자신에게 똑같이 따라 실행한다. 이를 통해 여러 대의 DB가 완벽히 똑같은 데이터를 유지하게 된다.
 * 특정 시점 복구(PITR: Point-in-Time Recovery) : 개발자가 실수로 WHERE 절 없이 DELETE를 날렸을 때, 어제 새벽에 받아둔 '풀 백업본'을 복원한 뒤, 백업 이후부터 사고 발생 직전까지의 Binlog 기록을 쭉 재생(Replay)하여 데이터를 완벽히 복원할 수 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f39d3e05-796d-42cd-a5de-08da04beeabe.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f39d3e05-796d-42cd-a5de-08da04beeabe.png)
 
 |기록 방식|동작 원리|장점|치명적 단점 및 주의사항|
 |:---:|:---:|:---:|:---:|
@@ -161,7 +161,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 
 #### MySQL Lock Deep Dive(Intention Lock, Gap Lock & Granularity Levels)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b25546c9-430b-42ee-8fd6-64498fa734b3.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b25546c9-430b-42ee-8fd6-64498fa734b3.png)
 
 **1. S-lock과 X-lock(가장 기본이 되는 '행(Row)' 잠금)**
 
@@ -199,7 +199,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 
 #### MySQL InnoDB Internals(Crash Recovery, Redo Log & MVCC)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/65f670c5-1751-4303-b1cb-8e5160176e81.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/65f670c5-1751-4303-b1cb-8e5160176e81.png)
 
 **1. Undo Log (언두 로그): 롤백과 동시성 제어의 핵심**
 
@@ -226,7 +226,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 
 #### Transaction Isolation Levels(Read Phenomena, MVCC & Snapshot)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f16aefb4-8e3a-4df7-8bef-c34eee5f165b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f16aefb4-8e3a-4df7-8bef-c34eee5f165b.png)
 
 * MySQL(InnoDB)의 기본 격리 수준은 **REPEATABLE READ**다.
 
@@ -257,7 +257,7 @@ UPDATE accounts SET balance = balance - 100 WHERE user_id = 1;
 
 #### MySQL Query Optimizer(Query Rewriting, Cost Model & Histogram)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2b0e0ed7-f23b-4229-a1c1-b849302d79a1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2b0e0ed7-f23b-4229-a1c1-b849302d79a1.png)
 
 **1. 쿼리 재작성(Query Rewriting): 옵티마이저의 마법**
 
@@ -436,7 +436,7 @@ ALTER TABLE orders_partitioned DROP PARTITION p_2023;
 
 #### MySQL B-Tree Index(Clustered vs Secondary, Page Format)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/28122f55-8372-4574-a27e-92dbe131caa7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/28122f55-8372-4574-a27e-92dbe131caa7.png)
 
 **1. B+ 트리 구조**
 
@@ -502,7 +502,7 @@ WHERE username = 'alice';
 
 #### MySQL Buffer Pool(Page Management, LRU & Eviction Strategy)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/db06d185-0807-44ee-972b-731538480743.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/db06d185-0807-44ee-972b-731538480743.png)
 
 **1. InnoDB Buffer Pool(메모리 캐시)**
 
@@ -546,7 +546,7 @@ WHERE username = 'alice';
 
 #### MySQL Durability(Doublewrite Buffer, WAL & FSync Performance)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a1091741-d40e-4456-a5b5-61a6bc8dce89.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a1091741-d40e-4456-a5b5-61a6bc8dce89.png)
 
 **1. 부분 쓰기 문제(Partial Write)와 Torn Page**
 

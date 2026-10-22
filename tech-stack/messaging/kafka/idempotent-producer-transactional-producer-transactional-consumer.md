@@ -24,7 +24,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
 #### 멱등성 프로듀서인 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/de0a7cb6-9394-4137-baaf-b7bd89d65fc8.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/de0a7cb6-9394-4137-baaf-b7bd89d65fc8.png)
 
 * 멱등성 프로듀서는 기본 프로듀서와 달리 데이터를 브로커에 전달할 때 프로듀서 PID(Producer unique ID)와 시퀀스 넘버를 함께 전달한다.
 * 그러면 브로커는 프로듀서 PID와 시퀀스 넘버를 확인해 동일한 메시지의 적재 요청이 오더라도 단 한 번만 데이터를 적재함으로써 프로듀서의 데이터는 정확히 한 번 브로커에 적재되도록 동작한다.
@@ -33,7 +33,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
 #### 멱등성 프로듀서가 아닌 경우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/ca6b7cbd-fd76-460a-97db-2b229d8ad277.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/ca6b7cbd-fd76-460a-97db-2b229d8ad277.png)
 
 * 브로커가 `seq` 번호없이 메시지를 수신 → 중복 식별이 불가능해진다.
 * ACK 유실 후 재전송 시 동일 메시지가 파티션에 2번 기록이 되고 이로 인해 중복 처리가 발생한다.
@@ -53,7 +53,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
 #### 멱등성 프로듀서 사용 시 오류
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e30e67b5-b8f7-4a84-b8ab-85faa53c8b02.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e30e67b5-b8f7-4a84-b8ab-85faa53c8b02.png)
 
 * 멱등성 프로듀서의 SID는 0부터 시작해 숫자를 1씩 더한 값이 전달된다.
 * 브로커에 멱등성 프로듀서가 전송한 데이터의 PID와 SID를 확인하는 과정에서 SID가 일정하지 않은 경우에는 `OutOfOrderSequenceException`이 발생할 수 있다.
@@ -62,7 +62,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
 #### 트랜잭션 프로듀서 동작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f7bd2aa2-5959-48d7-9fe4-0c1e20edfd36.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f7bd2aa2-5959-48d7-9fe4-0c1e20edfd36.png)
 
 * 카프카에서 트랜잭션은 다수의 파티션에 데이터를 저장할 경우 모든 데이터에 대해 동일한 원자성을 보장하기 위해 사용된다.
 * 원자성을 만족시킨다는 의미는 다수의 데이터를 동일 트랜잭션으로 묶어 전체 데이터를 일관성있게 처리하는 것을 의미한다.
@@ -90,7 +90,7 @@ producer.close();
 
 #### 트랜잭션 컨슈머 동작
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/21d0aad0-b454-4d6b-aca4-09e1a19362df.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/21d0aad0-b454-4d6b-aca4-09e1a19362df.png)
 
 * 트랜잭션 컨슈머는 파티션에 저장된 트랜잭션 레코드를 보고 트랜잭션이 완료(즉, 커밋)됨을 확인하고 데이터를 가져간다.
 * 트랜잭션 레코드는 실질적인 데이터를 가지고 있지 않으며 트랜잭션이 끝난 상태를 표시하는 정보만 가지고 있다.

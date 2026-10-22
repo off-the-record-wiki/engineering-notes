@@ -2,7 +2,7 @@
 
 #### KStream, KTable, GlobalKTable
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9ab602a7-d7a9-4f11-b38c-d0f85ba8dfe2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9ab602a7-d7a9-4f11-b38c-d0f85ba8dfe2.png)
 
 * `KStream`은 Kafka 토픽의 데이터를 이벤트 흐름으로 간주한다. 각 레코드는 독립적인 사건이며, 데이터베이스처럼 기존 값을 수정하는 것이 아니라 새로운 사건이 발생할 때마다 로그의 끝에 계속해서 추가하는 방식이다.
   * **Append-only** : 기존 키를 지우거나 덮어쓰지 않는다. 단순히 새로운 오프셋에 새로운 레코드를 추가한다.
@@ -11,14 +11,14 @@
 * 복구 용이성 : 모든 이벤트 기록이 그대로 남아있으므로 장애 발생 시 처음부터 다시 데이터를 읽어와 상태를 재구성하기 매우 쉽다.
 * 시계열 데이터 처리 : 모든 변화 과정이 남기 때문에 특정 시점의 상태를 추적하거나 로그 분석을 하는 데 최적화되어 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/e922bac7-e8f7-4dbb-a5e7-6d562f7a753a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e922bac7-e8f7-4dbb-a5e7-6d562f7a753a.png)
 
 * `KTable`은 Kafka 토픽의 데이터를 키-값(Key-Value) 쌍의 데이터베이스 상태로 간주한다. 특정 키에 새로운 메시지가 들어오면 이전 값을 덮어쓰기(Upsert)하여 항상 가장 최신 정보만을 유지한다.
   * **Upsert** : 기존 키를 덮어쓴다. 동일한 키가 들어오면 기존 데이터를 찾아서 최신 값으로 변경한다.
   * **최신 값 스냅샷** : `KTable`은 로컬 상태 저장소(State Store)를 유지한다.
   * **Changelog(변경 로그)** : `KTable` 데이터는 Kafka 토픽에 저장된 변경 사항(Changelog)들을 계속해서 반영한 결과물이다. 어떤 과정을 거쳐 현재의 값이 되었는가보다는 현재 최종 상태가 무엇인가가 중요하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/872cfcea-4782-4c0a-9c8f-989b04040635.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/872cfcea-4782-4c0a-9c8f-989b04040635.png)
 
 * `GlobalKTable`은 모든 파티션의 전체 데이터가 애플리케이션의 모든 태스크(인스턴스)에 복제되는 구조이다.
   * **브로드캐스트 방식** : 어떤 인스턴스가 어떤 파티션의 KStream을 처리하든 상관없이 GlobalKTable의 전체 데이터를 로컬에 가지고 있다.
@@ -29,12 +29,12 @@
 
 #### 토폴로지(Topology)
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7c3a6ecb-672a-4460-89b1-dea76540e625.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7c3a6ecb-672a-4460-89b1-dea76540e625.png)
 
 * 토폴로지란, 2개 이상의 노드들과 선으로 이루어진 집합을 말한다.
 * 여러 종류들이 있는데 스트림즈에서 사용하는 토폴로지는 트리 형태와 유사하다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5ae54f2b-8a85-47d8-a8aa-dfab3bc6b772.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5ae54f2b-8a85-47d8-a8aa-dfab3bc6b772.png)
 
 * 토폴로지를 이루는 노드를 하나의 프로세서(Processor)라고 부르고 노드와 노드를 이은 선을 스트림(Stream)이라고 부른다.
 * 소스 프로세서 : 데이터를 처리하기 위해 최초로 선언해야 하는 노드로, 하나 이상의 토픽에서 데이터를 가져온다.
@@ -67,7 +67,7 @@
 
 #### 텀블링 윈도우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/393d87aa-c6d0-4919-a5fe-8d2ffef43294.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/393d87aa-c6d0-4919-a5fe-8d2ffef43294.png)
 
 * 서로 겹치지 않은 윈도우를 특정 간격으로 지속적으로 처리할 때 사용한다.
 * 윈도우 최대 사이즈에 도달하면 해당 시점에 데이터를 취합하여 결과를 도출한다.
@@ -75,7 +75,7 @@
 
 #### 호핑 윈도우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4b25b495-daef-4a33-9404-5d19151b7452.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4b25b495-daef-4a33-9404-5d19151b7452.png)
 
 * 일정 시간 간격으로 겹치는 윈도우가 존재하는 윈도우 연산을 처리할 경우 사용한다.
 * 호핑 윈도우는 윈도우 사이즈와 윈도우 간격 2가지 변수를 가진다.
@@ -84,13 +84,13 @@
 
 #### 슬라이딩 윈도우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d2989070-0882-447a-bdf3-1711ca656540.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d2989070-0882-447a-bdf3-1711ca656540.png)
 
 * 슬라이딩 윈도우는 호핑 윈도우와 유사하지만 데이터의 정확한 시간을 바탕으로 윈도우 사이즈에 포함되는 데이터를 모두 연산에 포함시키는 특징이 있다.
 
 #### 세션 윈도우
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/bedd0a4a-5343-4905-9260-fd0267faace9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bedd0a4a-5343-4905-9260-fd0267faace9.png)
 
 * 세션 윈도우는 동일한 메시지 키의 데이터를 한 세션에 묶어 연산할 때 사용한다.
 * 세션의 최대 만료시간에 따라 윈도우 사이즈가 달라진다.

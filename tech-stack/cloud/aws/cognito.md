@@ -6,7 +6,7 @@
 * 앱의 관점에서 보면 Amazon Cognito 사용자 풀은 OpenID Connect(OIDC) 제공업체이다.
 * 사용자 풀(User Pool)은 보안, 아이덴티티 페더레이션, 앱 통합, 사용자 경험 사용자 지정을 위한 기능 계층을 추가한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8a0ba36c-4d55-4739-8a48-0c8f65c9ab7b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8a0ba36c-4d55-4739-8a48-0c8f65c9ab7b.png)
 
 ### Cognito 사용 배경
 

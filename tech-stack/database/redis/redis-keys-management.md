@@ -4,7 +4,7 @@
 
 #### Keys 관리 기법 - KEYS와 SCAN
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6c00b437-edcb-4567-8ca0-5630970d02a2.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6c00b437-edcb-4567-8ca0-5630970d02a2.png)
 
 **1. KEYS 명령어(패턴 매칭)**
 
@@ -42,7 +42,7 @@ SCAN 3072 MATCH users:* COUNT 100  # 반환된 커서로 다시 호출
 
 #### Keys 관리 기법 - EXISTS
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0f4a8786-d44a-4dca-9af5-f7fa8242833b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0f4a8786-d44a-4dca-9af5-f7fa8242833b.png)
 
 * `EXISTS key` : 사용자가 확인하고 싶은 특정 키 이름을 매개변수로 전달한다.
 * 키 존재 확인 : Redis 내부의 인덱스(Hash Table)에서 해당 키가 등록되었는지 검색한다.

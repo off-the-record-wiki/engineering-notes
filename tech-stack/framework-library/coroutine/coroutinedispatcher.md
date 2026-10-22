@@ -2,13 +2,13 @@
 
 #### CoroutineDispatcher의 의미와 동작 방식
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/92fa7c15-00a7-4905-a3ea-f0f95cfbe263.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/92fa7c15-00a7-4905-a3ea-f0f95cfbe263.png)
 
 * 사용자의 요청 : `launch`나 `async`와 같은 빌더를 통해 코루틴이 새로 생성된다.
 * 작업 대기열(Queue) 적재 : 디스패처는 넘겨받은 코루틴을 관리 하에 있는 동기화된 작업 대기열에 적재한다.
 * 쓰레드 풀 상태 : Thread-1이 코루틴 1을, Thread-2가 코루틴 2를 할당받아 하부 CPU 코어 위에서 활발히 동기 연산을 수행 중인 상태이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/86556902-f022-4eb8-aa4e-4e1766ba535d.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/86556902-f022-4eb8-aa4e-4e1766ba535d.png)
 
 * 쓰레드 가용 상태 전환 : Thread-1이 실행 중이던 코루틴 1 연산을 완료하면 해당 쓰레드는 디스패처에게 다음 작업을 요청한다.
 * Deque 및 Dispatch : 디스패처는 작업 대기열의 코루틴 3을 꺼내어 비어있는 Thread-1에 바인딩한다.
@@ -16,14 +16,14 @@
 
 #### 단일 쓰레드 디스패처
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/57e8fd2d-8c3b-4468-a5bd-7320e7cea518.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/57e8fd2d-8c3b-4468-a5bd-7320e7cea518.png)
 
 * 단일 쓰레드 디스패처란, 생성된 코루틴들을 오직 단 하나의 쓰레드에만 할당해 순차적으로 실행하도록 강제하는 코루틴 디스패처이다.
 * 다중 쓰레드 풀을 사용하는 다른 것과 달리 작업 대기열에 쌓인 코루틴들이 아무리 많아도 단 1개의 지정된 쓰레드가 컨텍스트 스위칭을 하며 작업을 처리한다.
 
 #### 멀티 쓰레드 디스패처
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e3ad27d-94eb-4f50-ad31-77e2a6120c10.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e3ad27d-94eb-4f50-ad31-77e2a6120c10.png)
 
 * 멀티 쓰레드 디스패처란, 생성된 코루틴들을 여러 개의 쓰레드로 구성된 쓰레드 풀에 분배해 병렬 및 동시 실행을 제어하는 코루틴 디스패처이다.
 **1. 내부 아키텍처 및 구동 메커니즘**
@@ -42,7 +42,7 @@
 
 #### Dispatchers.IO
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/05958266-ad34-48e8-bd63-2c456a43d2c6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/05958266-ad34-48e8-bd63-2c456a43d2c6.png)
 
 * `Dispatchers.IO`는 파일 입출력, 네트워크 요청, 데이터베이스 쿼리 실행 등과 같은 물리적 대기 시간을 수반하는 블로킹 I/O 작업을 처리하도록 설계된 멀티 쓰레드 기반의 코루틴 디스패처이다.
 * 초기상태(idle) : 애플리케이션 구동 초기에는 불필요하게 쓰레드를 많이 생성하지 않고 최소한의 워커 쓰레드만 유지한다.
@@ -52,7 +52,7 @@
 
 #### Dispatchers.Default
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/dc3b3a7c-a591-4d55-aa77-5346a2e26beb.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/dc3b3a7c-a591-4d55-aa77-5346a2e26beb.png)
 
 * `Dispatchers.Default`는 CPU 바운드 작업(대규모 데이터 정렬, 복잡한 알고리즘 연산, JSON/XML 파싱, 이미지 및 동영상 인코딩, 암호화 가동)을 위한 디스패처이다.
 * 코루틴 빌더를 사용할 때 별도의 디스패처를 명시하지 않으면 이 디스패처가 기본값으로 자동 지정된다.
@@ -61,7 +61,7 @@
 
 #### 공유 쓰레드 풀과 limitedParallelism
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4985f7fb-808a-46a4-b463-6f123107a16b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4985f7fb-808a-46a4-b463-6f123107a16b.png)
 
 **1. CoroutineScheduler**
 * Kotlin Coroutine 라이브러리는 JVM 환경에서 구동될 때, 내장 디스패처들을 위해 자체 설계한 고성능 쓰레드 풀인 `CoroutineScheduler`를 단 하나만 개설해 관리한다.
@@ -73,7 +73,7 @@
 
 #### Dispatchers.Main
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/4e7b5e62-2d27-4027-b9ec-985af5a5f0a6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4e7b5e62-2d27-4027-b9ec-985af5a5f0a6.png)
 
 * 메인 쓰레드에서의 작업을 위한 디스패처로 기본 코루틴 라이브러리에는 구현체가 없다.
 * 해당 디스패처를 사용하려면 안드로이드 코루틴 라이브러리 추가가 필요하다.
@@ -81,7 +81,7 @@
 
 #### Dispatchers.Main.immediate
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c4e66aa6-4511-404e-89a8-e158c1aedab9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c4e66aa6-4511-404e-89a8-e158c1aedab9.png)
 
 * `Dispatchers.Main.immediate`는 코루틴을 실행하는 코드가 메인 쓰레드에서 실행되고 있다면 작업 대기열에 적재될 필요없이 메인 쓰레드에서 그대로 실행될 수 있게 한다.
 * 만약 백그라운드 쓰레드에서 코루틴을 실행 요청하면 작업 대기열에 적재 후 메인 쓰레드로 보낸다.(=Dispatchers.Main과 같은 메커니즘)

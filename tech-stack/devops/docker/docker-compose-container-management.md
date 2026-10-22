@@ -55,7 +55,7 @@ $ docker compose down # 전체 컨테이너를 종료한다.
 
 ## 📚 컨테이너로 실행시킨 Spring Boot가 MySQL에 연결이 안되는 이유 분석하기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/15231eb1-85b9-475c-8314-3a4c7b51ba46.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/15231eb1-85b9-475c-8314-3a4c7b51ba46.png)
 
 * 호스트 컴퓨터 내부 각각의 컨테이너는 자신만의 네트워크 망과 IP주소를 가지고 있다.
 * 호스트 컴퓨터 입장에서 localhost는 호스트 컴퓨터 자신을 가리키나 Spring Boot 컨테이너 입장에서 localhost는 Spring Boot 컨테이너를 가리킨다.

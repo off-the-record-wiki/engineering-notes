@@ -4,7 +4,7 @@
 
 * 데이터를 보내고 받는 동안 코드를 실행하는 쓰레드는 다음과 같은 흐름을 가져가게 된다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/d687fee5-0067-4480-a8e8-90ed73b94362.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d687fee5-0067-4480-a8e8-90ed73b94362.png)
 
 * 데이터 입출력이 완료될 때까지 쓰레드는 아무 작업도 하지 않고 입출력이 끝나기를 기다린다. 즉, 입출력이 끝날 때까지 쓰레드는 블로킹된다.
 * 보통 입출력에 소요되는 시간은 코드를 실행하는 시간보다 훨씬 길다.
@@ -61,7 +61,7 @@ long end = System.currentTimeMillis();
 * 가상 쓰레드와 고루틴은 경량 쓰레드(`LightWeight`)라는 공통점을 가진다.
 * 경량 쓰레드는 OS가 관리하는 쓰레드가 아니라 JVM같은 언어의 런타임이 관리하는 쓰레드이다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/f1fea0af-f744-4bd3-abef-c043ab3014d1.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/f1fea0af-f744-4bd3-abef-c043ab3014d1.png)
 
 * 쓰레드는 기본적으로 최대 2MB의 스택 메모리 사이즈를 가지기 때문에, 컨텍스트 스위칭 시 메모리 이동량이 크다.
 * 또한 생성을 위해서 커널과 통신하여 스케줄링해야 하므로, 시스템 콜을 이용하기 때문에 생성 비용도 적지 않다.
@@ -70,7 +70,7 @@ long end = System.currentTimeMillis();
 
 #### Java의 가상 쓰레드 동작 원리
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/72c99658-8393-410b-90d5-940c5f863348.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/72c99658-8393-410b-90d5-940c5f863348.png)
 
 ***
 
@@ -89,7 +89,7 @@ long end = System.currentTimeMillis();
 * 가상 쓰레드는 실행하는 과정에서 블로킹되면 플랫폼 쓰레드와 언마운트되고 실행을 멈춘다.
 * 이 때, 언마운트된 플랫폼 쓰레드는 실행 대기 중인 다른 가상 쓰레드와 연결된 뒤 실행을 재개한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/a81d1494-5661-4d3a-a7ae-004681056791.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a81d1494-5661-4d3a-a7ae-004681056791.png)
 
 > 블로킹 연산과 synchronized 키워드
 >

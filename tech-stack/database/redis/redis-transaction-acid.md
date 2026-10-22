@@ -2,7 +2,7 @@
 
 #### Redis - Redis Transaction ACID
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/67f93e7b-e1ad-481e-a4e6-4bd89ae63217.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/67f93e7b-e1ad-481e-a4e6-4bd89ae63217.png)
 
 **1. 명령 일괄 실행 : MULTI와 EXEC**
 
@@ -29,7 +29,7 @@
 
 #### Redis Transaction - 트랜잭션의 생명 주기
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6f38e1f8-8204-43b7-9a3c-2503e1605648.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6f38e1f8-8204-43b7-9a3c-2503e1605648.png)
 
 **1. 트랜잭션의 생명 주기**
 
@@ -61,7 +61,7 @@ EXEC
 
 #### Redis Transaction - ACID 관점에서 본 Redis
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e52fd0a-2286-42c1-99cd-2715bdc94005.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e52fd0a-2286-42c1-99cd-2715bdc94005.png)
 
 **1. Atomicity(원자성) : "부분적 지원"**
 
@@ -112,7 +112,7 @@ EXEC
 
 #### Redis Transaction - Lua 스크립트와의 비교
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/8d56a01a-0cbc-4aa5-863e-7d52993a362a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/8d56a01a-0cbc-4aa5-863e-7d52993a362a.png)
 
 * 실무에서 "여러 명령을 원자적으로"가 필요할 때는 트랜잭션보다 **Lua 스크립트(`EVAL`)** 를 쓰는 경우가 더 많다.
 

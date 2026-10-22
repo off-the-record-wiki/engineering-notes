@@ -16,7 +16,7 @@ public class Node {
 }
 ```
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/9b1f4661-ff16-4809-be51-b92291c7cb06.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/9b1f4661-ff16-4809-be51-b92291c7cb06.png)
 
 * 노드는 내부에 데이터와 다음 노드에 대한 참조를 가지고 있다.
 * 데이터를 추가할 때 동적으로 필요한 만큼의 노드를 만들어서 연결한다. 배열과 다르게 메모리를 낭비하지 않는다.

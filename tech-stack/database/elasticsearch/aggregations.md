@@ -2,7 +2,7 @@
 
 #### Metric Aggregations란?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/2b7432da-f8a5-4677-92a0-16ee74b14b36.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/2b7432da-f8a5-4677-92a0-16ee74b14b36.png)
 
 * **숫자 필드에 대해 `sum`, `average`, `min`, `max`, `stats` 같은 지표를 계산**한다.
 * 여러 문서의 값이 **하나의 숫자로 집계**된다.
@@ -31,7 +31,7 @@ GET /products/_search
 
 #### Bucket Aggregations란?
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/138bae37-99ec-49e6-9394-dfa22aeb8291.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/138bae37-99ec-49e6-9394-dfa22aeb8291.png)
 
 * bucket aggregation은 **어떤 기준에 따라 문서를 버킷으로 묶는** 기능이다.
 * 각 버킷은 **공통된 특성을 공유하는 문서 그룹**을 나타낸다. 특성은 **필드 값, 값의 범위**, 또는 더 복잡한 기준일 수 있다.

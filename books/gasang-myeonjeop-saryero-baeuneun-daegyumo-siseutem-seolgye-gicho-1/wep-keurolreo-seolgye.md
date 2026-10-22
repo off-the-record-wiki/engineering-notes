@@ -2,7 +2,7 @@
 
 #### 웹 크롤러 시스템 디자인 설계
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c34e6648-a3f0-410e-b709-26b58cffbf91.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c34e6648-a3f0-410e-b709-26b58cffbf91.png)
 
 **1. 시작 URL 집합**
 * 시작 URL 집합은 웹 크롤러가 크롤링을 시작하는 출발점이다.
@@ -40,7 +40,7 @@
 
 **8. URL 추출기**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/512449bf-9b64-4bd9-b042-efe2eb159780.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/512449bf-9b64-4bd9-b042-efe2eb159780.png)
 
 * URL 추출기는 HTML 페이지를 파싱하여 링크들을 골라내는 역할을 한다.
 * 상대 경로는 절대 경로로 변환한다.
@@ -62,7 +62,7 @@
 * DFS, BFS는 바로 이 그래프 탐색에서 널리 사용되는 알고리즘이다. 하지만 DFS는 좋은 선택이 아닐 가능성이 높은데 왜냐하면 그래프 크기가 클 경우 어느 정도로 깊숙이 가게 될지 가늠하기 어렵기 때문이다.
 * 따라서 웹 크롤러는 보통 BFS, 즉 너비 우선 탐색을 사용한다. BFS를 FIFO 큐를 사용하는 알고리즘이다. 이 큐의 한쪽으로는 탐색할 URL을 집어넣고, 다른 한쪽으로는 꺼내기만 한다. 하지만 이 구현법에는 다음의 2가지 문제가 있다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/814212b1-1352-4aea-9b97-5d9283554248.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/814212b1-1352-4aea-9b97-5d9283554248.png)
 
 * 한 페이지에서 나오는 링크의 상당수는 같은 서버로 되돌아간다.
 * 위키피디아의 경우 동일한 `wikipedia.com` 서버의 다른 페이지를 참조하는 링크를 볼 수 있다. 결국 크롤러는 같은 호스트에 속한 많은 링크를 다운받느라 바빠지게 되는데, 이 때, 링크들을 병렬로 처리하게 된다면 위키피디아 서버는 수많은 요청으로 과부하에 걸리게 될 것이다. 이런 크롤러는 보통 '예의 없는' 크롤러로 간주된다.
@@ -70,7 +70,7 @@
 
 #### 미수집 URL 저장소
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/7b4d57f1-6a15-48ef-a046-8ea53da7619e.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7b4d57f1-6a15-48ef-a046-8ea53da7619e.png)
 
 * URL 저장소는 다운로드할 URL을 보관하는 저장소다.
 * 이 저장소를 잘 구현하면 '예외'를 갖춘 크롤러, URL 사이의 우선순위와 신선도를 구별하는 크롤러를 구현할 수 있다.
@@ -78,7 +78,7 @@
 
 **1. 예의**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/1915cb6c-db2a-4d4d-93e0-d1a164b3e5f9.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1915cb6c-db2a-4d4d-93e0-d1a164b3e5f9.png)
 
 * 웹 크롤러는 수집 대상 서버로 짧은 시간 안에 너무 많은 요청을 보내는 것을 삼가해야 한다.
 * 너무 많은 요청을 보내는 것은 '무례한' 일이며, 때로는 DoS 공격으로 간주되기도 한다. 가령 아무 안전장치가 없으면 초당 수천 건의 페이지 요청을 동일한 웹 사이트로 보내 사이트를 마비시켜버릴 수도 있다.
@@ -89,7 +89,7 @@
 
 **2. 우선순위**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/24949c9f-ac4c-4b52-88db-2b36757e5b73.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/24949c9f-ac4c-4b52-88db-2b36757e5b73.png)
 
 * 유용성에 따라 URL 우선순위를 나눌때는 페이지 랭크(PageRank), 트래픽 양, 갱신 빈도 등 다양한 척도를 사용할 수 있을 것이다.
   * 순위결정장치 : URL을 입력으로 받아 우선순위를 계산한다.
@@ -118,7 +118,7 @@
 
 **2. 성능 최적화 기법 - 분산 크롤링**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/95e5f92a-0ed1-40ac-93ad-ae3e52ec2d03.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/95e5f92a-0ed1-40ac-93ad-ae3e52ec2d03.png)
 
 * 성능을 높이기 위해 크롤링 작업을 여러 서버에 분산시키는 방법이다.
 * 각 서버는 여러 쓰레드를 돌려 다운로드 작업을 처리한다.
@@ -150,7 +150,7 @@
 
 **7. 확장성**
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/b7482587-3a79-4e33-b18e-b64a17927846.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b7482587-3a79-4e33-b18e-b64a17927846.png)
 
 * 새로운 형태의 컨텐츠를 쉽게 지원할 수 있도록 신경써야한다.
 * PNG 다운로더는 PNG 파일을 다운로드하는 플러그인 모듈이다.

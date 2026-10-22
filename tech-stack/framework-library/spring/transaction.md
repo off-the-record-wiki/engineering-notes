@@ -42,7 +42,7 @@
 
 #### 데이터베이스 연결 구조와 DB 세션
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/60f41c73-34ac-47d3-b5da-715c8ed8b10b.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/60f41c73-34ac-47d3-b5da-715c8ed8b10b.png)
 
 * DB 서버는 내부에 세션을 만들고 앞으로 해당 커넥션을 통한 모든 요청을 해당 세션을 통해 실행한다.
 * 개발자가 클라이언트(WAS나 DB 접근 툴)를 통해 SQL을 전달하면 현재 커넥션에 연결된 세션이 SQL을 실행한다.

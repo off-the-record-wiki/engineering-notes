@@ -2,7 +2,7 @@
 
 #### @Transactional이 적용된 테스트
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/c58f210b-0ffa-4db3-892c-3e19dba4537a.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c58f210b-0ffa-4db3-892c-3e19dba4537a.png)
 
 1. 자동 커밋을 수동 커밋으로 변경한다. 
 2. 리포지토리에서 트랜잭션 동기화 매니저에 있는 커넥션을 가져와 테스트를 실행한다.

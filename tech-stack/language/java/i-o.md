@@ -5,7 +5,7 @@
 * 자바 프로세스가 가지고 있는 데이터를 밖으로 보내려면 출력 스트림을 사용하면 되고 반대로 외부 데이터를 자바 프로세스 안으로 가져오려면 입력 스트림을 사용하면 된다.
 * 참고로 각 스트림은 단방향으로 흐른다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/18f8386e-b272-48cc-b012-2e9478d1aa48.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/18f8386e-b272-48cc-b012-2e9478d1aa48.png)
 
 * `FileOutputStream`
   * 파일에 데이터를 출력하는 스트림
@@ -36,17 +36,17 @@
 
 #### InputStream/OutputStream
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/686d17a3-b4a3-434d-bb87-766505577fc6.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/686d17a3-b4a3-434d-bb87-766505577fc6.png)
 
 * 현대 컴퓨터는 대부분 byte 단위로 데이터를 주고 받는다. 참고로 bit 단위는 너무 작기 때문에 byte 단위를 기본으로 사용한다.
 * 이렇게 데이터를 주고받는 것을 Input/Output(I/O)라 한다.
 * 자바 내부에 있는 데이터를 외부에 전달할 때 각각 데이터를 주고 받는 방식이 다르면 불편하기 때문에 이런 문제를 해결하기 위해 자바는 `InputStream`, `OutputStream`이라는 기본 추상 클래스를 제공한다.
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/5e4206ed-10b4-4b9c-a745-00fa451756e7.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5e4206ed-10b4-4b9c-a745-00fa451756e7.png)
 
 <br>
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/6edc08b1-a372-411f-b722-88770509c268.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/6edc08b1-a372-411f-b722-88770509c268.png)
 
 * `InputStream`과 `OutputStream`이 다양한 스트림을 추상화하고 기본 기능에 대한 표준을 잡아둔 덕에 편리하게 입출력 작업을 수행할 수 있다.
   * 일관성 : 모든 종류 입출력 작업에 대해 동일한 인터페이스를 사용할 수 있어 코드 일관성이 유지된다.
@@ -70,7 +70,7 @@
 
 #### Reader/Writer
 
-![](https://raw.githubusercontent.com/wiki/thought-corner/study/images/attachments/0cf9200d-1700-4946-81c7-78d164a24b42.png)
+![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/0cf9200d-1700-4946-81c7-78d164a24b42.png)
 
 * 모든 데이터는 `byte` 단위로 저장된다.
 * 따라서 Reader/Writer가 아무리 문자를 다룬다고 해도 문자를 바로 저장할 순 없다.
