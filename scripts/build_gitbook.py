@@ -21,14 +21,14 @@ import unicodedata
 import urllib.parse
 from pathlib import Path
 
-DEFAULT_WIKI_URL = 'https://github.com/off-the-record-wiki/study/wiki'
-SITE_TITLE = 'Study'
+DEFAULT_WIKI_URL = 'https://github.com/off-the-record-wiki/engineering-notes/wiki'
+SITE_TITLE = 'engineering-notes'
 
 TEXT = r'(?:[^\[\]\n]|\[[^\[\]\n]*\])*'
 DEST = r'(?:[^()\s]|\([^()\s]*\))+'
 MD_LINK = re.compile(rf'(?P<bang>!?)\[(?P<text>{TEXT})\]\((?P<dest>{DEST})(?P<title>\s+"[^"]*")?\)')
 WIKI_LINK = re.compile(
-    r'^(?P<abs>https?://(?:www\.)?github\.com/[\w.-]+/study/wiki/)?(?P<page>[^/#?:\s][^/#?\s]*)(?P<anchor>#.*)?$'
+    r'^(?P<abs>https?://(?:www\.)?github\.com/[\w.-]+/engineering-notes/wiki/)?(?P<page>[^/#?:\s][^/#?\s]*)(?P<anchor>#.*)?$'
 )
 IMG_TAG = re.compile(r'<img\b[^>]*>', re.I)
 IMG_OPEN = re.compile(r'<img\b[^>]*$', re.I)
@@ -376,7 +376,7 @@ class Builder:
             '    - type: space\n'
             '      key: backend-roadmap\n'
             f'      title: {SITE_TITLE}\n'
-            '      path: backend-roadmap\n'
+            '      path: engineering-notes\n'
             '      default: true\n'
             '      content:\n'
             '        directory: ./\n'
