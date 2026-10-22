@@ -120,6 +120,7 @@ class Builder:
         self.pages, self.wiki_sha = read_wiki(wiki)
         self.by_key = {n.casefold(): n for n in self.pages}
         self.paths = {}          # wiki page -> output path
+        self.repo_paths = {}     # 레포 파일·디렉터리 -> output path
         self.anchor_paths = {}   # (category page, github anchor) -> section path
         self.files = {}          # output path -> content
         self.used = set()
@@ -150,6 +151,18 @@ class Builder:
         if target is None:
             return f'{self.wiki_url}/{urllib.parse.quote(page, safe="-_.~")}{anchor}'
         return posixpath.relpath(target, posixpath.dirname(cur)) + anchor
+
+    def repo_link(self, dest, cur, source):
+        """레포 파일에서 claude/ 처럼 레포 안의 경로로 건 링크를 GitBook 페이지로 바꾼다. 대상이 없으면 None."""
+        if source is None or re.match(r'^[a-z]+:', dest):
+            return None
+        path, sep, anchor = dest.partition('#')
+        path = urllib.parse.unquote(path)
+        if not path:
+            return None
+        src = self.repo / path.lstrip('/') if path.startswith('/') else source.parent / path
+        target = self.repo_paths.get(src.resolve())
+        return posixpath.relpath(target, posixpath.dirname(cur)) + sep + anchor if target else None
 
     def asset(self, dest, cur, source):
         """레포 파일에서 /docs/image/... 처럼 레포 기준 경로로 건 이미지를 .gitbook/assets로 복사한다."""
@@ -223,7 +236,8 @@ class Builder:
         # GitBook은 이미지 alt를 캡션으로 보여 주므로 자동으로 붙은 alt는 지운다.
         s = MD_LINK.sub(lambda m: '{}[{}]({}{})'.format(
             m['bang'], '' if m['bang'] and AUTO_ALT.match(nfc(m['text'].strip())) else m['text'],
-            self.asset(m['dest'], cur, source) if m['bang'] else self.link(m['dest'], cur),
+            self.asset(m['dest'], cur, source) if m['bang']
+            else self.repo_link(m['dest'], cur, source) or self.link(m['dest'], cur),
             m['title'] or ''), s)
         return TAG.sub(lambda m: '<' if m[1].lower() in HTML_TAGS else r'\<', s)
 
@@ -315,6 +329,11 @@ class Builder:
         self.paths.update({'Home': 'README.md', 'Tech-Stack': 'tech-stack/README.md', 'Books': 'books/README.md'})
         for c in categories:
             self.paths[c] = 'tech-stack/README.md'
+        notes = self.claude_notes()
+        if notes:
+            self.repo_paths[(self.repo / 'claude').resolve()] = 'claude-code/README.md'
+        for _, path, src in notes:
+            self.repo_paths[src.resolve()] = path
 
         readme = self.repo / 'README.md'
         # 첫 페이지 제목은 레포 README의 제목 대신 사이트 이름을 쓴다
@@ -326,6 +345,10 @@ class Builder:
 
         summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)',
                    '* [Tech Stack](tech-stack/README.md)', '* [Books](books/README.md)']
+        if notes:
+            lines = [f'* [{title}]({posixpath.basename(path)})' for title, path, _ in notes]
+            self.page('claude-code/README.md', 'Claude Code', '\n'.join(lines))
+            summary.append('* [Claude Code](claude-code/README.md)')
         for label, sections in groups:
             summary += ['', f'## {label}', '']
             for sec in sections:
@@ -335,7 +358,6 @@ class Builder:
                     self.page(self.paths[page], text, self.pages[page])
                     summary.append(f'  * [{text}]({self.paths[page]})')
 
-        notes = self.claude_notes()
         if notes:
             summary += ['', '## Claude Code', '']
             for title, path, src in notes:

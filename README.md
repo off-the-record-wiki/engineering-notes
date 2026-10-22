@@ -8,6 +8,7 @@ Detailed study notes live in the [Wiki](https://github.com/thought-corner/study/
 
 - [🛠 Tech Stack](https://github.com/thought-corner/study/wiki/Tech-Stack)
 - [📚 Books](https://github.com/thought-corner/study/wiki/Books)
+- [🤖 Claude Code](claude/)
 
 ## Topics
 
