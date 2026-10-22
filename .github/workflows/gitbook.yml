@@ -11,7 +11,7 @@ on:
       - scripts/build_gitbook.py
       - .github/workflows/gitbook.yml
   schedule:
-    - cron: '0 18 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
