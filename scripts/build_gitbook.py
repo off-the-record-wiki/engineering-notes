@@ -3,6 +3,7 @@
 
 - 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)와 Books 페이지에서 만든다.
   카테고리의 `##` 섹션이 GitBook 페이지가 되고, 섹션 아래 링크들이 하위 페이지가 된다.
+  링크 없이 적힌 예정 노트는 섹션 페이지의 목록에만 남긴다.
 - 어느 카테고리에도 연결되지 않은 wiki 페이지는 제외하고, 그 페이지로 가는 링크는 wiki URL로 남긴다.
 
 사용법: python3 scripts/build_gitbook.py --wiki <wiki clone> --out <output dir>
@@ -46,6 +47,8 @@ SUMMARY_LINE = re.compile(r'^[ \t]*<summary>(.*?)</summary>[ \t]*$')
 BR_LINE = re.compile(r'^[ \t]*<br\s*/?>[ \t]*$')
 SECTION = re.compile(r'^##\s+(.+?)\s*$')
 ITEM = re.compile(rf'^\s*[*-]\s+\[(?P<text>{TEXT})\]\((?P<dest>{DEST})\)')
+# 아직 쓰지 않은 노트는 wiki에 링크 없이 `* [제목]`으로 적혀 있다
+PLANNED = re.compile(rf'^\s*[*-]\s+(?:\[(?P<bracketed>{TEXT})\]|(?P<text>.*\S))\s*$')
 NAV_LINE = re.compile(r'^\[←')
 
 
@@ -239,7 +242,7 @@ class Builder:
         return candidate
 
     def parse_category(self, name, base):
-        """카테고리 페이지를 [{title, ref, path, items: [(text, dest, page)]}]로 나눈다."""
+        """카테고리 페이지를 [{title, ref, path, items: [(text, dest, page)]}]로 나눈다. 예정 노트는 dest가 None이다."""
         sections, current = [], None
         for line in self.pages[name].split('\n'):
             if m := SECTION.match(line):
@@ -252,6 +255,8 @@ class Builder:
                 wm = WIKI_LINK.match(m['dest'])
                 page = self.resolve(urllib.parse.unquote(wm['page'])) if wm else None
                 current['items'].append((m['text'].strip(), m['dest'], page))
+            elif current and (m := PLANNED.match(line)):
+                current['items'].append(((m['text'] or m['bracketed']).strip(), None, None))
         return sections
 
     def assign(self, sections):
@@ -260,7 +265,7 @@ class Builder:
             owned = []
             for text, dest, page in sec['items']:
                 if page is None:
-                    if WIKI_LINK.match(dest) and WIKI_LINK.match(dest)['abs']:
+                    if dest and WIKI_LINK.match(dest) and WIKI_LINK.match(dest)['abs']:
                         self.warnings.append(f'{sec["title"]}: 없는 wiki 페이지 링크 {urllib.parse.unquote(dest)}')
                     continue
                 if page in self.paths:
@@ -277,7 +282,7 @@ class Builder:
         lines = [f'# {sec["title"]}', '']
         if sec['ref']:
             lines += [f'🔗 [Reference]({sec["ref"]})', '']
-        lines += [f'* [{text}]({dest})' for text, dest, _ in sec['items']]
+        lines += [f'* [{text}]({dest})' if dest else f'* {text}' for text, dest, _ in sec['items']]
         self.page(sec['path'], sec['title'], '\n'.join(lines))
 
     def build(self):
