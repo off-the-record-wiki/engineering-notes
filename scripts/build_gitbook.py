@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """GitHub Wiki를 GitBook Git Sync용 구조(SUMMARY.md)로 변환한다. 첫 페이지는 레포의 README.md다.
 
-- 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)에서 만든다.
+- 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)와 Books 페이지에서 만든다.
   카테고리의 `##` 섹션이 GitBook 페이지가 되고, 섹션 아래 링크들이 하위 페이지가 된다.
-- 어느 카테고리에도 연결되지 않은 wiki 페이지(Books 포함)는 제외하고, 그 페이지로 가는 링크는 wiki URL로 남긴다.
+- 어느 카테고리에도 연결되지 않은 wiki 페이지는 제외하고, 그 페이지로 가는 링크는 wiki URL로 남긴다.
 
 사용법: python3 scripts/build_gitbook.py --wiki <wiki clone> --out <output dir>
 """
@@ -53,9 +53,26 @@ def nfc(s):
     return unicodedata.normalize('NFC', s)
 
 
+# 한글 음절의 초성·중성·종성을 로마자로 옮기는 표(국어의 로마자 표기법을 음절 단위로 단순화)
+CHOSEONG = ['g', 'kk', 'n', 'd', 'tt', 'r', 'm', 'b', 'pp', 's', 'ss', '', 'j', 'jj', 'ch', 'k', 't', 'p', 'h']
+JUNGSEONG = ['a', 'ae', 'ya', 'yae', 'eo', 'e', 'yeo', 'ye', 'o', 'wa', 'wae', 'oe', 'yo', 'u', 'wo', 'we', 'wi',
+             'yu', 'eu', 'ui', 'i']
+JONGSEONG = ['', 'k', 'k', 'k', 'n', 'n', 'n', 't', 'l', 'k', 'm', 'l', 'l', 'l', 'p', 'l', 'm', 'p', 'p', 't', 't',
+             'ng', 't', 't', 'k', 't', 'p', 't']
+
+
+def romanize(text):
+    out = []
+    for ch in text:
+        n = ord(ch) - 0xAC00
+        out.append(CHOSEONG[n // 588] + JUNGSEONG[n // 28 % 21] + JONGSEONG[n % 28] if 0 <= n < 11172 else ch)
+    return ''.join(out)
+
+
 def slugify(text, max_bytes=200):  # 파일명 한도 255바이트 안에서 해시와 .md가 붙을 자리를 남긴다
-    # GitBook은 파일명에서 ASCII가 아닌 글자를 지우고 URL을 만든다(한글만 있으면 `undefined`). 그래서 ASCII만 남긴다.
-    s = re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFKC', text).lower()).strip('-')
+    # GitBook은 파일명에서 ASCII가 아닌 글자를 지우고 URL을 만든다(한글만 있으면 `undefined`).
+    # 그래서 한글은 로마자로 옮기고 ASCII만 남긴다.
+    s = re.sub(r'[^a-z0-9]+', '-', romanize(unicodedata.normalize('NFKC', text)).lower()).strip('-')
     if len(s.encode()) > max_bytes:
         head = s.encode()[:max_bytes].decode('utf-8', 'ignore').rstrip('-')
         s = f'{head}-{hashlib.sha1(text.encode()).hexdigest()[:6]}'
@@ -271,10 +288,11 @@ class Builder:
                 categories.setdefault(name, text.strip())
         groups = [(label, self.parse_category(c, f'tech-stack/{slugify(c.removeprefix("Tech-"))}'))
                   for c, label in categories.items()]
+        groups.append(('Books', self.parse_category('Books', 'books')))
         for _, sections in groups:
             self.assign(sections)
 
-        self.paths.update({'Home': 'README.md', 'Tech-Stack': 'tech-stack/README.md'})
+        self.paths.update({'Home': 'README.md', 'Tech-Stack': 'tech-stack/README.md', 'Books': 'books/README.md'})
         for c in categories:
             self.paths[c] = 'tech-stack/README.md'
 
@@ -282,10 +300,12 @@ class Builder:
         # 첫 페이지 제목은 레포 README의 제목 대신 사이트 이름을 쓴다
         text = re.sub(r'\A\s*# [^\n]*\n', '', readme.read_text(encoding='utf-8'))
         self.page('README.md', SITE_TITLE, text, readme)
-        text = '\n'.join(l for l in self.pages['Tech-Stack'].split('\n') if not NAV_LINE.match(l))
-        self.page(self.paths['Tech-Stack'], 'Tech Stack', text)
+        for name in ('Tech-Stack', 'Books'):
+            text = '\n'.join(l for l in self.pages[name].split('\n') if not NAV_LINE.match(l))
+            self.page(self.paths[name], name.replace('-', ' '), text)
 
-        summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)', '* [Tech Stack](tech-stack/README.md)']
+        summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)',
+                   '* [Tech Stack](tech-stack/README.md)', '* [Books](books/README.md)']
         for label, sections in groups:
             summary += ['', f'## {label}', '']
             for sec in sections:
