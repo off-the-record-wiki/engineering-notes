@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""GitHub Wiki를 GitBook Git Sync용 구조(SUMMARY.md)로 변환한다. 첫 페이지는 레포의 README.md다.
+"""GitHub Wiki와 레포의 노트를 GitBook Git Sync용 구조(SUMMARY.md)로 변환한다. 첫 페이지는 레포의 README.md다.
 
 - 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)와 Books 페이지에서 만든다.
   카테고리의 `##` 섹션이 GitBook 페이지가 되고, 섹션 아래 링크들이 하위 페이지가 된다.
   링크 없이 적힌 예정 노트는 섹션 페이지의 목록에만 남긴다.
 - 어느 카테고리에도 연결되지 않은 wiki 페이지는 제외하고, 그 페이지로 가는 링크는 wiki URL로 남긴다.
+- 레포의 claude/ 노트는 "Claude Code" 그룹으로 넣는다.
 
 사용법: python3 scripts/build_gitbook.py --wiki <wiki clone> --out <output dir>
 """
@@ -285,6 +286,20 @@ class Builder:
         lines += [f'* [{text}]({dest})' if dest else f'* {text}' for text, dest, _ in sec['items']]
         self.page(sec['path'], sec['title'], '\n'.join(lines))
 
+    def claude_notes(self):
+        """claude/의 노트를 번호순 → 번호 없는 노트 → Appendix 순으로 정렬한다."""
+        notes = []
+        for src in (self.repo / 'claude').glob('*.md'):
+            if m := re.fullmatch(r'Appendix_(\d+)_(.+)', src.stem):
+                order, title = (2, int(m[1])), f'Appendix {int(m[1])}. {m[2].replace("_", " ")}'
+            elif m := re.fullmatch(r'(\d+)_(.+)', src.stem):
+                order, title = (0, int(m[1])), m[2].replace('_', ' ')
+            else:
+                order, title = (1, 0), src.stem
+            notes.append((order, title, src))
+        return [(title, f'claude-code/{self.unique("claude-code", slugify(title))}.md', src)
+                for _, title, src in sorted(notes, key=lambda n: (n[0], n[1]))]
+
     def build(self):
         categories = {}  # wiki 페이지 -> _Sidebar에 표시된 이름
         for text, dest in re.findall(rf'\[({TEXT})\]\(({DEST})\)', self.pages.get('_Sidebar', '')):
@@ -319,6 +334,13 @@ class Builder:
                 for text, page in sec['owned']:
                     self.page(self.paths[page], text, self.pages[page])
                     summary.append(f'  * [{text}]({self.paths[page]})')
+
+        notes = self.claude_notes()
+        if notes:
+            summary += ['', '## Claude Code', '']
+            for title, path, src in notes:
+                self.page(path, title, src.read_text(encoding='utf-8'), src)
+                summary.append(f'* [{title}]({path})')
 
         self.files['SUMMARY.md'] = '\n'.join(summary) + '\n'
         self.files['.gitbook.yaml'] = 'root: ./\n\nstructure:\n  readme: README.md\n  summary: SUMMARY.md\n'
