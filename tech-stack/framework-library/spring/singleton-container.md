@@ -35,7 +35,7 @@ public class SingletonService {
   * 내부 속성을 변경하거나 초기화하기 어렵다.
   * 유연성이 떨어진다.
 
-> [Java ‐ private 생성자나 열거 타입으로 싱글턴임을 보증하라[Effective Java Item 3]](https://github.com/off-the-record-wiki/study/wiki/Java-%E2%80%90-private-%EC%83%9D%EC%84%B1%EC%9E%90%EB%82%98-%EC%97%B4%EA%B1%B0-%ED%83%80%EC%9E%85%EC%9C%BC%EB%A1%9C-%EC%8B%B1%EA%B8%80%ED%84%B4%EC%9E%84%EC%9D%84-%EB%B3%B4%EC%A6%9D%ED%95%98%EB%9D%BC%5BEffective-Java-Item-3%5D)
+> [Java ‐ private 생성자나 열거 타입으로 싱글턴임을 보증하라[Effective Java Item 3]](../../../books/effective-java-3-e/private-saengseongjana-yeolgeo-taipeuro-singgeulteonimeul-bojeunghara.md)
 
 #### 싱글톤 컨테이너
 

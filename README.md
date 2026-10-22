@@ -7,7 +7,7 @@ Detailed study notes live in the [Wiki](https://github.com/thought-corner/study/
 ## Explore
 
 - [🛠 Tech Stack](tech-stack/README.md)
-- [📚 Books](https://github.com/off-the-record-wiki/study/wiki/Books)
+- [📚 Books](books/README.md)
 
 ## Topics
 

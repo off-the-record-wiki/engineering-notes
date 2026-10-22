@@ -1,0 +1,23 @@
+# Kotlin Academy - Kotlin Essentials with exercises⭐
+
+🔗 [Reference](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000008439557)
+
+* [(Effective Kotlin Item 3) Kotlin - variable](effective-kotlin-item-3-kotlin-variable.md)
+* [(Effective Kotlin Item 4) Kotlin - primitive types, literals, and operations](effective-kotlin-item-4-kotlin-primitive-types-literals-and-operations.md)
+* [(Effective Kotlin Item 5) Kotlin - control Flow: if, when, try, and while](effective-kotlin-item-5-kotlin-control-flow-if-when-try-and-while.md)
+* [(Effective Kotlin Item 6) Kotlin - function](effective-kotlin-item-6-kotlin-function.md)
+* [(Effective Kotlin Item 7) Kotlin - for](effective-kotlin-item-7-kotlin-for.md)
+* [(Effective Kotlin Item 8) Kotlin - Null Safety and Nullable Types](effective-kotlin-item-8-kotlin-null-safety-and-nullable-types.md)
+* [(Effective Kotlin Item 9) Kotlin - Class](effective-kotlin-item-9-kotlin-class.md)
+* [(Effective Kotlin Item 10) Kotlin - Extend](effective-kotlin-item-10-kotlin-extend.md)
+* [(Effective Kotlin Item 11) Kotlin - Data Class](effective-kotlin-item-11-kotlin-data-class.md)
+* [(Effective Kotlin Item 12) Kotlin - Object](effective-kotlin-item-12-kotlin-object.md)
+* [(Effective Kotlin Item 13) Kotlin ‐ Exception](effective-kotlin-item-13-kotlin-exception.md)
+* [(Effective Kotlin Item 14) Kotlin - Enum Classes](effective-kotlin-item-14-kotlin-enum-classes.md)
+* [(Effective Kotlin Item 15) Kotlin - Sealed Classes and Interfaces](effective-kotlin-item-15-kotlin-sealed-classes-and-interfaces.md)
+* [(Effective Kotlin Item 16) Kotlin - Annotation Classes](effective-kotlin-item-16-kotlin-annotation-classes.md)
+* [(Effective Kotlin Item 17) Kotlin - Extensions](effective-kotlin-item-17-kotlin-extensions.md)
+* [(Effective Kotlin Item 18) Kotlin - Collections](effective-kotlin-item-18-kotlin-collections.md)
+* [(Effective Kotlin Item 19) Kotlin - Operator Overloading](effective-kotlin-item-19-kotlin-operator-overloading.md)
+* [(Effective Kotlin Item 20) Kotlin - The Beauty of the Type System](effective-kotlin-item-20-kotlin-the-beauty-of-the-type-system.md)
+* [(Effective Kotlin Item 21) Kotlin - Generic](effective-kotlin-item-21-kotlin-generic.md)
