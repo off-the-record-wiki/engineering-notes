@@ -47,22 +47,18 @@
 
 ![](https://github.com/user-attachments/assets/def3c2bd-51db-4cec-b0e6-952381a2d678)
 
-```
-1. SYN : 클라이언트 → 서버(시퀀스 번호 전송)
-2. SYN-ACK : 서버 → 클라이언트
-3. ACK : 클라이언트 → 서버(확인)
-```
+* SYN : 클라이언트 → 서버(시퀀스 번호 전송). 클라이언트가 연결을 요청하며 자신의 시작 순서 번호를 보낸다. 클라이언트는 `SYN_SENT` 상태가 된다.
+* SYN-ACK : 서버 → 클라이언트. 서버가 받았으니 다음 순서 번호를 확인해 주면서 자신의 시작 번호도 함께 보낸다. `SYN_RCVD` 상태가 된다.
+* ACK : 클라이언트 → 서버(확인). 클라이언트가 서버의 번호를 확인하면 양쪽이 모두 `ESTABLISHED`가 되고 데이터를 주고받기 시작한다.
 
 #### 연결 종료 — 4-way Handshake
 
 ![](https://github.com/user-attachments/assets/e285a9a8-d71f-491f-8de3-8f27d98970aa)
 
-```
-1. FIN : 종료 요청
-2. ACK : 확인
-3. FIN : 반대쪽도 종료 요청
-4. ACK : 확인
-```
+* FIN : 종료 요청. 클라이언트가 더 보낼 데이터가 없다며 `FIN`을 보내고 `FIN_WAIT_1`이 된다.
+* ACK : 확인. 서버가 받았다고 응답하고 `CLOSE_WAIT`가 된다. 이 때, 서버 쪽 방향은 아직 열려 있어서 남은 데이터가 있으면 마저 보낼 수 있다.
+* FIN : 반대쪽도 종료 요청. 서버도 보낼 것을 다 보내면 자신의 `FIN`을 보내고 `LAST_ACK`가 된다.
+* ACK : 확인. 클라이언트가 마지막 ACK를 보내면 서버는 바로 `CLOSED`가 된다. 클라이언트는 `TIME_WAIT`로 잠시(2MSL) 기다린 뒤 닫힌다. 마지막 `ACK`가 유실돼 서버가 `FIN`을 다시 보낼 경우에 대비하기 위해서다.
 
 #### UDP(User Datagram Protocol)
 
