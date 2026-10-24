@@ -2,7 +2,7 @@
 
 #### [MVC 패턴](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/04547a09-230a-483f-af90-868a1328acbc.png)
+![](https://github.com/user-attachments/assets/56fdf628-abf1-419a-ba82-ac410c78cd4b)
 
 * 애플리케이션을 데이터(Model), 화면(View), 제어(Controller) 세 가지 역할로 나누는 아키텍처 패턴이다.
 * 핵심 목적은 관심사의 분리(Separation of Concerns)로 서로 다른 책임을 가진 코드를 섞지 않는 것이다.
@@ -19,7 +19,7 @@
 
 #### [계층형 아키텍처](https://en.wikipedia.org/wiki/Multitier_architecture)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/46c2cbb4-1f43-46e5-9dc9-70c93388f245.png)
+![](https://github.com/user-attachments/assets/6ee31216-79af-4749-9ff4-48003553f1db)
 
 * **Controller(Presentation Layer) — 표현 계층**
   * 외부(클라이언트)와 맞닿는 진입점. HTTP 요청을 받고 응답을 반환한다.
@@ -34,7 +34,7 @@
 
 #### [DDD와 전술 패턴](https://en.wikipedia.org/wiki/Domain-driven_design)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/337a822a-a150-4e8d-98c0-5625920ecf27.png)
+![](https://github.com/user-attachments/assets/dd745e9b-ca2e-4c2c-bfeb-05d16931a458)
 
 * 복잡한 소프트웨어의 중심을 도메인(비즈니스 문제 영역)에 두고 설계하는 접근법이다.
 * 기술(DB, 프레임워크)이 아니라 비즈니스 규칙이 코드 구조를 이끌도록 하는 것이 핵심이다.
@@ -47,15 +47,9 @@
   * **Factory(팩토리)** : 생성 과정이 복잡한 애그리거트를 일관되게 만들어 주는 책임을 캡슐화한다. 생성 로직이 도메인 객체 밖으로 흩어지는 것을 막는다.
   * **Domain Event(도메인 이벤트)** : 도메인에서 의미 있는 사건을 표현한다. 발행하면 다른 애그리거트나 외부 시스템이 반응할 수 있어, 결합도를 낮추고 비동기 처리를 가능하게 한다.
 
-> **❗계층형 아키텍처와의 관계**
->
-> * DDD는 보통 Application / Domain / Infrastructure 계층 위에서 구현된다.
-> * DDD는 Repository 인터페이스를 도메인에 두고 구현을 Infrastructure로 밀어내(DIP), 도메인이 어떤 기술에도 의존하지 않는 가장 안쪽 핵심이 된다.
-> * 위와 같은 DDD 구성 요소를 사용해 도메인 로직을 애그리거트 단위로 묶는다. 복잡한 모델을 애그리거트 단위로 관리할 수 있게 함으로써 복잡도를 낮추고 애그리거트에 관련 로직을 모아 응집도를 높인다. 이는 복잡한 도메인의 유지보수성을 높인다.
-
 #### [마이크로서비스 아키텍처](https://en.wikipedia.org/wiki/Microservices)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/bc9b2bdc-5092-4965-9ae5-28a5f57e7281.png)
+![](https://github.com/user-attachments/assets/c8c555c8-8e79-4fe7-85a6-8904237952a5)
 
 | 구분 | 모놀리식 (Monolithic) | 마이크로서비스 (MSA) |
 |------|----------------------|---------------------|
@@ -74,14 +68,14 @@
 
 #### [이벤트 기반 아키텍처](https://en.wikipedia.org/wiki/Event-driven_architecture)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b7da8ef3-e296-42a1-a9e5-45d2a52b77ad.png)
+![](https://github.com/user-attachments/assets/dc8fc86d-6060-4e56-9195-cec6e67f7735)
 
 * 이벤트 생성자는 이벤트를 생성해서 브로커에 전달하고 브로커는 해당 이벤트에 관심 있는 소비자에게 이벤트를 전달한다. 그럼 이벤트 소비자는 이벤트를 받아 적절하게 반응한다.
 * 예를 들어, 주문 시스템에서 '결제 완료' 이벤트가 발생하면 이 이벤트가 배송 시스템으로 전달되고 배송 시스템은 전달받은 주문 정보를 바탕으로 배송을 시작한다.
 
 #### [CQRS 패턴(Command Query Responsibility Segregation)](https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/13fed680-eb5b-4a84-8143-11215c822c3a.png)
+![](https://github.com/user-attachments/assets/5ac5da26-96ba-4cf5-8f4a-b5a9024600d3)
 
 * 명령과 조회가 서로 다른 데이터를 사용하는데도 하나의 모델로 명령과 조회를 모두 구현하면 모델이 복잡해지고 코드의 유지보수가 어려워진다.
 * 도메인이 복잡해질 경우에는 CQRS 패턴을 사용해서 단일 모델 사용으로 인해 발생하는 복잡도 문제를 해결할 수 있다.
