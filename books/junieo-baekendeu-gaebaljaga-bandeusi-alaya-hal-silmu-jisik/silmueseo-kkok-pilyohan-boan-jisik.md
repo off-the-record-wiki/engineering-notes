@@ -2,11 +2,15 @@
 
 #### 정보 저장 수단 1 - 별도 저장소에 토큰과 사용자 식별 정보 저장하기(서버 별도 저장소)
 
+![](https://github.com/user-attachments/assets/817f8827-36d9-4868-882d-6f2e9be62bed)
+
 * 서버는 토큰과 사용자 식별 정보를 DB나 레디스와 같은 별도 저장소에 보관할 수 있다.
 * 로그인에 성공할 경우 서버는 임의 토큰 문자열을 만든 뒤 외부 저장소에 매핑 정보를 보관한다.
 * 토큰 문자열을 생성할 때는 고유한 값을 생성해서 토큰 중복으로 인해 사용자 정보가 잘못 매칭되지 않도록 해야 한다.
 
 #### 정보 저장 수단 2 - 토큰 자체에 사용자 식별 정보 저장하기(토큰)
+
+![](https://github.com/user-attachments/assets/9e30f50a-c954-44f2-a3ab-633ca7e8776b)
 
 * 토큰 자체에 사용자 식별 정보를 저장할 수도 있다.
 * 사용자가 로그인에 성공하면 사용자 식별자를 값으로 갖는 JWT를 생성해서 클라이언트에 토큰으로 응답한다.
@@ -40,12 +44,16 @@ try {
 
 #### 토큰 송수신 - 쿠키를 사용해서 토큰을 전송하기
 
+![](https://github.com/user-attachments/assets/42f991dc-98fc-42a3-a23e-6836656e8fdc)
+
 * 웹 사이트는 주로 쿠키 방식을 사용한다.
 * 서버 세션도 쿠키를 사용해서 세션 ID를 주고받는다.
 * 서버는 사용자가 로그인에 성공하면 토큰 문자열을 값으로 갖는 쿠키를 웹 브라우저에 응답한다.
 * 웹 브라우저는 서버가 전송한 쿠키를 모든 요청에 함께 전송하므로 토큰을 서버에 전송하기 위해 별도의 자바스크립트 코드를 작성할 필요가 없다.
 
 #### 토큰 송수신 - 특정 이름을 갖는 헤더를 사용해서 토큰을 전송하기
+
+![](https://github.com/user-attachments/assets/ff88fae9-3789-4d04-ac95-e99c9e831608)
 
 * 쿠키도 헤더를 통해 전송되지만 여기선 쿠키를 제외한 다른 헤더를 말한다.
 * 많은 앱이 서버와 통신할 때 헤더를 통해 토큰을 전송한다. 헤더 이름은 `Token`, `X-token`, `Auth` 등 알맞게 정하면 된다.
@@ -78,6 +86,8 @@ try {
 
 #### 토큰 재발급
 
+![](https://github.com/user-attachments/assets/3dd40c4e-4898-48fc-b01d-b2e227d93d16)
+
 * 인증과 인가에서 사용하는 토큰으로 액세스 토큰과 리프레시 토큰이 있다.
   * **액세스 토큰(Access Token)**
     * 보호된 리소스(API)에 접근할 때 요청마다 함께 전송되어, 인증·인가를 처리하는 토큰이다. 
@@ -106,7 +116,7 @@ try {
 * 대표적인 접근 제어 모델로는 역할 기반 접근 제어(Role-Based Access Control, RBAC)이 있다.
 * RBAC는 역할별로 실행 가능한 기능 집합을 할당하고 사용자에게는 역할을 부여한다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/b669d62b-a885-4a37-b394-6efece111681.png)
+![](https://github.com/user-attachments/assets/13bfea24-8f14-4e9b-a67c-dd66d3650613)
 
 * 그림과 같이 역할은 허용된 기능 집합을 갖는다.
 * 역할별 권한 부여 방식과 사용자별 권한 부여 방식은 각각 장단점이 있기 때문에 단독으로 사용하기보다는 함께 사용하는 경우가 많다.
@@ -126,7 +136,7 @@ try {
 * 단방향 암호화는 해시 함수를 사용해서 데이터를 해시 값으로 변환한다.
 * 해시 함수 알고리즘에는 SHA-256, MD5, BCrypt 등이 있다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/cee335a1-789d-4a0b-a6db-cff5de5b4c26.png)
+![](https://github.com/user-attachments/assets/1ea5c8b0-2cb5-4269-9b73-24ed27112a89)
 
 * SHA-256과 같은 해시 알고리즘은 원본 데이터를 유추하기 어렵게 하기 위해 원본 데이터가 조금만 달라도 완전히 다른 해시 값을 생성한다.
 * 예를 들어, '가나다라'를 암호화하면 해시 값이 'df2ef824'로 시작하는데 '가나다마'를 암호화하면 해시 값이 'fa262235'로 시작하는 식이다.
@@ -217,11 +227,15 @@ public static String encrypt(String input) {
 
 #### 양방향 암호화 - 대칭키 방식
 
+![](https://github.com/user-attachments/assets/9c1fa8a5-845c-4d43-b7f0-122ae381dbd8)
+
 * 대칭키 암호화는 암호화와 복호화할 때 동일한 키를 사용한다.
 * 즉, 암호화와 복호화를 수행하는 쌍이 같은 키를 공유해야 한다.
 * 이 방식에서는 키가 유출되면 누구나 암호화된 데이터를 복호화할 수 있기 때문에 키의 보안이 매우 중요하다.
 
 #### 양방향 암호화 - 비대칭키 방식
+
+![](https://github.com/user-attachments/assets/e4be3a11-6c9b-4a87-9811-8e993f77ed35)
 
 * 비대칭키 암호화는 암호화할 때와 복호화할 때 서로 다른 키를 사용한다.
 * 비대칭키 암호화에서는 공개 키와 개인 키를 생성한다.
@@ -315,6 +329,8 @@ public static String decrypt(String encrypted, PrivateKey key) {
 ```
 
 #### HMAC을 이용한 데이터 검증
+
+![](https://github.com/user-attachments/assets/d71a1ea9-c563-49f8-a658-49eb77b25dc6)
 
 * HMAC는 Hash-based Message Authentication Code의 약자로, 메시지의 무결성과 인증을 보장하기 위해 사용하는 암호화 기술이다.
 * HMAC은 해시 함수와 비밀 키를 이용해서 다음 2가지를 보장한다.
