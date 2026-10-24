@@ -8,6 +8,25 @@
 * 동시에 여러 클라이언트가 서버에 연결하는 만큼, 서버도 동시애 여러 쿼리를 DB에 보낸다.
 * 동시에 여러 클라이언트가 요청을 보내기 때문에 서버는 각 요청을 동시에 처리해야 한다.
 * 만약 동시에 처리하지 못하고 각 요청을 순차적으로 처리하게 된다면 서버 전체적인 성능, 즉 처리량과 응답 시간이 저하된다.
+* 서버가 동시에 여러 클라이언트 요청을 처리하는 방식은 크게 2가지가 있다.
+  * 클라이언트 요청마다 쓰레드를 할당해서 처리
+  * 비동기 I/O(또는 논블로킹 I/O)를 사용해서 처리
+
+1. 클라이언트 요청마다 쓰레드를 할당해서 처리
+
+![](https://github.com/user-attachments/assets/7bf09d14-ff4b-4f06-b93f-c89cbb40e17b)
+
+* 처리 흐름 : 서버가 요청을 받으면 쓰레드 풀에서 쓰레드를 하나 꺼내 그 요청에 전담시킨다. 쓰레드는 처리하고 DB나 외부 API를 호출하고, 결과를 받아 응답할 때까지 그 요청만 맡는다.
+* 핵심 문제 : DB 응답을 기다리는 동안 쓰레드는 할 일이 없는데도 반납되지 않는다.
+* 풀이 다 찼을 때 : 4개 쓰레드가 모두 대기 중이면 5번째 요청은 대기 큐에서 기다리고, 오래 걸리면 타임아웃이 발생한다.
+
+2. 비동기 I/O(또는 논블로킹 I/O)를 사용해서 처리
+
+![](https://github.com/user-attachments/assets/f09e007a-db8a-488f-938d-9272352cfac2)
+
+* 요청은 쓰레드를 하나씩 받는 대신 이벤트 큐에 쌓인다.
+* 이벤트 루프 쓰레드가 큐에서 하나씩 꺼내 짧게 처리한다. DB나 외부 API를 호출할 일이 생기면 I/O 요청만 OS에 걸어 두고 기다리지 않고 바로 다음 작업으로 넘어간다.
+* I/O는 OS(epoll 등)가 쓰레드 없이 감시하다가 끝나면 완료 이벤트를 큐에 넣는다. 루프는 이를 콜백으로 이어서 처리한다.
 
 ```java
 public class Increaser {
@@ -28,21 +47,25 @@ public class Increaser {
 
 #### 경쟁 상태(Race Condition)
 
+![](https://github.com/user-attachments/assets/e432d5a6-3db5-4bc1-97de-d45b11b192b4)
+
 * 여러 쓰레드가 동시에 공유 자원에 접근할 때, 접근 순서에 따라 결과가 달라지는 상황을 경쟁 상태라고 한다.
 * 경쟁 상태가 발생하면 예상하지 못한 결과가 나오거나 오류가 발생할 수 있다. 이런 문제는 공유 자원에 여러 쓰레드가 어떤 순서로 접근하느냐에 따라 결과가 달라지고 오류가 생긴다.
+* 쓰레드 A가 락을 잡고 읽기 → 계산 → 쓰기를 끝낼 때까지 쓰레드 B는 대기한다. 쓰레드 B는 락이 풀린 뒤 정확한 값을 읽어 결과가 정상이다.
+* 원자적 UPDATE 방식 혹은 `version` 컬럼을 두고 저장할 때 `version`이 그대로인지 확인해 충돌하면 다시 시도한다.
 
 #### 잠금(Lock)을 이용한 접근 제어
+
+![](https://github.com/user-attachments/assets/dd985e6d-2e57-4bff-96a4-e350f2c27757)
 
 * 프로세스 수준에서 데이터를 동시에 수정하는 것을 막기 위한 일반적인 방법은 잠금(Lock)을 사용하는 것이다.
 * 잠금을 사용하면 공유 자원에 접근하는 쓰레드를 한 번에 하나로 제한할 수 있다.
 
-***
-
+```
 1. 잠금을 획득한다.
 2. 공유 자원에 접근한다.
 3. 잠금을 해제한다.
-
-***
+```
 
 * 잠금은 한 번에 하나의 쓰레드만 획득할 수 있다.
 * 여러 쓰레드가 동시에 잠금 획득을 시도하면 그 중 하나만 획득하고 나머지 쓰레드는 잠금이 해제될 때까지 대기하게 된다.
@@ -50,14 +73,35 @@ public class Increaser {
 * 잠금이 해제되면 대기 중이던 쓰레드 중 하나가 잠금을 획득해 자원에 접근한다.
 
 #### 임계 영역(Critical Section)
+
+![](https://github.com/user-attachments/assets/41dae302-5e72-4988-b4ad-547c489053ce)
+
 * 임계 영역이란 동시에 둘 이상의 쓰레드나 프로세스가 접근하면 안되는 공유 자원에 접근하는 코드 영역을 말한다.
 * 공유 자원의 예시로는 메모리나 파일이 있다.
 
-#### `synchronized`와 `ReentrantLock`
-* `synchronized` 키워드를 사용하면 간단하게 쓰레드 동시 접근을 제어할 수 있다.
-* 코드 블록이 끝나면 자동으로 잠금을 풀어주기 때문에 `unlock()`와 같은 메서드를 호출할 필요도 없다.
-* 반면에 `ReentrantLock`은 `synchronized`에 없는 기능을 제공한다. 대표적인 예시가 잠금 획득 대기 시간을 지정하는 기능이다.
-* 두 방식을 섞어서 사용하는 방법은 권장하지 않는다.
+>❓올바른 임계 구역 처리의 3가지 조건
+* 상호 배제 : 한 번에 하나만 들어간다.
+* 진행 : 비어 있으면 기다리지 않고 바로 들어갈 수 있어야 한다.
+* 한정 대기 : 어떤 쓰레드도 무한정 기다리지 않아야 한다.
+
+#### synchronized와 ReentrantLock
+
+* 결론부터 말하자면 두 방식을 섞어서 사용하는 방법은 권장하지 않는다.
+* 성능
+  * Java 5에서는 `ReentrantLock`이 `synchronized`보다 빠르다. Java 6부터 `synchronized`가 크게 개선되면서 비교는 JVM 버전에 따라 달라졌고 어느 쪽이 빠르다고 보장할 수 없다.
+  * 성능이 중요한 구간이라면 JMH로 실제 경합 상황을 재현해 측정하는 것이 정확하다.
+  * `new ReentrantLock(true)`로 공정 모드를 켜면 쓰레드가 많을 때 처리량이 훨씬 낮아질 수 있고, 최대 100배까지 느릴 수 있다고 알려져 있다. 대신 대기 시간 편차가 작고 기아 상태가 없다. 기본값은 비공정 모드이다.
+* 기능 차이
+  * `ReentrantLock.tryLock()` : 잠금이 비어 있으면 얻고, 아니면 기다리지 않고 바로 `false`를 돌려준다.
+  * `ReentrantLock.tryLock(timeout, unit)` : 정해진 시간만 기다리고, 시간이 지나면 `false`를 돌려준다. 기다리는 중 인터럽트에도 반응한다.
+  * `ReentrantLock.lockInterruptibly()` : 기다리는 도중 인터럽트되면 `InterruptedException`으로 빠져 나온다.
+  * `ReentrantLock.newCondition()`: 잠금 하나에 대기 조건을 여러 개 만들 수 있다.
+  * 공정성 옵션 : 경합이 생기면 가장 오래 기다린 쓰레드에게 우선권을 준다.
+* 가상 쓰레드를 쓴다면 JDK 버전을 확인하는 것이 필요하다.
+  * [JEP 491: Synchronize Virtual Threads without Pinning (OpenJDK)](https://openjdk.org/jeps/491)
+  * [Virtual Threads after JDK 24 (InfoQ)](https://infoq.com/articles/virtual-threads-after-jdk24)
+  * [ReentrantLock Javadoc (JDK 21)](https://cs-214.epfl.ch/jdk-21.0.9-docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html)
+  * [Explicit Locks 강의 자료 (Kutztown University)](https://faculty.kutztown.edu/schwesin/spring2026/cpsc543/lectures/Explicit_Locks.pdf)
 
 #### 뮤텍스(Mutex)
 * 뮤텍스는 `mutual exclusion`의 줄임말로 잠금이라고 한다.
@@ -67,13 +111,11 @@ public class Increaser {
 * 동시에 실행할 수 있는 쓰레드 수를 제한한다.
 * 자원에 대한 접근을 일정 수준 이상으로 제한하고 싶을 때 세마포어를 사용할 수 있다. 예를 들면 외부 서비스에 대한 동시 요청을 최대 5개로 제한하고 싶을 때 세마포어를 사용한다.
 
-***
-
+```
 1. 세마포어에서 퍼밋을 획득(허용 가능 숫자 1만큼 감소)
 2. 코드 실행
 3. 세마포어에 퍼밋을 반환(허용 가능 숫자 1만큼 증가)
-
-***
+```
 
 #### 읽기/쓰기 잠금
 
@@ -84,14 +126,12 @@ public class Increaser {
   * 한 쓰레드가 쓰기 잠금을 획득했다면 쓰기 잠금이 해제될 때까지 읽기 잠금을 구할 수 없다.
   * 읽기 잠금을 획득한 모든 쓰레드가 읽기 잠금을 획득할 때까지 쓰기 잠금을 구할 수 없다.
 
-***
-
+```
 1. 쓰기 잠금은 한 번에 하나의 쓰레드만 구할 수 있다.
 2. 읽기 잠금은 한 번에 여러 쓰레드가 구할 수 있다.
 3. 한 쓰레드가 쓰기 잠금을 획득했다면 쓰기 잠금이 해제될 때까지 읽기 잠금을 구할 수 없다.
 4. 읽기 잠금을 획득한 모든 쓰레드가 읽기 잠금을 해제할 때까지 쓰기 잠금을 구할 수 없다.
-
-***
+```
 
 #### 원자적 타입(Atomic Type)
 
@@ -147,7 +187,7 @@ select * from 테이블 where 조건 for update
 * 하나의 트랜잭션이 특정 레코드에 대한 잠금을 획득한 경우 잠금을 해제할 때까지 다른 트랜잭션은 동일 레코드에 대한 잠금을 획득하지 못하고 대기해야 한다.
 * 레코드에 대한 잠금은 트랜잭션이 종료될 때, 반환된다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/480cf93a-af31-4b4f-9809-38e5f6130ded.png)
+![](https://github.com/user-attachments/assets/1bb937c7-1277-477a-858c-b3689d023268)
 
 #### 분산 잠금
 
@@ -163,7 +203,7 @@ select * from 테이블 where 조건 for update
 * 대신 데이터를 조회한 시점의 값과 수정하는 시점의 값이 같은지를 비교하는 방식으로 동시성 문제를 처리한다.
 * 보통 비선점 잠금을 구현할 때는 정수 타입의 버전 컬럼을 사용한다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/eb1804b0-27c8-4a0c-884b-9ceab1eccafa.png)
+![](https://github.com/user-attachments/assets/7c7b8860-e5ba-40d5-bbec-3b6a4ec899b7)
 
 #### 증분 쿼리
 
@@ -195,7 +235,7 @@ update SUBJECT set joinCount = joinCount + 1 where id = ?
 * 교착 상태는 2개 이상의 쓰레드가 서로가 획득한 잠금을 대기하면서 무한정 기다리는 상황을 말한다.
 * 교착 상태가 발생하지 안혿록 신경을 써야겠지만, 복잡한 코드 구조에서 잠금을 사용하면 개발자 자신도 모르게 교착 상태가 발생할 수 있다. 
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5352ac46-c5be-4bd3-86bc-09aab26592f9.png)
+![](https://github.com/user-attachments/assets/9ee91806-631b-4588-90e4-7d3e648eef2c)
 
 #### 기아(starvation) 상태
 
