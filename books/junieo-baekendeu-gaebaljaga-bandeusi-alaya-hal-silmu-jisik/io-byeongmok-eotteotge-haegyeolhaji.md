@@ -4,16 +4,24 @@
 
 * 데이터를 보내고 받는 동안 코드를 실행하는 쓰레드는 다음과 같은 흐름을 가져가게 된다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d687fee5-0067-4480-a8e8-90ed73b94362.png)
+![](https://github.com/user-attachments/assets/dad27447-8915-464d-9aa5-bc14a81e9f66)
 
-* 데이터 입출력이 완료될 때까지 쓰레드는 아무 작업도 하지 않고 입출력이 끝나기를 기다린다. 즉, 입출력이 끝날 때까지 쓰레드는 블로킹된다.
-* 보통 입출력에 소요되는 시간은 코드를 실행하는 시간보다 훨씬 길다.
-* 서버처럼 네트워크 연동이 많은 프로그램은 전체 실행 시간의 90% 이상을 입출력 대기에 사용하는 경우도 있다.
-* 쓰레드가 대기하는 데 시간을 소요한다는 것은 그 쓰레드를 실행하는 CPU도 아무것도 하지 않는 시간이 생긴다는 의미이다.
-* CPU 사용률을 높이려면 CPU가 실행할 쓰레드를 많이 만들면 된다.
-* 하지만 쓰레드를 생성하는 데에는 한계가 있다. 쓰레드는 수백 KB에서 수 MB 메모리를 사용한다.
-* 메모리를 늘려 쓰레드를 많이 만들 수 있다고 하더라도 여전히 문제가 되는데 바로 컨텍스트 스위칭이다.
-* 동시에 실행되는 쓰레드 수가 증가하면 컨텍스트 스위칭에 사용되는 시간도 비례해 증가한다.
+1. 문제 : 블로킹 I/O에서는 기다리는 동안 쓰레드가 묶인다.
+
+* DB 조회, 외부 API 호출 같은 네트워크 I/O는 CPU 처리보다 훨씬 오래 걸린다.
+* 블로킹 방식에서는 응답이 올 때까지 쓰레드가 CPU를 쓰지 않으면서도 다른 요청을 처리하지 못한다.
+
+2. 왜 자원이 낭비되나
+
+* 쓰레드 수가 처리량의 한계가 된다. 동시에 처리 중인 요청 수는 대략 "초당 요청 수 × 평균 응답 시간"이다.
+* 쓰레드는 공짜가 아니다. 쓰레드마다 스택 메모리가 필요하다. JVM 기본값은 보통 1MB 내외이고 설정에 따라 다르다. 쓰레드가 많아지면 OS가 쓰레드를 바꿔 실행하는 컨텍스트 스위칭 비용도 증가한다.
+* CPU는 노는데 요청은 밀린다. 쓰레드 풀이 대기 중인 쓰레드로 꽉 차면 CPU 사용률은 낮은데도 새로운 요청이 큐에서 기다리다 타임아웃이 발생한다.
+
+3. 해결 방법
+
+* 쓰레드 풀 크기 조정 : I/O 대기 비율이 높으면 풀을 키운다. 가장 쉽지만 메모리와 스위칭 비용 때문에 한계가 있다.
+* 비동기·논블로킹 I/O : I/O는 OS(epoll 등)에 맡기고 쓰레드는 결과를 기다리지 않고 다른 요청을 처리한다. 적은 쓰레드로 많은 연결을 처리할 수 있지만 코드가 복잡해지고 루프 안의 블로킹 호출 하나가 전체를 멈출 수 있다.
+* 가상 쓰레드(Java 21+) : 코드는 기존 블로킹 방식 그대로 쓰고 대기 중인 가상 쓰레드는 JVM이 실제 OS 쓰레드에서 내려 다른 작업에 넘긴다. 동기 코드의 단순함을 유지하면서 논블로킹에 가까운 효율을 얻을 수 있다.
 
 #### Blocking
 
@@ -58,6 +66,8 @@ long end = System.currentTimeMillis();
 
 #### Java의 가상 쓰레드
 
+![](https://github.com/user-attachments/assets/7e64ad2f-f85f-4c35-b1fc-cc62bb167429)
+
 * 가상 쓰레드와 고루틴은 경량 쓰레드(`LightWeight`)라는 공통점을 가진다.
 * 경량 쓰레드는 OS가 관리하는 쓰레드가 아니라 JVM같은 언어의 런타임이 관리하는 쓰레드이다.
 
@@ -72,13 +82,11 @@ long end = System.currentTimeMillis();
 
 ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/72c99658-8393-410b-90d5-940c5f863348.png)
 
-***
-
+```
 1. 실행될 Virtual Thread의 작업인 `runContinuation`을 `carrier thread`의 `Work Queue`에 push한다.
 2. `Work Queue`에 있는 `runContinuation`들은 `ForkJoinPool`에 의해 작업 훔치기 방식으로 `carrier thread`에 의해 처리된다.
 3. 처리되던 `runContinuation`들은 I/O, sleep으로 인한 Interrupt나 작업 완료 시, `Work Queue`에서 pop되어 park 과정에 의해 다시 힙 메모리로 되돌아간다.
-
-***
+```
 
 * `virtual thread`는 스스로 CPU에서 실행될 수 없고, 플랫폼 스레드 위에 mount되어야만 실행할 수 있다.
 * 이 때, `virtual thread`를 태우고 있는 플랫폼 스레드를 `carrier thread`라고 한다.
@@ -89,15 +97,14 @@ long end = System.currentTimeMillis();
 * 가상 쓰레드는 실행하는 과정에서 블로킹되면 플랫폼 쓰레드와 언마운트되고 실행을 멈춘다.
 * 이 때, 언마운트된 플랫폼 쓰레드는 실행 대기 중인 다른 가상 쓰레드와 연결된 뒤 실행을 재개한다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a81d1494-5661-4d3a-a7ae-004681056791.png)
+![](https://github.com/user-attachments/assets/72bd05f5-cb60-4903-af5f-9ce14e9ba2d3)
 
-> 블로킹 연산과 synchronized 키워드
->
-> * 블로킹 연산에는 IO 기능, ReentrantLock, Thread.sleep() 등이 포함된다.<br>
-> * 이들 연산을 사용해서 가상 쓰레드가 블로킹되면 플랫폼 쓰레드는 대기 중인 다른 가상 쓰레드를 실행한다.<br>
-> * 반면에 자바 23 또는 이전 버전에서 synchronized로 인해 블로킹되면 가상 쓰레드는 플랫폼 쓰레드로부터 언마운트 되지 않는다.<br>
-> * 즉, 플랫폼 쓰레드도 같이 블로킹된다. 이렇게 가상 쓰레드가 플랫폼 쓰레드까지 블로킹할 때, 이를 가상 쓰레드가 플랫폼 쓰레드에 고정되었다고 말한다.<br>
-> * 자바 21 기준으로 synchronized 외에도 JNI 호출 등 가상 쓰레드가 플랫폼 쓰레드에 고정되는 경우가 있는데, 가상 쓰레드가 고정되면 CPU 효율을 높일 수 없다.<br>
+* 블로킹 연산과 synchronized 키워드
+  * 블로킹 연산에는 IO 기능, ReentrantLock, Thread.sleep() 등이 포함된다.
+  * 이들 연산을 사용해서 가상 쓰레드가 블로킹되면 플랫폼 쓰레드는 대기 중인 다른 가상 쓰레드를 실행한다.
+  * 반면에 자바 23 또는 이전 버전에서 synchronized로 인해 블로킹되면 가상 쓰레드는 플랫폼 쓰레드로부터 언마운트 되지 않는다.
+  * 즉, 플랫폼 쓰레드도 같이 블로킹된다. 이렇게 가상 쓰레드가 플랫폼 쓰레드까지 블로킹할 때, 이를 가상 쓰레드가 플랫폼 쓰레드에 고정되었다고 말한다.
+  * 자바 21 기준으로 synchronized 외에도 JNI 호출 등 가상 쓰레드가 플랫폼 쓰레드에 고정되는 경우가 있는데, 가상 쓰레드가 고정되면 CPU 효율을 높일 수 없다.
 
 #### 가상 쓰레드와 성능
 
