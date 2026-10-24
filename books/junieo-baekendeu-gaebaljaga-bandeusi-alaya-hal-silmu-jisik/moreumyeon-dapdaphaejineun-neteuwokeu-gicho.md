@@ -36,6 +36,8 @@
 
 #### TCP(Transmission Control Protocol)
 
+![](https://github.com/user-attachments/assets/d629aa6a-ab04-457d-9d22-1783120a19b3)
+
 * 두 노드 간에 먼저 연결을 맺은 뒤 데이터를 주고 받는다.
 * TCP에서 두 노드가 연결을 맺기 위한 과정을 3-Way Handshake라고 한다.
 * TCP는 패킷 순서를 보장하고 패킷이 유실될 경우 재전송하는 기능을 제공하고 있어 안정적으로 데이터를 전송할 수 있다.
@@ -43,26 +45,28 @@
 
 #### 연결 수립 — 3-way Handshake
 
-***
+![](https://github.com/user-attachments/assets/def3c2bd-51db-4cec-b0e6-952381a2d678)
 
+```
 1. SYN : 클라이언트 → 서버(시퀀스 번호 전송)
 2. SYN-ACK : 서버 → 클라이언트
 3. ACK : 클라이언트 → 서버(확인)
-
-***
+```
 
 #### 연결 종료 — 4-way Handshake
 
-***
+![](https://github.com/user-attachments/assets/e285a9a8-d71f-491f-8de3-8f27d98970aa)
 
+```
 1. FIN : 종료 요청
 2. ACK : 확인
 3. FIN : 반대쪽도 종료 요청
 4. ACK : 확인
-
-***
+```
 
 #### UDP(User Datagram Protocol)
+
+![](https://github.com/user-attachments/assets/e55deb9a-ffe7-4a99-8014-ec6b617e3feb)
 
 * UDP는 응답 확인이나 패킷 정렬과 같은 과정을 거치지 않기 때문에 전송 속도는 TCP 대비 빠르다.
 * 이런 이유로 UDP는 속도가 중요하거나 일부 데이터가 유실되더라도 문제되지 않는 통신에 주로 사용된다.
@@ -74,20 +78,3 @@
 * QUIC는 TLS(Transport Layer Security)를 통합했다.
 * QUIC 패킷은 기본적으로 암호화되어 전송된다.
 * 또한 TPC 기준의 HTTPS는 TCP 연결을 위한 3-Way Handshake와 TLS 연결을 위한 TLS Handshake를 진행해서 여러 차례 통신을 한 뒤에 연결이 수립되는데, QUIC는 TLS를 통합함으로써 이 과정을 단축시켰다.
-
-> **❗TLS(Transport Layer Security)**
->
-> * 네트워크 통신을 암호화해 데이터를 안전하게 주고받도록 하는 보안 프로토콜이다. 과거 SSL의 후속으로 지금은 SSL은 폐기되고 TLS가 표준이다.
-> * HTTP에 TLS를 적용한 것이 바로 HTTPS이다.
-> * TLS가 보장하는 3가지
->   * 기밀성(Confidentiality) : 데이터를 암호화해 중간에서 엿봐도 내용을 알 수 없다.
->   * 무결성(Integrity) : 전송 중 데이터가 변조되지 않았음을 검증한다.
->   * 인증(Authentication) : 인증서를 통해 상대 서버(때로는 클라이언트)가 진짜인지 확인한다.
-
-> **❗TLS Handshake**
->
-> * Client Hello : 클라이언트가 지원하는 TLS 버전·암호 방식(cipher suite)·랜덤값을 전송한다.
-> * Server Hello + 인증서 : 서버가 선택한 암호 방식, 랜덤값, 그리고 인증서(공개키 포함)를 전송한다.
-> * 인증서 검증 : 클라이언트가 CA(인증 기관) 서명을 통해 서버 인증서가 신뢰할 수 있는지 확인한다.
-> * 키 교환 : 클라이언트가 세션에 쓸 비밀값을 서버 공개키로 암호화해 전달 → 양측이 동일한 대칭 세션키를 생성한다.
-> * 암호화 통신 시작 : 이후 모든 데이터는 세션키로 대칭 암호화된다.
