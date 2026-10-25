@@ -218,8 +218,8 @@
 * [(Clean Architecture 2) - 두 가지 가치에 대한 이야기](clean-architecture/du-gaji-gachie-daehan-iyagi.md)
 * [(Clean Architecture 3) - 패러다임 개요](clean-architecture/paereodaim-gaeyo.md)
 * [(Clean Architecture 4) - 구조적 프로그래밍](clean-architecture/gujojeok-peurogeuraeming.md)
-* [(Clean Architecture 5) - 객체 지향 프로그래밍]
-* [(Clean Architecture 6) - 함수형 프로그래밍]
+* [(Clean Architecture 5) - 객체 지향 프로그래밍](clean-architecture/gaekche-jihyang-peurogeuraeming.md)
+* [(Clean Architecture 6) - 함수형 프로그래밍](clean-architecture/hamsuhyeong-peurogeuraeming.md)
 * [(Clean Architecture 7) - SRP: 단일 책임 원칙]
 * [(Clean Architecture 8) - OCP: 개방-폐쇄 원칙]
 * [(Clean Architecture 9) - LSP: 리스코프 치환 원칙]
