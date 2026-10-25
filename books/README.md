@@ -232,8 +232,8 @@
 * [(Clean Architecture 16) - 독립성](clean-architecture/dokripseong.md)
 * [(Clean Architecture 17) - 경계: 선 긋기](clean-architecture/gyeonggye-seon-geutgi.md)
 * [(Clean Architecture 18) - 경계 해부학](clean-architecture/gyeonggye-haebuhak.md)
-* [(Clean Architecture 19) - 정책과 수준]
-* [(Clean Architecture 20) - 업무 규칙]
+* [(Clean Architecture 19) - 정책과 수준](clean-architecture/jeongchaekgwa-sujun.md)
+* [(Clean Architecture 20) - 업무 규칙](clean-architecture/eopmu-gyuchik.md)
 * [(Clean Architecture 21) - 소리치는 아키텍처]
 * [(Clean Architecture 22) - 클린 아키텍처](clean-architecture/keulrin-akitekcheo.md)
 * [(Clean Architecture 23) - 프레젠터와 험블 객체]
