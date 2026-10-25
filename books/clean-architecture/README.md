@@ -19,7 +19,7 @@
 * [(Clean Architecture 15) - 아키텍처란?](akitekcheoran.md)
 * [(Clean Architecture 16) - 독립성](dokripseong.md)
 * [(Clean Architecture 17) - 경계: 선 긋기](gyeonggye-seon-geutgi.md)
-* (Clean Architecture 18) - 경계 해부학
+* [(Clean Architecture 18) - 경계 해부학](gyeonggye-haebuhak.md)
 * (Clean Architecture 19) - 정책과 수준
 * (Clean Architecture 20) - 업무 규칙
 * (Clean Architecture 21) - 소리치는 아키텍처

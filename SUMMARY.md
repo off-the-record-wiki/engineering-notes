@@ -674,6 +674,7 @@
   * [(Clean Architecture 15) - 아키텍처란?](books/clean-architecture/akitekcheoran.md)
   * [(Clean Architecture 16) - 독립성](books/clean-architecture/dokripseong.md)
   * [(Clean Architecture 17) - 경계: 선 긋기](books/clean-architecture/gyeonggye-seon-geutgi.md)
+  * [(Clean Architecture 18) - 경계 해부학](books/clean-architecture/gyeonggye-haebuhak.md)
   * [(Clean Architecture 22) - 클린 아키텍처](books/clean-architecture/keulrin-akitekcheo.md)
   * [(Clean Architecture 24) - 부분적 경계](books/clean-architecture/bubunjeok-gyeonggye.md)
   * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](books/clean-architecture/deiteobeiseuneun-sebusahangida.md)
