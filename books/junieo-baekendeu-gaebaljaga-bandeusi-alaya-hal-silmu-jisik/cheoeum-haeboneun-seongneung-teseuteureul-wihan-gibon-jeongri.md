@@ -2,7 +2,7 @@
 
 #### 포화점과 버클존
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d0b2c43f-6223-40c3-955f-22afd98f8a2d.png)
+![](https://github.com/user-attachments/assets/5ff2030c-062b-4433-81f3-e7bb685d9f39)
 
 * 부하를 증가시키면 초기에는 처리량도 함께 증가한다.
 * 그러다 일정 부하 구간에 도달하면 처리량의 증가 폭이 줄어들기 시작하고 어느 시점부터는 처리량과 응답 시간이 급격히 저하된다. 
@@ -18,7 +18,7 @@
 
 #### 성능 테스트 설계 시 고려사항⭐
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/e9aa3e64-87fe-41d8-9e9f-33600a14c14c.png)
+![](https://github.com/user-attachments/assets/ae0640de-65e7-46ab-ac6d-30884712b2a0)
 
 * 개발 → 테스트 코드 → 관찰 코드 심기 → 기준선 측정 → 부하 실험 → 병목 분석 → 개선 → 재측정
   * 관찰 코드를 미리 심어두기
@@ -29,8 +29,6 @@
   * 성능 회귀 방지 자동화
 
 #### 성능 테스트 설계 시 주의사항
-
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/d226537a-108a-4647-8eaa-ea10c777d196.png)
 
 * 성능 테스트를 진행할 때 흔히 하는 실수 중 하나가 바로 테스트 대상 시스템과 부하기를 한 장비에서 실행하는 것이다.
 * 부하 생성은 그 자체로 많은 자원을 사용한다. 따라서 테스트 대상 시스템과 부하기를 한 장비에서 실행하면 테스트 대상 시스템이 자원을 온전히 활용하지 못해 실제 성능보다 낮은 결과가 나온다. 성능 테스트를 진행할 때, 반드시 부하 발생기와 테스트 대상 시스템을 분리해야 한다.
