@@ -2,15 +2,15 @@
 
 #### 절차 지향(Procedural Oriented)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/5a5710ca-84aa-4a6d-9a2a-6545a6392547.png)
+![](https://github.com/user-attachments/assets/becbb50c-4660-4105-af63-61d7f05c7792)
 
 * 한 데이터를 사용하는 프로시저가 많을수록 그 데이터 타입을 변경하기 어려워진다.
-* 예를 들어, 전자 장비의 꺼짐/켜짐 상태를 저장하기 위해 `boolean` 타입이고, 이름이 `isOn`이라는 데이터를 사용한다고 가정할때, 만약 요구사항이 변경되어서 꺼짐/켜짐, 그리고 대기 사앹까지 추가해야 한다고 가정하면 `boolean` 타입 대신 열거 타입으로 변경하면 이 데이터를 사용하는 모든 프로시저를 전부 변경해야 한다.
+* 예를 들어, 전자 장비의 꺼짐/켜짐 상태를 저장하기 위해 `boolean` 타입이고, 이름이 `isOn`이라는 데이터를 사용한다고 가정할때, 만약 요구사항이 변경되어서 꺼짐/켜짐, 그리고 대기 상태까지 추가해야 한다고 가정하면 `boolean` 타입 대신 열거 타입으로 변경하면 이 데이터를 사용하는 모든 프로시저를 전부 변경해야 한다.
 * 절차 지향적으로 프로그램을 구성할 때 매우 흔하게 발생하는 문제들이 있다. 이로 인해 새로운 요구사항이 생겨서 프로그램의 한 곳을 수정하게 되면 다른 곳에서 문제가 발생하고 다시 그 곳을 수정하면 또 다른 곳에서 문제가 발생하는 악순환이 발생한다. 이는 결국 코드 수정을 어렵게 만들며, 새로운 기능을 추가하는데 많은 구현 시간을 투입하게 만든다.
 
 #### 객체 지향(Object Oriented)
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/46e68706-b197-4042-a640-9b4fc04ccfaf.png)
+![](https://github.com/user-attachments/assets/3e5b6435-ecf5-4f42-91c5-c956f108cd25)
 
 * 절차 지향과 달리 객체 지향은 데이터 및 데이터와 관련된 프로시저를 객체(Object)라고 불리는 단위로 묶는다.
 * 객체는 프로시저를 수행하는데 필요한 만큼의 데이터를 가지며, 객체들이 모여 프로그램을 구성한다.
@@ -133,7 +133,7 @@ public void process(ByteEncryptor encryptor) {
 * 객체를 생성하든 메서드를 호출하든 또는 파라미터로 전달받든 다른 타입에 의존을 한다는 것은 의존하는 타입에 변경이 발생할 때 같이 변경될 가능성이 높다는 것을 생각해야 한다.
 * 의존 영향은 꼬리에 꼬리를 문 것처럼 전파되는 특징을 가진다. 의존의 이런 특징 때문에 의존이 순환해서 발생할 경우 다른 방법이 없는지 고민해야 한다.
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/1c93780b-b02d-4b07-b668-69eaabf4ea84.png)
+![](https://github.com/user-attachments/assets/3b7271c4-b0a4-42bf-a244-147d09896ca7)
 
 #### 캡슐화⭐
 
