@@ -226,10 +226,10 @@
 * [(Clean Architecture 10) - ISP: 인터페이스 분리 원칙](clean-architecture/isp-inteopeiseu-bunri-wonchik.md)
 * [(Clean Architecture 11) - DIP: 의존성 역전 원칙](clean-architecture/dip-uijonseong-yeokjeon-wonchik.md)
 * [(Clean Architecture 12) - 컴포넌트](clean-architecture/keomponeonteu.md)
-* [(Clean Architecture 13) - 컴포넌트 응집도]
-* [(Clean Architecture 14) - 컴포넌트 결합]
-* [(Clean Architecture 15) - 아키텍처란?]
-* [(Clean Architecture 16) - 독립성]
+* [(Clean Architecture 13) - 컴포넌트 응집도](clean-architecture/keomponeonteu-eungjipdo.md)
+* [(Clean Architecture 14) - 컴포넌트 결합](clean-architecture/keomponeonteu-gyeolhap.md)
+* [(Clean Architecture 15) - 아키텍처란?](clean-architecture/akitekcheoran.md)
+* [(Clean Architecture 16) - 독립성](clean-architecture/dokripseong.md)
 * [(Clean Architecture 17) - 경계: 선 긋기]
 * [(Clean Architecture 18) - 경계 해부학]
 * [(Clean Architecture 19) - 정책과 수준]
