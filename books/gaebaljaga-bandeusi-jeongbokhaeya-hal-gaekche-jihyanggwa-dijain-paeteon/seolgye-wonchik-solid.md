@@ -271,5 +271,3 @@ class AllInOne implements Printer, Scanner, Fax {
   * 예를 들어, 고수준 모듈이라 함은 "바이트 데이터를 읽어와 암호화하고 결과 바이트 데이터를 쓴다." 이렇게 "무엇"을 정의한다.
   * 예를 들어, 저수준 모듈이라 함은 "파일에서 바이트 데이터를 읽어온다", "AES 알고리즘으로 암호화한다", "파일에 바이트 데이터를 쓴다"와 같이 "어떻게"를 정의한다.
 * 소스 코드 의존과 런타임 의존
-
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/a8a0cfe3-6ec8-49c9-ba93-e17eaeb91b36.png)
