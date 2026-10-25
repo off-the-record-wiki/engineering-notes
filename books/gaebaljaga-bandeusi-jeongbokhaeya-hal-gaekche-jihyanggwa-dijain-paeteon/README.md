@@ -7,4 +7,3 @@
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 재사용: 상속보단 조립](jaesayong-sangsokbodan-jorip.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 설계 원칙: SOLID](seolgye-wonchik-solid.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - DI(Dependency Injection)와 서비스 로케이터](di-dependency-injection-wa-seobiseu-rokeiteo.md)
-* [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 주요 디자인 패턴](juyo-dijain-paeteon.md)

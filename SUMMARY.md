@@ -698,7 +698,6 @@
   * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 재사용: 상속보단 조립](books/gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/jaesayong-sangsokbodan-jorip.md)
   * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 설계 원칙: SOLID](books/gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/seolgye-wonchik-solid.md)
   * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - DI(Dependency Injection)와 서비스 로케이터](books/gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/di-dependency-injection-wa-seobiseu-rokeiteo.md)
-  * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 주요 디자인 패턴](books/gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/juyo-dijain-paeteon.md)
 * [Real MySQL 8.0 (1)⭐](books/real-mysql-8-0-1/README.md)
 * [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향)⭐](books/gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang/README.md)
   * [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향) - 협력하는 객체들의 공동체](books/gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang/gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang-hyeopryeokhaneun-gaekchedeului-gongdongche.md)

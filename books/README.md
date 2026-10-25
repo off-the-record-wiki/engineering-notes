@@ -289,7 +289,6 @@
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 재사용: 상속보단 조립](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/jaesayong-sangsokbodan-jorip.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 설계 원칙: SOLID](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/seolgye-wonchik-solid.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - DI(Dependency Injection)와 서비스 로케이터](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/di-dependency-injection-wa-seobiseu-rokeiteo.md)
-* [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 주요 디자인 패턴](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/juyo-dijain-paeteon.md)
 
 ## [Real MySQL 8.0 (1)⭐](https://product.kyobobook.co.kr/detail/S000001766482)
 
