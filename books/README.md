@@ -220,7 +220,7 @@
 * [(Clean Architecture 4) - 구조적 프로그래밍](clean-architecture/gujojeok-peurogeuraeming.md)
 * [(Clean Architecture 5) - 객체 지향 프로그래밍](clean-architecture/gaekche-jihyang-peurogeuraeming.md)
 * [(Clean Architecture 6) - 함수형 프로그래밍](clean-architecture/hamsuhyeong-peurogeuraeming.md)
-* [(Clean Architecture 7) - SRP: 단일 책임 원칙]
+* [(Clean Architecture 7) - SRP: 단일 책임 원칙](clean-architecture/srp-danil-chaekim-wonchik.md)
 * [(Clean Architecture 8) - OCP: 개방-폐쇄 원칙]
 * [(Clean Architecture 9) - LSP: 리스코프 치환 원칙]
 * [(Clean Architecture 10) - ISP: 인터페이스 분리 원칙]

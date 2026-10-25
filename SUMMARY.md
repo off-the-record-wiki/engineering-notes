@@ -663,6 +663,7 @@
   * [(Clean Architecture 4) - 구조적 프로그래밍](books/clean-architecture/gujojeok-peurogeuraeming.md)
   * [(Clean Architecture 5) - 객체 지향 프로그래밍](books/clean-architecture/gaekche-jihyang-peurogeuraeming.md)
   * [(Clean Architecture 6) - 함수형 프로그래밍](books/clean-architecture/hamsuhyeong-peurogeuraeming.md)
+  * [(Clean Architecture 7) - SRP: 단일 책임 원칙](books/clean-architecture/srp-danil-chaekim-wonchik.md)
   * [(Clean Architecture 22) - 클린 아키텍처](books/clean-architecture/keulrin-akitekcheo.md)
   * [(Clean Architecture 24) - 부분적 경계](books/clean-architecture/bubunjeok-gyeonggye.md)
   * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](books/clean-architecture/deiteobeiseuneun-sebusahangida.md)
