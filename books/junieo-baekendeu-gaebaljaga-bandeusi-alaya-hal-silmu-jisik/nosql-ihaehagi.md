@@ -2,7 +2,7 @@
 
 #### NoSQL이란
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/579bb3da-7362-4f75-92c2-8183db6344d5.png)
+![](https://github.com/user-attachments/assets/b943a43a-9003-4bf1-8eec-f6979f546db7)
 
 * 특정 요구사항에 맞춰 데이터를 저장하고 조회하기 위한 기법을 제공하는 데이터베이스를 NoSQL이라고 한다.
 * NoSQL 데이터베이스는 전통적인 관계형 데이터베이스보다 덜 제한적인 일관성 모델을 이용하는 데이터의 저장 및 검색을 위한 메커니즘을 제공한다. 이런 접근에 대한 동기에는 디자인의 단순화, 수평적 확장성, 세세한 통제를 포함한다.
@@ -32,17 +32,18 @@
 
 #### CAP 정리
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/4c14f212-71a6-4efe-8c0e-a7750e16439f.png)
+![](https://github.com/user-attachments/assets/4040269c-6c24-46d7-9d24-94513cd5930f)
 
 * Consistency(일관성) : 모든 노드가 같은 순간에 같은 데이터를 볼 수 있다. 한 노드의 데이터가 변경되면 모든 노드의 데이터도 동일한 값으로 바꾼다.
 * Availability(가용성) : 모든 요청이 성공 또는 실패 결과를 반환할 수 있다.
 * Partition Tolerance(분할내성) : 네트워크 장애가 발생해도 시스템이 계속 동작할 수 있다.
 
-> **❗분산 시스템의 주요 일관성 모델**
->
-> * **강한 일관성(Strong Consistency)** : 쓰기가 끝난 순간부터 누가 읽어도 최신값을 보장할 수 있다. 전역 시계 기준 실시간 순서까지 보장하기에 가장 비싸고 느리다.
->   * 예시 : 계좌 잔액·이체, 재고 차감, 예약 좌석 선점
-> * **최종적 일관성(Eventual Consistency)** : 순서 보장을 아예 포기. 노드마다 잠깐 다른 값을 볼 수 있지만 새로운 쓰기가 없으면 언젠가 모두 같은 값을 볼 수 있다.
->   * 예시 : SNS 팔로워 수·좋아요·조회수, 추천 피드, DNS 전파
-> 
-> 결론 : 잠깐 틀린 값을 보여줘도 되는가? → 안 된다면 강한 일관성, 된다면 최종적 일관성
+#### 분산 시스템의 일관성 모델(잠깐 틀린 값을 보여줘도 되는가? → 안 된다면 강한 일관성, 된다면 최종적 일관성)
+
+1. 강한 일관성 : 쓰기가 끝난 순간부터 누가 읽어도 최신값을 보장할 수 있다. 전역 시계 기준 실시간 순서까지 보장하기에 가장 비싸고 느리다.
+
+![](https://github.com/user-attachments/assets/342d242d-8b0b-4496-b41b-7b891393a846)
+
+2. 최종적 일관성 : 순서 보장을 아예 포기. 노드마다 잠깐 다른 값을 볼 수 있지만 새로운 쓰기가 없으면 언젠가 모두 같은 값을 볼 수 있다.
+
+![](https://github.com/user-attachments/assets/e8a1c9c0-a741-4ac7-8786-4c4048de87d3)
