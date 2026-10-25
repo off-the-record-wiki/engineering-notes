@@ -9,11 +9,11 @@
 * [(Clean Architecture 5) - 객체 지향 프로그래밍](gaekche-jihyang-peurogeuraeming.md)
 * [(Clean Architecture 6) - 함수형 프로그래밍](hamsuhyeong-peurogeuraeming.md)
 * [(Clean Architecture 7) - SRP: 단일 책임 원칙](srp-danil-chaekim-wonchik.md)
-* (Clean Architecture 8) - OCP: 개방-폐쇄 원칙
-* (Clean Architecture 9) - LSP: 리스코프 치환 원칙
-* (Clean Architecture 10) - ISP: 인터페이스 분리 원칙
-* (Clean Architecture 11) - DIP: 의존성 역전 원칙
-* (Clean Architecture 12) - 컴포넌트
+* [(Clean Architecture 8) - OCP: 개방-폐쇄 원칙](ocp-gaebang-pyeswae-wonchik.md)
+* [(Clean Architecture 9) - LSP: 리스코프 치환 원칙](lsp-riseukopeu-chihwan-wonchik.md)
+* [(Clean Architecture 10) - ISP: 인터페이스 분리 원칙](isp-inteopeiseu-bunri-wonchik.md)
+* [(Clean Architecture 11) - DIP: 의존성 역전 원칙](dip-uijonseong-yeokjeon-wonchik.md)
+* [(Clean Architecture 12) - 컴포넌트](keomponeonteu.md)
 * (Clean Architecture 13) - 컴포넌트 응집도
 * (Clean Architecture 14) - 컴포넌트 결합
 * (Clean Architecture 15) - 아키텍처란?
