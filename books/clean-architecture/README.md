@@ -22,13 +22,13 @@
 * [(Clean Architecture 18) - 경계 해부학](gyeonggye-haebuhak.md)
 * [(Clean Architecture 19) - 정책과 수준](jeongchaekgwa-sujun.md)
 * [(Clean Architecture 20) - 업무 규칙](eopmu-gyuchik.md)
-* (Clean Architecture 21) - 소리치는 아키텍처
+* [(Clean Architecture 21) - 소리치는 아키텍처](sorichineun-akitekcheo.md)
 * [(Clean Architecture 22) - 클린 아키텍처](keulrin-akitekcheo.md)
-* (Clean Architecture 23) - 프레젠터와 험블 객체
+* [(Clean Architecture 23) - 프레젠터와 험블 객체](peurejenteowa-heombeul-gaekche.md)
 * [(Clean Architecture 24) - 부분적 경계](bubunjeok-gyeonggye.md)
-* (Clean Architecture 25) - 계층과 경계
-* (Clean Architecture 26) - 메인 컴포넌트
-* (Clean Architecture 27) - '크고 작은 모든' 서비스들
+* [(Clean Architecture 25) - 계층과 경계](gyecheunggwa-gyeonggye.md)
+* [(Clean Architecture 26) - 메인 컴포넌트](mein-keomponeonteu.md)
+* [(Clean Architecture 27) - '크고 작은 모든' 서비스들](keugo-jakeun-modeun-seobiseudeul.md)
 * (Clean Architecture 28) - 테스트 경계
 * (Clean Architecture 29) - 클린 임베디드 아키텍처
 * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](deiteobeiseuneun-sebusahangida.md)
