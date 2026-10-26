@@ -34,4 +34,5 @@
 * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](deiteobeiseuneun-sebusahangida.md)
 * [(Clean Architecture 31) - 웹은 세부사항이다](wepeun-sebusahangida.md)
 * [(Clean Architecture 32) - 프레임워크는 세부사항이다](peureimwokeuneun-sebusahangida.md)
+* ~~[(Clean Architecture 33) - 사례 연구: 비디오 판매]~~
 * [(Clean Architecture 34) - 빠져 있는 장](ppajyeo-itneun-jang.md)

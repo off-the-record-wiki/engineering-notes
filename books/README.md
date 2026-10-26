@@ -246,6 +246,7 @@
 * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](clean-architecture/deiteobeiseuneun-sebusahangida.md)
 * [(Clean Architecture 31) - 웹은 세부사항이다](clean-architecture/wepeun-sebusahangida.md)
 * [(Clean Architecture 32) - 프레임워크는 세부사항이다](clean-architecture/peureimwokeuneun-sebusahangida.md)
+* ~~[(Clean Architecture 33) - 사례 연구: 비디오 판매]~~
 * [(Clean Architecture 34) - 빠져 있는 장](clean-architecture/ppajyeo-itneun-jang.md)
 
 ## [Clean Code](https://product.kyobobook.co.kr/detail/S000001032980)
