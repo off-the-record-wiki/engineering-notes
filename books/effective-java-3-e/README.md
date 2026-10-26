@@ -1,4 +1,4 @@
-# Effective Java 3/E🔥
+# Effective Java 3/E
 
 🔗 [Reference](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000003160832)
 

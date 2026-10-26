@@ -1,4 +1,4 @@
-# Kubernetes⭐
+# Kubernetes
 
 🔗 [Reference](https://kubernetes.io/docs/home/)
 

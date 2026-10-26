@@ -1,4 +1,4 @@
-# PostgreSQL🔥
+# PostgreSQL
 
 🔗 [Reference](https://www.postgresql.org/docs/18/index.html)
 

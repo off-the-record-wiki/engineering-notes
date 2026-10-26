@@ -1,4 +1,4 @@
-# Redis⭐
+# Redis
 
 🔗 [Reference](https://redis.io/docs/latest/)
 

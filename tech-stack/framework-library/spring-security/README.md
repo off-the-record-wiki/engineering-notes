@@ -1,4 +1,4 @@
-# Spring Security⭐
+# Spring Security
 
 🔗 [Reference](https://docs.spring.io/spring-security/reference/index.html)
 

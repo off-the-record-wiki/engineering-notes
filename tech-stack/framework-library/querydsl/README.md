@@ -1,4 +1,4 @@
-# QueryDsl📎
+# QueryDsl
 
 🔗 [Reference](http://querydsl.com/static/querydsl/latest/reference/html/)
 

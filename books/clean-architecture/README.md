@@ -1,4 +1,4 @@
-# Clean Architecture🔥
+# Clean Architecture
 
 🔗 [Reference](https://product.kyobobook.co.kr/detail/S000001033082)
 

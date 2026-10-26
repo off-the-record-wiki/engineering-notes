@@ -1,4 +1,4 @@
-# Kotlin Academy - Effective Kotlin Best Practice 2/E⭐
+# Kotlin Academy - Effective Kotlin Best Practice 2/E
 
 🔗 [Reference](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000011546361)
 

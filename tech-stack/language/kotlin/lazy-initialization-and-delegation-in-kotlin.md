@@ -1,6 +1,6 @@
 # Kotlin - Lazy Initialization and Delegation in Kotlin
 
-## 📚 lateinit과 lazy()⭐
+## 📚 lateinit과 lazy()
 
 * **lateinit** : 초기값을 지정하지 않고, null이 들어갈 수 없는 변수를 선언하는 키워드이다.
   * lateinit 변수가 초기화되지 않은 상태에서 접근하면 UninitializedPropertyAccessException이 발생한다. 이는 컴파일 타임에 널 가능성 체크를 하지 않는 대신, 런타임에 초기화 여부를 명시적으로 확인하는 방식이기 때문이다.
@@ -27,7 +27,7 @@ public class OrderServiceTest {
 }
 ```
 
-## 📚 by lazy의 원리와 위임 프로퍼티⭐
+## 📚 by lazy의 원리와 위임 프로퍼티
 
 * by lazy는 Kotlin의 지연 초기화 기능을 구현하는 가장 일반적인 방법이다.
 * 이는 변수가 처음 사용되는 시점에 초기화가 이루어지도록 하며, 초기화에 비용이 많이 드는 객체를 효율적으로 다룰 때 유용하다.

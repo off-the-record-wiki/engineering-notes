@@ -1,4 +1,4 @@
-# AWS⭐
+# AWS
 
 🔗 [Reference](https://docs.aws.amazon.com/)
 

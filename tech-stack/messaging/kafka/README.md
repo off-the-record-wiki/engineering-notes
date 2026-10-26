@@ -1,4 +1,4 @@
-# Kafka⭐
+# Kafka
 
 🔗 [Reference](https://kafka.apache.org/43/getting-started/introduction/)
 

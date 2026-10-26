@@ -1,4 +1,4 @@
-# Reactive Programming📎
+# Reactive Programming
 
 🔗 [Reference](https://projectreactor.io/docs/core/release/reference/reactiveProgramming.html)
 

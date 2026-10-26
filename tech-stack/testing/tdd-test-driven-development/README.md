@@ -1,4 +1,4 @@
-# TDD(Test-Driven-Development)⭐
+# TDD(Test-Driven-Development)
 
 * [TDD - Introduction to TDD](introduction-to-tdd.md)
 * [TDD - Iterating with TDD](iterating-with-tdd.md)

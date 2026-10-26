@@ -1,4 +1,4 @@
-# Jenkins📎
+# Jenkins
 
 🔗 [Reference](https://www.jenkins.io/sigs/docs/)
 

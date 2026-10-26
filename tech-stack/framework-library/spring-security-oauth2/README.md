@@ -1,4 +1,4 @@
-# Spring Security OAuth2⭐
+# Spring Security OAuth2
 
 🔗 [Reference](https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html)
 

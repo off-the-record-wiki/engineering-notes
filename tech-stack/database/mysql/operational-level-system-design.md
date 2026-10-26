@@ -1,6 +1,6 @@
 # MySQL ‐ Operational‐Level System Design
 
-#### 실시간 변동 데이터 처리를 위한 스트리밍 데이터 처리 기법⭐⭐⭐
+#### 실시간 변동 데이터 처리를 위한 스트리밍 데이터 처리 기법
 
 ![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/832bba94-de3a-49de-bf0b-6d38290f3ddf.png)
 
@@ -86,7 +86,7 @@ INSERT INTO analytics_db.daily_product_sales
 SELECT * FROM daily_summary;
 ```
 
-#### 실시간 데이터 동기화를 위한 디자인 설계 패턴⭐⭐⭐
+#### 실시간 데이터 동기화를 위한 디자인 설계 패턴
 
 **1. 문제 : 하나의 변경, 여러 목적지**
 * Dual Write : 애플리케이션이 DB에 쓰고 또 Kafka에도 직접 쓴다. 두 쓰기는 한 트랜잭션이 아니라, 하나가 실패하면 시스템 간 데이터가 영구히 어긋난다.
@@ -152,7 +152,7 @@ SELECT * FROM daily_summary;
 * 주의 6 : Transaction Outbox로 Dual Write 봉쇄 : 애플리케이션이 이벤트를 발행해야 한다면, 비즈니스 데이터와 함께 outbox 테이블에 한 트랜잭션으로 넣고 그 테이블을 CDC로 흘린다.
 * 주의 7 : 재적재(Backfill) 경로 확보 : 소비자 로직 변경·유실 시 스냅샷을 다시 태워 전량 재구성할 수 있어야 한다. Kafka 보존기간·compaction 정책을 이에 맞춰 설계한다.
 
-#### 견고한 비동기 작업을 위한 MySQL 작업 큐 활용법⭐⭐⭐
+#### 견고한 비동기 작업을 위한 MySQL 작업 큐 활용법
 
 **1. 문제 : 동기 처리 안티패턴**
 * 회원가입이 부가 작업까지 전부 끝나야 응답한다. 사용자 저장은 빠르지만, 이메일·쿠폰은 외부 의존이라 느리고 불안정하다.
@@ -263,7 +263,7 @@ WHERE id = @job_id;
 * 주의 5 : 우선순위 기아 주의. 높은 우선순위 잡이 계속 유입되면 낮은 잡이 영원히 밀린다. 대기 시간 가중치(aging) 등의 보정을 고려한다.
 * 주의 6 : 처리량 상한을 알고 쓸 것. DB 큐는 초당 수백 ~ 수천 건 규모에 적합하다. 그 이상·다중 서비스 팬아웃이 필요해지면 Kafka·SQS로 이행하는 것이 자연스러운 다음 단계다.
 
-#### MySQL + NoSQL을 결합한 시스템 아키텍처 설계⭐⭐⭐
+#### MySQL + NoSQL을 결합한 시스템 아키텍처 설계
 
 **1. 문제 — 하나의 DB로 모든 질의를 감당할 수 없다**
 * 관계형 DB는 트랜잭션과 정합성에 최적이다. 하지만 같은 데이터에 대한 요구는 제각각이다.

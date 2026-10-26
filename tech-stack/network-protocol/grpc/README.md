@@ -1,4 +1,4 @@
-# gRPC📎
+# gRPC
 
 🔗 [Reference](https://grpc.io/docs/guides/)
 

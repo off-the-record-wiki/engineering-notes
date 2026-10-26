@@ -1,7 +1,7 @@
 # Books
 
 
-## [Effective Java 3/E🔥](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000003160832)
+## [Effective Java 3/E](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000003160832)
 
 * [(Effective Java Item 1) Java ‐ 생성자 대신 정적 팩토리 메서드를 고려하라](effective-java-3-e/saengseongja-daesin-jeongjeok-paektori-meseodeureul-goryeohara.md)
 * [(Effective Java Item 2) Java - 생성자에 매개변수가 많다면 빌더를 고려하라](effective-java-3-e/saengseongjae-maegaebyeonsuga-mandamyeon-bildeoreul-goryeohara.md)
@@ -94,7 +94,7 @@
 * [(Effective Java Item 89) Java - 인스턴스 수를 통제해야 한다면 readResolve보다는 열거 타입을 사용하라](effective-java-3-e/inseuteonseu-sureul-tongjehaeya-handamyeon-readresolvebodaneun-yeolgeo-taipeul-sayonghara.md)
 * [(Effective Java Item 90) Java - 직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하라]
 
-## [Kotlin Academy - Effective Kotlin Best Practice 2/E⭐](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000011546361)
+## [Kotlin Academy - Effective Kotlin Best Practice 2/E](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000011546361)
 
 * [(Effective Kotlin Item 1) Kotlin - 가변성을 제한하라](kotlin-academy-effective-kotlin-best-practice-2-e/effective-kotlin-item-1-kotlin-gabyeonseongeul-jehanhara.md)
 * [(Effective Kotlin Item 2) Kotlin - 임계 영역을 제거하라](kotlin-academy-effective-kotlin-best-practice-2-e/effective-kotlin-item-2-kotlin-imgye-yeongyeokeul-jegeohara.md)
@@ -157,7 +157,7 @@
 * [(Effective Kotlin Item 59) Kotlin - 가변 컬렉션 사용을 고려하라](kotlin-academy-effective-kotlin-best-practice-2-e/effective-kotlin-item-59-kotlin-gabyeon-keolreksyeon-sayongeul-goryeohara.md)
 * [(Effective Kotlin Item 60) Kotlin - 적절한 컬렉션 타입을 사용하라](kotlin-academy-effective-kotlin-best-practice-2-e/effective-kotlin-item-60-kotlin-jeokjeolhan-keolreksyeon-taipeul-sayonghara.md)
 
-## [Kotlin Academy - Kotlin Essentials with exercises⭐](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000008439557)
+## [Kotlin Academy - Kotlin Essentials with exercises](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000008439557)
 
 * [(Effective Kotlin Item 3) Kotlin - variable](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-3-kotlin-variable.md)
 * [(Effective Kotlin Item 4) Kotlin - primitive types, literals, and operations](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-4-kotlin-primitive-types-literals-and-operations.md)
@@ -179,7 +179,7 @@
 * [(Effective Kotlin Item 20) Kotlin - The Beauty of the Type System](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-20-kotlin-the-beauty-of-the-type-system.md)
 * [(Effective Kotlin Item 21) Kotlin - Generic](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-21-kotlin-generic.md)
 
-## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1🔥](https://product.kyobobook.co.kr/detail/S000001033116)
+## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1](https://product.kyobobook.co.kr/detail/S000001033116)
 
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 사용자 수에 따른 규모 확장성](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/sayongja-sue-ttareun-gyumo-hwakjangseong.md)
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 개략적인 규모 추정](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/gaeryakjeokin-gyumo-chujeong.md)
@@ -196,7 +196,7 @@
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 유튜브 설계]
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 구글 드라이브 설계]
 
-## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2📎](https://product.kyobobook.co.kr/detail/S000211656186)
+## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2](https://product.kyobobook.co.kr/detail/S000211656186)
 
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 근접성 서비스]
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 주변 친구]
@@ -212,7 +212,7 @@
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 전자 지갑]
 * [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 증권 거래소]
 
-## [Clean Architecture🔥](https://product.kyobobook.co.kr/detail/S000001033082)
+## [Clean Architecture](https://product.kyobobook.co.kr/detail/S000001033082)
 
 * [(Clean Architecture 1) - 설계와 아키텍처란?](clean-architecture/seolgyewa-akitekcheoran.md)
 * [(Clean Architecture 2) - 두 가지 가치에 대한 이야기](clean-architecture/du-gaji-gachie-daehan-iyagi.md)
@@ -249,7 +249,7 @@
 * [(Clean Architecture 33) - 사례 연구: 비디오 판매]
 * [(Clean Architecture 34) - 빠져 있는 장](clean-architecture/ppajyeo-itneun-jang.md)
 
-## [Clean Code🔥](https://product.kyobobook.co.kr/detail/S000001032980)
+## [Clean Code](https://product.kyobobook.co.kr/detail/S000001032980)
 
 * [(Clean Code 2) Clean Code - 의미 있는 이름](clean-code/uimi-itneun-ireum.md)
 * [(Clean Code 3) Clean Code - 함수](clean-code/hamsu.md)
@@ -265,7 +265,7 @@
 * [(Clean Code 13) Clean Code - 동시성](clean-code/dongsiseong.md)
 * [(Clean Code 17) Clean Code - 냄새와 휴리스틱](clean-code/naemsaewa-hyuriseutik.md)
 
-## [리팩토링 2판⭐](https://product.kyobobook.co.kr/detail/S000001810241)
+## [리팩토링 2판](https://product.kyobobook.co.kr/detail/S000001810241)
 
 * [리팩토링 2판 - 리팩터링: 첫 번째 예시]
 * [리팩토링 2판 - 리팩터링 원칙]
@@ -280,7 +280,7 @@
 * [리팩토링 2판 - API 리팩터링]
 * [리팩토링 2판 - 상속 다루기]
 
-## [데이터 중심 애플리케이션 설계⭐](https://product.kyobobook.co.kr/detail/S000001766328)
+## [데이터 중심 애플리케이션 설계](https://product.kyobobook.co.kr/detail/S000001766328)
 
 * [데이터 중심 애플리케이션 설계 - 신뢰할 수 있고 확장 가능하며 유지보수하기 쉬운 애플리케이션]
 * [데이터 중심 애플리케이션 설계 - 데이터 모델과 질의 언어]
@@ -295,7 +295,7 @@
 * [데이터 중심 애플리케이션 설계 - 스트림 처리]
 * [데이터 중심 애플리케이션 설계 - 데이터 시스템의 미래]
 
-## [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식⭐](https://product.kyobobook.co.kr/detail/S000216376461)
+## [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식](https://product.kyobobook.co.kr/detail/S000216376461)
 
 * [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식 - 느려진 서비스, 어디부터 봐야 할까](junieo-baekendeu-gaebaljaga-bandeusi-alaya-hal-silmu-jisik/neuryeojin-seobiseu-eodibuteo-bwaya-halkka.md)
 * [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식 - 성능을 좌우하는 DB 설계와 쿼리](junieo-baekendeu-gaebaljaga-bandeusi-alaya-hal-silmu-jisik/seongneungeul-jwauhaneun-db-seolgyewa-kwori.md)
@@ -310,7 +310,7 @@
 * [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식 ‐ NoSQL 이해하기](junieo-baekendeu-gaebaljaga-bandeusi-alaya-hal-silmu-jisik/nosql-ihaehagi.md)
 * [주니어 백엔드 개발자가 반드시 알아야 할 실무 지식 ‐ DB로 분산 잠금 구현하기](junieo-baekendeu-gaebaljaga-bandeusi-alaya-hal-silmu-jisik/dbro-bunsan-jamgeum-guhyeonhagi.md)
 
-## [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴⭐](https://product.kyobobook.co.kr/detail/S000001062523)
+## [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴](https://product.kyobobook.co.kr/detail/S000001062523)
 
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 객체 지향](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/gaekche-jihyang.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 다형성과 추상 타입](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/dahyeongseonggwa-chusang-taip.md)
@@ -318,14 +318,14 @@
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - 설계 원칙: SOLID](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/seolgye-wonchik-solid.md)
 * [개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴 - DI(Dependency Injection)와 서비스 로케이터](gaebaljaga-bandeusi-jeongbokhaeya-hal-gaekche-jihyanggwa-dijain-paeteon/di-dependency-injection-wa-seobiseu-rokeiteo.md)
 
-## [Real MySQL 8.0 (1)⭐](https://product.kyobobook.co.kr/detail/S000001766482)
+## [Real MySQL 8.0 (1)](https://product.kyobobook.co.kr/detail/S000001766482)
 
 * [Real MySQL 8.0 - 인덱스]
 * [Real MySQL 8.0 - 실행 계획]
 * [Real MySQL 8.0 - 아키텍처]
 * [Real MySQL 8.0 - 트랜잭션과 잠금]
 
-## [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향)⭐](https://product.kyobobook.co.kr/detail/S000001628109?utm_source=google&utm_medium=cpc&utm_campaign=googleSearch&gt_network=g&gt_keyword=&gt_target_id=aud-901091942354:dsa-435935280379&gt_campaign_id=9979905549&gt_adgroup_id=132556570510&gad_source=1)
+## [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향)](https://product.kyobobook.co.kr/detail/S000001628109?utm_source=google&utm_medium=cpc&utm_campaign=googleSearch&gt_network=g&gt_keyword=&gt_target_id=aud-901091942354:dsa-435935280379&gt_campaign_id=9979905549&gt_adgroup_id=132556570510&gad_source=1)
 
 * [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향) - 협력하는 객체들의 공동체](gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang/gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang-hyeopryeokhaneun-gaekchedeului-gongdongche.md)
 * [객체지향의 사실과 오해(역할, 책임, 협력 관점에서 본 객체지향) - 이상한 나라의 객체](gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang/gaekchejihyangui-sasilgwa-ohae-yeokhal-chaekim-hyeopryeok-gwanjeomeseo-bon-gaekchejihyang-isanghan-naraui-gaekche.md)

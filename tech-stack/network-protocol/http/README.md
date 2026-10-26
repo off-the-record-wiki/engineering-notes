@@ -1,4 +1,4 @@
-# HTTP🔥
+# HTTP
 
 🔗 [Reference](https://devdocs.io/http/)
 

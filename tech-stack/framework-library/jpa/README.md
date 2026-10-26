@@ -1,4 +1,4 @@
-# JPA⭐
+# JPA
 
 🔗 [Reference](https://docs.spring.io/spring-data/jpa/reference/index.html)
 

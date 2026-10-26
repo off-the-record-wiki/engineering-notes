@@ -1,4 +1,4 @@
-# 개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴⭐
+# 개발자가 반드시 정복해야 할 객체 지향과 디자인 패턴
 
 🔗 [Reference](https://product.kyobobook.co.kr/detail/S000001062523)
 

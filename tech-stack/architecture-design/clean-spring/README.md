@@ -1,4 +1,4 @@
-# Clean Spring📎
+# Clean Spring
 
 * [Clean Spring - Domain-Driven Development](domain-driven-development.md)
 * [Clean Spring - Domain-Driven Development with Design Patterns](domain-driven-development-with-design-patterns.md)

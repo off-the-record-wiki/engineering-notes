@@ -1,4 +1,4 @@
-# Coroutine📎
+# Coroutine
 
 🔗 [Reference](https://kotlinlang.org/docs/coroutines-overview.html)
 

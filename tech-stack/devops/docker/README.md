@@ -1,4 +1,4 @@
-# Docker⭐
+# Docker
 
 🔗 [Reference](https://docs.docker.com/guides/)
 

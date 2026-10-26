@@ -1,4 +1,4 @@
-# Database🔥
+# Database
 
 * [Database - Database Introduction](database-introduction.md)
 * [Database - Search & Sort](search-sort.md)

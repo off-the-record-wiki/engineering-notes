@@ -1,4 +1,4 @@
-# MySQL🔥
+# MySQL
 
 🔗 [Reference](https://dev.mysql.com/doc/)
 

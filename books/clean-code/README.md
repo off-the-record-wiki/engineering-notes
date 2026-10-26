@@ -1,4 +1,4 @@
-# Clean Code🔥
+# Clean Code
 
 🔗 [Reference](https://product.kyobobook.co.kr/detail/S000001032980)
 

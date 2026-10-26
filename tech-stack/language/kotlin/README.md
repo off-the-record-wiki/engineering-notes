@@ -1,4 +1,4 @@
-# Kotlin⭐
+# Kotlin
 
 🔗 [Reference](https://kotlinlang.org/docs/home.html)
 

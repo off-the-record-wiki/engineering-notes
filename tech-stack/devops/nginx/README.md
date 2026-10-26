@@ -1,4 +1,4 @@
-# Nginx⭐
+# Nginx
 
 🔗 [Reference](https://nginx.org/en/docs/)
 

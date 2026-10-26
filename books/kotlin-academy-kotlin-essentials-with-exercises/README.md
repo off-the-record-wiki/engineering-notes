@@ -1,4 +1,4 @@
-# Kotlin Academy - Kotlin Essentials with exercises⭐
+# Kotlin Academy - Kotlin Essentials with exercises
 
 🔗 [Reference](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000008439557)
 

@@ -1,4 +1,4 @@
-# Monitoring📎
+# Monitoring
 
 * [Monitoring - Log Level & Filter](log-level-filter.md)
 * [Monitoring - Log Collection with ELK Stack](log-collection-with-elk-stack.md)

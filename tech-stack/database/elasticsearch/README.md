@@ -1,4 +1,4 @@
-# ElasticSearch📎
+# ElasticSearch
 
 🔗 [Reference](https://www.elastic.co/docs#how-to-guides)
 

@@ -1,4 +1,4 @@
-# MSA⭐
+# MSA
 
 * [MicroService Architecture - Service Communications Patterns(RESTful API)](service-communications-patterns-restful-api.md)
 * [MicroService Architecture - Service Communications Patterns(GraphQL)](service-communications-patterns-graphql.md)

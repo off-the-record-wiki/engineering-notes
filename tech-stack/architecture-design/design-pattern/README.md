@@ -1,4 +1,4 @@
-# Design Pattern📎
+# Design Pattern
 
 🔗 [Reference](https://refactoring.guru/design-patterns)
 
