@@ -2,15 +2,13 @@
 
 #### 일차원 경계
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/7d81cbdc-8554-4134-9351-dfbe1dfa094b.png)
+![](https://github.com/user-attachments/assets/d5c86582-202d-461e-beab-f7dc8386e36d)
 
-* 인터페이스 하나로 심어두는 경계. 의존성 역전(DIP)이 이미 적용된 상태이다.
+* 완벽한 형태의 아키텍처 경계는 양방향으로 격리된 상태를 유지해야 하므로 쌍방향 Boundary 인터페이스를 사용한다.
+* 양방향으로 격리된 상태를 유지하려면 초기 설정할 때나 지속적으로 유지할 때도 비용이 많이 든다.
 
 #### 퍼싸드(Facade) 패턴
 
-![](https://raw.githubusercontent.com/wiki/off-the-record-wiki/engineering-notes/images/attachments/c7925f90-bf6b-4d38-9406-18b87efb4571.png)
+![](https://github.com/user-attachments/assets/53d5017e-da89-4405-9722-dd2b882c11b7)
 
-* Facade 클래스에 서비스들의 메서드를 나열해두고 호출이 오면 해당 서비스로 전달만 한다.
-* Client는 서비스 클래스에 직접 접근하지 못한다.
-* Facade는 인터페이스가 아니라 모든 서비스를 아는 클래스이다. `Client → Facade → ServiceA/B/C`로 추이 종속성이 그대로 이어지게 된다.
-* Facade는 복잡한 서브시스템을 쓰기 쉽게 만드는 편의 목적의 패턴이다.
+* 경계는 Facade 클래스로만 간단히 정의된다. Facade 클래스에는 모든 서비스 클래스를 메서드 형태로 정의하고, 서비스 호출이 발생하면 해당 서비스 클래스로 호출을 전달한다. 클라이언트는 이들 서비스 클래스에 직접 접근할 수 없다.
