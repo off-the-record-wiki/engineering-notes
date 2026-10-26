@@ -25,9 +25,3 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Testing](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Testing) | Java Test, Load Testing, TDD |
 | [Distributed Search and Analytics Engine](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Distributed-Search-Analytics-Engine) | OpenSearch |
 | [AI Engineering](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-AI-Engineering) | Harness Engineering |
-
-## Priority
-
-- 🔥 Core
-- ⭐ Important
-- 📎 Extended
