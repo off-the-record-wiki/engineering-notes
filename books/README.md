@@ -251,6 +251,7 @@
 
 ## [Clean Code](https://product.kyobobook.co.kr/detail/S000001032980)
 
+* [(Clean Code 1) Clean Code - 깨끗한 코드]
 * [(Clean Code 2) Clean Code - 의미 있는 이름](clean-code/uimi-itneun-ireum.md)
 * [(Clean Code 3) Clean Code - 함수](clean-code/hamsu.md)
 * [(Clean Code 4) Clean Code - 주석](clean-code/juseok.md)
@@ -263,6 +264,9 @@
 * [(Clean Code 11) Clean Code - 시스템](clean-code/siseutem.md)
 * [(Clean Code 12) Clean Code - 창발성](clean-code/changbalseong.md)
 * [(Clean Code 13) Clean Code - 동시성](clean-code/dongsiseong.md)
+* [(Clean Code 14) Clean Code - 점진적인 개선]
+* [(Clean Code 15) Clean Code - JUnit 들여다보기]
+* [(Clean Code 16) Clean Code - SerialDate 리팩터링]
 * [(Clean Code 17) Clean Code - 냄새와 휴리스틱](clean-code/naemsaewa-hyuriseutik.md)
 
 ## [리팩토링 2판](https://product.kyobobook.co.kr/detail/S000001810241)
