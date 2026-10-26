@@ -700,6 +700,8 @@
   * [(Clean Architecture 25) - 계층과 경계](books/clean-architecture/gyecheunggwa-gyeonggye.md)
   * [(Clean Architecture 26) - 메인 컴포넌트](books/clean-architecture/mein-keomponeonteu.md)
   * [(Clean Architecture 27) - '크고 작은 모든' 서비스들](books/clean-architecture/keugo-jakeun-modeun-seobiseudeul.md)
+  * [(Clean Architecture 28) - 테스트 경계](books/clean-architecture/teseuteu-gyeonggye.md)
+  * [(Clean Architecture 29) - 클린 임베디드 아키텍처](books/clean-architecture/keulrin-imbedideu-akitekcheo.md)
   * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](books/clean-architecture/deiteobeiseuneun-sebusahangida.md)
   * [(Clean Architecture 31) - 웹은 세부사항이다](books/clean-architecture/wepeun-sebusahangida.md)
   * [(Clean Architecture 32) - 프레임워크는 세부사항이다](books/clean-architecture/peureimwokeuneun-sebusahangida.md)

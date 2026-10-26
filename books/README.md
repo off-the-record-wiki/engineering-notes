@@ -241,12 +241,11 @@
 * [(Clean Architecture 25) - 계층과 경계](clean-architecture/gyecheunggwa-gyeonggye.md)
 * [(Clean Architecture 26) - 메인 컴포넌트](clean-architecture/mein-keomponeonteu.md)
 * [(Clean Architecture 27) - '크고 작은 모든' 서비스들](clean-architecture/keugo-jakeun-modeun-seobiseudeul.md)
-* [(Clean Architecture 28) - 테스트 경계]
-* [(Clean Architecture 29) - 클린 임베디드 아키텍처]
+* [(Clean Architecture 28) - 테스트 경계](clean-architecture/teseuteu-gyeonggye.md)
+* [(Clean Architecture 29) - 클린 임베디드 아키텍처](clean-architecture/keulrin-imbedideu-akitekcheo.md)
 * [(Clean Architecture 30) - 데이터베이스는 세부사항이다](clean-architecture/deiteobeiseuneun-sebusahangida.md)
 * [(Clean Architecture 31) - 웹은 세부사항이다](clean-architecture/wepeun-sebusahangida.md)
 * [(Clean Architecture 32) - 프레임워크는 세부사항이다](clean-architecture/peureimwokeuneun-sebusahangida.md)
-* [(Clean Architecture 33) - 사례 연구: 비디오 판매]
 * [(Clean Architecture 34) - 빠져 있는 장](clean-architecture/ppajyeo-itneun-jang.md)
 
 ## [Clean Code](https://product.kyobobook.co.kr/detail/S000001032980)
