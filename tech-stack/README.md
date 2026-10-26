@@ -68,9 +68,3 @@
 ## AI Engineering
 
 - [Harness Engineering](ai-engineering/harness-engineering/README.md)
-
-## Legend
-
-- 🔥 Core
-- ⭐ Important
-- 📎 Extended
