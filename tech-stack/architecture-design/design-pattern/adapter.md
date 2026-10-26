@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 결제 수단이 둘이다. 하나는 사내 레거시, 하나는 해외 PG SDK. **둘 다 우리가 고칠 수 없다.**
 
@@ -58,7 +58,7 @@ if (result.success()) { ... }
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -67,7 +67,7 @@ if (result.success()) { ... }
 | **Adapter** | 둘 사이를 번역 | `LegacyCardAdapter` · `OverseasPayAdapter` |
 | **Client** | Target만 안다 | `CheckoutService` · `Main` |
 
-### Target을 먼저 정한다 — 순서가 중요하다
+#### Target을 먼저 정한다 — 순서가 중요하다
 
 ```java
 public interface PaymentGateway {
@@ -79,7 +79,7 @@ public interface PaymentGateway {
 
 순서가 뒤바뀌면 패턴이 무너진다. SDK를 먼저 보고 "센트를 받으니까 우리도 센트로 할까" 하는 순간, **외부 SDK가 우리 도메인을 지배하기 시작한다.** 그러면 SDK를 바꿀 때 도메인 전체가 흔들린다.
 
-### Adapter — 하는 일은 번역뿐이다
+#### Adapter — 하는 일은 번역뿐이다
 
 ```java
 public class LegacyCardAdapter implements PaymentGateway {
@@ -119,7 +119,7 @@ public class OverseasPayAdapter implements PaymentGateway {
 
 두 어댑터가 **하는 변환이 서로 전혀 다르다.** 어댑티가 어긋나는 방식이 다르기 때문이다. 그래도 바깥에서 보면 둘은 똑같은 `PaymentGateway`다.
 
-### 어댑터가 하는 다섯 가지 번역
+#### 어댑터가 하는 다섯 가지 번역
 
 | 종류 | 예 |
 |---|---|
@@ -131,7 +131,7 @@ public class OverseasPayAdapter implements PaymentGateway {
 
 이 중 **실패 표현의 통일**이 실무에서 가장 값어치 있다. SDK 예외 타입이 우리 코드 바깥으로 새어 나가지 않기 때문이다. 나중에 SDK를 교체해도 `catch` 블록을 찾아다닐 일이 없다.
 
-### 어댑터가 버리는 것도 있다
+#### 어댑터가 버리는 것도 있다
 
 ```java
 public PaymentResult pay(String orderId, long amountInWon) {
@@ -144,7 +144,7 @@ public PaymentResult pay(String orderId, long amountInWon) {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -181,7 +181,7 @@ for (PaymentGateway gateway : new PaymentGateway[] {domestic, overseas}) {
 
 ---
 
-## 4. 새 PG사를 추가하려면
+#### 4. 새 PG사를 추가하려면
 
 ```java
 public class NewPgAdapter implements PaymentGateway {
@@ -202,9 +202,9 @@ public class NewPgAdapter implements PaymentGateway {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 객체 어댑터와 클래스 어댑터
+#### 객체 어댑터와 클래스 어댑터
 
 GoF는 두 가지를 제시한다.
 
@@ -227,7 +227,7 @@ public class LegacyCardAdapter extends LegacyCardApi implements PaymentGateway {
 
 마지막 항목이 결정적이다. 클래스 어댑터는 **캡슐화를 스스로 깬다.**
 
-### 어댑터에 로직을 넣지 않는다
+#### 어댑터에 로직을 넣지 않는다
 
 가장 흔한 실수다. 어댑터는 번역만 해야 한다.
 
@@ -246,7 +246,7 @@ public PaymentResult pay(String orderId, long amountInWon) {
 
 > 판단 기준: **"어댑티를 다른 것으로 바꿔도 이 코드가 필요한가?"** 필요하다면 그건 어댑터의 일이 아니다.
 
-### 데코레이터·프록시·파사드와의 차이
+#### 데코레이터·프록시·파사드와의 차이
 
 넷 다 "감싼다"는 점이 같아서 구조만 보면 구분이 안 된다. **인터페이스를 어떻게 하느냐**로 갈린다.
 
@@ -262,7 +262,7 @@ public PaymentResult pay(String orderId, long amountInWon) {
 - **어댑터** — 맞춰야 할 **기존 규격이 있다.** `PaymentGateway`가 먼저 존재하고 거기 맞춘다
 - **파사드** — 맞출 규격이 **없다.** 복잡한 서브시스템을 보고 편한 인터페이스를 새로 만든다
 
-### 자바 표준 라이브러리의 어댑터
+#### 자바 표준 라이브러리의 어댑터
 
 ```java
 Reader reader = new InputStreamReader(inputStream);   // 바이트 스트림 → 문자 스트림
@@ -272,7 +272,7 @@ Enumeration<String> e = Collections.enumeration(list);// Collection → 레거�
 
 `InputStreamReader`가 교과서적이다. `InputStream`(바이트)과 `Reader`(문자)는 **애초에 다른 규격**인데, 이 클래스가 사이에 서서 번역한다. [데코레이터](decorator.md)인 `BufferedInputStream`과 나란히 놓고 보면 차이가 분명하다 — 버퍼드는 `InputStream`을 받아 `InputStream`을 내놓고(유지), 리더는 `InputStream`을 받아 `Reader`를 내놓는다(변경).
 
-### 어댑터는 테스트 경계이기도 하다
+#### 어댑터는 테스트 경계이기도 하다
 
 외부 SDK는 테스트하기 어렵다. 네트워크가 필요하고, 실패 상황을 만들기도 힘들다. 어댑터가 있으면 **경계가 명확해진다.**
 
@@ -281,7 +281,7 @@ Enumeration<String> e = Collections.enumeration(list);// Collection → 레거�
 
 어댑터에 로직을 넣지 말라는 이유가 여기서도 나온다. 로직이 섞이면 이 두 테스트가 다시 엉킨다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -293,7 +293,7 @@ Enumeration<String> e = Collections.enumeration(list);// Collection → 레거�
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - **고칠 수 없는 코드**를 써야 할 때 (외부 SDK, 레거시, 다른 팀 모듈)

@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 주문 상태가 바뀔 때 해야 할 일이 늘어나면 이런 코드가 생긴다.
 
@@ -52,7 +52,7 @@ public void changeStatus(OrderStatus next) {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -64,7 +64,7 @@ public void changeStatus(OrderStatus next) {
 
 전략 패턴과 참여자 수는 비슷하지만 **관계의 수가 다르다.** 전략은 Context 하나가 전략 하나를 들고 있고, 옵저버는 Subject 하나가 **여러 개를** 들고 있다. 그래서 "하나가 바뀌면 여럿이 반응한다"가 성립한다.
 
-### Observer — 메서드 하나짜리 규격
+#### Observer — 메서드 하나짜리 규격
 
 ```java
 public interface OrderObserver {
@@ -78,7 +78,7 @@ public interface OrderObserver {
 order.register(event -> log.info("감사로그 {} {}", event.orderId(), event.status()));
 ```
 
-### ConcreteSubject — 목록을 들고 알린다
+#### ConcreteSubject — 목록을 들고 알린다
 
 ```java
 public class Order implements Subject {
@@ -97,7 +97,7 @@ public class Order implements Subject {
 
 `unregister()`가 규격에 들어 있는 게 중요하다. **구독을 끊을 방법이 없으면 Subject가 살아 있는 동안 옵저버도 계속 살아남는다.** 자바에서 옵저버 패턴이 메모리 누수의 흔한 원인으로 꼽히는 이유다.
 
-### 통지에 실리는 데이터 — push와 pull
+#### 통지에 실리는 데이터 — push와 pull
 
 이 예제는 **push** 방식이다. 옵저버가 필요로 할 값을 Subject가 담아서 보낸다.
 
@@ -120,7 +120,7 @@ public record OrderEvent(String orderId, OrderStatus status, int amount) { }
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -159,7 +159,7 @@ java -cp out observer.code.Main
 
 ---
 
-## 4. 새 알림을 추가하려면
+#### 4. 새 알림을 추가하려면
 
 ```java
 public class SlackNotifier implements OrderObserver {
@@ -182,9 +182,9 @@ order.register(new SlackNotifier());   // 조립하는 곳에서 한 줄
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 통지 메서드에 함정이 두 개 있다
+#### 통지 메서드에 함정이 두 개 있다
 
 ```java
 @Override
@@ -212,19 +212,19 @@ case SHIPPED -> {
 
 > 다만 예외를 삼키는 게 항상 옳지는 않다. "재고 차감이 실패했는데 주문은 성공"이 말이 안 되는 도메인이라면, 그건 옵저버로 뺄 일이 아니라 트랜잭션 안에서 처리할 일이다. **실패해도 되는 일만 옵저버로 뺀다.**
 
-### 통지 순서에 기대면 안 된다
+#### 통지 순서에 기대면 안 된다
 
 출력에서 메일 → 재고 → 통계 순으로 나오는 건 등록 순서 때문이지 **보장된 규칙이 아니다.** 등록 순서를 바꾸거나 나중에 비동기로 돌리면 그대로 깨진다.
 
 옵저버 B가 "옵저버 A가 먼저 처리했을 것"을 전제로 동작하는 순간, 그 둘은 사실 하나의 절차다. **순서가 중요하다면 옵저버로 나눌 게 아니라 한 곳에 순서대로 쓰는 게 맞다.**
 
-### 동기 통지의 함정
+#### 동기 통지의 함정
 
 이 예제의 통지는 **같은 스레드에서 순서대로** 일어난다. 옵저버 하나가 3초 걸리면 `changeStatus()`도 3초 걸린다. 주문 처리가 알림 때문에 느려지는 것이다.
 
 실무에서 이 문제는 **통지와 처리를 분리**해서 푼다. 큐에 넣고 반환하거나, 스프링이라면 `@Async` / `@TransactionalEventListener`를 쓴다. 다만 그 순간 "실패하면 어떻게 되는가"를 다시 설계해야 한다. 동기일 때는 예외를 잡으면 그만이지만, 비동기는 재시도와 유실 처리가 따라온다.
 
-### `java.util.Observer`는 쓰지 않는다
+#### `java.util.Observer`는 쓰지 않는다
 
 자바에 내장된 `java.util.Observable` / `Observer`는 **Java 9에서 deprecated 됐다.**
 
@@ -234,7 +234,7 @@ case SHIPPED -> {
 
 **직접 인터페이스를 정의하는 편이 낫다.** 이 예제처럼 20줄이면 끝난다.
 
-### 스프링을 쓴다면 이미 들어 있다
+#### 스프링을 쓴다면 이미 들어 있다
 
 ```java
 @Component
@@ -251,7 +251,7 @@ publisher.publishEvent(new OrderEvent(orderId, next, amount));
 
 `ApplicationEventPublisher`가 Subject고, `@EventListener`가 등록이다. **컨테이너가 옵저버 목록을 대신 관리한다.** 그래도 패턴을 알아야 하는 이유는, 순서·예외·동기 여부 같은 위의 질문이 스프링을 쓴다고 사라지지 않기 때문이다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -263,7 +263,7 @@ publisher.publishEvent(new OrderEvent(orderId, next, amount));
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 한 사건에 반응해야 할 곳이 **여럿이고, 앞으로 더 늘어날 것 같을 때**

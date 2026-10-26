@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 경비 신청을 승인하는 서비스가 있다. 금액에 따라 승인자가 다르다 — 30만 원 이하는 팀장, 100만 원 이하는 매니저, 500만 원 이하는 이사, 그 이상은 대표이사.
 
@@ -51,7 +51,7 @@ public final ApprovalResult approve(ExpenseRequest request) {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -59,7 +59,7 @@ public final ApprovalResult approve(ExpenseRequest request) {
 | **ConcreteHandler** | 실제 처리 조건 | `TeamLeadHandler` · `ManagerHandler` · `DirectorHandler` · `CeoHandler` |
 | **Client** | 체인을 조립하고 요청을 첫 핸들러에 보낸다 | `Main` |
 
-### Handler가 있어야 성립한다
+#### Handler가 있어야 성립한다
 
 ```java
 public abstract class ApprovalHandler {
@@ -88,7 +88,7 @@ public abstract class ApprovalHandler {
 
 `approve()`는 `final`이다 — **체이닝 로직은 템플릿 메서드로 한 곳에 고정해 뒀다.** 하위 클래스가 결정하는 건 "내가 처리할 수 있는가"(`canApprove`) 하나뿐이다. 다음 핸들러를 부를지, 언제 멈출지를 하위 클래스마다 다시 구현하게 두면 누군가는 체이닝을 까먹거나 틀리게 짤 수 있다. [팩토리 메서드](factory-method.md)에서 본 것과 같은 이유로 템플릿 메서드를 섞어 썼다.
 
-### 체인은 누가 조립하는가 — Client의 책임
+#### 체인은 누가 조립하는가 — Client의 책임
 
 ```java
 ApprovalHandler teamLead = new TeamLeadHandler();
@@ -99,7 +99,7 @@ teamLead.linkWith(new ManagerHandler()).linkWith(new DirectorHandler()).linkWith
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -144,7 +144,7 @@ java -cp out chain_of_responsibility.code.Main
 
 ---
 
-## 4. 새 핸들러를 추가하려면
+#### 4. 새 핸들러를 추가하려면
 
 ```java
 public class AuditLogHandler extends ApprovalHandler {
@@ -171,9 +171,9 @@ audit.linkWith(teamLead).linkWith(manager).linkWith(director).linkWith(ceo);
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 데코레이터 패턴과의 차이 — 이번에도 구조는 같고 위임이 다르다
+#### 데코레이터 패턴과의 차이 — 이번에도 구조는 같고 위임이 다르다
 
 [데코레이터](decorator.md)·[프록시](proxy.md)에 이어 또 같은 질문이 나온다. 클래스가 자기 자신과 같은 타입을 들고 위임한다는 구조는 똑같다.
 
@@ -186,18 +186,18 @@ audit.linkWith(teamLead).linkWith(manager).linkWith(director).linkWith(ceo);
 
 이 예제의 `AuditLogHandler`는 예외적으로 항상 다음으로 넘긴다는 점에서 데코레이터에 가깝게 행동한다 — 패턴의 경계는 항상 이렇게 흐릿해질 수 있다. 판단 기준은 **"멈출 수 있는 경로가 있는가"** 다.
 
-### 옵저버 패턴과의 차이 — 하나가 반응하는가, 전부가 반응하는가
+#### 옵저버 패턴과의 차이 — 하나가 반응하는가, 전부가 반응하는가
 
 [옵저버](observer.md)는 이벤트 하나에 등록된 리스너 **전부**가 반응한다 (통지). 책임 연쇄는 체인에 등록된 핸들러 중 **보통 하나만** 처리하고 멈춘다 (에스컬레이션). `AuditLogHandler`처럼 항상 통과하는 핸들러를 여러 개 두면 옵저버와 결과가 비슷해 보이지만, 의도가 다르다 — 옵저버는 "이 일이 일어났다는 걸 알리는 것"이 목적이고, 책임 연쇄는 "이 일을 처리할 사람을 찾는 것"이 목적이다.
 
-### 실무에서는 이미 쓰고 있다
+#### 실무에서는 이미 쓰고 있다
 
 - 서블릿 `Filter`/`FilterChain` — `chain.doFilter(request, response)`를 부르는 자리가 이 예제의 `next.approve(request)`와 같다
 - 스프링 시큐리티의 `FilterChainProxy` — 인증·인가·CSRF 검사를 각각 다른 필터가 맡고, 처리되면 그 자리에서 멈추거나 다음으로 넘긴다
 - Express.js·Koa 같은 미들웨어의 `next()`
 - `java.util.logging.Logger`의 핸들러 체인 — 로그 레벨에 따라 부모 로거로 계속 전파된다. 이름부터가 `Handler`다
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -208,7 +208,7 @@ audit.linkWith(teamLead).linkWith(manager).linkWith(director).linkWith(ceo);
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 요청을 처리할 후보가 여럿이고, **누가 처리할지 실행 시점에** 정해질 때

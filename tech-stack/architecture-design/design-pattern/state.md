@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 자판기가 있다. 조작은 세 가지뿐이다 — **동전 투입 · 동전 반환 · 버튼 누르기**. 그런데 같은 조작이 상황에 따라 다르게 동작해야 한다. 동전이 없을 때 버튼을 누르면 아무 일도 없어야 하고, 이미 동전이 들어 있는데 또 넣으면 받지 말아야 하고, 매진이면 전부 거절해야 한다.
 
@@ -82,7 +82,7 @@ public class NoCoinState implements VendingMachineState {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -91,7 +91,7 @@ public class NoCoinState implements VendingMachineState {
 | **ConcreteState** | 그 상태에서의 행동과 전이 | `NoCoinState` · `HasCoinState` · `SoldOutState` |
 | **Client** | 자판기를 조작한다 | `Main` |
 
-### State가 있어야 성립한다
+#### State가 있어야 성립한다
 
 ```java
 public interface VendingMachineState {
@@ -104,7 +104,7 @@ public interface VendingMachineState {
 
 **조작 하나가 메서드 하나다.** 그래서 새 상태를 추가하면 컴파일러가 "이 메서드들을 구현하라"고 강제한다 — 앞의 if 버전에서 분기를 빠뜨리던 문제가 **컴파일 에러로 바뀐다.** 이게 조건문을 다형성으로 바꿔서 얻는 가장 실질적인 이득이다.
 
-### 컨텍스트는 위임만 한다
+#### 컨텍스트는 위임만 한다
 
 ```java
 public void insertCoin() {
@@ -114,7 +114,7 @@ public void insertCoin() {
 
 `VendingMachine`에는 **`if`가 하나도 없다.** 아는 것은 "지금 어떤 상태냐"뿐이고, 판단은 전부 상태 객체가 한다.
 
-### 전이는 누가 정하는가 — 상태 자신이 정한다
+#### 전이는 누가 정하는가 — 상태 자신이 정한다
 
 ```java
 // HasCoinState
@@ -129,7 +129,7 @@ public void pressButton(VendingMachine machine) {
 
 이 패턴의 핵심이 이 줄이다. 다음 상태를 **컨텍스트가 아니라 현재 상태가 계산한다.** `VendingMachine`은 `changeState()`로 시키는 대로 바꿀 뿐, 어떤 조건에서 매진이 되는지 모른다.
 
-### 상태 객체는 공유된다
+#### 상태 객체는 공유된다
 
 ```java
 private final VendingMachineState noCoin = new NoCoinState();
@@ -141,7 +141,7 @@ private final VendingMachineState soldOut = new SoldOutState();
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -196,7 +196,7 @@ java -cp out state.code.Main
 
 ---
 
-## 4. 새 상태를 추가하려면
+#### 4. 새 상태를 추가하려면
 
 품절 임박 상태(마지막 하나일 때 경고)를 넣는다고 하자.
 
@@ -232,9 +232,9 @@ public class LastOneState implements VendingMachineState {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 전략 패턴과의 차이 — 또 구조는 같고, 이번엔 **누가 바꾸는가**가 다르다
+#### 전략 패턴과의 차이 — 또 구조는 같고, 이번엔 **누가 바꾸는가**가 다르다
 
 [전략](strategy.md)·[커맨드](command.md)에 이어 세 번째로 같은 질문이 나온다. 클래스 다이어그램을 그리면 [전략 패턴](strategy.md)과 **구분이 안 된다.** 둘 다 인터페이스를 두고, 컨텍스트가 구현체에 위임한다.
 
@@ -252,7 +252,7 @@ public class LastOneState implements VendingMachineState {
 
 > 판단 기준 한 줄: **"구현체가 다음 구현체를 지목하는가?"** 그러면 상태, 아니면 전략이다.
 
-### 상태 패턴은 상태 기계를 코드로 옮긴 것이다
+#### 상태 패턴은 상태 기계를 코드로 옮긴 것이다
 
 이 예제를 상태 전이도로 그리면 그대로 유한 상태 기계(FSM)가 된다.
 
@@ -266,7 +266,7 @@ public class LastOneState implements VendingMachineState {
 
 **전이도의 화살표 하나가 상태 클래스의 메서드 한 줄에 대응한다.** 그래서 기획서의 상태 다이어그램을 코드로 옮기기 쉽고, 반대로 코드에서 전이도를 복원하기도 쉽다. 주문 상태(결제대기 → 결제완료 → 배송중 → 배송완료), 문서 결재 흐름처럼 **도메인에 상태 전이도가 이미 있는 문제**가 이 패턴의 자리다.
 
-### 상태를 어디에 둘 것인가 — enum이라는 대안
+#### 상태를 어디에 둘 것인가 — enum이라는 대안
 
 자바에서는 enum이 메서드를 가질 수 있어서, 상태가 단순하면 클래스 대신 enum으로도 같은 걸 만든다.
 
@@ -285,7 +285,7 @@ public enum VendingState {
 
 상태 개수가 고정이고 상태별 데이터가 없다면 enum이 더 간결하다 — 인스턴스가 하나로 보장되고, `switch`나 직렬화도 자연스럽다. 반대로 **상태별로 다른 필드가 필요하거나, 상태를 런타임에 늘려야 하거나, 상태마다 의존성을 주입받아야 한다면** 클래스 쪽이 맞다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -297,7 +297,7 @@ public enum VendingState {
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 객체의 행동이 **상태에 따라 달라지고**, 그 상태가 실행 중에 바뀔 때

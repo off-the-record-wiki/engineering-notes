@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 할인 방식이 늘어날 때 이런 코드가 생긴다.
 
@@ -34,7 +34,7 @@ public int finalAmount() {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -43,7 +43,7 @@ public int finalAmount() {
 | **Context** | 전략을 보관하고 계산을 위임 | `Order` |
 | **Client** | 전략을 골라 Context에 주입 | `Main` |
 
-### Strategy — 교체 가능한 알고리즘의 규격
+#### Strategy — 교체 가능한 알고리즘의 규격
 
 ```java
 public interface DiscountPolicy {
@@ -51,7 +51,7 @@ public interface DiscountPolicy {
 }
 ```
 
-### ConcreteStrategy — 규격을 각자 다르게 구현
+#### ConcreteStrategy — 규격을 각자 다르게 구현
 
 ```java
 public class RateDiscountPolicy implements DiscountPolicy {
@@ -73,7 +73,7 @@ public class FixedAmountDiscountPolicy implements DiscountPolicy {
 }
 ```
 
-### Context — 계산을 직접 하지 않고 전략에게 넘긴다
+#### Context — 계산을 직접 하지 않고 전략에게 넘긴다
 
 ```java
 public class Order {
@@ -95,7 +95,7 @@ public class Order {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -119,7 +119,7 @@ order.finalAmount();                                          // 15000
 
 ---
 
-## 4. 새 정책을 추가하려면
+#### 4. 새 정책을 추가하려면
 
 ```java
 public class CouponDiscountPolicy implements DiscountPolicy {
@@ -134,9 +134,9 @@ public class CouponDiscountPolicy implements DiscountPolicy {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 반환 타입은 반드시 통일되어야 한다
+#### 반환 타입은 반드시 통일되어야 한다
 
 전략마다 반환 타입이 다르면 호출부가 "어떤 구현체인지" 알아야 하므로, **교체 가능성이라는 전제 자체가 깨진다.**
 
@@ -152,7 +152,7 @@ public interface DiscountPolicy {
 
 > JDK의 대표적인 전략 패턴인 `Comparator<T>`도 입력은 제네릭이지만 **반환은 항상 `int` 고정**이다.
 
-### 메서드가 하나면 람다도 전략이다
+#### 메서드가 하나면 람다도 전략이다
 
 `DiscountPolicy`는 추상 메서드가 하나뿐이라 람다를 그대로 넘길 수 있다.
 
@@ -163,7 +163,7 @@ order.changeDiscountPolicy(amount -> 0);            // 할인 없음
 
 간단하고 일회성인 규칙은 람다, **도메인 용어로 부를 이름이 있는 규칙**은 클래스로 만든다. 람다에는 이름과 설명이 남지 않기 때문이다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -174,7 +174,7 @@ order.changeDiscountPolicy(amount -> 0);            // 할인 없음
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 같은 일을 하는 방법이 여러 개고, 앞으로 더 늘어날 것 같을 때

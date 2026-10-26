@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 장바구니에 단품도 들어가고 세트도 들어간다. 세트 안에 또 세트가 들어갈 수도 있다.
 
@@ -47,7 +47,7 @@ int total = cart.stream().mapToInt(CartItem::price).sum();
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -56,7 +56,7 @@ int total = cart.stream().mapToInt(CartItem::price).sum();
 | **Composite** | 자식을 담고 재귀로 처리 | `Bundle` |
 | **Client** | 부분과 전체를 구분하지 않는다 | `Main` |
 
-### 핵심은 한 줄이다
+#### 핵심은 한 줄이다
 
 ```java
 public class Bundle implements CartItem {
@@ -68,7 +68,7 @@ public class Bundle implements CartItem {
 
 `Bundle`은 `CartItem`을 **구현하면서 `CartItem`을 담는다.** [데코레이터](decorator.md)의 "is-a이면서 has-a"와 모양이 같은데, 차이는 개수다. 데코레이터는 하나를 감싸고 컴포지트는 **여럿을 담는다.**
 
-### 재귀는 Leaf에서 멈춘다
+#### 재귀는 Leaf에서 멈춘다
 
 ```java
 // Leaf — 종료 조건
@@ -98,7 +98,7 @@ public class Bundle implements CartItem {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -155,7 +155,7 @@ public void print(String indent) {
 
 ---
 
-## 4. 새 종류를 추가하려면
+#### 4. 새 종류를 추가하려면
 
 정기구독 묶음이 생겼다고 하자. 12개월 치를 담고 매달 하나씩 나가는 것이다.
 
@@ -176,9 +176,9 @@ public class Subscription implements CartItem {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### `add()`를 어디에 둘 것인가 — GoF의 유명한 트레이드오프
+#### `add()`를 어디에 둘 것인가 — GoF의 유명한 트레이드오프
 
 이 패턴에서 유일하게 고민할 지점이고, GoF도 정답을 정해 두지 않았다.
 
@@ -226,7 +226,7 @@ public class Bundle implements CartItem {
 
 > `java.util.List`의 `Collections.unmodifiableList()`가 정확히 이 딜레마의 사례다. `add()`가 인터페이스에 있어서 부를 수는 있지만 예외가 난다.
 
-### `java.io.File`은 컴포지트가 아니다
+#### `java.io.File`은 컴포지트가 아니다
 
 파일과 디렉터리를 한 타입으로 다루니 컴포지트처럼 보이지만, 쓰는 쪽은 이렇게 된다.
 
@@ -247,7 +247,7 @@ public long size(File file) {
 
 진짜 예는 AWT의 `Container extends Component`다. `Container`가 `Component` 목록을 담고, `paint()`가 재귀로 내려간다.
 
-### 순환 참조를 막을 방법이 없다
+#### 순환 참조를 막을 방법이 없다
 
 ```java
 Bundle a = new Bundle("A", 0);
@@ -269,7 +269,7 @@ public Bundle add(CartItem item) {
 
 이 예제는 조립이 코드에 고정되어 있어 뺐다.
 
-### 타입이 느슨해진다 — 이 패턴의 진짜 대가
+#### 타입이 느슨해진다 — 이 패턴의 진짜 대가
 
 ```java
 giftSet.add(new Product("머그컵", 12_000));
@@ -280,13 +280,13 @@ giftSet.add(anotherGiftSet);          // 선물 세트 안에 선물 세트? 막
 
 부분과 전체를 같게 만든 대가로 **둘의 차이를 표현할 언어를 잃는다.** 그 차이가 도메인에서 중요하다면 이 패턴이 맞지 않는다는 뜻이다.
 
-### 깊은 트리는 재귀 깊이를 조심한다
+#### 깊은 트리는 재귀 깊이를 조심한다
 
 `price()`가 재귀 호출이므로 트리가 깊으면 `StackOverflowError`가 난다. 카테고리 트리나 조직도처럼 깊이가 수십 단계까지 갈 수 있다면 스택 대신 명시적 큐로 순회하는 편이 안전하다.
 
 일반적인 상품 세트 정도(깊이 2~3)에서는 신경 쓸 일이 아니다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -298,7 +298,7 @@ giftSet.add(anotherGiftSet);          // 선물 세트 안에 선물 세트? 막
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 데이터가 **트리 구조**이고, 부분과 전체에 **같은 연산**을 하고 싶을 때

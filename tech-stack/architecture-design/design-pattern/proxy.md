@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 월별 매출 리포트를 조회하는 서비스가 있다. 두 가지가 무겁다 — **커넥션을 잡는 것**과 **집계 쿼리를 도는 것**.
 
@@ -61,7 +61,7 @@ public class DatabaseReportService implements ReportService {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -70,7 +70,7 @@ public class DatabaseReportService implements ReportService {
 | **Proxy** | 같은 얼굴로 앞에 서서 통제 | `LazyReportProxy` · `AuthReportProxy` · `CachingReportProxy` |
 | **Client** | 둘을 구분하지 못한다 | `Main` |
 
-### Subject가 있어야 성립한다
+#### Subject가 있어야 성립한다
 
 ```java
 public interface ReportService {
@@ -80,7 +80,7 @@ public interface ReportService {
 
 프록시가 진짜인 척할 수 있는 **유일한 근거**다. 이 인터페이스가 없으면 클라이언트가 `DatabaseReportService` 타입을 직접 알아야 하고, 그 순간 프록시를 끼워 넣을 자리가 사라진다.
 
-### 프록시의 종류 — GoF가 드는 것들
+#### 프록시의 종류 — GoF가 드는 것들
 
 이 패턴은 구조가 단순해서, 배울 것은 **무엇을 통제하느냐**다.
 
@@ -142,7 +142,7 @@ public String monthlyReport(String month) {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -184,7 +184,7 @@ java -cp out proxy.code.Main
 
 `DatabaseReportService`는 자기가 건너뛰어졌다는 사실조차 모른다.
 
-### 프록시는 겹칠 수 있다
+#### 프록시는 겹칠 수 있다
 
 ```java
 ReportService stacked =
@@ -207,7 +207,7 @@ ReportService stacked =
 
 ---
 
-## 4. 새 통제를 추가하려면
+#### 4. 새 통제를 추가하려면
 
 ```java
 public class RateLimitReportProxy implements ReportService {
@@ -229,9 +229,9 @@ public class RateLimitReportProxy implements ReportService {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 데코레이터와의 차이 — 구조는 같고 위임이 다르다
+#### 데코레이터와의 차이 — 구조는 같고 위임이 다르다
 
 가장 헷갈리는 지점이다. 클래스 다이어그램을 그리면 [데코레이터](decorator.md)와 **거의 똑같다.** 둘 다 같은 인터페이스를 구현하고 같은 타입을 들고 있다.
 
@@ -257,7 +257,7 @@ if (cached != null) return cached;
 
 > 판단 기준 한 줄: **"실제 객체를 안 부르는 경로가 있는가?"** 있으면 프록시, 없으면 데코레이터다.
 
-### 어댑터·파사드와의 차이
+#### 어댑터·파사드와의 차이
 
 | 패턴 | 인터페이스 | 감싸는 개수 | 목적 |
 |---|---|---|---|
@@ -268,7 +268,7 @@ if (cached != null) return cached;
 
 프록시와 데코레이터만 인터페이스를 유지한다. 그 둘 사이는 위의 표로 가른다.
 
-### 스프링 AOP가 이 패턴이다
+#### 스프링 AOP가 이 패턴이다
 
 ```java
 @Service
@@ -296,7 +296,7 @@ public String cachedReport(String month) { ... }
 
 같은 객체 안에서 자기 메서드를 부르면 **프록시를 통과하지 않으므로 캐시가 동작하지 않는다.** 프록시는 바깥에서 들어오는 호출만 가로챌 수 있기 때문이다. 이 예제로 치면 `DatabaseReportService`가 자기 메서드를 부를 때 `CachingReportProxy`를 거치지 않는 것과 같다.
 
-### 프록시는 실제 객체를 대신할 수 있어야 한다
+#### 프록시는 실제 객체를 대신할 수 있어야 한다
 
 ```java
 ReportService service = new AuthReportProxy(real, staff);
@@ -307,13 +307,13 @@ service.monthlyReport("2026-07");     // SecurityException
 
 > 보호 프록시를 쓸 때는 **실패가 규격의 일부**라는 걸 인터페이스에 드러내는 편이 낫다. 예외를 문서화하거나, 애초에 반환 타입에 실패를 담는다.
 
-### 캐싱 프록시는 무효화가 숙제다
+#### 캐싱 프록시는 무효화가 숙제다
 
 이 예제의 캐시는 한 번 담기면 영원히 남는다. 매출이 정정되어도 옛 값이 나간다.
 
 실무라면 TTL, 최대 크기(LRU), 명시적 무효화가 필요하고, 그 순간 프록시가 꽤 복잡해진다. **직접 만들기보다 `@Cacheable`이나 Caffeine 같은 것을 쓰는 편이 낫다** — 프록시 패턴을 아는 것은 그것들이 무엇을 하는지 이해하기 위해서다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -325,7 +325,7 @@ service.monthlyReport("2026-07");     // SecurityException
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 실제 객체의 **생성이나 호출이 비쌀** 때 (지연 생성, 캐싱)

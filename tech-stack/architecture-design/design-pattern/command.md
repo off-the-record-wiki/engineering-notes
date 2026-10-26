@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 텍스트 편집기가 있다. 버튼을 누르면 글자가 들어가거나 지워지고, "실행 취소" 버튼을 누르면 방금 한 일이 되돌아가야 한다.
 
@@ -67,7 +67,7 @@ public class EditorInvoker {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -77,7 +77,7 @@ public class EditorInvoker {
 | **Invoker** | 커맨드를 실행시키는 쪽 | `EditorInvoker` |
 | **Client** | 커맨드를 만들고 Receiver를 연결한다 | `Main` |
 
-### Command가 있어야 성립한다
+#### Command가 있어야 성립한다
 
 ```java
 public interface Command {
@@ -88,7 +88,7 @@ public interface Command {
 
 `EditorInvoker`가 아는 건 이 인터페이스뿐이다. **무엇을, 누구에게** 시키는지 모르기 때문에 실행을 나중으로 미룰 수도, 스택에 쌓아 되돌릴 수도, 여러 개를 묶을 수도 있다. 이 인터페이스가 없으면 `EditorInvoker`가 `Document`를 직접 알아야 하고, 그 순간 액션의 가짓수만큼 분기가 생긴다.
 
-### undo는 커맨드마다 계산 방식이 다르다
+#### undo는 커맨드마다 계산 방식이 다르다
 
 **삽입의 undo — 계산으로 끝난다**
 
@@ -142,7 +142,7 @@ public void undo() {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -185,7 +185,7 @@ java -cp out command.code.Main
 
 ---
 
-## 4. 새 명령을 추가하려면
+#### 4. 새 명령을 추가하려면
 
 ```java
 public class UppercaseCommand implements Command {
@@ -220,9 +220,9 @@ public class UppercaseCommand implements Command {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 전략 패턴과의 차이 — 구조는 같고 시간 축이 다르다
+#### 전략 패턴과의 차이 — 구조는 같고 시간 축이 다르다
 
 클래스 다이어그램만 보면 [전략 패턴](strategy.md)과 거의 같다. 둘 다 인터페이스를 정의하고, 구현체를 주입받아 위임한다.
 
@@ -237,11 +237,11 @@ public class UppercaseCommand implements Command {
 
 전략은 "정렬을 퀵정렬로 할까 병합정렬로 할까"처럼 **같은 문제의 다른 풀이**를 고르는 것이다. 커맨드는 "이 버튼을 누르면 무슨 일이 일어나야 하는가"라는 **요청 자체**를 대상으로 캡슐화한다. `DeleteTextCommand`가 `deletedText`를 들고 있는 것처럼, 커맨드는 실행 시점과 되돌리는 시점 사이의 **시간을 넘나드는 상태**를 가질 수 있다 — 전략에는 없는 특징이다.
 
-### 컴포지트 패턴과 겹치는 지점
+#### 컴포지트 패턴과 겹치는 지점
 
 `MacroCommand`는 사실상 **컴포지트 패턴**이다 — `Command` 자체가 `Command`의 목록을 담아 재귀적으로 구성될 수 있다. 매크로 안에 매크로를 넣는 것도 그대로 동작한다. GoF도 커맨드의 확장으로 매크로 커맨드를 별도로 다룬다.
 
-### 메멘토 패턴 — undo를 만드는 또 다른 방법
+#### 메멘토 패턴 — undo를 만드는 또 다른 방법
 
 이 예제의 undo는 **반대 동작을 실행하는 방식**이다 (삽입 ↔ 삭제). undo를 만드는 다른 방법은 상태 자체를 통째로 저장했다가 그대로 복원하는 것 — **메멘토 패턴**이다.
 
@@ -253,7 +253,7 @@ public class UppercaseCommand implements Command {
 
 실무에서는 둘을 섞기도 한다 — 되돌리기 쉬운 동작은 커맨드의 반대 실행으로, 상태가 복잡해서 반대 동작을 정의하기 어려운 동작은 스냅샷 복원으로 처리한다.
 
-### 익숙한 곳에 이미 있다
+#### 익숙한 곳에 이미 있다
 
 ```java
 executorService.submit(() -> processOrder(orderId));   // Runnable = 커맨드
@@ -261,7 +261,7 @@ executorService.submit(() -> processOrder(orderId));   // Runnable = 커맨드
 
 `Runnable`·`Callable`을 `ExecutorService`에 제출하는 것 자체가 커맨드 패턴이다. "지금, 여기서" 실행하는 대신 **요청을 객체로 감싸 다른 스레드가, 나중에** 실행하게 만든다. Swing의 `javax.swing.Action`도 마찬가지다 — 버튼과 메뉴가 같은 `Action` 객체를 공유해서, 하나만 비활성화해도 둘 다 비활성화된다. 이벤트 소싱에서 "일어난 일을 이벤트로 기록해 두었다가 재생한다"는 것도 같은 발상의 연장이다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -272,7 +272,7 @@ executorService.submit(() -> processOrder(orderId));   // Runnable = 커맨드
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 실행 취소·다시 실행을 지원해야 할 때

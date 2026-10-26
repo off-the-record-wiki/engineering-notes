@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 리포트 종류가 늘어날 때 이런 코드가 생긴다.
 
@@ -59,7 +59,7 @@ public final String generate() {
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -69,7 +69,7 @@ public final String generate() {
 
 전략 패턴과 달리 참여자가 **둘뿐이다.** 알고리즘을 담을 별도의 인터페이스도, 그걸 들고 있을 Context도 없다. 상속 계층 하나로 끝난다.
 
-### 단계는 세 종류다
+#### 단계는 세 종류다
 
 이 패턴을 이해하는 핵심은 "부모가 선언한 메서드가 다 같은 성격이 아니다"라는 점이다.
 
@@ -98,7 +98,7 @@ public abstract class ReportGenerator {
 }
 ```
 
-### ConcreteClass — 필요한 칸만 채운다
+#### ConcreteClass — 필요한 칸만 채운다
 
 ```java
 public class SalesReportGenerator extends ReportGenerator {
@@ -128,7 +128,7 @@ public class InventoryReportGenerator extends ReportGenerator {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -154,7 +154,7 @@ java -cp out template_method.code.Main
 
 ---
 
-## 4. 새 리포트를 추가하려면
+#### 4. 새 리포트를 추가하려면
 
 ```java
 public class PayrollReportGenerator extends ReportGenerator {
@@ -168,9 +168,9 @@ public class PayrollReportGenerator extends ReportGenerator {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 템플릿 메서드는 반드시 `final`이어야 한다
+#### 템플릿 메서드는 반드시 `final`이어야 한다
 
 ```java
 public final String generate() { ... }
@@ -178,7 +178,7 @@ public final String generate() { ... }
 
 `final`을 빼면 하위 클래스가 `generate()` 자체를 통째로 재정의할 수 있다. 그 순간 "절차를 부모가 소유한다"는 전제가 무너지고, 남는 건 그냥 상속받은 클래스 몇 개다. **이 패턴에서 `final`은 장식이 아니라 패턴의 정의 그 자체다.**
 
-### 단계는 `public`이 아니라 `protected`다
+#### 단계는 `public`이 아니라 `protected`다
 
 ```java
 protected abstract String body(List<Row> rows);
@@ -186,7 +186,7 @@ protected abstract String body(List<Row> rows);
 
 단계는 **하위 클래스에게만** 열려 있는 확장점이지, 바깥에서 호출하라고 만든 API가 아니다. `public`으로 열면 클라이언트가 `generate()`를 건너뛰고 `body()`만 부르는 코드를 쓸 수 있게 되고, 절차를 강제한 의미가 사라진다.
 
-### 호출 방향이 거꾸로다 — 헐리우드 원칙
+#### 호출 방향이 거꾸로다 — 헐리우드 원칙
 
 보통의 재사용은 자식이 부모의 기능을 **불러다 쓴다.** 템플릿 메서드는 반대다. 부모의 `generate()`가 자식의 `body()`를 **불러 준다.**
 
@@ -194,7 +194,7 @@ protected abstract String body(List<Row> rows);
 
 프레임워크가 이 구조를 쓰는 이유이기도 하다. 스프링의 `AbstractController`, JUnit의 `@BeforeEach`/`@Test` 실행 순서, 자바의 `AbstractList`가 모두 같은 모양이다. **흐름은 프레임워크가 갖고, 사용자는 빈칸만 채운다.**
 
-### 전략 패턴과의 차이
+#### 전략 패턴과의 차이
 
 같은 문제를 풀지만 도구가 다르다.
 
@@ -208,7 +208,7 @@ protected abstract String body(List<Row> rows);
 
 판단 기준은 한 줄이다. **"절차는 같은데 단계만 다른가?"** → 템플릿 메서드. **"하는 일 자체가 다른가?"** → 전략.
 
-### 단계의 시그니처가 갈리면 이 패턴은 못 쓴다
+#### 단계의 시그니처가 갈리면 이 패턴은 못 쓴다
 
 템플릿 메서드는 모든 하위 클래스가 **같은 시그니처**를 공유한다는 전제 위에 서 있다. 이게 깨지면 억지가 된다.
 
@@ -235,7 +235,7 @@ public class EmailLoginService extends LoginService {
 
 반대로 소셜 로그인 **안쪽**의 Google/Kakao/Naver 처리는 OAuth2 절차가 동일하므로 템플릿 메서드가 잘 맞는다. **같은 도메인이라도 축을 나눠서 봐야 한다.**
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -246,7 +246,7 @@ public class EmailLoginService extends LoginService {
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 여러 클래스가 **같은 순서로 같은 일**을 하는데, 중간 몇 단계만 다를 때

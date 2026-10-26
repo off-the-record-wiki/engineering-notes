@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 음료에 토핑을 붙여 팔아야 한다. 상속으로 풀면 이렇게 된다.
 
@@ -56,7 +56,7 @@ Beverage drink = new Whipped(new ExtraShot(new Americano()));
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -66,7 +66,7 @@ Beverage drink = new Whipped(new ExtraShot(new Americano()));
 | **ConcreteDecorator** | 실제로 기능을 얹는다 | `ExtraShot` · `Whipped` · `Syrup` · `LargeSize` |
 | **Client** | `Component` 타입만 안다 | `Main` |
 
-### 핵심은 Decorator의 이중성이다
+#### 핵심은 Decorator의 이중성이다
 
 ```java
 public abstract class BeverageDecorator implements Beverage {   // ① Beverage'이다'
@@ -83,7 +83,7 @@ public abstract class BeverageDecorator implements Beverage {   // ① Beverage'
 
 `BeverageDecorator`가 추상 클래스인 이유도 여기 있다. **아무것도 더하지 않는 데코레이터는 존재할 이유가 없으므로** 직접 만들지 못하게 막는다.
 
-### ConcreteDecorator — 감싼 것에게 먼저 묻고, 자기 몫을 얹는다
+#### ConcreteDecorator — 감싼 것에게 먼저 묻고, 자기 몫을 얹는다
 
 ```java
 public class ExtraShot extends BeverageDecorator {
@@ -102,7 +102,7 @@ public class ExtraShot extends BeverageDecorator {
 
 모든 데코레이터가 이 모양이다. **자기가 감싼 것을 먼저 호출하고, 그 결과에 자기를 더한다.**
 
-### Component는 작아야 한다
+#### Component는 작아야 한다
 
 ```java
 public interface Beverage {
@@ -115,7 +115,7 @@ public interface Beverage {
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -147,7 +147,7 @@ private static void print(Beverage beverage) {
 }
 ```
 
-### 호출이 흐르는 길
+#### 호출이 흐르는 길
 
 `new Whipped(new ExtraShot(new Americano())).cost()`를 부르면 이렇게 된다.
 
@@ -164,7 +164,7 @@ Whipped.cost()
 
 ---
 
-## 4. 새 토핑을 추가하려면
+#### 4. 새 토핑을 추가하려면
 
 ```java
 public class Cinnamon extends BeverageDecorator {
@@ -184,9 +184,9 @@ public class Cinnamon extends BeverageDecorator {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### 순서가 결과를 바꾼다
+#### 순서가 결과를 바꾼다
 
 더하기만 하는 데코레이터끼리는 순서가 상관없다. 하지만 하나라도 다른 연산이 섞이면 달라진다.
 
@@ -199,7 +199,7 @@ new ExtraShot(new LargeSize(americano))    //  4,500 × 1.5 + 500  = 7,250원
 
 이건 버그가 아니라 이 패턴의 성질이다. 다만 **순서가 곧 사양이 된다**는 뜻이므로, 이런 데코레이터가 섞이면 감싸는 순서를 문서로 못 박거나 조립을 한 곳(팩토리, 빌더)으로 모아야 한다. 여기저기서 자유롭게 감싸게 두면 가격이 조용히 갈린다.
 
-### 실행 중에 조합할 수 있다 — 상속과 갈리는 지점
+#### 실행 중에 조합할 수 있다 — 상속과 갈리는 지점
 
 ```java
 Beverage drink = new Latte();
@@ -210,7 +210,7 @@ for (String option : List.of("샷", "휘핑", "라지")) {
 
 주문서에서 읽어 온 옵션으로 조합을 만든다. 상속으로는 불가능하다. **상속은 컴파일 타임에 확정되고, 데코레이터는 런타임에 조립된다.**
 
-### 감싸면 원래 타입을 잃는다
+#### 감싸면 원래 타입을 잃는다
 
 ```java
 Beverage drink = new ExtraShot(new Americano());
@@ -221,7 +221,7 @@ drink instanceof Americano       // false — 감싼 순간 아니다
 
 > 클라이언트는 `Component` 타입만 알아야 한다. 이 조건을 못 지키는 상황이라면 데코레이터가 맞는 도구인지 다시 봐야 한다.
 
-### 프록시·컴포지트와 헷갈릴 때
+#### 프록시·컴포지트와 헷갈릴 때
 
 셋 다 "같은 인터페이스로 감싼다"는 구조가 같아서 그림만 보면 구분이 안 된다. **목적이 다르다.**
 
@@ -233,7 +233,7 @@ drink instanceof Americano       // false — 감싼 순간 아니다
 
 판단은 질문 하나다. **"감싸서 무엇을 하려는가?"** 없던 동작을 더하면 데코레이터, 원래 동작을 그대로 두고 언제/누가를 통제하면 프록시.
 
-### 자바 표준 라이브러리의 데코레이터
+#### 자바 표준 라이브러리의 데코레이터
 
 `java.io`가 통째로 데코레이터다.
 
@@ -245,7 +245,7 @@ InputStream in = new BufferedInputStream(new FileInputStream("a.txt"));
 
 `Collections.unmodifiableList()`, `synchronizedList()`도 같은 모양이다. 원본 리스트를 감싸서 "수정 금지"라는 동작을 얹는다.
 
-### 실무에서 더 자주 쓰이는 모양
+#### 실무에서 더 자주 쓰이는 모양
 
 토핑보다는 **횡단 관심사**를 얹을 때 쓴다.
 
@@ -258,7 +258,7 @@ PaymentGateway gateway =
 
 로깅·재시도·캐싱·타임아웃은 **결제 로직과 아무 상관이 없는데 결제 코드에 섞이기 쉬운 것들**이다. 데코레이터로 빼면 `HttpPaymentGateway`는 결제만 하고, 필요한 쪽에서 원하는 만큼 감싼다. 스프링 AOP가 프록시로 하는 일도 성격이 같다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -269,7 +269,7 @@ PaymentGateway gateway =
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 기능의 **조합**이 필요하고, 조합 수가 많을 때 (상속이면 클래스가 폭발한다)

@@ -8,7 +8,7 @@
 
 ---
 
-## 1. 왜 필요한가
+#### 1. 왜 필요한가
 
 주문 알림을 이메일·문자·푸시로 보내야 한다. 채널이 늘어날 때 이런 코드가 생긴다.
 
@@ -54,7 +54,7 @@ protected abstract NotificationChannel createChannel();
 
 ---
 
-## 2. 구성 요소
+#### 2. 구성 요소
 
 | GoF 참여자 | 역할 | 이 예제의 클래스 |
 |---|---|---|
@@ -65,7 +65,7 @@ protected abstract NotificationChannel createChannel();
 
 **두 계층이 짝을 이룬다.** Creator 하나에 Product 하나. 이 평행 구조가 이 패턴의 생김새다.
 
-### Creator는 "공장 클래스"가 아니다
+#### Creator는 "공장 클래스"가 아니다
 
 이 패턴에서 가장 오해받는 자리다.
 
@@ -88,7 +88,7 @@ public abstract class NotificationSender {
 
 그래서 팩토리 메서드는 대개 혼자 있지 않고 **[템플릿 메서드](template-method.md) 안에서 호출된다.** GoF 책도 그렇게 설명한다. 이 예제의 `send()`가 정확히 템플릿 메서드다 — 절차를 `final`로 고정하고, 그 안의 한 단계를 하위 클래스에게 맡긴다.
 
-### ConcreteCreator는 짧다
+#### ConcreteCreator는 짧다
 
 ```java
 public class SmsNotificationSender extends NotificationSender {
@@ -110,7 +110,7 @@ public class SmsNotificationSender extends NotificationSender {
 
 제품을 만드는 데 필요한 설정(발신 번호)을 ConcreteCreator가 들고 있는 것도 자연스럽다. **클라이언트는 이 값의 존재를 알 필요가 없다.**
 
-### 팩토리 메서드는 `protected`다
+#### 팩토리 메서드는 `protected`다
 
 ```java
 protected abstract NotificationChannel createChannel();
@@ -120,7 +120,7 @@ protected abstract NotificationChannel createChannel();
 
 ---
 
-## 3. 실행
+#### 3. 실행
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name '*.java')
@@ -168,7 +168,7 @@ Creator는 제품이 무엇인지 모르면서도 제품의 사정에 맞춘다.
 
 ---
 
-## 4. 새 채널을 추가하려면
+#### 4. 새 채널을 추가하려면
 
 ```java
 public class KakaoChannel implements NotificationChannel {
@@ -191,9 +191,9 @@ public class KakaoNotificationSender extends NotificationSender {
 
 ---
 
-## 5. 알아둘 점
+#### 5. 알아둘 점
 
-### "팩토리"라 불리는 세 가지를 구분해야 한다
+#### "팩토리"라 불리는 세 가지를 구분해야 한다
 
 이 패턴이 유독 헷갈리는 이유는 **이름이 겹치는 것이 셋**이기 때문이다.
 
@@ -231,7 +231,7 @@ Order.builder(...);
 
 > 구분하는 가장 빠른 방법: **`switch`나 `if`로 타입을 고르고 있으면 GoF 팩토리 메서드가 아니다.** 그리고 `static`이면 오버라이드할 수 없으므로 역시 아니다.
 
-### 추상 팩토리와의 경계
+#### 추상 팩토리와의 경계
 
 | | 팩토리 메서드 | [추상 팩토리](abstract-factory.md) |
 |---|---|---|
@@ -244,7 +244,7 @@ Order.builder(...);
 
 실무에서는 **추상 팩토리의 각 메서드가 팩토리 메서드**이기도 하다. 둘은 배타적이지 않다.
 
-### 상속이 수단이라는 것의 대가
+#### 상속이 수단이라는 것의 대가
 
 ```java
 new EmailNotificationSender("shop@example.com")   // 컴파일 타임에 확정
@@ -261,7 +261,7 @@ public NotificationSender(NotificationChannel channel) { this.channel = channel;
 
 **팩토리 메서드가 이것보다 나은 경우는 하나다** — 제품 생성에 Creator만 아는 정보가 필요하거나, 제품을 **매번 새로** 만들어야 할 때. 주입은 인스턴스를 고정하지만 팩토리 메서드는 호출할 때마다 만든다.
 
-### 제품이 매번 새로 만들어진다
+#### 제품이 매번 새로 만들어진다
 
 ```java
 public final void send(String to, String message) {
@@ -279,7 +279,7 @@ protected NotificationChannel createChannel() {
 
 **팩토리 메서드는 "새로 만들라"고 요구하지 않는다.** "제품을 내놓으라"고 할 뿐이다. 정적 팩토리 메서드가 캐싱하는 것(`Integer.valueOf`)과 같은 자유다.
 
-### 자바·스프링에서의 모습
+#### 자바·스프링에서의 모습
 
 ```java
 Collection.iterator()              // 컬렉션마다 다른 Iterator를 만든다 — 교과서적인 예
@@ -290,7 +290,7 @@ Calendar.getInstance()             // (실제로는 단순 팩토리에 가깝�
 
 스프링에서는 `FactoryBean<T>`의 `getObject()`가 같은 자리다.
 
-### 이 예제에서 의도적으로 뺀 것
+#### 이 예제에서 의도적으로 뺀 것
 
 학습 초점을 흐리지 않으려고 뺐다. 실무라면 필요하다.
 
@@ -302,7 +302,7 @@ Calendar.getInstance()             // (실제로는 단순 팩토리에 가깝�
 
 ---
 
-## 6. 언제 쓰고, 언제 안 쓰나
+#### 6. 언제 쓰고, 언제 안 쓰나
 
 **쓴다**
 - 제품을 **쓰는 절차는 같은데** 어떤 제품을 쓸지가 갈릴 때
