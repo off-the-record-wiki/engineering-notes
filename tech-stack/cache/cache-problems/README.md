@@ -1,6 +1,6 @@
 # Cache Problems
 
-* Cache - Cache Penetration(Null Object Pattern)
+* [Cache - Cache Penetration(Null Object Pattern)](cache-penetration-null-object-pattern.md)
 * Cache - Cache Penetration(Bloom Filter)
 * Cache - Cache Stampede(Jitter)
 * Cache - Cache Stampede(Probabilistic Early Recomputation)
