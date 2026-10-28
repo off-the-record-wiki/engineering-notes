@@ -8,6 +8,7 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 
 - [🛠 Tech Stack](tech-stack/README.md)
 - [📚 Books](books/README.md)
+- [📝 Retrospective](retrospective/README.md)
 - [🤖 Claude Code](claude-code/README.md)
 
 ## Topics
