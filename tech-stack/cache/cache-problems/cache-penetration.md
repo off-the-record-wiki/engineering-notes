@@ -1,4 +1,4 @@
-# Cache - Cache Penetration(Null Object Pattern)
+# Cache - Cache Penetration
 
 #### Cache Penetration
 
