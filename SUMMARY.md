@@ -308,6 +308,7 @@
 * [Cache Strategy](tech-stack/cache/cache-strategy/README.md)
   * [Redis ‐ Redis Cache Strategy](tech-stack/cache/cache-strategy/redis-cache-strategy.md)
 * [Cache Problems](tech-stack/cache/cache-problems/README.md)
+  * [Cache - Cache Penetration](tech-stack/cache/cache-problems/cache-penetration.md)
 * [Spring Cache](tech-stack/cache/spring-cache/README.md)
   * [Spring - Cache Annotation](tech-stack/cache/spring-cache/cache-annotation.md)
 
