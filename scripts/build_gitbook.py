@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """GitHub Wiki와 레포의 노트를 GitBook Git Sync용 구조(SUMMARY.md)로 변환한다. 첫 페이지는 레포의 README.md다.
 
-- 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)와 Books 페이지에서 만든다.
+- 목차는 wiki의 _Sidebar에 나열된 카테고리 페이지(Tech-*)와 Books, Retrospective 페이지에서 만든다.
   카테고리의 `##` 섹션이 GitBook 페이지가 되고, 섹션 아래 링크들이 하위 페이지가 된다.
   링크 없이 적힌 예정 노트는 섹션 페이지의 목록에만 남긴다.
 - 어느 카테고리에도 연결되지 않은 wiki 페이지는 제외하고, 그 페이지로 가는 링크는 wiki URL로 남긴다.
@@ -23,6 +23,8 @@ from pathlib import Path
 
 DEFAULT_WIKI_URL = 'https://github.com/off-the-record-wiki/engineering-notes/wiki'
 SITE_TITLE = 'engineering-notes'
+# Tech-Stack처럼 목차 맨 위에 두는 wiki 페이지 -> 출력 디렉터리. `##` 섹션과 그 아래 링크가 하위 페이지가 된다.
+HUB_PAGES = {'Books': 'books', 'Retrospective': 'retrospective'}
 
 TEXT = r'(?:[^\[\]\n]|\[[^\[\]\n]*\])*'
 DEST = r'(?:[^()\s]|\([^()\s]*\))+'
@@ -322,11 +324,12 @@ class Builder:
                 categories.setdefault(name, text.strip())
         groups = [(label, self.parse_category(c, f'tech-stack/{slugify(c.removeprefix("Tech-"))}'))
                   for c, label in categories.items()]
-        groups.append(('Books', self.parse_category('Books', 'books')))
+        groups += [(name, self.parse_category(name, base)) for name, base in HUB_PAGES.items()]
         for _, sections in groups:
             self.assign(sections)
 
-        self.paths.update({'Home': 'README.md', 'Tech-Stack': 'tech-stack/README.md', 'Books': 'books/README.md'})
+        self.paths.update({'Home': 'README.md', 'Tech-Stack': 'tech-stack/README.md'})
+        self.paths.update({name: f'{base}/README.md' for name, base in HUB_PAGES.items()})
         for c in categories:
             self.paths[c] = 'tech-stack/README.md'
         notes = self.claude_notes()
@@ -339,12 +342,12 @@ class Builder:
         # 첫 페이지 제목은 레포 README의 제목 대신 사이트 이름을 쓴다
         text = re.sub(r'\A\s*# [^\n]*\n', '', readme.read_text(encoding='utf-8'))
         self.page('README.md', SITE_TITLE, text, readme)
-        for name in ('Tech-Stack', 'Books'):
+        for name in ('Tech-Stack', *HUB_PAGES):
             text = '\n'.join(l for l in self.pages[name].split('\n') if not NAV_LINE.match(l))
             self.page(self.paths[name], name.replace('-', ' '), text)
 
-        summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)',
-                   '* [Tech Stack](tech-stack/README.md)', '* [Books](books/README.md)']
+        summary = ['# Table of contents', '', f'* [{SITE_TITLE}](README.md)', '* [Tech Stack](tech-stack/README.md)']
+        summary += [f'* [{name}]({base}/README.md)' for name, base in HUB_PAGES.items()]
         if notes:
             lines = [f'* [{title}]({posixpath.basename(path)})' for title, path, _ in notes]
             self.page('claude-code/README.md', 'Claude Code', '\n'.join(lines))
