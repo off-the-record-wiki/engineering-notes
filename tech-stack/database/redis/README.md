@@ -4,7 +4,6 @@
 
 * [Redis ‐ Redis](redis.md)
 * [Redis ‐ Redis Manual](redis-manual.md)
-* [Redis ‐ Redis Cache Strategy](redis-cache-strategy.md)
 * [Redis ‐ Redis Master-Slave](redis-master-slave.md)
 * [Redis - Redis Cluster Mode](redis-cluster-mode.md)
 * [Redis - Redis Cluster Example](redis-cluster-example.md)

@@ -115,7 +115,6 @@
   * [Spring ‐ Spring AOP Application](tech-stack/framework-library/spring/spring-aop-application.md)
   * [Spring - MyBatis](tech-stack/framework-library/spring/mybatis.md)
   * [Spring ‐ URL Encoding](tech-stack/framework-library/spring/url-encoding.md)
-  * [Spring - Cache Annotation](tech-stack/framework-library/spring/cache-annotation.md)
   * [Spring - Retry](tech-stack/framework-library/spring/retry.md)
 * [Spring Security](tech-stack/framework-library/spring-security/README.md)
   * [Spring Security - Initialization](tech-stack/framework-library/spring-security/initialization.md)
@@ -260,7 +259,6 @@
 * [Redis](tech-stack/database/redis/README.md)
   * [Redis ‐ Redis](tech-stack/database/redis/redis.md)
   * [Redis ‐ Redis Manual](tech-stack/database/redis/redis-manual.md)
-  * [Redis ‐ Redis Cache Strategy](tech-stack/database/redis/redis-cache-strategy.md)
   * [Redis ‐ Redis Master-Slave](tech-stack/database/redis/redis-master-slave.md)
   * [Redis - Redis Cluster Mode](tech-stack/database/redis/redis-cluster-mode.md)
   * [Redis - Redis Cluster Example](tech-stack/database/redis/redis-cluster-example.md)
@@ -304,6 +302,14 @@
   * [PostgreSQL - Advanced SQL Query Patterns](tech-stack/database/postgresql/advanced-sql-query-patterns.md)
   * [PostgreSQL - PostgreSQL-Specific Features, Indexing & Performance Optimization](tech-stack/database/postgresql/postgresql-specific-features-indexing-performance-optimization.md)
   * [PostgreSQL - Transactions, Concurrency & Why PostgreSQL in the AI Era](tech-stack/database/postgresql/transactions-concurrency-why-postgresql-in-the-ai-era.md)
+
+## Cache
+
+* [Cache Strategy](tech-stack/cache/cache-strategy/README.md)
+  * [Redis ‐ Redis Cache Strategy](tech-stack/cache/cache-strategy/redis-cache-strategy.md)
+* [Cache Problems](tech-stack/cache/cache-problems/README.md)
+* [Spring Cache](tech-stack/cache/spring-cache/README.md)
+  * [Spring - Cache Annotation](tech-stack/cache/spring-cache/cache-annotation.md)
 
 ## Messaging
 

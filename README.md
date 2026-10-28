@@ -18,6 +18,7 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Language](tech-stack/README.md) | Java, Kotlin |
 | [Framework & Library](tech-stack/README.md) | Spring, Spring Security, Spring Security OAuth2, Spring Batch, Spring AI, Spring Data JPA, Querydsl, Coroutine, Reactive Programming |
 | [Database](tech-stack/README.md) | Database, MySQL, Redis, Valkey, Elasticsearch, PostgreSQL |
+| [Cache](tech-stack/README.md) | Cache Strategy, Cache Problems, Spring Cache |
 | [Messaging](tech-stack/README.md) | Kafka |
 | [Network & Protocol](tech-stack/README.md) | HTTP, gRPC |
 | [DevOps](tech-stack/README.md) | Docker, Kubernetes, CI/CD, Nginx, Monitoring |

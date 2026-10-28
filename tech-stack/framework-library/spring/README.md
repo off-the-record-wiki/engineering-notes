@@ -38,5 +38,4 @@
 * [Spring ‐ Spring AOP Application](spring-aop-application.md)
 * [Spring - MyBatis](mybatis.md)
 * [Spring ‐ URL Encoding](url-encoding.md)
-* [Spring - Cache Annotation](cache-annotation.md)
 * [Spring - Retry](retry.md)

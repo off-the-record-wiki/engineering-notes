@@ -27,6 +27,12 @@
 - [Elasticsearch](database/elasticsearch/README.md)
 - [PostgreSQL](database/postgresql/README.md)
 
+## Cache
+
+- [Cache Strategy](cache/cache-strategy/README.md)
+- [Cache Problems](cache/cache-problems/README.md)
+- [Spring Cache](cache/spring-cache/README.md)
+
 ## Messaging
 
 - [Kafka](messaging/kafka/README.md)
