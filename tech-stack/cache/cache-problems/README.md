@@ -1,6 +1,6 @@
 # Cache Problems
 
-* [Cache - Cache Penetration](cache-penetration.md)
+* [Cache - Cache Penetration](https://github.com/off-the-record-wiki/engineering-notes/wiki/Cache-%E2%80%90-Cache-Penetration(Null-Object-Pattern))
 * Cache - Cache Stampede(Jitter)
 * Cache - Cache Stampede(Probabilistic Early Recomputation)
 * Cache - Cache Stampede(Request Collapsing)
