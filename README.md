@@ -18,6 +18,7 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Language](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Language) | Java, Kotlin |
 | [Framework & Library](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Framework-Library) | Spring, Spring Security, Spring Security OAuth2, Spring Batch, Spring AI, Spring Data JPA, Querydsl, Coroutine, Reactive Programming |
 | [Database](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Database) | Database, MySQL, Redis, Valkey, Elasticsearch, PostgreSQL |
+| [Cache](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Cache) | Cache Strategy, Cache Problems, Spring Cache |
 | [Messaging](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Messaging) | Kafka |
 | [Network & Protocol](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Network-Protocol) | HTTP, gRPC |
 | [DevOps](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-DevOps) | Docker, Kubernetes, CI/CD, Nginx, Monitoring |
