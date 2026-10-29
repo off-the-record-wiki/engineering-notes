@@ -1,6 +1,6 @@
 # Claude Code
 
-* [Claude Code - Stop asking, start harnessing](https://github.com/off-the-record-wiki/engineering-notes/wiki/Claude-Code-%E2%80%90-Stop-asking,-start-harnessing0
+* [Claude Code - Stop asking, start harnessing](stop-asking-start-harnessing.md)
 * Claude Code - CLAUDE.md: The Blueprint of Harness Engineering
 * Claude Code - Design Patterns for Quality-Assured AI Agents
 * Claude Code - Token Optimization for AI Agents: Drivers and Strategies

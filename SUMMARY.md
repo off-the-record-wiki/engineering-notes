@@ -496,6 +496,7 @@
 
 * [Harness Engineering](tech-stack/ai-engineering/harness-engineering/README.md)
 * [Claude Code](tech-stack/ai-engineering/claude-code/README.md)
+  * [Claude Code - Stop asking, start harnessing](tech-stack/ai-engineering/claude-code/stop-asking-start-harnessing.md)
 
 ## Books
 
