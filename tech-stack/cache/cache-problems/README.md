@@ -1,6 +1,5 @@
 # Cache Problems
 
 * [Cache - Cache Penetration](cache-penetration.md)
-* Cache - Cache Stampede
+* [Cache - Cache Stampede](cache-stampede.md)
 * Cache - Hot Key
-* Cache - Hot Key(Application Level Sharding/Replication)
