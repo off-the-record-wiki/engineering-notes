@@ -9,7 +9,6 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 - [🛠 Tech Stack](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Stack)
 - [📚 Books](https://github.com/off-the-record-wiki/engineering-notes/wiki/Books)
 - [📝 Retrospective](https://github.com/off-the-record-wiki/engineering-notes/wiki/Retrospective)
-- [🤖 Claude Code](claude/)
 
 ## Topics
 
@@ -26,4 +25,4 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Architecture & Design](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Architecture-Design) | MSA, Design Pattern, Clean Spring |
 | [Testing](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Testing) | Java Test, Load Testing, TDD |
 | [Distributed Search and Analytics Engine](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Distributed-Search-Analytics-Engine) | OpenSearch |
-| [AI Engineering](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-AI-Engineering) | Harness Engineering |
+| [AI Engineering](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-AI-Engineering) | Harness Engineering, Claude Code |
