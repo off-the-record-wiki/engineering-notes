@@ -1,4 +1,4 @@
-# Sub Agent
+# Claude Code - Sub Agent
 
 ### 자주 쓰이는 서브에이전트 패턴
 

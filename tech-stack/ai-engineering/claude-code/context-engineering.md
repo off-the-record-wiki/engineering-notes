@@ -1,4 +1,4 @@
-# Appendix 1. Context Engineering
+# Claude Code - Context Engineering
 
 ### CLAUDE.md 작동 원리
 

@@ -1,4 +1,4 @@
-# Token Optimization
+# Claude Code - Token Optimization
 
 ### Claude Code 세션의 가치를 극대화하는 방법
 

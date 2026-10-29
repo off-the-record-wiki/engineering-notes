@@ -1,4 +1,4 @@
-# Hooks
+# Claude Code - Hooks
 
 ### Hooks
 

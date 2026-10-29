@@ -9,3 +9,13 @@
 * Claude Code - Mitigating Self-Preference Bias in AI Using Subagents
 * Claude Code - Advanced Multi-Agent Orchestration: Task Scheduling and BFT-Based Consensus Patterns
 * Claude Code - Course Wrap-Up: Building and Deploying Custom Plugins and Skills
+* [Claude Code - Token Optimization](token-optimization.md)
+* [Claude Code - Configuration Files and Memory Management](configuration-files-and-memory-management.md)
+* [Claude Code - Using MCP](using-mcp.md)
+* [Claude Code - Prompt Engineering](prompt-engineering.md)
+* [Claude Code - Sub Agent](sub-agent.md)
+* [Claude Code - Hooks](hooks.md)
+* [Claude Code - MCP Servers](mcp-servers.md)
+* [Claude Code - Beyond Prompts: Why Context Engineering Matters](beyond-prompts-why-context-engineering-matters.md)
+* [Claude Code - Context Engineering](context-engineering.md)
+* [Claude Code - Context Engineering for Large-Scale Projects](context-engineering-for-large-scale-projects.md)

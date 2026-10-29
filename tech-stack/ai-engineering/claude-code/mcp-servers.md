@@ -1,4 +1,4 @@
-# MCP Servers
+# Claude Code - MCP Servers
 
 ### MCP Servers
 

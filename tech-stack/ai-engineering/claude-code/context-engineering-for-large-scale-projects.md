@@ -1,4 +1,4 @@
-# Appendix 2. Context Engineering for Large-Scale Projects
+# Claude Code - Context Engineering for Large-Scale Projects
 
 ### 대규모 프로젝트 컨텍스트 엔지니어링: `.claude/rules/` 조건부 규칙
 

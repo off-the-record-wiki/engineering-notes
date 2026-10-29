@@ -1,4 +1,4 @@
-# Prompt Engineering
+# Claude Code - Prompt Engineering
 
 ### 클로드에게 역할 부여하기 (Give Claude a role)
 

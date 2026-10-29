@@ -1,4 +1,4 @@
-# Configuration Files and Memory Management
+# Claude Code - Configuration Files and Memory Management
 
 ### settings.json
 

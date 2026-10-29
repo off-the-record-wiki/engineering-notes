@@ -4,7 +4,6 @@
 * [Tech Stack](tech-stack/README.md)
 * [Books](books/README.md)
 * [Retrospective](retrospective/README.md)
-* [Claude Code](claude-code/README.md)
 
 ## Language
 
@@ -495,8 +494,19 @@
 ## AI Engineering
 
 * [Harness Engineering](tech-stack/ai-engineering/harness-engineering/README.md)
+  * [Harness Engineering - Designing a Harness for Claude Code](tech-stack/ai-engineering/harness-engineering/designing-a-harness-for-claude-code.md)
 * [Claude Code](tech-stack/ai-engineering/claude-code/README.md)
   * [Claude Code - Stop asking, start harnessing](tech-stack/ai-engineering/claude-code/stop-asking-start-harnessing.md)
+  * [Claude Code - Token Optimization](tech-stack/ai-engineering/claude-code/token-optimization.md)
+  * [Claude Code - Configuration Files and Memory Management](tech-stack/ai-engineering/claude-code/configuration-files-and-memory-management.md)
+  * [Claude Code - Using MCP](tech-stack/ai-engineering/claude-code/using-mcp.md)
+  * [Claude Code - Prompt Engineering](tech-stack/ai-engineering/claude-code/prompt-engineering.md)
+  * [Claude Code - Sub Agent](tech-stack/ai-engineering/claude-code/sub-agent.md)
+  * [Claude Code - Hooks](tech-stack/ai-engineering/claude-code/hooks.md)
+  * [Claude Code - MCP Servers](tech-stack/ai-engineering/claude-code/mcp-servers.md)
+  * [Claude Code - Beyond Prompts: Why Context Engineering Matters](tech-stack/ai-engineering/claude-code/beyond-prompts-why-context-engineering-matters.md)
+  * [Claude Code - Context Engineering](tech-stack/ai-engineering/claude-code/context-engineering.md)
+  * [Claude Code - Context Engineering for Large-Scale Projects](tech-stack/ai-engineering/claude-code/context-engineering-for-large-scale-projects.md)
 
 ## Books
 
@@ -762,17 +772,3 @@
 
 * [Conference](retrospective/conference/README.md)
   * [Retrospective - Datadog Summit Seoul 2026](retrospective/conference/datadog-summit-seoul-2026.md)
-
-## Claude Code
-
-* [Token Optimization](claude-code/token-optimization.md)
-* [Configuration Files and Memory Management](claude-code/configuration-files-and-memory-management.md)
-* [Using MCP](claude-code/using-mcp.md)
-* [Prompt Engineering](claude-code/prompt-engineering.md)
-* [Sub Agent](claude-code/sub-agent.md)
-* [Hooks](claude-code/hooks.md)
-* [MCP Servers](claude-code/mcp-servers.md)
-* [Beyond Prompts: Why Context Engineering Matters](claude-code/beyond-prompts-why-context-engineering-matters.md)
-* [Appendix 1. Context Engineering](claude-code/appendix-1-context-engineering.md)
-* [Appendix 2. Context Engineering for Large-Scale Projects](claude-code/appendix-2-context-engineering-for-large-scale-projects.md)
-* [Appendix 3. Harness Engineering](claude-code/appendix-3-harness-engineering.md)

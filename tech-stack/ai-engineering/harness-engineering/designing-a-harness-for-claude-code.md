@@ -1,4 +1,4 @@
-# Appendix 3. Harness Engineering
+# Harness Engineering - Designing a Harness for Claude Code
 
 ### Harness Engineering
 

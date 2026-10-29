@@ -1,4 +1,4 @@
-# Beyond Prompts: Why Context Engineering Matters
+# Claude Code - Beyond Prompts: Why Context Engineering Matters
 
 ### Beyond Prompts: Why Context Engineering Matters
 
