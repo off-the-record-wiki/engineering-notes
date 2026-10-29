@@ -310,6 +310,7 @@
 * [Cache Problems](tech-stack/cache/cache-problems/README.md)
   * [Cache - Cache Penetration](tech-stack/cache/cache-problems/cache-penetration.md)
   * [Cache - Cache Stampede](tech-stack/cache/cache-problems/cache-stampede.md)
+  * [Cache - Hot Key](tech-stack/cache/cache-problems/hot-key.md)
 * [Spring Cache](tech-stack/cache/spring-cache/README.md)
   * [Spring - Cache Annotation](tech-stack/cache/spring-cache/cache-annotation.md)
 
