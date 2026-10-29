@@ -495,6 +495,7 @@
 ## AI Engineering
 
 * [Harness Engineering](tech-stack/ai-engineering/harness-engineering/README.md)
+* [Claude Code](tech-stack/ai-engineering/claude-code/README.md)
 
 ## Books
 
