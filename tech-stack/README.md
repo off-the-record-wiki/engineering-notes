@@ -74,3 +74,4 @@
 ## AI Engineering
 
 - [Harness Engineering](ai-engineering/harness-engineering/README.md)
+- [Claude Code](ai-engineering/claude-code/README.md)
