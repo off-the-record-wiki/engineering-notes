@@ -500,6 +500,7 @@
   * [Claude Code - CLAUDE.md: The Blueprint of Harness Engineering](tech-stack/ai-engineering/claude-code/claude-md-the-blueprint-of-harness-engineering.md)
   * [Claude Code - Design Patterns for Quality-Assured AI Agents](tech-stack/ai-engineering/claude-code/design-patterns-for-quality-assured-ai-agents.md)
   * [Claude Code - Token Optimization for AI Agents: Drivers and Strategies](tech-stack/ai-engineering/claude-code/token-optimization-for-ai-agents-drivers-and-strategies.md)
+  * [Claude Code - Enforcing Claude Code Compliance via Harness Engineering](tech-stack/ai-engineering/claude-code/enforcing-claude-code-compliance-via-harness-engineering.md)
   * [Claude Code - Token Optimization](tech-stack/ai-engineering/claude-code/token-optimization.md)
   * [Claude Code - Configuration Files and Memory Management](tech-stack/ai-engineering/claude-code/configuration-files-and-memory-management.md)
   * [Claude Code - Using MCP](tech-stack/ai-engineering/claude-code/using-mcp.md)

@@ -4,7 +4,7 @@
 * [Claude Code - CLAUDE.md: The Blueprint of Harness Engineering](claude-md-the-blueprint-of-harness-engineering.md)
 * [Claude Code - Design Patterns for Quality-Assured AI Agents](design-patterns-for-quality-assured-ai-agents.md)
 * [Claude Code - Token Optimization for AI Agents: Drivers and Strategies](token-optimization-for-ai-agents-drivers-and-strategies.md)
-* Claude Code - Enforcing Claude Code Compliance via Harness Engineering
+* [Claude Code - Enforcing Claude Code Compliance via Harness Engineering](enforcing-claude-code-compliance-via-harness-engineering.md)
 * Claude Code - Defending the Agent: Understanding Indirect Injection and Prompt Exploits
 * Claude Code - Mitigating Self-Preference Bias in AI Using Subagents
 * Claude Code - Advanced Multi-Agent Orchestration: Task Scheduling and BFT-Based Consensus Patterns
