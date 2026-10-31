@@ -11,6 +11,7 @@
 
 import argparse
 import hashlib
+import os
 import posixpath
 import re
 import shutil
@@ -370,8 +371,13 @@ def main():
     pages = sum(1 for p in builder.files if p.endswith('.md'))
     skipped = [p for p in builder.pages if p not in builder.paths and p != '_Sidebar']
     print(f'wiki {builder.wiki_sha[:7]}: 페이지 {pages}개 생성, 목차에 없는 wiki 페이지 {len(skipped)}개 제외')
+    # GitHub Actions에서는 경고 명령으로 내보내 실행 요약 화면에 경고로 보이게 한다
+    in_actions = os.environ.get('GITHUB_ACTIONS') == 'true'
     for w in dict.fromkeys(builder.warnings):
-        print(f'warning: {w}', file=sys.stderr)
+        if in_actions:
+            print(f'::warning title=build_gitbook::{w}')
+        else:
+            print(f'warning: {w}', file=sys.stderr)
 
 
 if __name__ == '__main__':

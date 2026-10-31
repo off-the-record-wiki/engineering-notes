@@ -7,6 +7,7 @@ on:
     paths:
       - README.md
       - scripts/build_gitbook.py
+      - scripts/test_build_gitbook.py
       - .github/workflows/gitbook.yml
   schedule:
     - cron: '17 * * * *'
@@ -31,6 +32,9 @@ jobs:
             "https://github.com/${GITHUB_REPOSITORY}.wiki.git" "$RUNNER_TEMP/wiki"
           git -C "$RUNNER_TEMP/wiki" sparse-checkout set --no-cone '/*.md'
           git -C "$RUNNER_TEMP/wiki" checkout -q
+
+      - name: Test build script
+        run: python3 -m unittest discover -s scripts
 
       - name: Build
         run: >
