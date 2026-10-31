@@ -55,6 +55,25 @@ Tasklet 은 POJO 를 주입받아 getter 로 쓴다. 주입되는 것은 스코�
 ./gradlew bootRun --args='--spring.batch.job.name=pojoJob reportName=daily reportDate=2026-10-31,java.time.LocalDate pageSize=50,java.lang.Integer'
 ```
 
+### directAccessJob
+
+`@Value` 주입 없이 Tasklet 안에서 `JobParameters` 를 코드로 꺼내 쓴다. `@StepScope` 도 필요 없다.
+
+```java
+JobParameters parameters = chunkContext.getStepContext().getStepExecution().getJobParameters();
+String userName = parameters.getString("userName");
+LocalDate targetDate = parameters.getLocalDate("targetDate");
+Long limit = parameters.getLong("limit", 10L);
+```
+
+- 스코프 없는 싱글턴 Tasklet 이어도 실행마다 그 실행의 `StepExecution` 에서 꺼내므로 값이 섞이지 않는다.
+- 타입별 getter 는 넘긴 타입과 정확히 맞아야 한다. `getInteger` 는 없고, `limit=5,java.lang.Integer` 로 넘기면 `getLong` 이 `Key limit is not of type Long` 으로 실패해 Job 이 `FAILED` 가 된다. 그래서 `limit` 은 `java.lang.Long` 으로 넘긴다.
+- `getLong(key, 기본값)` 처럼 기본값을 받는 오버로드는 키가 없을 때만 기본값을 쓴다. `limit` 을 생략하면 `10` 이다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=directAccessJob userName=kim targetDate=2026-10-31,java.time.LocalDate limit=5,java.lang.Long'
+```
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
