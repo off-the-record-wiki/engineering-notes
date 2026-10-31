@@ -226,6 +226,42 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 같은 `group` 으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `group` 을 바꾸거나 `run` 같은 파라미터를 더해 실행한다.
 
+### promotionJob
+
+`executionContextJob` 은 Tasklet 이 넣은 키 하나를 승격한다. `promotionJob` 은 청크 Step 이 청크마다 누적한 집계값을 승격해 다음 Step 이 읽는다.
+
+| Step | 하는 일 |
+| --- | --- |
+| `aggregateStep` | `amounts`(`;` 구분)를 2건씩 읽고, `OrderTotalWriter` 가 Step 컨텍스트의 `orderCount`·`totalAmount` 에 누적. `ExecutionContextPromotionListener` 가 두 키를 Job 컨텍스트로 옮긴다 |
+| `reportStep` | `@Value("#{jobExecutionContext['orderCount']}")` 등으로 받아 `report orderCount=3, totalAmount=4000` 출력 |
+
+- `OrderTotalWriter` 는 `@BeforeStep` 으로 받은 `StepExecution` 의 Step 컨텍스트에만 쓴다. Job 컨텍스트로 옮기는 일은 승격 리스너가 맡으므로 Writer 는 Job 컨텍스트를 모른다. `.writer(...)` 에 넘긴 Writer 는 리스너 어노테이션이 있으면 빌더가 리스너로 자동 등록하므로(`ChunkOrientedStepBuilder.addAsStreamAndListener`) `.listener(...)` 에 따로 넣지 않는다. 상태를 가지므로 `@StepScope` 로 Step 실행마다 새로 만든다.
+- 음수 금액이 있으면 Writer 가 예외를 던져 `aggregateStep` 이 `FAILED` 가 된다. 승격은 종료 코드가 `COMPLETED` 일 때만 일어나므로 Job 컨텍스트에는 값이 없고, `reportStep` 은 실행되지 않는다. 저장된 Step 컨텍스트에는 커밋된 청크까지의 값(`1000;2500;-1` → `orderCount=2`, `totalAmount=3500`)이 남는다.
+- 기본 표기법(`이름=값,타입`)은 쉼표를 타입 구분자로 쓰므로 목록은 `;` 로 나눈다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=promotionJob amounts=1000;2500;500'
+```
+
+### promotionRuleJob
+
+승격 리스너의 `statuses`·`strict` 설정이 어떻게 동작하는지 보인다.
+
+| Step | 리스너 설정 | 결과 |
+| --- | --- | --- |
+| `statusStep` | 종료 코드를 `EMPTY` 로 설정. 기본 리스너(`defaultKey`)와 `setStatuses({"COMPLETED", "EMPTY"})` 리스너(`emptyAllowedKey`) | `defaultKey` 는 승격되지 않고 `emptyAllowedKey` 만 승격 |
+| `strictStep` | 키를 넣지 않고 `setStrict(true)`(`strictKey`) | `IllegalArgumentException` 이 로그로만 남고 Step 은 `COMPLETED` |
+| `ruleCheckStep` | — | `defaultKey=null, emptyAllowedKey=promoted, strictKey=null` 출력 |
+
+- `statuses` 는 BatchStatus 가 아니라 종료 코드(`ExitStatus`)와 비교한다. `contribution.setExitStatus(new ExitStatus("EMPTY"))` 처럼 커스텀 종료 코드를 쓰는 Step 은 기본 설정으로는 아무 것도 승격하지 않는다. 패턴(`*`, `?`)도 쓸 수 있다.
+- `AbstractStep` 은 `afterStep` 에서 난 예외를 `Exception in afterStep callback` 로그로만 남기고 Step 상태를 바꾸지 않는다. 그래서 `strict` 는 Step 을 실패시키지 못하고, 다음 Step 이 `null` 을 받는다. 필수 값이면 다음 Step 에서 직접 확인해야 한다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=promotionRuleJob run=1'
+```
+
+같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
