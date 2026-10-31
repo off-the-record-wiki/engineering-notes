@@ -315,3 +315,81 @@ public class DynamicDataJobConfig {
 * `ExecutionContextPromotionListener`를 사용하면 번거로운 데이터 설정 작업 없이도 손쉽게 스텝 간 데이터 공유가 가능하다.
 
 #### ExecutionContextPromotionListener를 활용한 Step 간 데이터 공유
+
+* `ExecutionContextPromotionListener`는 Step 수준 `ExecutionContext`의 데이터를 Job 수준 `ExecutionContext`로 등록시켜주는 `StepExecutionListener`의 구현체다.
+* Spring Batch에서는 Step 수준의 `ExecutionContext` 데이터를 Job 수준의 `ExecutionContext`로 옮기는 과정을 승격(Promote)이라 부른다. 그래서 이 리스너의 이름도 `ExecutionContextPromotion` + `Listener`인 것이다. 이 리스너는 `StepExecutionListener`의 `afterStep()` 메서드를 오버라이드하여 승격 작업을 수행한다.
+
+```java
+@Configuration
+public class PromotionRuleJobConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(PromotionRuleJobConfig.class);
+
+    @Bean
+    public Job promotionRuleJob(JobRepository jobRepository, Step statusStep, Step strictStep, Step ruleCheckStep) {
+        return new JobBuilder("promotionRuleJob", jobRepository)
+                .start(statusStep)
+                .next(strictStep)
+                .next(ruleCheckStep)
+                .build();
+    }
+
+    @Bean
+    public Step statusStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        ExecutionContextPromotionListener defaultStatuses = promotionListener("defaultKey");
+        ExecutionContextPromotionListener emptyAllowed = promotionListener("emptyAllowedKey");
+        emptyAllowed.setStatuses(new String[] {ExitStatus.COMPLETED.getExitCode(), "EMPTY"});
+
+        return new StepBuilder("statusStep", jobRepository)
+                .tasklet(
+                        (contribution, chunkContext) -> {
+                            ExecutionContext stepContext = contribution.getStepExecution().getExecutionContext();
+                            stepContext.putString("defaultKey", "promoted");
+                            stepContext.putString("emptyAllowedKey", "promoted");
+                            contribution.setExitStatus(new ExitStatus("EMPTY"));
+                            return RepeatStatus.FINISHED;
+                        },
+                        transactionManager)
+                .listener(defaultStatuses)
+                .listener(emptyAllowed)
+                .build();
+    }
+
+    @Bean
+    public Step strictStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        ExecutionContextPromotionListener strict = promotionListener("strictKey");
+        strict.setStrict(true);
+
+        return new StepBuilder("strictStep", jobRepository)
+                .tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED, transactionManager)
+                .listener(strict)
+                .build();
+    }
+
+    @Bean
+    public Step ruleCheckStep(
+            JobRepository jobRepository, PlatformTransactionManager transactionManager, Tasklet ruleCheckTasklet) {
+        return new StepBuilder("ruleCheckStep", jobRepository)
+                .tasklet(ruleCheckTasklet, transactionManager)
+                .build();
+    }
+
+    @Bean
+    @StepScope
+    public Tasklet ruleCheckTasklet(
+            @Value("#{jobExecutionContext['defaultKey']}") String defaultKey,
+            @Value("#{jobExecutionContext['emptyAllowedKey']}") String emptyAllowedKey,
+            @Value("#{jobExecutionContext['strictKey']}") String strictKey) {
+        return (contribution, chunkContext) -> {
+            log.info("defaultKey={}, emptyAllowedKey={}, strictKey={}", defaultKey, emptyAllowedKey, strictKey);
+            return RepeatStatus.FINISHED;
+        };
+    }
+
+    private ExecutionContextPromotionListener promotionListener(String key) {
+        ExecutionContextPromotionListener listener = new ExecutionContextPromotionListener();
+        listener.setKeys(new String[] {key});
+        return listener;
+    }
+}
+```
