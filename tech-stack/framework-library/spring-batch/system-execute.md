@@ -2,9 +2,9 @@
 
 #### 청크 지향 처리
 
-* 데이터 읽기(ItemReader): 데이터를 하나씩 읽어들인다. Chunk 크기만큼 반복 실행된다.
-* 데이터 가공(ItemProcessor): 읽어들인 데이터를 원하는대로 가공한다. 필요없는 놈들은 여기서 걸러진다.
-* 데이터 저장(ItemWriter): Chunk 단위로 모아진 데이터를 한 번에 처리한다.
+* 데이터 읽기(`ItemReader`): 데이터를 하나씩 읽어들인다. Chunk 크기만큼 반복 실행된다.
+* 데이터 가공(`ItemProcessor`): 읽어들인 데이터를 원하는대로 가공한다. 필요없는 놈들은 여기서 걸러진다.
+* 데이터 저장(`ItemWriter`): Chunk 단위로 모아진 데이터를 한 번에 처리한다.
 
 #### 파일 기반 배치 처리
 
@@ -18,14 +18,14 @@
 
 #### FlatFileItemReader
 
-* FlatFileItemReader의 `read()` 메서드의 핵심 동작은 크게 두 단계로 이루어진다.
+* `FlatFileItemReader`의 `read()` 메서드의 핵심 동작은 크게 두 단계로 이루어진다.
   * 파일에서 한 줄을 읽어온다.
   * 읽어온 한 줄의 문자열을 우리가 사용할 객체로 변환해 리턴한다.
 * 파일에서 읽어온 한 줄의 데이터는 `LineMapper`가 변환한다. `LineMapper`는 파일에서 읽어온 한 줄의 텍스트를 도메인 객체로 매핑한다.
 
 #### DefaultLineMapper
 
-* DefaultLineMapper의 동작은 크게 두 단계로 이뤄진다.
+* `DefaultLineMapper`의 동작은 크게 두 단계로 이뤄진다.
   * 토큰화(Tokenization) : 하나의 문자열 라인을 토큰 단위로 분리한다.
   * 객체 매핑 작전 : 분리된 토큰들을 도메인 객체의 프로퍼티에 매핑한다.
 
@@ -37,12 +37,12 @@
 * `DelimitedLineTokenizer` : 쉼표(,)와 같은 구분자로 구분된 데이터를 토큰화한다.
 * `FixedLengthTokenizer` : 고정 길이로 구분된 데이터를 토큰화한다.
 
-2. 객체 매핑 : 토큰화된 필드들(FieldSet)을 객체에 매핑하기
+2. 객체 매핑 : 토큰화된 필드들(`FieldSet`)을 객체에 매핑하기
 
 ![](https://github.com/user-attachments/assets/4f979542-425a-4a2c-9816-f46f76a7df61)
 
 * `FieldSet`을 객체로 매핑하는 일은 `DefaultLineMapper`의 또 다른 부하, `FieldSetMapper`가 담당한다.
-* `FieldSetMapper`의 `mapFieldSet()` 메서드는 `LineTokenizer`가 만든 `FieldSet` 객체를 입력 받아 우리가 원하는 자바 객체(SystemFailure)로 최종 변환한다.
+* `FieldSetMapper`의 `mapFieldSet()` 메서드는 `LineTokenizer`가 만든 `FieldSet` 객체를 입력 받아 우리가 원하는 자바 객체(`SystemFailure`)로 최종 변환한다.
 * 별도 설정이 없다면 `BeanWrapperFieldSetMapper`가 기본 `FieldSetMapper`로 사용된다.
 
 ```java
@@ -53,8 +53,8 @@ public interface FieldSetMapper<T> {
 
 #### [FlatFileItemReader 구성](https://docs.spring.io/spring-batch/reference/readers-and-writers/flat-files/file-item-reader.html)
 
-* `name()` : ItemReader의 식별자 지정. 
-* `resource()` : 타겟 설정. 읽어들일 Resource를 지정한다.
+* `name()` : `ItemReader`의 식별자 지정. 
+* `resource()` : 타겟 설정. 읽어들일 `Resource`를 지정한다.
 * `delimited()` : 파일 형식 지정.
 * `.delimiter()` : 구분자 지정. 읽어들일 파일이 구분자로 분리된 형식임을 설정했으니 이제 어떤 문자를 구분자로 사용할지 지정하는 역할을 한다.
 * `.names()` : 프로퍼티 매핑. `FieldSet`의 `names` 필드에 사용할 객체의 프로퍼티 이름을 전달한다. 
@@ -72,7 +72,7 @@ public interface FieldSetMapper<T> {
 
 #### RegexLineTokenizer
 
-* 구조가 복잡하고 라인의 길이도 가변적인 경우, 정규식을 활용한 RegexLineTokenizer가 유용한 도구가 된다.
+* 구조가 복잡하고 라인의 길이도 가변적인 경우, 정규식을 활용한 `RegexLineTokenizer`가 유용한 도구가 된다.
 
 ```java
 tokenizer.setRegex("\\[\\w+\\]\\[Thread-(\\d+)\\]\\[CPU: \\d+%\\] (.+)");
@@ -97,15 +97,15 @@ tokenizer.setRegex("\\[\\w+\\]\\[Thread-(\\d+)\\]\\[CPU: \\d+%\\] (.+)");
 
 ![](https://github.com/user-attachments/assets/499e8cbf-0916-4cf7-85ca-410823200f62)
 
-* `MultiResourceItemReader`는 여러 파일을 순차적으로 읽을 수 있게 해주는 ItemReader 구현체이다.
-* `resources()` : `resources()` 메서드에 읽을 대상 Resource의 목록을 배열 형태로 구성한다.
-* `delegate()` : 실제 데이터 읽기를 수행할 위임 대상 ItemReader를 `delegate()` 메서드에 구성한다.
+* `MultiResourceItemReader`는 여러 파일을 순차적으로 읽을 수 있게 해주는 `ItemReader` 구현체이다.
+* `resources()` : `resources()` 메서드에 읽을 대상 `Resource`의 목록을 배열 형태로 구성한다.
+* `delegate()` : 실제 데이터 읽기를 수행할 위임 대상 `ItemReader`를 `delegate()` 메서드에 구성한다.
 
 #### FlatFileItemWriter
 
 ![](https://github.com/user-attachments/assets/5233bbba-8d23-434d-a34b-57e5fc1854c6)
 
-1. FieldExtractor(필드 추출)
+1. `FieldExtractor`(필드 추출)
 
 * `FieldExtractor`는 도메인 객체에서 필드를 추출하는 역할을 한다.
 
@@ -117,7 +117,7 @@ public interface FieldExtractor<T> {
 
 ![](https://github.com/user-attachments/assets/45a88e03-c445-498c-8dcf-394a49ca56c2)
 
-2. LineAggregator(문자열 결합)
+2. `LineAggregator`(문자열 결합)
 
 * `LineAggregator`는 `FieldExtractor`에서 추출한 데이터들을 하나의 문자열로 결합하는 역할을 맡는다.
 * 구분자 기반 형식의 파일을 읽을 때 `DelimitedLineTokenizer`가 사용되었던 것처럼 구분자 기반 형식으로 파일을 쓸 때(문자열로 결합할 때)는 `DelimitedLineAggregator`가 사용된다. 또한 고정 길이 형식을 포함한 다른 형식으로 파일을 쓸 때(문자열로 결합할 때)는 `FormatterLineAggregator`를 사용할 수 있다.

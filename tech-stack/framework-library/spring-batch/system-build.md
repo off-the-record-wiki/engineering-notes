@@ -24,7 +24,7 @@ public interface Tasklet {
 #### RepeatStatus의 두 얼굴: FINISHED vs CONTINUABLE
 
 * `RepeatStatus.FINISHED` : Step의 처리가 성공이든 실패든 상관없이 해당 Step이 완료되었음을 의미한다. 더 이상 반복할 필요 없이 다음 스텝으로 넘어가며 배치 잡은 차근차근 진행된다.
-* `RepeatStatus.CONTINUABLE` : Tasklet의 `execute()`메서드가 추가로 더 실행되어야 함을 Spring Batch Step에 알리는 신호이다. Step의 종료는 보류되고 필요한 만큼 `execute()`메서드가 반복 호출된다.
+* `RepeatStatus.CONTINUABLE` : `Tasklet`의 `execute()`메서드가 추가로 더 실행되어야 함을 Spring Batch Step에 알리는 신호이다. Step의 종료는 보류되고 필요한 만큼 `execute()`메서드가 반복 호출된다.
 
 #### RepeatStatus가 필요한 이유: 짧은 트랜잭션을 활용한 안전한 배치 처리
 
@@ -99,9 +99,9 @@ public interface ItemWriter<T> {
 
 #### 청크 지향 처리의 흐름
 
-* 데이터 읽기 : ItemReader는 데이터 소스에서 하나씩 데이터를 읽어온다. `read()` 메서드가 호출될 때마다 데이터를 순차적으로 반환하며, 청크 크기만큼 데이터를 읽어야 끝난다. 다시 말해, 청크 크기가 10이면 `read()`가 10번 호출되어 하나의 청크가 생성된다.
-* 데이터 깎기 : ItemProcessor는 ItemReader가 읽어온 청크의 각 아이템 하나씩을 처리한다.
-* 데이터 쓰기 : ItemProcessor의 처리까지 완료되었다면 이제 청크를 실제로 쓸 차례다. ItemReader / ItemProcessor가 각각의 아이템을 하나씩 처리하는 것과 달리 ItemWriter는 청크 전체를 한 번에 입력 받는다.
+* 데이터 읽기 : `ItemReader`는 데이터 소스에서 하나씩 데이터를 읽어온다. `read()` 메서드가 호출될 때마다 데이터를 순차적으로 반환하며, 청크 크기만큼 데이터를 읽어야 끝난다. 다시 말해, 청크 크기가 10이면 `read()`가 10번 호출되어 하나의 청크가 생성된다.
+* 데이터 깎기 : `ItemProcessor`는 `ItemReader`가 읽어온 청크의 각 아이템 하나씩을 처리한다.
+* 데이터 쓰기 : `ItemProcessor`의 처리까지 완료되었다면 이제 청크를 실제로 쓸 차례다. `ItemReader` / `ItemProcessor`가 각각의 아이템을 하나씩 처리하는 것과 달리 `ItemWriter`는 청크 전체를 한 번에 입력 받는다.
 
 #### 청크 처리와 트랜잭션
 
@@ -110,12 +110,12 @@ public interface ItemWriter<T> {
 
 #### JobParameters란?
 
-* JobParameters는 배치 작업에 전달되는 입력 값이다. 이 값은 배치가 어떤 조건에서 어떤 데이터를 다룰지를 결정한다.
+* `JobParameters`는 배치 작업에 전달되는 입력 값이다. 이 값은 배치가 어떤 조건에서 어떤 데이터를 다룰지를 결정한다.
 
 #### 프로퍼티와 JobParameters의 결정적 차이
 
 * 입력값 동적 변경
-* 메타데이터 : JobParameters의 모든 값을 메타데이터 저장소에 기록하며 이를 통해 Job 인스턴스 식별 및 재시작 처리, Job 실행 이력 추적 등 중요한 기능을 제공한다.
+* 메타데이터 : `JobParameters`의 모든 값을 메타데이터 저장소에 기록하며 이를 통해 Job 인스턴스 식별 및 재시작 처리, Job 실행 이력 추적 등 중요한 기능을 제공한다.
 
 #### JobParameters 전달하기 - 커맨드라인에서 잡 파라미터 전달하기
 
@@ -126,7 +126,7 @@ public interface ItemWriter<T> {
 * `parameterName` : 배치 Job에서 파라미터를 찾을 때 사용할 Key 값이다. 이 이름으로 Job 내에서 파라미터에 접근할 수 있다.
 * `parameterValue` : 파라미터 실제 값
 * `parameterType` : 파라미터의 타입(`java.lang.String`)과 같은 fully qualified name 사용. 이 파라미터 타입을 명시하지 않을 경우 Spring Batch는 해당 파라미터를 `String` 타입으로 가정한다.
-* `identificationFlag` : Spring Batch에게 해당 파라미터가 JobInstance 식별(identification)에 사용될 파라미터인지 여부를 전달하는 값으로 `true`이면 식별에 사용된다는 의미다. 이 플래그는 생략 가능하며 생략할 경우 `true`로 설정된다.
+* `identificationFlag` : Spring Batch에게 해당 파라미터가 `JobInstance` 식별(identification)에 사용될 파라미터인지 여부를 전달하는 값으로 `true`이면 식별에 사용된다는 의미다. 이 플래그는 생략 가능하며 생략할 경우 `true`로 설정된다.
 
 #### 다양한 타입의 Job 파라미터 - 기본 데이터 타입 파라미터 전달
 
@@ -464,8 +464,8 @@ class JsonParameterTests {
 
 ![](https://github.com/user-attachments/assets/86acf670-5918-4633-acd9-08c55cde01f5)
 
-* Spring Batch에서는 JobExecution이라는 곳에 Job의 실행 정보를 쥐고 있다. 결국 Step 안에서 JobParameter를 찾아내려면 이 JobExecution을 통해서 찾아야 한다.
-* JobExecution은 Job의 실행과 관련된 모든 정보를 담고 있는 객체다. Job 실행 시점에 생성되어 잡의 실행 상태, JobParameters, 실행 결과 등을 포함한다.
+* Spring Batch에서는 `JobExecution`이라는 곳에 Job의 실행 정보를 쥐고 있다. 결국 Step 안에서 `JobParameter`를 찾아내려면 이 `JobExecution`을 통해서 찾아야 한다.
+* `JobExecution`은 Job의 실행과 관련된 모든 정보를 담고 있는 객체다. Job 실행 시점에 생성되어 잡의 실행 상태, `JobParameters`, 실행 결과 등을 포함한다.
 
 ```java
 @SpringBatchTest
@@ -555,7 +555,7 @@ class DirectAccessJobTests {
 
 #### JobParametersValidator
 
-* JobParametersValidator를 사용하면 잘못된 파라미터가 들어오는 순간 즉시 차단할 수 있다.
+* `JobParametersValidator`를 사용하면 잘못된 파라미터가 들어오는 순간 즉시 차단할 수 있다.
 
 ```java
 @Configuration
@@ -768,11 +768,11 @@ public @interface JobScope {}
 * Spring Batch Step에 `@StepScope`를 달면 Step 빈 생성과 스코프 활성화 시점이 맞지 않아 오류가 발생한다.
 * Spring Batch는 Step 실행 전 메타데이터 관리를 위해 Step 빈에 접근한다. 문제는 이 시점에는 Step이 실행되지 않았기 때문에 `@StepScope`가 활성화되지 않았다는 것이다. 결국 스코프가 활성화되지 않은 상태에서 프록시에 접근하려 하니 문제가 발생하는 것이다. 마찬가지로 `@JobScope` 또한 Step 빈에 선언해서는 안 된다.
 
->❓Step에서 JobParameters를 어떻게 사용하면 좋은지?
+>❓Step에서 `JobParameters`를 어떻게 사용하면 좋은지?
 
 * 여러 방법이 있지만 그 중 실무에서 사용했던 방법은 `@StepScope` + `@Value`이다.
 * 값이 생성자 인자로 들어와서 타입이 분명하고 실행마다 새 인스턴스라 상태가 섞이지 않는다.
-* Spring Batch 가 테스트 도구(StepScopeTestUtils)를 함께 주기도 한다.
+* Spring Batch 가 테스트 도구(`StepScopeTestUtils`)를 함께 주기도 한다.
 
 #### ExecutionContext
 
@@ -966,12 +966,12 @@ public interface StepExecutionListener extends StepListener {
     }
 }
 ```
-* `beforeStep()`: Step의 시작 시점, 정확히는 StepScope가 활성화된 직후에 호출된다. Step 실행 전 필요한 초기화 작업을 수행할 수 있다.
-* `afterStep()` : Step 종료 시점에 호출된다. JobExecutionListener의 `afterJob()`과 마찬가지로 Step의 성공/실패 여부와 관계없이 무조건 호출되기 때문에 실패 처리나 리소스 정리 등 안전한 후처리 작업을 수행할 수 있다.
+* `beforeStep()`: Step의 시작 시점, 정확히는 `StepScope`가 활성화된 직후에 호출된다. Step 실행 전 필요한 초기화 작업을 수행할 수 있다.
+* `afterStep()` : Step 종료 시점에 호출된다. `JobExecutionListener`의 `afterJob()`과 마찬가지로 Step의 성공/실패 여부와 관계없이 무조건 호출되기 때문에 실패 처리나 리소스 정리 등 안전한 후처리 작업을 수행할 수 있다.
 
 #### ChunkListener
 
-* ChunkListener는 이러한 하나의 청크 단위 처리가 시작되기 전, 완료된 후, 그리고 실행 도중 에러가 발생했을 때 호출되는 리스너 인터페이스다. 
+* `ChunkListener`는 이러한 하나의 청크 단위 처리가 시작되기 전, 완료된 후, 그리고 실행 도중 에러가 발생했을 때 호출되는 리스너 인터페이스다. 
 * 각 청크의 처리 현황을 모니터링하거나 로깅하는데 사용할 수 있다.
 
 ```java
