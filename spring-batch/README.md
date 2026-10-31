@@ -105,6 +105,25 @@ Long limit = parameters.getLong("limit", 10L);
 ./gradlew bootRun --args='--spring.batch.job.name=jobScopeJob message=hello'
 ```
 
+### stepScopeJob
+
+`@StepScope` 빈은 Step 실행(`StepExecution`) 하나에 하나씩 만들어진다. `jobScopeJob` 과 같은 모양(두 Step + 상태를 담는 빈)이라 차이를 나란히 볼 수 있다.
+
+| | `jobScopeJob`(`@JobScope`) | `stepScopeJob`(`@StepScope`) |
+| --- | --- | --- |
+| 인스턴스 단위 | Job 실행 하나 | Step 실행 하나 |
+| `secondStep` 에서 본 기록 | `[firstStep, secondStep]` | `[secondStep]` |
+
+- `stepScopeTasklet` 빈 정의 하나를 두 Step 이 함께 쓰지만, Step 마다 새로 만들어져 `@Value("#{stepExecution.stepName}")` 로 자기 Step 이름을 받는다.
+- `StepRecorder` 는 `@Component @StepScope` 빈이라 Step 끼리 기록을 공유하지 않는다.
+- Step 실행 밖에서 쓰면 `ScopeNotActiveException` 이 난다. `@SpringBatchTest` 는 테스트 메서드마다 Step 스코프도 열어 두므로(`StepScopeTestExecutionListener`), 이 동작은 `StepScopeOutsideExecutionTests` 에서 확인한다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=stepScopeJob run=1'
+```
+
+파라미터가 없으면 두 번째 실행부터 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
