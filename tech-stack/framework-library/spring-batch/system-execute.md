@@ -587,3 +587,151 @@ public class JobScopeJobConfig {
     }
 }
 ```
+
+#### @StepScope
+
+* `@StepScope`는 `@JobScope`와 동일한 방식으로 동작하지만 적용 범위에서 차이가 있다. `@JobScope`가 `Job`의 실행 범위에서 빈을 관리한다면, `@StepScope`는 `Step`의 실행 범위에서 빈을 관리한다.
+
+```java
+/**
+ * TL;DR: {@code @StepScope} 빈은 StepExecution 하나에 하나씩 만들어진다.
+ * - stepScopeTasklet: 빈 정의 하나를 두 Step 이 쓰지만 Step 마다 새로 만들어져 {@code #{stepExecution.stepName}} 으로 자기 이름을 받는다.
+ * - {@link StepRecorder}: Step 끼리 공유하지 않는다. secondStep 의 기록은 [secondStep] 뿐이다({@code @JobScope} 면 [firstStep, secondStep]).
+ * - Step 실행 밖에서 쓰면 {@code ScopeNotActiveException}.
+ */
+@Configuration
+public class StepScopeJobConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(StepScopeJobConfig.class);
+
+    @Bean
+    public Job stepScopeJob(JobRepository jobRepository, Step stepScopeFirstStep, Step stepScopeSecondStep) {
+        return new JobBuilder("stepScopeJob", jobRepository)
+                .start(stepScopeFirstStep)
+                .next(stepScopeSecondStep)
+                .build();
+    }
+
+    @Bean
+    public Step stepScopeFirstStep(
+            JobRepository jobRepository, Tasklet stepScopeTasklet, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("firstStep", jobRepository)
+                .tasklet(stepScopeTasklet, transactionManager)
+                .build();
+    }
+
+    @Bean
+    public Step stepScopeSecondStep(
+            JobRepository jobRepository, Tasklet stepScopeTasklet, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("secondStep", jobRepository)
+                .tasklet(stepScopeTasklet, transactionManager)
+                .build();
+    }
+
+    @Bean
+    @StepScope
+    public Tasklet stepScopeTasklet(
+            StepRecorder stepRecorder, @Value("#{stepExecution.stepName}") String stepName) {
+        return (contribution, chunkContext) -> {
+            stepRecorder.record(stepName);
+            log.info("stepName={}, recorded={}", stepName, stepRecorder.getRecorded());
+            return RepeatStatus.FINISHED;
+        };
+    }
+}
+```
+
+#### JobScope와 StepScope 사용 시 주의사항
+
+1. 프록시 대상의 타입이 클래스인 경우 반드시 상속 가능한 클래스여야 한다.
+
+```java
+@Scope(value = "job", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface JobScope {}
+```
+* CGLIB를 사용해 클래스 기반의 프록시를 생성한다. 프록시를 생성하려면 대상 클래스가 상속 가능해야 한다.
+
+2. Step 빈에는 `@StepScope`와 `@JobScope`를 사용하지 말라.
+
+![](https://github.com/user-attachments/assets/52edbedc-2fd3-430a-8877-b6db4670c71e)
+
+* Spring Batch Step에 `@StepScope`를 달면 Step 빈 생성과 스코프 활성화 시점이 맞지 않아 오류가 발생한다.
+* Spring Batch는 Step 실행 전 메타데이터 관리를 위해 Step 빈에 접근한다. 문제는 이 시점에는 Step이 실행되지 않았기 때문에 `@StepScope`가 활성화되지 않았다는 것이다. 결국 스코프가 활성화되지 않은 상태에서 프록시에 접근하려 하니 문제가 발생하는 것이다. 마찬가지로 `@JobScope` 또한 Step 빈에 선언해서는 안 된다.
+
+>❓Step에서 JobParameters를 어떻게 사용하면 좋은지?
+
+* 여러 방법이 있지만 그 중 실무에서 사용했던 방법은 `@StepScope` + `@Value`이다.
+* 값이 생성자 인자로 들어와서 타입이 분명하고 실행마다 새 인스턴스라 상태가 섞이지 않는다.
+* Spring Batch 가 테스트 도구(StepScopeTestUtils)를 함께 주기도 한다.
+
+#### ExecutionContext
+
+* Spring Batch는 `JobExecution`과 `StepExecution`을 사용해 시작 시간, 종료 시간, 실행 상태 같은 메타데이터를 관리한다. 
+* 하지만 이런 기본적인 실행 정보만으로는 시스템을 완벽하게 제어하기 부족할 때가 있다. 비즈니스 로직 처리 중에 발생하는 커스텀 데이터를 관리할 방법이 필요한데 이 때 사용하는 것이 바로 `ExecutionContext`라는 데이터 컨테이너다.
+* `ExecutionContext`를 활용하면 커스텀 컬렉션의 마지막 처리 인덱스나 집계 중간 결과물 같은 데이터를 저장할 수 있다. 이는 Job이 중단된 후 재시작할 때 특히 유용하다. Spring Batch가 재시작 시 `ExecutionContext`의 데이터를 자동으로 복원하므로 중단된 지점부터 처리를 이어갈 수 있다.
+
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class ExecutionContextJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    JobRepository jobRepository;
+
+    @Autowired
+    Job executionContextJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(executionContextJob);
+    }
+
+    @Test
+    void 다음_Step은_Job_컨텍스트에_직접_넣거나_승격한_값만_읽는다(CapturedOutput output) throws Exception {
+        // given
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(jobOperatorTestUtils.getUniqueJobParameters());
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).contains("directValue=direct, promotedValue=promoted, stepOnlyValue=null");
+    }
+
+    @Test
+    void 저장된_Job_컨텍스트에는_직접_넣은_값과_승격한_값만_있다() throws Exception {
+        // given
+        JobExecution execution = jobOperatorTestUtils.startJob(jobOperatorTestUtils.getUniqueJobParameters());
+
+        // when
+        ExecutionContext jobContext = jobRepository.getJobExecution(execution.getId()).getExecutionContext();
+
+        // then
+        assertThat(jobContext.get("directValue")).isEqualTo("direct");
+        assertThat(jobContext.get("promotedValue")).isEqualTo("promoted");
+        assertThat(jobContext.containsKey("stepOnlyValue")).isFalse();
+    }
+
+    @Test
+    void 저장된_Step_컨텍스트에는_승격하지_않은_값이_남아_있다() throws Exception {
+        // given
+        JobExecution execution = jobOperatorTestUtils.startJob(jobOperatorTestUtils.getUniqueJobParameters());
+
+        // when
+        StepExecution putStep = jobRepository.getJobExecution(execution.getId()).getStepExecutions().stream()
+                .filter(stepExecution -> stepExecution.getStepName().equals("putStep"))
+                .findFirst()
+                .orElseThrow();
+
+        // then
+        assertThat(putStep.getExecutionContext().get("stepOnlyValue")).isEqualTo("stepOnly");
+    }
+}
+```
