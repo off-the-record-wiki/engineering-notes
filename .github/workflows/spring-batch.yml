@@ -1,0 +1,47 @@
+name: spring-batch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - spring-batch/**
+      - .github/workflows/spring-batch.yml
+  pull_request:
+    paths:
+      - spring-batch/**
+      - .github/workflows/spring-batch.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spring-batch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: spring-batch
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Testcontainers 가 러너의 Docker 로 MySQL 컨테이너를 띄운다
+      - name: Test
+        run: ./gradlew test
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spring-batch-test-report
+          path: spring-batch/build/reports/tests/test
