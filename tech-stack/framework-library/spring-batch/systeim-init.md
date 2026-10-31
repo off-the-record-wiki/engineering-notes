@@ -76,3 +76,6 @@
 #### Job과 Step
 
 ![](https://github.com/user-attachments/assets/94954ff1-2abb-4cc5-89a3-c6ce3d9614df)
+
+* Job은 하나의 완전한 배치 처리를 의미한다. 실제로 우리가 흔히 접하는 배치 작업들은 모두 Job으로 표현한다.
+* Step은 Job을 구성하는 실행 단위로 하나의 Job은 하나 이상의 Step으로 구성된다.
