@@ -1,4 +1,4 @@
-# Spring Batch - SYSTEM TAKEOVER
+# Spring Batch - SYSTEM EXECUTE
 
 #### 청크 지향 처리
 
