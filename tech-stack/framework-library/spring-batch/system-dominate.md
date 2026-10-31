@@ -6,6 +6,93 @@
 * 즉, 배치 처리 중 발생하는 특정 이벤트를 감지하고 원하는 로직을 실행할 수 있게 해준다.
 * Job 시작 전후, Step 실행 전후는 물론, 청크 단위 또는 아이템 단위 처리 시점까지 모든 과정에 개입할 수 있다. 이를 통해 로깅, 모니터링, 에러 처리 등 원하는 로직을 자유롭게 추가할 수 있다.
 
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class ListenerJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    Job listenerJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(listenerJob);
+    }
+
+    @Test
+    void beforeJob이_가공한_기간을_Step이_읽고_afterJob이_완료_상태를_남긴다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = targetDateParameters(LocalDate.of(2026, 10, 31));
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut())
+                .contains("period=2026-10-01~2026-10-31")
+                .contains("afterJob status=COMPLETED");
+    }
+
+    @Test
+    void beforeJob_Step_afterJob_순서로_실행된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = targetDateParameters(LocalDate.of(2026, 10, 31));
+
+        // when
+        jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        String out = output.getOut();
+        int before = out.indexOf("beforeJob targetDate=2026-10-31");
+        int step = out.indexOf("period=");
+        int after = out.indexOf("afterJob status=");
+        assertThat(before).isNotNegative();
+        assertThat(step).isGreaterThan(before);
+        assertThat(after).isGreaterThan(step);
+    }
+
+    @Test
+    void Step이_실패해도_afterJob이_실행되어_실패_상태를_남긴다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("targetDate", LocalDate.of(2026, 10, 31), LocalDate.class)
+                .addJobParameter("fail", true, Boolean.class)
+                .toJobParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.FAILED);
+        assertThat(output.getOut()).contains("afterJob status=FAILED");
+    }
+
+    @Test
+    void targetDate가_월_첫날이면_기간은_그날_하루다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = targetDateParameters(LocalDate.of(2026, 11, 1));
+
+        // when
+        jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(output.getOut()).contains("period=2026-11-01~2026-11-01");
+    }
+
+    private JobParameters targetDateParameters(LocalDate targetDate) {
+        return jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("targetDate", targetDate, LocalDate.class)
+                .toJobParameters();
+    }
+}
+```
+
 #### JobExecutionListener
 
 * `JobExecutionListener`는 Job 실행의 시작과 종료 시점에 호출되는 리스너 인터페이스이다.
