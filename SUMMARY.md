@@ -148,6 +148,7 @@
 * [Spring Batch](tech-stack/framework-library/spring-batch/README.md)
   * [Spring Batch - Scheduler vs Batch](tech-stack/framework-library/spring-batch/scheduler-vs-batch.md)
   * [Spring Batch - SYSTEIM INIT](tech-stack/framework-library/spring-batch/systeim-init.md)
+  * [Spring Batch - SYSTEM BUILD](tech-stack/framework-library/spring-batch/system-build.md)
 * [Spring AI](tech-stack/framework-library/spring-ai/README.md)
   * [Spring AI - LLM Introduction](tech-stack/framework-library/spring-ai/llm-introduction.md)
   * [Spring AI - Spring AI Introduction](tech-stack/framework-library/spring-ai/spring-ai-introduction.md)

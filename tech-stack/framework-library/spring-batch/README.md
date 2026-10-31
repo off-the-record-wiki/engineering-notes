@@ -4,7 +4,7 @@
 
 * [Spring Batch - Scheduler vs Batch](scheduler-vs-batch.md)
 * [Spring Batch - SYSTEIM INIT](systeim-init.md)
-* Spring Batch - SYSTEM BUILD
+* [Spring Batch - SYSTEM BUILD](system-build.md)
 * Spring Batch - SYSTEM EXECUTE
 * Spring Batch - SYSTEM DOMINATE
 * Spring Batch - SYSTEM TAKEOVER
