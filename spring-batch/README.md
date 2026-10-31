@@ -36,6 +36,15 @@ Job 을 하나만 등록했을 때는 그 Job 이 실행된다. 여러 개를 �
 
 Job 이 여러 개라서 `--spring.batch.job.name` 으로 실행할 Job 을 지정해야 한다.
 
+### enumJob
+
+열거형 파라미터 `deliveryType`(`DeliveryType`)을 받아 상수 이름과 배송 소요일(`leadDays()`)을 출력한다.
+값은 상수 이름(`EXPRESS`), 타입은 enum 의 전체 클래스 이름으로 넘긴다. 중첩 enum 은 타입 이름에 `$` 가 들어가므로 최상위 enum 으로 둔다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=enumJob deliveryType=EXPRESS,com.example.batch.enumparam.DeliveryType'
+```
+
 ## 검사
 
 Testcontainers 로 MySQL 을 띄워 배치 메타 테이블이 생성되는지 확인한다.
