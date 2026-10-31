@@ -55,6 +55,20 @@ Tasklet 은 POJO 를 주입받아 getter 로 쓴다. 주입되는 것은 스코�
 ./gradlew bootRun --args='--spring.batch.job.name=pojoJob reportName=daily reportDate=2026-10-31,java.time.LocalDate pageSize=50,java.lang.Integer'
 ```
 
+### JSON 표기법
+
+`JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
+값은 `이름={"value":"...","type":"...","identifying":"true"}` 로 넘긴다. 기본 표기법(`이름=값,타입`)은 쉼표로 값과 타입을 나누기 때문에 쉼표가 들어간 값을 넘길 수 없지만, JSON 표기법은 넘길 수 있다.
+
+```java
+JobParameters parameters = jsonJobParametersReader.read(properties);
+jobOperator.start(parameterJob, parameters);
+```
+
+- `JsonJobParametersConverter` 를 그대로 빈으로 등록하면 안 된다. `JobParametersConverter` 타입 빈은 Boot 의 명령행 실행기(`JobLauncherApplicationRunner`, `@Autowired` setter)와 `JobOperator` 에 자동 주입되어, 위의 `bootRun` 명령이 모두 `Unable to decode job parameter` 로 실패한다. 그래서 `JobParametersConverter` 가 아닌 클래스로 감싸서 등록한다.
+- 이렇게 하면 `bootRun --args` 는 계속 기본 표기법을 읽고, JSON 은 코드에서 명시적으로 쓸 때만 쓰인다.
+- `JobOperator.start(String, Properties)` 는 Spring Batch 6.0 에서 폐기 예정이라 쓰지 않는다.
+
 ## 검사
 
 Testcontainers 로 MySQL 을 띄워 배치 메타 테이블이 생성되는지 확인한다.
