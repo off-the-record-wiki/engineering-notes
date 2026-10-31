@@ -74,6 +74,25 @@ Long limit = parameters.getLong("limit", 10L);
 ./gradlew bootRun --args='--spring.batch.job.name=directAccessJob userName=kim targetDate=2026-10-31,java.time.LocalDate limit=5,java.lang.Long'
 ```
 
+### validatorJob
+
+`JobParametersValidator` 를 직접 구현해(`FileJobParametersValidator`) 파라미터 값을 검사한다. `CompositeJobParametersValidator` 로 필수 키 검사(`DefaultJobParametersValidator`)와 묶어 `JobBuilder.validator(...)` 에 등록한다. 검증기는 등록한 순서대로 돈다.
+
+| 검사 | 검증기 | 실패 메시지 |
+| --- | --- | --- |
+| `fileName`, `chunkSize` 가 있어야 한다 | `DefaultJobParametersValidator` | `The JobParameters do not contain required keys: [...]` |
+| `fileName` 은 `java.lang.String` 이어야 한다 | `FileJobParametersValidator` | `fileName must be java.lang.String` |
+| `fileName` 은 `.csv` 로 끝나야 한다 | `FileJobParametersValidator` | `fileName must end with .csv: <값>` |
+| `chunkSize` 는 `java.lang.Long` 이어야 한다 | `FileJobParametersValidator` | `chunkSize must be java.lang.Long` |
+| `chunkSize` 는 1 이상 1000 이하여야 한다 | `FileJobParametersValidator` | `chunkSize must be between 1 and 1000: <값>` |
+
+- 검증에 실패하면 `InvalidJobParametersException` 이 나고 Step 은 실행되지 않는다.
+- 타입 검사는 `getString`·`getLong` 대신 `getParameter(...).type()` 으로 한다. 타입별 getter 는 타입이 다르면 `IllegalArgumentException` 을 던져서 검증 예외로 바뀌지 않는다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=validatorJob fileName=orders.csv chunkSize=100,java.lang.Long'
+```
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
