@@ -177,6 +177,28 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 ./gradlew bootRun --args='--spring.batch.job.name=listenerJob targetDate=2026-10-31,java.time.LocalDate'
 ```
 
+### annotationListenerJob
+
+리스너 인터페이스를 구현하지 않고, 일반 클래스(`AnnotatedBatchListener`)의 메서드에 `@BeforeJob`, `@AfterJob`, `@BeforeStep`, `@AfterStep` 을 붙여 리스너를 만든다.
+
+| | 인터페이스 방식(`listenerJob`) | 어노테이션 방식(`annotationListenerJob`) |
+| --- | --- | --- |
+| 클래스 | `JobExecutionListener` 등을 `implements` | 아무것도 구현하지 않는 일반 클래스 |
+| Job·Step 리스너를 한 클래스에 | 인터페이스를 여러 개 구현 | 어노테이션만 더 붙임 |
+| 메서드 이름 | 인터페이스가 정함 | 자유 |
+| 등록 | `listener(JobExecutionListener)` | `listener(Object)` — 빌더가 어노테이션 메서드를 찾아 리스너로 감싼다 |
+| 시그니처 실수 | 컴파일 오류 | 실행 시점에야 드러남 |
+
+- 같은 객체를 `JobBuilder.listener(...)` 와 `StepBuilder.listener(...)` 에 모두 등록해야 Job·Step 어노테이션이 각각 동작한다. Job 에만 등록하면 `@BeforeStep`/`@AfterStep` 은 불리지 않는다.
+- `@AfterStep` 메서드의 시그니처는 `ExitStatus afterStep(StepExecution)` 이다. 반환한 값은 Step 의 종료 상태와 `ExitStatus.and(...)` 로 합쳐져 더 심각한 쪽이 남는다.
+- `@AfterStep`, `@AfterJob` 은 실패해도 불린다. `fail=true,java.lang.Boolean` 을 넘기면 `status=FAILED` 로 출력된다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=annotationListenerJob run=1'
+```
+
+같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
