@@ -262,6 +262,42 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
 
+### csvFileJob
+
+주문 CSV(`orderId,customer,amount`)를 읽어 금액이 10000 이상이면 `VIP`, 아니면 `NORMAL` 등급을 붙여 새 CSV(`orderId,customer,amount,grade`)로 쓴다.
+
+| 구성 요소 | 설정 |
+| --- | --- |
+| Reader | `FlatFileItemReader` — `linesToSkip(1)` 로 헤더를 건너뛰고, `#` 으로 시작하는 줄은 기본값(`comments`)으로 무시한다. `targetType(Order.class)` 이면 record 로 바로 매핑한다 |
+| Processor | `OrderGradeProcessor` — `Order` → `GradedOrder` |
+| Writer | `FlatFileItemWriter` — `headerCallback` 으로 헤더를, `footerCallback` 으로 마지막 줄 `count=N,total=합계` 를 쓴다. `delimited().sourceType(GradedOrder.class)` 이면 record 의 필드를 꺼낸다 |
+| Step | `faultTolerant().skip(FlatFileParseException.class).skipLimit(3)` — 형식이 틀린 줄은 건너뛴다 |
+
+- 건너뛴 헤더·주석 줄은 `readCount` 에 들어가지 않는다. 하지만 `FlatFileParseException.getLineNumber()` 는 이 줄들까지 센 실제 줄 번호다. `OrderSkipLogger` 가 `skip line=<줄 번호> input=<원문>` 으로 남긴다.
+- 숫자가 아닌 금액(변환 실패)과 열 개수가 다른 줄(`IncorrectTokenCountException`)은 모두 `FlatFileParseException` 으로 감싸져 나온다. 그래서 skip 대상은 이 예외 하나로 충분하다. 잘못된 줄이 한도(3)를 넘으면 Step 이 `FAILED` 가 된다.
+- 푸터의 건수·합계는 `OrderSummaryFooter` 가 `ItemWriteListener.afterWrite` 로 누적한다. 같은 객체를 `footerCallback` 과 `.listener(...)` 에 넘긴다. Step 실행마다 값을 새로 세야 하므로 `@StepScope` 다.
+- 헤더는 Writer 를 열 때, 푸터는 닫을 때 쓴다. 그래서 0건이어도 두 줄은 남는다. 출력 파일이 있으면 덮어쓴다(`shouldDeleteIfExists` 기본 `true`).
+- 입력 파일이 없으면 `FlatFileItemReader` 는 기본(`strict=true`)으로 `Input resource must exist` 를 던지고 Step 이 `FAILED` 가 된다. `allowMissing=true,java.lang.Boolean` 을 넘기면 `strict(false)` 가 되어 경고만 남기고 0건으로 완료한다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=csvFileJob inputFile=data/orders.csv outputFile=build/output/orders-graded.csv'
+```
+
+`data/orders.csv` 에는 금액이 `abc` 인 줄이 있어 `skip line=5 input=3,park,abc` 가 출력된다.
+
+### multiCsvFileJob
+
+`inputDir` 의 `*.csv` 를 `MultiResourceItemReader` 로 차례로 읽는다. 파일 하나를 읽는 일은 `csvFileJob` 과 같은 설정의 `FlatFileItemReader`(delegate)가 맡고, Processor·Writer 도 같은 빈을 쓴다.
+
+- 파일은 이름 순서로 읽는다(기본 `comparator`). delegate 는 파일마다 다시 열리므로 `linesToSkip(1)` 이 파일마다 적용되어 각 파일의 헤더가 빠진다.
+- `MultiResourceItemReader` 의 `strict` 기본값은 `false` 다(`FlatFileItemReader` 와 반대). 맞는 파일이 하나도 없으면 실패하지 않고 0건으로 완료해 헤더와 `count=0,total=0` 만 쓴다. 파일이 반드시 있어야 하면 `setStrict(true)` 로 바꾼다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=multiCsvFileJob inputDir=data/multi outputFile=build/output/multi-graded.csv'
+```
+
+두 Job 모두 같은 파라미터로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run=2` 같은 파라미터를 더해 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
