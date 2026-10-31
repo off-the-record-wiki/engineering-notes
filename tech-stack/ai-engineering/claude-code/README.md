@@ -6,7 +6,7 @@
 * [Claude Code - Token Optimization for AI Agents: Drivers and Strategies](token-optimization-for-ai-agents-drivers-and-strategies.md)
 * [Claude Code - Enforcing Claude Code Compliance via Harness Engineering](enforcing-claude-code-compliance-via-harness-engineering.md)
 * [Claude Code - Defending the Agent: Understanding Indirect Injection and Prompt Exploits](defending-the-agent-understanding-indirect-injection-and-prompt-exploits.md)
-* Claude Code - Mitigating Self-Preference Bias in AI Using Subagents
+* [Claude Code - Mitigating Self-Preference Bias in AI Using Subagents](mitigating-self-preference-bias-in-ai-using-subagents.md)
 * Claude Code - Advanced Multi-Agent Orchestration: Task Scheduling and BFT-Based Consensus Patterns
 * Claude Code - Course Wrap-Up: Building and Deploying Custom Plugins and Skills
 * [Claude Code - Token Optimization](token-optimization.md)
