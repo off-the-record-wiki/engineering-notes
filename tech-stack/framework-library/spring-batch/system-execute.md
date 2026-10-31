@@ -88,3 +88,44 @@ tokenizer.setRegex("\\[\\w+\\]\\[Thread-(\\d+)\\]\\[CPU: \\d+%\\] (.+)");
 
 * 각 라인은 서로 다른 구조와 형식을 가지고 있다. 기본으로 사용되는 `LineMapper` 구현체인 `DefaultLineMapper`는 하나의 `LineTokenizer`와 하나의 `FieldSetMapper`만을 가지고 있어 이런 다양한 형식의 파일을 처리할 수 없다.
 * 이런 상황에서 `PatternMatchingCompositeLineMapper`를 사용할 수 있다.
+
+#### RecordFieldSetMapper
+
+* 파일의 데이터를 record로 매핑하는 역할을 한다.
+
+#### MultiResourceItemReader
+
+![](https://github.com/user-attachments/assets/499e8cbf-0916-4cf7-85ca-410823200f62)
+
+* `MultiResourceItemReader`는 여러 파일을 순차적으로 읽을 수 있게 해주는 ItemReader 구현체이다.
+* `resources()` : `resources()` 메서드에 읽을 대상 Resource의 목록을 배열 형태로 구성한다.
+* `delegate()` : 실제 데이터 읽기를 수행할 위임 대상 ItemReader를 `delegate()` 메서드에 구성한다.
+
+#### FlatFileItemWriter
+
+![](https://github.com/user-attachments/assets/5233bbba-8d23-434d-a34b-57e5fc1854c6)
+
+1. FieldExtractor(필드 추출)
+
+* `FieldExtractor`는 도메인 객체에서 필드를 추출하는 역할을 한다.
+
+```java
+public interface FieldExtractor<T> {
+    Object[] extract(T item);
+}
+```
+
+![](https://github.com/user-attachments/assets/45a88e03-c445-498c-8dcf-394a49ca56c2)
+
+2. LineAggregator(문자열 결합)
+
+* `LineAggregator`는 `FieldExtractor`에서 추출한 데이터들을 하나의 문자열로 결합하는 역할을 맡는다.
+* 구분자 기반 형식의 파일을 읽을 때 `DelimitedLineTokenizer`가 사용되었던 것처럼 구분자 기반 형식으로 파일을 쓸 때(문자열로 결합할 때)는 `DelimitedLineAggregator`가 사용된다. 또한 고정 길이 형식을 포함한 다른 형식으로 파일을 쓸 때(문자열로 결합할 때)는 `FormatterLineAggregator`를 사용할 수 있다.
+
+```java
+public interface LineAggregator<T> {
+    String aggregate(T item);
+}
+```
+
+![](https://github.com/user-attachments/assets/bf23f9d9-6d61-4c9b-ac83-3ac41dbb08ee)
