@@ -3,7 +3,7 @@
 🔗 [Reference](https://docs.spring.io/spring-batch/reference/index.html)
 
 * [Spring Batch - Scheduler vs Batch](scheduler-vs-batch.md)
-* [Spring Batch - SYSTEM INIT](system-init.md)
+* [Spring Batch - SYSTEM INIT](https://github.com/off-the-record-wiki/engineering-notes/wiki/Spring-Batch-%E2%80%90-SYSTEIM-INIT)
 * [Spring Batch - SYSTEM BUILD](system-build.md)
 * Spring Batch - SYSTEM EXECUTE
 * Spring Batch - SYSTEM DOMINATE
