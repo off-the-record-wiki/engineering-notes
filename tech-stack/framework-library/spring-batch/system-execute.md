@@ -300,3 +300,236 @@ class PojoJobTests {
 >❗기본 파라미터 표기법의 한계 : 파라미터 값에 쉼표(,)가 포함되면 `Caused by: java.lang.ClassNotFoundException`가 발생한다. 이런 경우 JSON 기반 파라미터 표기법을 사용할 수 있다.
 
 #### JobParameter의 JSON 기반 표기법
+
+```java
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class JsonParameterTests {
+
+    @Autowired
+    JobOperator jobOperator;
+
+    @Autowired
+    JsonJobParametersReader jsonJobParametersReader;
+
+    @Autowired
+    Job parameterJob;
+
+    @Test
+    void JSON_표기법으로_넘기면_쉼표가_들어간_값으로_Job이_실행된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = jsonJobParametersReader.read(jsonProperties());
+
+        // when
+        jobOperator.start(parameterJob, parameters);
+
+        // then
+        assertThat(output.getOut())
+                .contains("Hello, batch, json (1/2)")
+                .contains("Hello, batch, json (2/2)");
+    }
+
+    @Test
+    void JSON_표기법은_쉼표가_들어간_값과_지정한_타입을_그대로_유지한다() {
+        // given
+        Properties properties = jsonProperties();
+
+        // when
+        JobParameters parameters = jsonJobParametersReader.read(properties);
+
+        // then
+        assertThat(parameters.getParameter("name").value()).isEqualTo("batch, json");
+        assertThat(parameters.getParameter("count").type()).isEqualTo(Integer.class);
+    }
+
+    private Properties jsonProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("name", "{\"value\":\"batch, json\",\"type\":\"java.lang.String\"}");
+        properties.setProperty("count", "{\"value\":\"2\",\"type\":\"java.lang.Integer\"}");
+        return properties;
+    }
+}
+```
+
+#### JobParameters, 코드로 직접 접근하기
+
+![](https://github.com/user-attachments/assets/86acf670-5918-4633-acd9-08c55cde01f5)
+
+* Spring Batch에서는 JobExecution이라는 곳에 Job의 실행 정보를 쥐고 있다. 결국 Step 안에서 JobParameter를 찾아내려면 이 JobExecution을 통해서 찾아야 한다.
+* JobExecution은 Job의 실행과 관련된 모든 정보를 담고 있는 객체다. Job 실행 시점에 생성되어 잡의 실행 상태, JobParameters, 실행 결과 등을 포함한다.
+
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class DirectAccessJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    Job directAccessJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(directAccessJob);
+    }
+
+    @Test
+    void 코드로_꺼낸_파라미터로_처리해_출력하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = directParameters("kim", LocalDate.of(2026, 10, 31), 5L);
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).contains("userName=kim, targetDate=2026-10-31, limit=5");
+    }
+
+    @Test
+    void limit을_넘기지_않으면_기본값_10으로_처리하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("userName", "kim")
+                .addJobParameter("targetDate", LocalDate.of(2026, 10, 31), LocalDate.class)
+                .toJobParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).contains("userName=kim, targetDate=2026-10-31, limit=10");
+    }
+
+    @Test
+    void 연달아_실행하면_스코프_없는_Tasklet도_각_실행의_파라미터를_읽는다(CapturedOutput output) throws Exception {
+        // given
+        jobOperatorTestUtils.startJob(directParameters("kim", LocalDate.of(2026, 10, 31), 5L));
+
+        // when
+        jobOperatorTestUtils.startJob(directParameters("lee", LocalDate.of(2026, 11, 1), 7L));
+
+        // then
+        assertThat(output.getOut()).contains("userName=lee, targetDate=2026-11-01, limit=7");
+    }
+
+    @Test
+    void limit을_Integer_타입으로_넘기면_getLong이_타입_불일치로_Job이_실패한다() throws Exception {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("userName", "kim")
+                .addJobParameter("targetDate", LocalDate.of(2026, 10, 31), LocalDate.class)
+                .addJobParameter("limit", 5, Integer.class)
+                .toJobParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.FAILED);
+        assertThat(execution.getExitStatus().getExitDescription()).contains("Key limit is not of type Long");
+    }
+
+    private JobParameters directParameters(String userName, LocalDate targetDate, Long limit) {
+        return jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("userName", userName)
+                .addJobParameter("targetDate", targetDate, LocalDate.class)
+                .addLong("limit", limit)
+                .toJobParameters();
+    }
+}
+```
+
+#### JobParametersValidator
+
+* JobParametersValidator를 사용하면 잘못된 파라미터가 들어오는 순간 즉시 차단할 수 있다.
+
+```java
+@Configuration
+public class ValidatorJobConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(ValidatorJobConfig.class);
+
+    @Bean
+    public Job validatorJob(JobRepository jobRepository, Step validatorStep) {
+        return new JobBuilder("validatorJob", jobRepository)
+                .validator(fileJobParametersValidator())
+                .start(validatorStep)
+                .build();
+    }
+
+    @Bean
+    public Step validatorStep(
+            JobRepository jobRepository, Tasklet validatorTasklet, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("validatorStep", jobRepository)
+                .tasklet(validatorTasklet, transactionManager)
+                .build();
+    }
+
+    @Bean
+    @StepScope
+    public Tasklet validatorTasklet(
+            @Value("#{jobParameters['fileName']}") String fileName,
+            @Value("#{jobParameters['chunkSize']}") Long chunkSize) {
+        return (contribution, chunkContext) -> {
+            log.info("fileName={}, chunkSize={}", fileName, chunkSize);
+            return RepeatStatus.FINISHED;
+        };
+    }
+
+    private JobParametersValidator fileJobParametersValidator() {
+        CompositeJobParametersValidator validator = new CompositeJobParametersValidator();
+        validator.setValidators(List.of(
+                new DefaultJobParametersValidator(new String[] {"fileName", "chunkSize"}, new String[] {}),
+                new FileJobParametersValidator()));
+        return validator;
+    }
+}
+```
+```java
+public class FileJobParametersValidator implements JobParametersValidator {
+
+    private static final long MIN_CHUNK_SIZE = 1L;
+    private static final long MAX_CHUNK_SIZE = 1000L;
+
+    @Override
+    public void validate(JobParameters parameters) throws InvalidJobParametersException {
+        String fileName = parameters.getString("fileName");
+        if (fileName == null || !fileName.endsWith(".csv")) {
+            throw new InvalidJobParametersException("fileName must end with .csv: " + fileName);
+        }
+
+        JobParameter<?> chunkSize = parameters.getParameter("chunkSize");
+        if (chunkSize == null || !chunkSize.type().equals(Long.class)) {
+            throw new InvalidJobParametersException("chunkSize must be java.lang.Long");
+        }
+        long value = (Long) chunkSize.value();
+        if (value < MIN_CHUNK_SIZE || value > MAX_CHUNK_SIZE) {
+            throw new InvalidJobParametersException(
+                    "chunkSize must be between " + MIN_CHUNK_SIZE + " and " + MAX_CHUNK_SIZE + ": " + value);
+        }
+    }
+}
+```
+
+#### Job과 Step의 Scope
+
+![](https://github.com/user-attachments/assets/c5e6339d-708c-42d8-9e30-46a558cf5a97)
+
+* Spring Batch는 일반적인 Spring 애플리케이션의 기본 스코프인 싱글톤과는 다른 특별한 스코프를 제공한다. `JobScope`와 `StepScope`이다.
+* `JobScope`와 `StepScope`가 선언된 빈은 애플리케이션 구동 시점에는 우선 프록시 객체로만 존재한다. `Job`이나 `Step`이 실행된 후에 프록시 객체에 접근을 시도하면 그 때 실제 빈이 생성된다.
+* 각각의 스코프 빈은 `Job`과 `Step`의 실행(`Execution`) 시점에 생성되어 종료할 때 함께 소멸된다.
+* 런타임에 결정되는 `JobParameters`를 실행 시점에 정확하게 주입받을 수 있고, 동시에 여러 `Job`이 실행되더라도 각각 독립적인 빈을 사용하게 되어 동시성 문제도 해결할 수 있다.
+* 또한 `Job`이나 `Step`의 실행이 끝나면 해당 빈도 함께 제거되므로 불필요하게 메모리를 점유하지 않아 리소스 관리 측면에서도 효율적이다.
+
+#### @JobScope
+
+* `@JobScope`는 `Job`이 실행될 때 실제 빈이 생성되고 `Job`이 종료될 때 함께 제거되는 스코프이다. 즉, `JobExecution`과 생명주기를 같이 한다.
+* 지연된 빈 생성(Lazy Bean Creation) : `@JobScope`가 적용된 빈은 애플리케이션 구동 시점에는 프록시 객체만 생성된다.
+* `Job` 파라미터와의 연동 : `@JobScope`는 이런 동적 파라미터를 `Step` 빈 생성 시에 주입받을 수 있게 해준다. 만약 `@JobScope`가 없다면 `Step` 빈은 애플리케이션 구동 시점에 생성되므로 실행 시점에 전달되는 파라미터를 받을 수 없을 것이다.
+* 병렬 처리 지원(Parallel Processing Support) : `@JobScope`를 사용하면 `JobExecution`마다 별도의 빈이 생성되어 동시성 문제를 피할 수 있다.
