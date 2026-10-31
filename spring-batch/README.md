@@ -124,6 +124,24 @@ Long limit = parameters.getLong("limit", 10L);
 
 파라미터가 없으면 두 번째 실행부터 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
 
+### stepParameterJob
+
+청크 지향 Step 에서 JobParameters 를 쓴다. 어디에 쓰느냐에 따라 붙이는 스코프가 다르다.
+
+| 쓰는 곳 | 빈 | 스코프 | 파라미터 |
+| --- | --- | --- | --- |
+| Step 설정(청크 크기) | `stepParameterStep` | `@JobScope` | `chunkSize` → `.chunk(chunkSize)` |
+| 읽을 데이터 범위 | `stepParameterReader`(`ListItemReader`) | `@StepScope` | `count` → 1..count |
+
+- Step 빈은 Step 이 시작되기 전에 만들어지므로 `@StepScope` 가 아니라 `@JobScope` 를 붙인다. 스코프가 없으면 애플리케이션 시작 때 `jobParameters` 를 찾지 못해 실패한다.
+- 두 빈 모두 실행마다 새로 만들어져서, 다음 실행에서 `chunkSize`·`count` 를 바꾸면 그대로 반영된다.
+- Writer 는 청크마다 `chunk=[1, 2, 3]` 처럼 출력한다. `count=0` 이면 아무것도 쓰지 않고 완료된다.
+- Spring Batch 6 에서는 `chunk(int, PlatformTransactionManager)` 가 폐기 예정이라 `chunk(int)` 뒤에 `.transactionManager(...)` 를 쓴다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=stepParameterJob count=7,java.lang.Long chunkSize=3,java.lang.Long'
+```
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
