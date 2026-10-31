@@ -142,6 +142,29 @@ Long limit = parameters.getLong("limit", 10L);
 ./gradlew bootRun --args='--spring.batch.job.name=stepParameterJob count=7,java.lang.Long chunkSize=3,java.lang.Long'
 ```
 
+### executionContextJob
+
+ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job 실행마다 하나(`BATCH_JOB_EXECUTION_CONTEXT`), Step 실행마다 하나(`BATCH_STEP_EXECUTION_CONTEXT`)씩 있고 DB 에 저장된다. Job 파라미터는 실행 전에 정해지는 입력이고, ExecutionContext 는 실행 중에 쓰고 읽는다.
+
+`putStep` 이 값 세 개를 서로 다른 방식으로 넣고, `readStep` 이 `@Value("#{jobExecutionContext['...']}")` 로 읽는다.
+
+| 값 | 넣는 곳 | `readStep` 에서 | 저장되는 곳 |
+| --- | --- | --- | --- |
+| `directValue` | Job 컨텍스트에 직접(`stepExecution.getJobExecution().getExecutionContext()`) | `direct` | Job 컨텍스트 |
+| `promotedValue` | Step 컨텍스트 + `ExecutionContextPromotionListener` | `promoted` | Step 컨텍스트와 Job 컨텍스트 |
+| `stepOnlyValue` | Step 컨텍스트에만 | `null` | Step 컨텍스트 |
+
+- 다음 Step 으로 값을 넘기려면 Job 컨텍스트에 있어야 한다. Step 컨텍스트에 넣은 값은 그 Step 에서만 보인다.
+- `ExecutionContextPromotionListener` 는 Step 이 끝날 때(기본은 `COMPLETED` 일 때) 지정한 키를 Job 컨텍스트로 복사한다. Step 코드가 Job 컨텍스트를 몰라도 된다.
+- `jobExecutionContext` 를 `@Value` 로 받는 빈에는 `@StepScope`(또는 `@JobScope`)가 필요하다.
+- 테스트는 `JobRepository.getJobExecution(id)` 로 DB 에서 다시 읽어 저장된 내용을 확인한다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=executionContextJob run=1'
+```
+
+같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
