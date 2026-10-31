@@ -149,8 +149,6 @@
   * [Spring Batch - Scheduler vs Batch](tech-stack/framework-library/spring-batch/scheduler-vs-batch.md)
   * [Spring Batch - SYSTEM INIT](tech-stack/framework-library/spring-batch/system-init.md)
   * [Spring Batch - SYSTEM BUILD](tech-stack/framework-library/spring-batch/system-build.md)
-  * [Spring Batch - SYSTEM EXECUTE](tech-stack/framework-library/spring-batch/system-execute.md)
-  * [Spring Batch - SYSTEM DOMINATE](tech-stack/framework-library/spring-batch/system-dominate.md)
   * [Spring Batch - SYSTEM TAKEOVER](tech-stack/framework-library/spring-batch/system-takeover.md)
 * [Spring AI](tech-stack/framework-library/spring-ai/README.md)
   * [Spring AI - LLM Introduction](tech-stack/framework-library/spring-ai/llm-introduction.md)
