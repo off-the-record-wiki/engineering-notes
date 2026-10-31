@@ -1,4 +1,4 @@
-# Spring Batch - SYSTEIM INIT
+# Spring Batch - SYSTEM INIT
 
 #### 배치 처리란?
 

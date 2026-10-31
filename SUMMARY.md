@@ -147,7 +147,7 @@
   * [Spring Security - Authorization Server Endpoint Protocol](tech-stack/framework-library/spring-security-oauth2/authorization-server-endpoint-protocol.md)
 * [Spring Batch](tech-stack/framework-library/spring-batch/README.md)
   * [Spring Batch - Scheduler vs Batch](tech-stack/framework-library/spring-batch/scheduler-vs-batch.md)
-  * [Spring Batch - SYSTEIM INIT](tech-stack/framework-library/spring-batch/systeim-init.md)
+  * [Spring Batch - SYSTEM INIT](tech-stack/framework-library/spring-batch/system-init.md)
   * [Spring Batch - SYSTEM BUILD](tech-stack/framework-library/spring-batch/system-build.md)
 * [Spring AI](tech-stack/framework-library/spring-ai/README.md)
   * [Spring AI - LLM Introduction](tech-stack/framework-library/spring-ai/llm-introduction.md)
