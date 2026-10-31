@@ -22,4 +22,220 @@
 
 #### 다양한 타입의 Job 파라미터 - 기본 데이터 타입 파라미터 전달
 
-* 
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class ParameterJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    JobRepository jobRepository;
+
+    @Test
+    void 문자열과_정수형_파라미터를_넘기면_이름을_횟수만큼_출력하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("name", "batch")
+                .addJobParameter("count", 3, Integer.class)
+                .toJobParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut().lines().filter(line -> line.contains("Hello, batch ("))).hasSize(3);
+    }
+
+    @Test
+    void 정수형_파라미터가_0이면_아무것도_출력하지_않고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("name", "batch")
+                .addJobParameter("count", 0, Integer.class)
+                .toJobParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).doesNotContain("Hello, ");
+    }
+
+    @Test
+    void 문자열_파라미터가_없으면_Job이_시작되지_않는다() {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("count", 3, Integer.class)
+                .toJobParameters();
+
+        // when / then
+        assertThatThrownBy(() -> jobOperatorTestUtils.startJob(parameters))
+                .isInstanceOf(InvalidJobParametersException.class);
+    }
+
+    @Test
+    void 정수형_파라미터가_없으면_Job이_시작되지_않는다() {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("name", "batch")
+                .toJobParameters();
+
+        // when / then
+        assertThatThrownBy(() -> jobOperatorTestUtils.startJob(parameters))
+                .isInstanceOf(InvalidJobParametersException.class);
+    }
+
+    @Test
+    void 문자열_파라미터가_없으면_JobExecution이_만들어지지_않는다() {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("count", 3, Integer.class)
+                .toJobParameters();
+
+        // when
+        catchThrowable(() -> jobOperatorTestUtils.startJob(parameters));
+
+        // then
+        assertThat(jobRepository.getLastJobExecution("parameterJob", parameters)).isNull();
+    }
+
+    @Test
+    void 정수형_파라미터가_없으면_JobExecution이_만들어지지_않는다() {
+        // given
+        JobParameters parameters = jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("name", "batch")
+                .toJobParameters();
+
+        // when
+        catchThrowable(() -> jobOperatorTestUtils.startJob(parameters));
+
+        // then
+        assertThat(jobRepository.getLastJobExecution("parameterJob", parameters)).isNull();
+    }
+}
+```
+
+#### 날짜와 시간 파라미터 전달(LocalDate와 LocalDateTime 파라미터 전달하기)
+
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class DateTimeJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    JobRepository jobRepository;
+
+    @Autowired
+    Job dateTimeJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(dateTimeJob);
+    }
+
+    @Test
+    void 날짜와_날짜시간_파라미터를_넘기면_그_타입으로_처리해_출력하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = dateTimeParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut())
+                .contains("targetDate=2026-10-31, dayOfWeek=SATURDAY")
+                .contains("requestedAt=2026-10-31T09:30:15, time=09:30:15");
+    }
+
+    @Test
+    void 날짜와_날짜시간_파라미터는_타입을_유지한_채_저장된다() throws Exception {
+        // given
+        JobExecution execution = jobOperatorTestUtils.startJob(dateTimeParameters());
+
+        // when
+        JobParameters stored = jobRepository.getJobExecution(execution.getId()).getJobParameters();
+
+        // then
+        assertThat(stored.getParameter("targetDate").type()).isEqualTo(LocalDate.class);
+        assertThat(stored.getParameter("requestedAt").type()).isEqualTo(LocalDateTime.class);
+    }
+
+    private JobParameters dateTimeParameters() {
+        return jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("targetDate", LocalDate.of(2026, 10, 31), LocalDate.class)
+                .addJobParameter("requestedAt", LocalDateTime.of(2026, 10, 31, 9, 30, 15), LocalDateTime.class)
+                .toJobParameters();
+    }
+}
+```
+
+#### 열거형(Enum) 파라미터 전달
+
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class EnumJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    JobRepository jobRepository;
+
+    @Autowired
+    Job enumJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(enumJob);
+    }
+
+    @Test
+    void 열거형_파라미터를_넘기면_열거형으로_처리해_출력하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = expressParameters();
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).contains("deliveryType=EXPRESS, leadDays=1");
+    }
+
+    @Test
+    void 열거형_파라미터는_타입과_상수를_유지한_채_저장된다() throws Exception {
+        // given
+        JobExecution execution = jobOperatorTestUtils.startJob(expressParameters());
+
+        // when
+        JobParameter<?> stored = jobRepository.getJobExecution(execution.getId())
+                .getJobParameters()
+                .getParameter("deliveryType");
+
+        // then
+        assertThat(stored.type()).isEqualTo(DeliveryType.class);
+        assertThat(stored.value()).isSameAs(DeliveryType.EXPRESS);
+    }
+
+    private JobParameters expressParameters() {
+        return jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addJobParameter("deliveryType", DeliveryType.EXPRESS, DeliveryType.class)
+                .toJobParameters();
+    }
+}
+```
