@@ -45,6 +45,16 @@ Job 이 여러 개라서 `--spring.batch.job.name` 으로 실행할 Job 을 지�
 ./gradlew bootRun --args='--spring.batch.job.name=enumJob deliveryType=EXPRESS,com.example.batch.enumparam.DeliveryType'
 ```
 
+### pojoJob
+
+Job 파라미터를 POJO(`ReportJobParameters`) 하나로 모아 주입받는다. POJO 는 `@Component` + `@StepScope` 빈이고 필드에 `@Value("#{jobParameters['...']}")` 를 붙인다.
+Tasklet 은 POJO 를 주입받아 getter 로 쓴다. 주입되는 것은 스코프 프록시라서 Tasklet 에는 `@StepScope` 가 없어도 실행마다 그 실행의 파라미터가 들어간다.
+`@StepScope` 는 CGLIB 클래스 프록시를 만들기 때문에 final 인 record 는 쓸 수 없다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=pojoJob reportName=daily reportDate=2026-10-31,java.time.LocalDate pageSize=50,java.lang.Integer'
+```
+
 ## 검사
 
 Testcontainers 로 MySQL 을 띄워 배치 메타 테이블이 생성되는지 확인한다.
