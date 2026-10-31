@@ -239,3 +239,64 @@ class EnumJobTests {
     }
 }
 ```
+
+#### POJO를 활용한 Job 파라미터 주입
+
+* POJO를 활용한 파라미터 관리는 코드를 더 체계적으로 구성할 수 있게 해준다. 특히 여러 개의 파라미터를 다루는 복잡한 배치 잡에서 이런 구조화의 효과가 나오게 된다.
+
+```java
+@SpringBatchTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
+@Import(TestcontainersConfiguration.class)
+@ExtendWith(OutputCaptureExtension.class)
+class PojoJobTests {
+
+    @Autowired
+    JobOperatorTestUtils jobOperatorTestUtils;
+
+    @Autowired
+    Job pojoJob;
+
+    @BeforeEach
+    void setUp() {
+        jobOperatorTestUtils.setJob(pojoJob);
+    }
+
+    @Test
+    void POJO로_주입받은_파라미터로_처리해_출력하고_완료된다(CapturedOutput output) throws Exception {
+        // given
+        JobParameters parameters = reportParameters("daily", LocalDate.of(2026, 10, 31), 50);
+
+        // when
+        JobExecution execution = jobOperatorTestUtils.startJob(parameters);
+
+        // then
+        assertThat(execution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+        assertThat(output.getOut()).contains("reportName=daily, reportDate=2026-10-31, pageSize=50");
+    }
+
+    @Test
+    void 연달아_실행하면_POJO에는_각_실행의_파라미터가_들어간다(CapturedOutput output) throws Exception {
+        // given
+        jobOperatorTestUtils.startJob(reportParameters("daily", LocalDate.of(2026, 10, 31), 50));
+
+        // when
+        jobOperatorTestUtils.startJob(reportParameters("weekly", LocalDate.of(2026, 11, 1), 10));
+
+        // then
+        assertThat(output.getOut()).contains("reportName=weekly, reportDate=2026-11-01, pageSize=10");
+    }
+
+    private JobParameters reportParameters(String reportName, LocalDate reportDate, Integer pageSize) {
+        return jobOperatorTestUtils.getUniqueJobParametersBuilder()
+                .addString("reportName", reportName)
+                .addJobParameter("reportDate", reportDate, LocalDate.class)
+                .addJobParameter("pageSize", pageSize, Integer.class)
+                .toJobParameters();
+    }
+}
+```
+
+>❗기본 파라미터 표기법의 한계 : 파라미터 값에 쉼표(,)가 포함되면 `Caused by: java.lang.ClassNotFoundException`가 발생한다. 이런 경우 JSON 기반 파라미터 표기법을 사용할 수 있다.
+
+#### JobParameter의 JSON 기반 표기법
