@@ -7,7 +7,7 @@
 * [Spring Batch - SYSTEM BUILD](system-build.md)
 * [Spring Batch - SYSTEM EXECUTE](system-execute.md)
 * [Spring Batch - SYSTEM DOMINATE](system-dominate.md)
-* Spring Batch - SYSTEM TAKEOVER
+* [Spring Batch - SYSTEM TAKEOVER](system-takeover.md)
 * Spring Batch - SYSTEM CONQUER
 * Spring Batch - SYSTEM WARFARE
 * Spring Batch - SYSTEM SHUTDOWN
