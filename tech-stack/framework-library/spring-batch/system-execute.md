@@ -533,3 +533,57 @@ public class FileJobParametersValidator implements JobParametersValidator {
 * 지연된 빈 생성(Lazy Bean Creation) : `@JobScope`가 적용된 빈은 애플리케이션 구동 시점에는 프록시 객체만 생성된다.
 * `Job` 파라미터와의 연동 : `@JobScope`는 이런 동적 파라미터를 `Step` 빈 생성 시에 주입받을 수 있게 해준다. 만약 `@JobScope`가 없다면 `Step` 빈은 애플리케이션 구동 시점에 생성되므로 실행 시점에 전달되는 파라미터를 받을 수 없을 것이다.
 * 병렬 처리 지원(Parallel Processing Support) : `@JobScope`를 사용하면 `JobExecution`마다 별도의 빈이 생성되어 동시성 문제를 피할 수 있다.
+
+```java
+/**
+ * TL;DR: {@code @JobScope} 빈은 JobExecution 하나에 하나씩 만들어진다.
+ * - firstStep: Step 빈에 {@code @JobScope} → 실행마다 jobParameters 를 새로 받는다.
+ * - {@link VisitedSteps}: 같은 실행의 Step 들이 한 인스턴스를 공유하고, 다음 실행은 새 인스턴스로 시작한다.
+ * - Job 실행 밖에서 쓰면 {@code ScopeNotActiveException}.
+ */
+@Configuration
+public class JobScopeJobConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(JobScopeJobConfig.class);
+
+    @Bean
+    public Job jobScopeJob(JobRepository jobRepository, Step jobScopeFirstStep, Step jobScopeSecondStep) {
+        return new JobBuilder("jobScopeJob", jobRepository)
+                .start(jobScopeFirstStep)
+                .next(jobScopeSecondStep)
+                .build();
+    }
+
+    @Bean
+    @JobScope
+    public Step jobScopeFirstStep(
+            JobRepository jobRepository,
+            PlatformTransactionManager transactionManager,
+            VisitedSteps visitedSteps,
+            @Value("#{jobParameters['message']}") String message) {
+        return new StepBuilder("firstStep", jobRepository)
+                .tasklet(
+                        (contribution, chunkContext) -> {
+                            visitedSteps.add("firstStep");
+                            log.info("firstStep message={}", message);
+                            return RepeatStatus.FINISHED;
+                        },
+                        transactionManager)
+                .build();
+    }
+
+    @Bean
+    public Step jobScopeSecondStep(
+            JobRepository jobRepository, PlatformTransactionManager transactionManager, VisitedSteps visitedSteps) {
+        return new StepBuilder("secondStep", jobRepository)
+                .tasklet(
+                        (contribution, chunkContext) -> {
+                            visitedSteps.add("secondStep");
+                            log.info("secondStep visitedSteps={}", visitedSteps.getSteps());
+                            return RepeatStatus.FINISHED;
+                        },
+                        transactionManager)
+                .build();
+    }
+}
+```
