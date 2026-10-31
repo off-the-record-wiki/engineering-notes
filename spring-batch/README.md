@@ -165,6 +165,18 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
 
+### listenerJob
+
+`JobExecutionListener` 는 Job 이 시작되기 직전(`beforeJob`)과 끝난 직후(`afterJob`)에 불린다. `JobBuilder.listener(...)` 로 등록한다.
+
+- `ReportPeriodListener.beforeJob` 은 `targetDate` 로 그 달 1일~`targetDate` 기간을 계산해 Job 컨텍스트(`startDate`, `endDate`)에 넣는다. Step 은 `#{jobExecutionContext['...']}` 로 읽기만 한다. 여러 Step 이 같은 가공 값을 써야 할 때 계산을 한 곳에 모으는 방법이다.
+- `afterJob` 은 Job 이 실패해도 불린다(`AbstractJob` 의 `finally` 블록). `fail=true,java.lang.Boolean` 을 넘기면 Step 이 예외를 던지고 `afterJob status=FAILED` 가 출력된다.
+- 인터페이스를 구현하는 대신 아무 클래스의 메서드에 `@BeforeJob`/`@AfterJob` 을 붙여 등록할 수도 있다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=listenerJob targetDate=2026-10-31,java.time.LocalDate'
+```
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
