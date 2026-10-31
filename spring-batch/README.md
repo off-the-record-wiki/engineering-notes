@@ -199,6 +199,33 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 같은 `run` 값으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run` 값을 바꿔 가며 실행한다.
 
+### dynamicDataJob
+
+`listenerJob` 은 `beforeJob` 이 만든 값을 Step 하나가 읽는다. `dynamicDataJob` 은 파라미터만으로는 정해지지 않는 값을 `beforeJob` 이 실행 시점에 만들고, Step 세 개가 서로 다른 방식으로 읽는다.
+
+`DispatchPlanListener.beforeJob` 은 `group` 파라미터로 `RegionDirectory`(DB 조회 대신 쓰는 메모리 조회기)를 조회해 Job 컨텍스트에 넣는다.
+
+| 키 | 값 |
+| --- | --- |
+| `regions` | 조회한 지역 목록(`south` → `[BUSAN, DAEGU, ULSAN]`, 없는 그룹 → `[]`) |
+| `regionCount` | 목록 크기 |
+| `label` | `dispatch-<JobExecution ID>` — 실행마다 달라 파라미터로 미리 넘길 수 없다 |
+
+| Step | 읽는 방식 |
+| --- | --- |
+| `prepareStep` | `@StepScope` Tasklet 에 `@Value("#{jobExecutionContext['regions']}")` 로 주입 |
+| `dispatchStep` | `@StepScope` `ListItemReader` 를 `regions` 로 만든다. 동적 목록이 청크 Step 의 입력이 된다 |
+| `summaryStep` | 스코프 없이 `chunkContext.getStepContext().getStepExecution().getJobExecution().getExecutionContext()` 에서 직접 읽음 |
+
+- `beforeJob` 이 예외를 던지면(`group` 이 없을 때) Job 은 `FAILED` 가 되고 Step 은 하나도 실행되지 않는다. StepExecution 이 남지 않으므로 실패 원인은 Job 실행의 예외로만 보인다.
+- 컨텍스트에 넣은 값은 `BATCH_JOB_EXECUTION_CONTEXT` 에 저장된다. 테스트는 `JobRepository` 에서 다시 읽어 확인한다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=dynamicDataJob group=south'
+```
+
+같은 `group` 으로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `group` 을 바꾸거나 `run` 같은 파라미터를 더해 실행한다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
