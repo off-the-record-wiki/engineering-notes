@@ -158,3 +158,27 @@ public interface LineAggregator<T> {
 #### 대용량 파일의 분할 처리: MultiResourceItemWriter
 
 ![](https://github.com/user-attachments/assets/7c9b28ea-e73c-4fc5-bcec-bad72e5d4381)
+
+* `name()` : M`ultiResourceItemWriter` 식별을 위한 고유 이름 지정
+* `resource()` : `MultiResourceItemWriter`를 사용할 땐 위임 대상 `ItemWriter` 대신 `MultiResourceItemWriter` 구성 코드에 `Resource`를 지정해줘야 한다. 위임 대상 `ItemWriter`에 `Resource`를 지정해주는 역할은 `MultiResourceItemWriter`가 내부적으로 수행
+* `itemCountLimitPerResource` : 한 파일당 최대 라인 수를 지정
+* `delegate` : 실제 파일 쓰기를 수행할 위임 대상 `ItemWriter`를 설정
+* `resourceSuffixCreator` : 파일 기본 이름 뒤에 붙을 접미사를 정의
+
+#### JSON 파일 읽고 쓰기
+
+![](https://github.com/user-attachments/assets/831f9824-7a9c-4d9b-ad6c-6086fe0e0699)
+
+* 중첩된 객체도 표현할 수 있고, 배열도 다룰 수 있어서 현대 시스템에서 자주 사용하는 패턴이다.
+
+#### JsonItemReader
+
+* `JsonItemReader`는 JSON 데이터를 처리하기 위한 리더이다.
+* `resource` : JSON 데이터의 소스를 지정한다. 파일뿐만 아니라 URL 등 다양한 소스에서 JSON을 읽어들일 수 있다.
+* `JsonObjectReader` : JSON 파싱의 핵심 엔진이다. Jackson, Gson을 모두 제공한다.
+
+#### JsonFileItemWriter
+
+* `JsonFileItemWriter`는 객체를 JSON 배열 형식으로 변환해 파일로 저장하는 역할을 한다. 내부적으로 `JsonObjectMarshaller`를 사용해 객체를 JSON 문자열로 변환한다.
+* `WritableResource` : JSON 데이터를 저장할 대상 파일을 나타내는 Spring의 `WritableResource`이다.
+* `JsonObjectMarshaller` : 객체를 JSON 형식으로 마샬링하는 JSON 객체 변환기로 Spring Batch에서는 Jackson, Gson 두 가지 구현체를 지원한다.
