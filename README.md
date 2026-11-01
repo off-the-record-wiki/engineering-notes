@@ -20,7 +20,7 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Cache](tech-stack/README.md) | Cache Strategy, Cache Problems, Spring Cache |
 | [Messaging](tech-stack/README.md) | Kafka |
 | [Network & Protocol](tech-stack/README.md) | HTTP, gRPC |
-| [DevOps](tech-stack/README.md) | Docker, Kubernetes, CI/CD, Nginx, Monitoring |
+| [DevOps](tech-stack/README.md) | Docker, Kubernetes, CI/CD, Nginx, Monitoring, Terraform |
 | [Cloud](tech-stack/README.md) | AWS |
 | [Architecture & Design](tech-stack/README.md) | MSA, Design Pattern, Clean Spring |
 | [Testing](tech-stack/README.md) | Java Test, Load Testing, TDD |
