@@ -52,3 +52,94 @@ JdbcCursorItemReader
 * PreparedStatementSetter(동적 쿼리 파라미터 주입기) : `PreparedStatementSetter`는 이름 그대로 `PreparedStatement`에 동적으로 파라미터 값을 주입하는 역할을 한다.
 
 ![](https://github.com/user-attachments/assets/9f887ab8-3c25-4737-9453-07e8a1f006bb)
+
+#### JDBC 드라이버의 내부 최적화
+
+1. ResultSet 내부 버퍼링
+
+* JDBC 드라이버는 기본적으로 여러 개의 row를 미리 가져와 `ResultSet`의 내부 버퍼에 저장해둔다. 따라서 `ResultSet.next()`가 호출될 때마다 이 버퍼에서 데이터를 하나씩 꺼내는 구조다. 즉, 우리가 한 건씩 읽는다고 착각할 뿐 실제로는 한 번에 여러 건을 가져와서 처리하는 방식이다.
+
+2. `JdbcCursorItemReader`의 `read()` 메서드가 호출되면?
+
+![](https://github.com/user-attachments/assets/2883d1ba-5e99-46a3-919c-b343d1db0cca)
+
+* 버퍼가 비었을 때만 데이터베이스에 새로운 데이터를 요청하고 이 때도 한 번에 여러 건의 데이터를 가져와 버퍼에 채운다.
+* MySQL 드라이버는 `useCursorFetch` connection property 설정이 없으면 기본적으로 쿼리 결과의 모든 행을 한 번에 메모리로 가져온다. 따라서 조회 결과가 대용량이면 메모리에 전부 적재되어 시스템 자원을 고갈시킬 수 있다. 대량 데이터를 안전하게 처리하려면 `useCursorFetch=true`를 설정하여 데이터를 분할 로딩한다.
+
+3. Fetch Size로 네트워크 비용 최적화
+
+* `fetchSize`는 JDBC 드라이버가 한 번에 가져올 row 개수를 지정하는 값이다. 예를 들어 `fetchSize=1000`이면, 드라이버는 한 번의 네트워크 요청으로 최대 1000건의 데이터를 가져오려고 시도한다.
+* 하지만 이 값은 JDBC 드라이버에게 주는 힌트일 뿐이며 실제로 가져오는 건수는 드라이버 구현체와 데이터베이스의 정책에 따라 달라질 수 있다. 드라이버는 이 설정을 참고해 데이터를 한 번에 가져와 내부 버퍼에 저장하고 이후 `read()`가 호출될 때마다 이 버퍼에서 하나씩 반환한다. 이를 통해 데이터베이스와의 네트워크 통신 횟수를 줄여 성능을 최적화할 수 있다.
+
+#### 커서 연속성
+
+![](https://github.com/user-attachments/assets/90e0e976-4b53-405f-bc30-ce04562e7fc0)
+
+* 청크 처리마다 트랜잭션이 새로 시작되고 커밋될텐데 커서는 닫히지 않고 안전하게 데이터를 계속 읽는다.
+* `JdbcCursorItemReader`가 기본적으로 `Step` 트랜잭션과 별도의 데이터베이스 커넥션을 사용하기 때문이다. 덕분에 `Step` 트랜잭션이 커밋되더라도 커서는 영향을 받지 않고 처음 열렸을 때의 상태 그대로 데이터를 끝까지 읽어갈 수 있다.
+
+#### JdbcCursorItemReader의 SQL ORDER BY 설정
+
+![](https://github.com/user-attachments/assets/20e282b2-6772-4fe8-9f49-a8cc772fe43a)
+
+* `Step`이 재시작되면 `JdbcCursorItemReader`는 `jumpToItem()` 메서드를 호출해서 이전에 실패한 지점부터 다시 시작하게 된다. 이 때 `ResultSet.next()`를 호출해서 실패 지점까지 커서를 이동시키는데 만약 쿼리 결과의 순서가 매번 다르다면 `ResultSet.next()`로 이동한 지점이 이전 실행의 그 지점이라고 보장할 수 없다.
+* `ORDER BY`가 없으면 재시작 시 동일한 데이터 순서를 보장할 수 없어서 어떤 데이터는 중복 처리되거나 어떤 데이터는 누락될 수 있다. 그래서 `JdbcCursorItemReader`를 사용할 때도 반드시 `ORDER BY` 절을 추가해야 하며 `ORDER BY` 절에는 유니크한 값(보통 PK)을 포함하도록 한다.
+
+![](https://github.com/user-attachments/assets/b05b2027-c8ce-4337-b9c3-a108e1959132)
+
+#### JdbcPagingItemReader: 데이터를 페이지 단위로 처리하는 법
+
+![](https://github.com/user-attachments/assets/387c46b3-dfc9-439d-9929-379f461feb5c)
+
+* 대량의 데이터를 메모리 걱정없이 안전하게 읽어오는 또 다른 방법은 바로 데이터를 페이지 단위로 나눠서 읽어오는 것으로 `dbcPagingItemReader`가 있다.
+* `JdbcPagingItemReader`는 `Keyset` 기반 페이징을 수행한다.
+  * Offset 기반 페이징 : 데이터베이스가 결과셋을 정렬한 후, `OFFSET`만큼 건너뛰고 `LIMIT` 개수만큼 데이터를 가져오는 방식. 이 과정에서 메모리를 많이 사용하고 시간도 오래 걸린다. 특히 페이지 번호가 뒤로 갈수록 스캔하고 버려지는 데이터가 많아져서 성능이 급격히 저하된다.
+  * Keyset 기반 페이징 : `SELECT * FROM victims WHERE id > 1000 ORDER BY id LIMIT 10`처럼 이전 페이지의 마지막 키(`id`) 값을 기준으로 그 다음 데이터를 가져온다. 정확히 이전에 가져온 마지막 값 이후부터 읽어오므로 성능이 일정하게 유지된다.
+
+```
+JdbcPagingItemReader
+    |
+    - DataSource   
+    |        └── (데이터베이스 연결)
+    |
+    - RowMapper
+    |        └── (ResultSet → Java 객체 변환) 
+    |
+    - NamedParameterJdbcTemplate
+    |        └── (SQL 실행 및 파라미터 바인딩)
+    |
+    - PagingQueryProvider
+	     ├── (쿼리 생성 및 페이징 전략)
+             └── (DB별 SQL 최적화)
+```
+* DataSource : `JdbcCursorItemReader`에서 살펴본 것과 동일하게 데이터베이스 연결을 담당하는 객체다. Spring Boot가 `application.yml`의 `spring.datasource` 설정을 읽어 자동으로 생성한 DataSource를 사용한다.
+* RowMapper : `JdbcCursorItemReader`와 동일하게 조회 결과를 Java 객체로 매핑하는 역할을 한다.
+* NamedParameterJdbcTemplate : `JdbcTemplate`에서 한 단계 발전한 이 템플릿은 위치 기반 파라미터(?) 대신 이름을 가진 파라미터를 사용할 수 있게 해준다.
+* PagingQueryProvider(페이징 쿼리 생성) : `JdbcPagingItemReader`는 Keyset 기반 페이징을 위한 특별한 쿼리 생성 도구를 필요로 하며 이를 위해 Spring Batch는 각 데이터베이스에 최적화된 `PagingQueryProvider` 구현체를 제공한다. PostgreSQL에는 `PostgresPagingQueryProvider`가 MySQL에는 `MySqlPagingQueryProvider`가 필요한 식이다.
+
+#### JdbcBatchItemWriter
+
+* `JdbcBatchItemWriter`는 Spring Batch에서 제공하는 가장 기본적인 관계형 데이터베이스 쓰기 도구다. 내부적으로 `NamedParameterJdbcTemplate`을 사용하며 `JdbcTemplate`의 `batchUpdate`를 활용해 청크 단위로 모아진 아이템들을 효율적으로 데이터베이스에 저장한다.
+* 일반 INSERT와 Multi-value INSERT와 Batch Update는 각각 차이가 있다.
+  * 일반 INSERT : 매 쿼리마다 네트워크 패킷 발생
+  * Multi-Value INSERT : 여러 값을 하나의 쿼리로 한 번에 전송
+  * Batch Update : `PreparedStatement`를 재사용하여 쿼리 템플릿 하나와 여러 파라미터 세트를 함께 전송한다. 이렇게 전달된 배치 쿼리는 데이터베이스 서버에서 파싱되어 처리되며 이 모든 작업은 하나의 트랜잭션 내에서 수행된다. 이를 통해 청크 단위로 묶인 수백 건의 데이터가 모두 성공하거나 모두 실패하는 원자성이 보장된다.
+
+```
+JdbcBatchItemWriter
+    │
+    ├────── NamedParameterJdbcTemplate  
+    │        └─ (쿼리 실행)  
+    │
+    ├────── SQL  
+    │        └─ (데이터 삽입/수정을 위한 쿼리)  
+    │
+    ├──────  ItemSqlParameterSourceProvider or ItemPreparedStatementSetter
+             └─ (Java 객체 → SQL 파라미터 매핑)
+```
+* NamedParameterJdbcTemplate : 네임드 파라미터 바인딩을 지원하는 `JdbcTemplate`이다. `JdbcBatchItemWriter`에서 SQL 실행과 결과 처리를 위해 사용된다.
+* SQL : `JdbcBatchItemWriter`가 실행할 SQL 구문을 정의한다. 이 SQL은 `INSERT`, `UPDATE`, `DELETE`와 같은 DML 구문이 될 수 있으며 파라미터 바인딩을 위해 두 가지 방식을 지원한다. 단, 두 방식을 동일한 SQL 문에서 혼용하면 안 된다. 하나의 방식만 선택해서 사용해야 한다.
+  * 물음표(`?`) 플레이스홀더
+  * 네임드 파라미터(`:name`)
+* ItemSqlParameterSourceProvider : `ItemSqlParameterSourceProvider`는 Java 객체의 프로퍼티를 SQL의 네임드 파라미터에 매핑하는 역할을 담당한다.
+* BeanPropertyItemSqlParameterSourceProvider : Spring JDBC의 `BeanPropertySqlParameterSource`를 사용하여 리플렉션 기반으로 필드 값을 바인딩하는데 자바빈 규약을 따르는 객체의 프로퍼티를 자동으로 SQL 파라미터에 매핑한다.
