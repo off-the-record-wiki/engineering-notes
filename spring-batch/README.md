@@ -328,6 +328,38 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 실행이 `FAILED` 로 끝났으면 원인(예: `reportDir` 자리의 일반 파일, 원본 로그의 깨진 줄)을 고친 뒤 위 명령을 같은 파라미터로 다시 실행한다. 같은 JobInstance 가 재시작되어 수집·분석·보고를 처음부터 다시 한다. `allowStartIfComplete` 는 Step 단위 설정이라, JobInstance 가 `COMPLETED` 면 여전히 `JobInstanceAlreadyCompleteException` 으로 막힌다.
 
+### orderRecoveryJob
+
+해킹으로 `orders.status` 가 틀어졌다고 보고 복구한다. `SHIPPED`·`CANCELLED` 인 주문을 읽어, `shipping_id` 가 있으면 `SHIPPED`, 없으면 `READY_FOR_SHIPMENT` 로 다시 정한다. `READY_FOR_SHIPMENT` 주문은 읽지 않는다.
+
+| 구성 요소 | 설정 |
+| --- | --- |
+| Reader | `JdbcPagingItemReader` — `SELECT id, customer_id, order_datetime, status, shipping_id FROM orders WHERE status IN ('SHIPPED', 'CANCELLED')`, 정렬 키 `id` 오름차순, `pageSize(10)`. `queryProvider` 를 주지 않으면 빌더가 DataSource 메타데이터로 DB 를 알아내 `MySqlPagingQueryProvider` 를 고른다. 행은 `DataClassRowMapper` 로 `RecoveryOrder` record 에 매핑한다 |
+| Processor | `OrderStatusRecoveryProcessor` — 판정 결과가 지금 상태와 같으면 `null`, 다르면 status 만 바꾼 `RecoveryOrder` |
+| Writer | `JdbcBatchItemWriter` — `UPDATE orders SET status = :status WHERE id = :id`. `beanMapped()` 는 getter(`getId()`) 규칙으로 값을 찾으므로 record 접근자(`id()`)에 기대지 않고, `itemSqlParameterSourceProvider` 로 `MapSqlParameterSource` 를 직접 만든다. enum 은 `name()` 문자열로 넘긴다 |
+| Step | `orderRecoveryStep`, chunk(10) |
+
+- `JdbcPagingItemReader` 는 정렬 키(`id`)로 다음 페이지를 찾는다(`WHERE ... AND id > 마지막 id ORDER BY id LIMIT 10`). 그래서 읽는 중에 앞 페이지의 UPDATE 로 조회 조건에서 빠지는 행(→ `READY_FOR_SHIPMENT`)이 생겨도 뒤의 행을 건너뛰지 않는다. OFFSET 방식(`LIMIT 10 OFFSET 10`)이면 빠진 행만큼 결과가 앞으로 당겨져 건너뛴다.
+- Processor 가 `null` 을 돌려준 주문(이미 맞는 상태)은 `filterCount` 에 세고 `writeCount` 에는 세지 않는다. UPDATE 도 하지 않는다.
+- 샘플 데이터 `sql/orders-data.sql` 은 `spring.sql.init.mode: always` 라서 앱이 뜰 때마다 `DELETE FROM orders` 뒤 다시 채워진다. 복구 결과는 다음 실행 때 해킹된 상태로 되돌아간다.
+
+샘플 12건은 읽기 9건(`SHIPPED`·`CANCELLED`), 그중 이미 맞는 상태 2건(id 4, 9)이 걸러지고 7건을 고친다. `READY_FOR_SHIPMENT` 3건(id 5, 6, 11)은 읽지 않는다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=orderRecoveryJob run=1'
+```
+
+bootRun 이 끝나면 `spring-boot-docker-compose` 가 MySQL 컨테이너를 멈추므로, 결과는 컨테이너만 다시 켜서 본다. 앱을 띄우지 않으므로 샘플 데이터가 다시 채워지지 않는다.
+
+```bash
+docker compose start mysql
+docker compose exec mysql mysql -ubatch -pbatch batch -e 'SELECT id, status, shipping_id FROM orders ORDER BY id'
+docker compose exec mysql mysql -ubatch -pbatch batch -e "SELECT s.READ_COUNT, s.FILTER_COUNT, s.WRITE_COUNT FROM BATCH_STEP_EXECUTION s WHERE s.STEP_NAME = 'orderRecoveryStep' ORDER BY s.STEP_EXECUTION_ID DESC LIMIT 1"
+docker compose stop mysql
+```
+
+실행 전 상태는 `orders-data.sql` 의 내용과 같다. 실행 후에는 id 1, 3, 7, 10, 12 가 `READY_FOR_SHIPMENT`, id 2, 8 이 `SHIPPED` 로 바뀌고 Step 건수는 `read=9, filter=2, write=7` 이다. 같은 파라미터로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로 `run=2` 처럼 값을 바꾼다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.

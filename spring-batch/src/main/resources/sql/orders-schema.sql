@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customer_id BIGINT NOT NULL,
+    order_datetime DATETIME NOT NULL,
+    status VARCHAR(30) NOT NULL,
+    shipping_id VARCHAR(50) NULL
+);

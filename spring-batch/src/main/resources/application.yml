@@ -2,3 +2,8 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/orders-schema.sql
+      data-locations: classpath:sql/orders-data.sql
