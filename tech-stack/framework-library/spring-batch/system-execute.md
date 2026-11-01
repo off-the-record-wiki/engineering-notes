@@ -129,3 +129,32 @@ public interface LineAggregator<T> {
 ```
 
 ![](https://github.com/user-attachments/assets/bf23f9d9-6d61-4c9b-ac83-3ac41dbb08ee)
+
+#### 커스텀 포맷 형식으로 파일 쓰기
+
+* 커스텀 포맷으로 데이터를 파일에 쓰기 위해서는 `FormatterLineAggregator`를 사용해야 한다. 
+* `FormatterLineAggregator`는 객체의 필드를 지정된 포맷에 맞춰 문자열로 변환한다. 고정 길이 형식의 파일이나 특별한 형식의 보고서를 만들 때 사용하기 좋다.
+* `formatted()` : `FlatFileItemWriterBuilder`의 `formatted()` 메서드는 `FlatFileItemWriter`가 사용할 `LineAggregator` 구현체로 `FormatterLineAggregator`를 지정한다. `FormatterLineAggregator`는 객체의 각 필드를 지정된 포맷 문자열에 맞춰 하나의 문자열로 변환한다.
+* `format()` : `FormatterLineAggregator`가 사용할 포맷 문자열을 지정한다.
+
+#### 파일 처리 옵션
+
+* `shouldDeleteIfExists` : 기존 파일의 처리 여부
+* `append` : 기존 파일에 데이터 덧붙이기 여부
+* `shouldDeleteIfEmpty` : 빈 결과 파일 처리 여부
+
+#### FlatFileItemWriter의 롤백 전략
+
+![](https://github.com/user-attachments/assets/39f3071f-a1ad-4488-bba4-055fead5b85b)
+
+* DB와 달리 파일은 이미 쓰여진 데이터를 롤백할 수 없다는 문제가 있다. 이 문제를 해결하기 위해 `FlatFileItemWriter`는 데이터를 즉시 파일에 쓰지 않고 내부 버퍼에 일시적으로 저장해둔다.
+* 이후 청크 처리가 정상적으로 완료되어 트랜잭션이 커밋되려고 할 때, 즉 `beforeCommit()` 콜백이 호출될 때 비로소 버퍼의 데이터를 파일에 쓴다. 덕분에 중간에 롤백이 발생하더라도 실제 파일에는 아무 데이터도 쓰이지 않아 마치 DB 롤백처럼 동작하게 된다.
+
+#### 파일 쓰기와 OS 캐시: forceSync 옵션
+
+* OS는 성능을 위해 매번 디스크에 직접 쓰지 않고 메모리 캐시에 데이터를 먼저 저장한다. 디스크 I/O는 비용이 크기 때문이다. 그러나 이로 인해 OS가 갑자기 중단되면 캐시의 데이터가 디스크에 쓰이지 못하고 유실될 수 있다.
+* `FlatFileItemWriterBuilder`는 이러한 동작을 개발자가 손쉽게 제어할 수 있도록 `forceSync()` 메서드를 제공한다. 이 값을 `true`로 설정하면 캐시가 아닌 디스크에 즉시 동기화되어 OS 중단이나 파일 시스템 문제가 발생해도 데이터 손실 위험이 줄어든다. 다만 잦은 동기화로 인해 성능 저하가 발생할 수 있다는 점을 기억하자. 기본값은 `false`이다.
+
+#### 대용량 파일의 분할 처리: MultiResourceItemWriter
+
+![](https://github.com/user-attachments/assets/7c9b28ea-e73c-4fc5-bcec-bad72e5d4381)
