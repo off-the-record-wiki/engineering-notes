@@ -1,0 +1,4 @@
+2026-11-01 10:00:00 [INFO] 로그인 성공
+2026-11-01 11:00:00 [ERROR] 타임아웃
+	at com.example.Db.connect(Db.java:42)
+2026-11-01 12:00:00 [ERROR] DB 연결 실패

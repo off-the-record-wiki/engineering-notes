@@ -298,6 +298,36 @@ ExecutionContext 는 실행 중에 만든 값을 담아 두는 저장소다. Job
 
 두 Job 모두 같은 파라미터로 다시 실행하면 이미 완료된 JobInstance 라서 실행되지 않으므로, `run=2` 같은 파라미터를 더해 실행한다.
 
+### logCollectionJob
+
+`serversDir` 아래 서버 디렉터리마다 있는 그날 로그(`<서버이름>/app-<targetDate>.log`)를 셸 명령으로 `workDir/<targetDate>/<서버이름>.log` 에 모으고, 줄마다 `yyyy-MM-dd HH:mm:ss [INFO|WARN|ERROR] 메시지` 형식을 읽어 서버별·레벨별 건수를 센 뒤 `reportDir/report-<targetDate>.txt` 로 쓴다. 파라미터 `targetDate`(LocalDate)·`serversDir`·`workDir`·`reportDir` 는 모두 필수이고 `DefaultJobParametersValidator` 로 검사한다.
+
+| Step | 설정 |
+| --- | --- |
+| `createWorkDirStep` | `SystemCommandTasklet` — `mkdir -p <workDir>/<targetDate>` |
+| `collectLogsStep` | `SystemCommandTasklet` — `sh -c <스크립트> sh <serversDir> <workDir>/<targetDate> <targetDate>`. `serversDir` 가 없으면 `exit 2`, `<workDir>/<targetDate>` 가 비었거나 디렉터리가 아니면 `exit 3` 이다. 복사 전에 `rm -f -- "$2"/*.log` 로 그 날짜 디렉터리의 `.log` 만 지우고, 서버 디렉터리마다 그날 파일이 있으면 `cp` 한다 |
+| `analyzeLogsStep` | chunk(10). Reader 는 `MultiResourceItemReader` 로 `<workDir>/<targetDate>/*.log` 를 읽고, delegate `FlatFileItemReader` 는 `RegexLineTokenizer`(`^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) \[(INFO|WARN|ERROR)\] (.*)$`)로 나눈다. 주석 접두어를 비워(`comments(new String[0])`) `#` 으로 시작하는 줄도 형식 오류로 skip 한다. Writer `LogStatisticsWriter` 는 `@JobScope` 빈 `LogStatistics` 에 건수를 쌓는다. `faultTolerant().skip(FlatFileParseException.class).skipLimit(10)` |
+| `writeReportStep` | `DailyReportTasklet` — `LogStatistics` 와 `analyzeLogsStep` 의 `readSkipCount` 로 보고서를 쓴다. 서버는 이름순, 레벨은 INFO → WARN → ERROR 순서다 |
+
+- `SystemCommandTasklet` 은 명령의 종료 코드가 0 이 아니면 `SystemCommandException` 을 던지고 Step 이 `FAILED` 가 된다. 그래서 `serversDir` 가 없으면 `collectLogsStep` 에서 멈추고 `analyzeLogsStep` 은 실행되지 않는다.
+- `setTimeout` 은 필수다. 0 이면 `afterPropertiesSet` 이 `timeout value must be greater than zero` 로 막는다. `setTaskExecutor` 도 필수라서 `SimpleAsyncTaskExecutor` 를 넘긴다. 시간 안에 끝나지 않으면 `SystemCommandException` 이 난다.
+- 경로는 스크립트 문자열에 끼워 넣지 않고 `sh -c` 의 위치 인자(`$1 $2 $3`)로 넘긴다. 경로에 공백이나 따옴표가 있어도 명령이 깨지지 않는다.
+- `LogEntry` 는 `ResourceAware` 를 구현한다. `MultiResourceItemReader` 가 읽은 항목마다 `setResource` 를 불러 주므로, 파일 이름에서 `.log` 를 뗀 값을 서버 이름으로 쓴다.
+- 정규식에 맞지 않는 줄(스택트레이스 등)은 `RegexLineTokenizer` 가 빈 토큰을 돌려주고, 이름 3개와 개수가 달라 `FlatFileParseException` 이 된다. 10줄까지는 건너뛰고 `skipped` 에 세며, 11줄째에서 Step 이 `FAILED` 가 되어 보고서를 쓰지 않는다.
+- `LogStatistics` 는 `@JobScope` 라서 JobExecution 마다 새로 만들어지고, 같은 실행의 `analyzeLogsStep` 과 `writeReportStep` 이 같은 객체를 본다. 그날 로그가 없는 서버는 집계에 없으므로 보고서 줄과 `servers` 수에서 빠진다.
+- 재시작하면 처음부터 다시 실행한다. 네 Step 모두 `allowStartIfComplete(true)` 라서 지난 실행에서 완료된 Step 도 다시 돌고, 수집 Step 이 그 날짜 수집 디렉터리의 `.log` 를 비운 뒤 원본에서 다시 복사한다. `MultiResourceItemReader` 와 delegate 는 `saveState(false)` 라서 이어 읽지 않는다. `LogStatistics` 가 새 JobExecution 에서 비어 있어도 분석 Step 이 다시 채우고, `skipped` 는 현재 JobExecution 의 `analyzeLogsStep` 값만 센다.
+- 지난 실행이 남긴 파일(서버 디렉터리가 없어진 서버의 `.log` 등)도 수집 전에 지워지므로 집계에 들어가지 않는다.
+
+샘플 데이터는 `data/servers/` 에 있다. `server-1` 에는 그날 로그와 다른 날짜(`2026-10-31`) 로그가, `server-2` 에는 스택트레이스 형식 줄 1개가 섞인 그날 로그가 있다.
+
+```bash
+./gradlew bootRun --args='--spring.batch.job.name=logCollectionJob targetDate=2026-11-01,java.time.LocalDate serversDir=data/servers workDir=build/collected reportDir=build/output'
+```
+
+`build/output/report-2026-11-01.txt` 에 `skipped=1` 인 보고서가 생긴다. 같은 `targetDate`(와 경로)로 다시 실행하면 이미 완료된 JobInstance 라서 `JobInstanceAlreadyCompleteException` 이 나므로, 다른 `targetDate` 나 `run=2` 같은 파라미터를 더해 실행한다.
+
+실행이 `FAILED` 로 끝났으면 원인(예: `reportDir` 자리의 일반 파일, 원본 로그의 깨진 줄)을 고친 뒤 위 명령을 같은 파라미터로 다시 실행한다. 같은 JobInstance 가 재시작되어 수집·분석·보고를 처음부터 다시 한다. `allowStartIfComplete` 는 Step 단위 설정이라, JobInstance 가 `COMPLETED` 면 여전히 `JobInstanceAlreadyCompleteException` 으로 막힌다.
+
 ### JSON 표기법
 
 `JsonJobParametersConverter` 를 감싼 별도 빈(`JsonJobParametersReader`, `JsonParameterConfig`)을 두고, 필요한 곳에서 명시적으로 주입받아 쓴다. Jackson 3(`tools.jackson.core:jackson-databind`)이 필요하다.
