@@ -245,3 +245,40 @@ RedisItemReader
 * 중간 지점이 없기 때문에 실패하면 다시 처음부터 돌리는 것이 유일한 선택이다.
 
 #### RedisItemWriter
+
+![](https://github.com/user-attachments/assets/54a8f5c1-783d-47ef-8bc6-11ba9b094db6)
+
+* `RedisItemWriter`는 `RedisTemplate`을 사용해 청크의 각 아이템을 하나 하나 추가(`SET`)하거나 삭제(`DEL`)한다. 별도의 파이프라이닝과 같은 최적화 없이 단순히 한 건씩 처리하는 것이 특징이다.
+* 내부 구조를 살펴보면 `RedisTemplate` 외에도 `itemKeyMapper`라는 `Converter<V, K>`타입의 필드로 구성되어 있는 것을 알 수 있는데, 이 `itemKeyMapper`의 제네릭 타입이 `<V, K>`인 것을 주목한다. `RedisItemWriter`는 이 `itemKeyMapper`를 사용해 청크의 각 아이템(`V`)으로부터 Redis key(`K`)를 추출한다.
+
+#### CompositeItemReader: 통합 처리
+
+![](https://github.com/user-attachments/assets/d17187e7-8a35-4f2e-a332-c66157c4f07f)
+
+* 여러 `ItemReader`들을 순차적으로 실행하는 곳에 사용된다.
+* 데이터베이스가 여러 샤드로 분산되어 있을 때 특히 유용할 것이다. 별도의 샤드 관리 없이 각 샤드(datasource)를 바라보는 `ItemReader`들만 준비해서 전달하면 된다. 레거시 시스템과 신규 시스템의 데이터를 하나의 흐름으로 처리할 때에도 유용하다.
+
+#### CompositeItemWriter
+
+![](https://github.com/user-attachments/assets/0ede11ce-f1a5-4c56-8f6a-b729ced38978)
+
+```java
+public void write(Chunk<? extends T> chunk) throws Exception {
+    for (ItemWriter<? super T> writer : delegates) {
+       writer.write(chunk);
+    }
+}
+```
+* `ItemWriter`들을 위임 대상으로 등록해놓으면 `CompositeItemWriter`의 `write()` 메서드가 호출될 때마다 모든 위임 대상 `ItemWriter`들이 차례대로 실행된다.
+
+#### ClassifierCompositeItemWriter
+
+![](https://github.com/user-attachments/assets/b902e605-2007-4732-a1ec-c3d2a5f64e84)
+
+```java
+private Classifier<T, ItemWriter<? super T>> classifier = new ClassifierSupport<>(null);
+```
+
+* 청크 단위로 들어온 데이터를 하나씩 분류(`classify`)한다.
+* 분류된 결과에 따라 적절한 위임 대상 `ItemWriter`에 item을 매핑한다.
+* 청크의 모든 `item`이 분류되면, 각 `ItemWriter`가 자기에게 할당된 `item`을 처리한다.
