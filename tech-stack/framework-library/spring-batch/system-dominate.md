@@ -143,3 +143,51 @@ JdbcBatchItemWriter
   * 네임드 파라미터(`:name`)
 * ItemSqlParameterSourceProvider : `ItemSqlParameterSourceProvider`는 Java 객체의 프로퍼티를 SQL의 네임드 파라미터에 매핑하는 역할을 담당한다.
 * BeanPropertyItemSqlParameterSourceProvider : Spring JDBC의 `BeanPropertySqlParameterSource`를 사용하여 리플렉션 기반으로 필드 값을 바인딩하는데 자바빈 규약을 따르는 객체의 프로퍼티를 자동으로 SQL 파라미터에 매핑한다.
+
+#### JpaCursorItemReader: 엔티티를 스트리밍으로 처리
+
+![](https://github.com/user-attachments/assets/6b402708-c350-42bc-99cb-94e0a0465b3b)
+
+```
+JpaCursorItemReader
+    │
+    ├────── queryString(JPQL) or JpaQueryProvider  
+    │        └─ (Query 생성에 사용됨)  
+    │
+    ├────── EntityManager  
+    │        └─ (JPA 핵심 엔진)
+    │        
+    └────── Query  
+             └─ (EntityManager가 생성하는 실행 가능한 쿼리 인스턴스)
+```
+* queryString(JPA의 질의 언어) : `JpaCursorItemReader`가 데이터를 조회하기 위한 JPQL(Java Persistence Query Language) 쿼리다. `EntityManager`가 이 `queryString`을 사용하여 실제 실행 가능한 `Query` 객체를 생성한다. 만약 `queryString` 대신 `JpaQueryProvider`를 사용해 쿼리를 생성하고 싶다면 `JpaCursorItemReaderBuilder.queryProvider()`를 통해 `JpaQueryProvider` 구현체를 설정할 수 있다.
+* EntityManager(JPA의 심장) : `EntityManager`는 JPA의 핵심 컴포넌트로 엔티티의 생명주기를 관리하고 실제 데이터베이스 작업을 수행한다. `JpaCursorItemReader`에서는 이 `EntityManager`를 통해 커서 기반의 데이터 조회를 실행한다. `JpaCursorItemReaderBuilder.entityManagerFactory()` 메서드를 통해 `EntityManagerFactory` 인스턴스를 전달하면 `JpaCursorItemReader`가 내부적으로 `EntityManager`를 생성하여 커서 기반의 데이터 조회에 사용한다.
+* Query(실행 가능한 쿼리 인스턴스) : `JpaCursorItemReader`는 `EntityManager`를 통해 실행 가능한 `Query` 객체를 생성하고, 이를 사용해 데이터를 스트리밍 방식으로 읽어온다. 이 과정은 다음과 같이 `Query` 객체의 `getResultStream()` 메서드를 호출해 수행한다.
+
+#### JpaQueryProvider를 사용한 쿼리 설정
+
+* `JpaQueryProvider` 구현체를 통해 동적 쿼리 생성 등 더 유연한 쿼리 처리가 가능하다. `JpaQueryProvider`는 쿼리 생성을 담당하는 컴포넌트로 이를 통해 직접 작성한 JPQL 문자열 외에도 Named Query나 Native SQL 등 다양한 방식으로 쿼리를 생성할 수 있다.
+  * `JpaNamedQueryProvider` : 엔티티 등에 미리 정의된 Named Query를 사용한다.
+  * `JpaNativeQueryProvider` : Native SQL을 사용하여 데이터를 조회하도록 한다.
+
+#### JpaPagingItemReader
+
+![](https://github.com/user-attachments/assets/74aee84e-261d-4bc1-976f-bf0063387201)
+
+* `JpaPagingItemReader`는 이름 그대로 데이터를 페이지 단위로 처형하는 `ItemReader`다. 전체 데이터를 일정 수의 페이지만큼 읽는다는 점에서 `JdbcPagingItemReader`와 유사하다. 그러나 내부적으로 JPA 구현체를 사용한다는 점, 그리고 가장 중요한 페이징 방식에서 `JdbcPagingItemReader`와 차이가 있다.
+* `JdbcPagingItemReader`와 달리 `JpaPagingItemReader`는 offset 기반으로 페이징을 수행한다. offset 기반 페이징은 데이터베이스에서 특정 범위의 레코드를 가져오는 방법 중 하나로 SQL에서는 다음과 같이 `LIMIT`과 `OFFSET` 절을 사용해 구현한다.
+
+```
+JpaPagingItemReader 
+    │ 
+    ├────── queryString(JPQL) or JpaQueryProvider 
+    │        └─ (Query 생성에 사용됨) 
+    │ 
+    ├────── EntityManager 
+             └─ (JPA 핵심 엔진)
+```
+
+>❗IDENTITY 전략 사용 시 배치 처리 제약사항
+* ID 생성 전략을 `IDENTITY`로 사용할 경우 하나의 중요한 제약사항이 있다. `IDENTITY` 전략에서는 엔티티의 ID가 데이터베이스에서 생성되기 때문에, Hibernate가 엔티티를 영속화하기 위해서는 반드시 `INSERT`를 먼저 실행해야 한다.
+* 이는 결과적으로 모든 `INSERT`가 개별적으로 실행되어야 함을 의미한다. 따라서 Hibernate는 여러 개의 `INSERT` 문을 하나의 배치로 묶어서 처리할 수 없게 된다. 배치 처리 성능이 중요한 상황이라면 `SEQUENCE` 전략을 권장한다.
+* `TABLE` 전략은 성능과 확장성 측면에서 심각한 문제를 가지고 있다. 새로운 ID를 생성할 때마다 별도의 트랜잭션이 필요하고, 이 과정에서 행(row) 단위의 잠금이 발생한다. 따라서 배치 처리와 같이 대량의 데이터를 다루는 상황에서는 가급적 `SEQUENCE` 전략을 사용하도록 한다.
