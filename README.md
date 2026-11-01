@@ -20,7 +20,7 @@ Detailed study notes live in the [Wiki](https://github.com/off-the-record-wiki/e
 | [Cache](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Cache) | Cache Strategy, Cache Problems, Spring Cache |
 | [Messaging](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Messaging) | Kafka |
 | [Network & Protocol](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Network-Protocol) | HTTP, gRPC |
-| [DevOps](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-DevOps) | Docker, Kubernetes, CI/CD, Nginx, Monitoring |
+| [DevOps](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-DevOps) | Docker, Kubernetes, CI/CD, Nginx, Monitoring, Terraform |
 | [Cloud](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Cloud) | AWS |
 | [Architecture & Design](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Architecture-Design) | MSA, Design Pattern, Clean Spring |
 | [Testing](https://github.com/off-the-record-wiki/engineering-notes/wiki/Tech-Testing) | Java Test, Load Testing, TDD |
