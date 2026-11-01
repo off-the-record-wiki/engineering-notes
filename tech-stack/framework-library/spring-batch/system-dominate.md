@@ -191,3 +191,57 @@ JpaPagingItemReader
 * ID 생성 전략을 `IDENTITY`로 사용할 경우 하나의 중요한 제약사항이 있다. `IDENTITY` 전략에서는 엔티티의 ID가 데이터베이스에서 생성되기 때문에, Hibernate가 엔티티를 영속화하기 위해서는 반드시 `INSERT`를 먼저 실행해야 한다.
 * 이는 결과적으로 모든 `INSERT`가 개별적으로 실행되어야 함을 의미한다. 따라서 Hibernate는 여러 개의 `INSERT` 문을 하나의 배치로 묶어서 처리할 수 없게 된다. 배치 처리 성능이 중요한 상황이라면 `SEQUENCE` 전략을 권장한다.
 * `TABLE` 전략은 성능과 확장성 측면에서 심각한 문제를 가지고 있다. 새로운 ID를 생성할 때마다 별도의 트랜잭션이 필요하고, 이 과정에서 행(row) 단위의 잠금이 발생한다. 따라서 배치 처리와 같이 대량의 데이터를 다루는 상황에서는 가급적 `SEQUENCE` 전략을 사용하도록 한다.
+
+#### RedisItemReader: Key들을 스캔해 처리
+
+* `RedisItemReader`는 Redis `SCAN` 명령을 사용하는 일종의 커서 기반 `ItemReader`라고 할 수 있다. 하지만 `SCAN` 명령의 특성상 다른 커서 기반 `ItemReader`들과는 확연한 동작 차이가 존재한다.
+* `SCAN`은 조회 대상 key들의 목록만을 반환한다. `SCAN`은 `STRING` 타입(Redis 데이터 타입) 전용 명령어다. 따라서 `RedisItemReader`에서는 `STRING` 타입의 데이터만 조회 가능하다. `HASH`, `SET`, `LIST` 등의 타입들을 처리하려면 `HSCAN`, `SSCAN`, `ZSCAN`을 사용한 커스텀 ItemReader를 직접 구현해야 한다.
+
+![](https://github.com/user-attachments/assets/9312c272-94a5-47d9-8b38-5a58a06222e8)
+
+1. 초기화
+
+* `RedisItemReader`는 초기화 시점(`open()`)에 `SCAN` 명령을 최초 호출해 커서를 생성한다. 이 커서는 조회 대상 key 목록을 담고 있다. 여기서 반드시 알아야할 사실은 Redis `SCAN` 명령은 전체 key를 한 번에 응답하지 않는다는 사실이다. 따라서 커서가 담고 있는 것도 전체 key의 일부에 불과하다.
+
+2. `read()`
+
+* `RedisItemReader`의 `read()` 메서드는 커서로부터 key를 하나씩 받아와서 `GET` 명령을 호출한다. 하나씩, 정확하게, 커서의 key가 전부 소비될 때까지 이 과정이 반복된다.
+
+3. 추가 SCAN
+
+* 추가적인 `SCAN` 명령으로 새로운 key 목록을 확보한다. 모든 데이터를 완전히 처리할 때까지 이 과정이 계속된다.
+
+#### RedisItemReader의 치명적 약점
+
+![](https://github.com/user-attachments/assets/a90c39a2-7ab7-4b53-9dd2-a7f01c48c0f1)
+
+```
+RedisItemReader
+│
+├────── RedisTemplate
+│       └─ (Redis 작업을 수행하는 핵심 컴포넌트)
+│
+├────── Cursor
+│       └─ (SCAN 명령으로 생성된 Redis 커서)
+│
+└────── ScanOptions
+        └─ (SCAN 명령 수행 시 사용할 옵션들)
+```
+
+1. 네트워크
+
+* `RedisItemReader`는 아이템 하나당 `GET` 명령 하나를 호출한다. 청크 크기가 100개라면 총 100번의 `GET` 명령이 Redis에 가해진다.
+* Redis는 인메모리 데이터베이스 특성상 마이크로초 단위의 빠른 응답이 가능하다. 하지만 각 아이템마다 네트워크 왕복 시간(RTT)이 발생하기 때문에 조회할 데이터가 많을 경우 전체 조회 시간은 예상보다 훨씬 길어질 수 있다.
+* 다수의 `GET` 요청이 몰리면 Redis 서버에게도 상당한 부담을 안겨줄 수 있다. 대규모 데이터 조회 시에는 이런 특성들을 모두 계산에 넣어야 한다.
+
+2. 중복 데이터
+
+* Redis 내부 데이터 구조 특성상 `SCAN` 명령이 중복된 key를 반환할 수 있다. 중복 처리는 애플리케이션에서 처리해야한다.
+* 통계 배치처럼 사소한 데이터 중복이 크게 문제되지 않거나 별도의 중복 처리 방법이 없는 상황이라면 `RedisItemReader`는 반드시 멱등성이 보장된 배치 잡에서만 사용해야 한다.
+
+3. 재시작 불가
+
+* Redis `SCAN` 명령은 데이터 순서를 보장하지 않는다. 즉, 배치 잡의 이전 실행과 재시작 간의 데이터 순서가 완전히 뒤바뀔 수 있다는 뜻이다.
+* 중간 지점이 없기 때문에 실패하면 다시 처음부터 돌리는 것이 유일한 선택이다.
+
+#### RedisItemWriter
