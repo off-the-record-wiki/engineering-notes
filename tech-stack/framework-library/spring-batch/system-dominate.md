@@ -109,7 +109,7 @@ JdbcPagingItemReader
     |        └── (SQL 실행 및 파라미터 바인딩)
     |
     - PagingQueryProvider
-	     ├── (쿼리 생성 및 페이징 전략)
+	       ├── (쿼리 생성 및 페이징 전략)
              └── (DB별 SQL 최적화)
 ```
 * DataSource : `JdbcCursorItemReader`에서 살펴본 것과 동일하게 데이터베이스 연결을 담당하는 객체다. Spring Boot가 `application.yml`의 `spring.datasource` 설정을 읽어 자동으로 생성한 DataSource를 사용한다.
