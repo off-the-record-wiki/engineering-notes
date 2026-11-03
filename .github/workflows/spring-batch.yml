@@ -33,7 +33,7 @@ jobs:
           distribution: temurin
           java-version: '25'
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
 
       # Testcontainers 가 러너의 Docker 로 MySQL 컨테이너를 띄운다
       - name: Test
