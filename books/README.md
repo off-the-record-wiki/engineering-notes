@@ -179,39 +179,6 @@
 * [(Effective Kotlin Item 20) Kotlin - The Beauty of the Type System](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-20-kotlin-the-beauty-of-the-type-system.md)
 * [(Effective Kotlin Item 21) Kotlin - Generic](kotlin-academy-kotlin-essentials-with-exercises/effective-kotlin-item-21-kotlin-generic.md)
 
-## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1](https://product.kyobobook.co.kr/detail/S000001033116)
-
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 사용자 수에 따른 규모 확장성](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/sayongja-sue-ttareun-gyumo-hwakjangseong.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 개략적인 규모 추정](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/gaeryakjeokin-gyumo-chujeong.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 처리율 제한 장치의 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/cheoriyul-jehan-jangchiui-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 안정 해시 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/anjeong-haesi-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 키-값 저장소 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/ki-gap-jeojangso-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 분산 시스템을 위한 유일 ID 생성기 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/bunsan-siseutemeul-wihan-yuil-id-saengseonggi-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - URL 단축기 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/url-danchukgi-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 웹 크롤러 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/wep-keurolreo-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 알림 시스템 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/alrim-siseutem-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 뉴스 피드 시스템 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/nyuseu-pideu-siseutem-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 채팅 시스템 설계](gasang-myeonjeop-saryero-baeuneun-daegyumo-siseutem-seolgye-gicho-1/chaeting-siseutem-seolgye.md)
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 검색어 자동완성 시스템 설계]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 유튜브 설계]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 1 - 구글 드라이브 설계]
-
-## [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2](https://product.kyobobook.co.kr/detail/S000211656186)
-
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 근접성 서비스]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 주변 친구]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 구글 맵]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 분산 메시지 큐]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 지표 모니터링 및 경보 시스템]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 광고 클릭 이벤트 집계]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 호텔 예약 시스템]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 분산 이메일 서비스]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - S3와 유사한 객체 저장소]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 실시간 게임 순위표]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 결제 시스템]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 전자 지갑]
-* [가상 면접 사례로 배우는 대규모 시스템 설계 기초 2 - 증권 거래소]
-
 ## [Clean Architecture](https://product.kyobobook.co.kr/detail/S000001033082)
 
 * [(Clean Architecture 1) - 설계와 아키텍처란?](clean-architecture/seolgyewa-akitekcheoran.md)
